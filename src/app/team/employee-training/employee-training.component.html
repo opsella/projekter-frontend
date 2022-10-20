@@ -1,0 +1,37 @@
+<div class="trainings-container">
+
+
+  <h2>To Do</h2>
+  <mat-expansion-panel *ngFor="let tdata of toDoTrainings" class="panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ tdata.title }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ tdata.description }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ul class="sections">
+      <li *ngFor="let tsection of tdata.sections">
+        <a routerLink="">{{ tsection }}</a><img src="assets/images/check.svg" alt="check" />
+      </li>
+    </ul>
+  </mat-expansion-panel>
+
+  <div class="divider"></div>
+
+  <h2>Completed</h2>
+  <mat-expansion-panel *ngFor="let tdata of completedTrainings" class="panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ tdata.title }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ tdata.description }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <ul>
+      <li *ngFor="let tsection of tdata.sections">{{ tsection }}</li>
+    </ul>
+  </mat-expansion-panel>
+</div>

@@ -1,0 +1,15 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-employee-trainings-list',
+  templateUrl: './employee-trainings-list.component.html',
+  styleUrls: ['./employee-trainings-list.component.scss']
+})
+export class EmployeeTrainingsListComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

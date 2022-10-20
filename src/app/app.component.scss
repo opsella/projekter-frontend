@@ -1,0 +1,14 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  //grid-template-rows: auto;
+  grid-template-areas: "nav nav nav nav"
+                        "aside section section section"
+                        "footer footer footer footer";
+  height: 99vh;
+}
+
+.grid-wrapper {
+  height: 99vh;
+  //overflow-y: hidden;
+}

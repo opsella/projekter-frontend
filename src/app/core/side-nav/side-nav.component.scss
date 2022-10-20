@@ -1,0 +1,17 @@
+aside {
+  background-color: #546467;
+  grid-area: aside;
+  padding: 3rem 1rem;
+  font-size: 1em;
+  height: 100%;
+
+  ul {
+    height: 100%;
+
+    li {
+      a {
+        color: white;
+      }
+    }
+  }
+}
