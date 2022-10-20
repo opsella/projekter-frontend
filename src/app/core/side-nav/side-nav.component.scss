@@ -1,9 +1,9 @@
 aside {
   background-color: #546467;
-  grid-area: aside;
   padding: 3rem 1rem;
   font-size: 1em;
   height: 100%;
+  box-sizing: border-box;
 
   ul {
     height: 100%;

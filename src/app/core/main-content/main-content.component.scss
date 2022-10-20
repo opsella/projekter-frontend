@@ -1,7 +1,7 @@
 main {
   background-image: linear-gradient(#fbfbfb, #e6e8e9);
-  grid-area: section;
   padding: 2rem;
   overflow-y: scroll;
-  //height: 100%;
+  height: 100%;
+  box-sizing: border-box;
 }
