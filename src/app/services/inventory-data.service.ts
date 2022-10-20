@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core'
+import { Observable, of } from 'rxjs'
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,16 @@ export class InventoryDataService {
     if (retrievedData) {
       return of([
         {
-          name: '',
+          name: 'Equipment 1',
+        },
+        {
+          name: 'Equipment 2',
+        },
+        {
+          name: 'Equipment 3',
+        },
+        {
+          name: 'Equipment 4',
         },
       ]);
     } else {
