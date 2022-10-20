@@ -1,1 +1,6 @@
 <p>inventory-list-page works!</p>
+
+<h1>Inventory Items</h1>
+<ul>
+  <li *ngFor="let item of inventoryItems$ | async; index as i">#{{i}} {{item.name}}</li>
+</ul>
