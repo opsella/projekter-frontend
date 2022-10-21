@@ -1,1 +1,24 @@
-<p>inventory-setup-page works!</p>
+<section *ngIf="!createInventory">
+  <h1>You do not have any inventory</h1>
+
+  <button mat-button (click)="startInventoryCreation()">Add Inventory Item</button>
+  <button mat-button>Import Inventory</button>
+</section>
+
+<section *ngIf="createInventory">
+  <h1>How will you track this item?</h1>
+
+  <form [formGroup]="inventoryType">
+    <ng-template matStepLabel>Select Inventory Type</ng-template>
+    <mat-label>How will you track this item?</mat-label>
+    <mat-radio-group formControlName="options" required>
+      <mat-radio-button value="/inventory/create/supplies">Quantity</mat-radio-button>
+      <mat-radio-button value="/inventory/create/equipment">Individually</mat-radio-button>
+    </mat-radio-group>
+  </form>
+</section>
+
+<section *ngIf="createInventory">
+  {{ route | async }}
+  <a [routerLink]="route | async">Create</a>
+</section>
