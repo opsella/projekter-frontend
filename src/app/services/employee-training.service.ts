@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
 export interface TrainingObj {
   title: String;
@@ -7,62 +7,62 @@ export interface TrainingObj {
 }
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: "root",
 })
 export class EmployeeTrainingService {
-  private trainings: Array<TrainingObj> = [
-    {
-      title: 'Employee Intro',
-      description: '(required)',
-      sections: ['Policies', 'Disclosures', 'Conduct'],
-    },
-    {
-      title: 'Sexual Harassment Policy',
-      description: '(required)',
-      sections: ['Policies', 'Disclosures', 'Conduct'],
-    },
-    {
-      title: 'Lawn Edging',
-      description: '(required)',
-      sections: ['Policies', 'Disclosures', 'Conduct'],
-    },
-    {
-      title: 'Weed Eater Fundamentals',
-      description: '(optional)',
-      sections: ['Policies', 'Disclosures', 'Conduct'],
-    },
-  ];
+    private trainings: Array<TrainingObj> = [
+        {
+            title: "Employee Intro",
+            description: "(required)",
+            sections: ["Policies", "Disclosures", "Conduct"],
+        },
+        {
+            title: "Sexual Harassment Policy",
+            description: "(required)",
+            sections: ["Policies", "Disclosures", "Conduct"],
+        },
+        {
+            title: "Lawn Edging",
+            description: "(required)",
+            sections: ["Policies", "Disclosures", "Conduct"],
+        },
+        {
+            title: "Weed Eater Fundamentals",
+            description: "(optional)",
+            sections: ["Policies", "Disclosures", "Conduct"],
+        },
+    ];
 
-  private completedTrainings: Array<TrainingObj> = [
-    {
-      title: 'Employee Intro',
-      description: '(required)',
-      sections: ['Policies', 'Disclosures', 'Conduct'],
-    },
-    {
-      title: 'Sexual Harassment Policy',
-      description: '(required)',
-      sections: ['Policies', 'Disclosures', 'Conduct'],
-    },
-    {
-      title: 'Lawn Edging',
-      description: '(required)',
-      sections: ['Policies', 'Disclosures', 'Conduct'],
-    },
-    {
-      title: 'Weed Eater Fundamentals',
-      description: '(optional)',
-      sections: ['Policies', 'Disclosures', 'Conduct'],
-    },
-  ];
+    private completedTrainings: Array<TrainingObj> = [
+        {
+            title: "Employee Intro",
+            description: "(required)",
+            sections: ["Policies", "Disclosures", "Conduct"],
+        },
+        {
+            title: "Sexual Harassment Policy",
+            description: "(required)",
+            sections: ["Policies", "Disclosures", "Conduct"],
+        },
+        {
+            title: "Lawn Edging",
+            description: "(required)",
+            sections: ["Policies", "Disclosures", "Conduct"],
+        },
+        {
+            title: "Weed Eater Fundamentals",
+            description: "(optional)",
+            sections: ["Policies", "Disclosures", "Conduct"],
+        },
+    ];
 
-  constructor() {}
+    constructor() {}
 
-  getToDoTrainings(): Array<TrainingObj> {
-    return this.trainings;
-  }
+    public getToDoTrainings(): Array<TrainingObj> {
+        return this.trainings;
+    }
 
-  getCompletedTrainings(): Array<TrainingObj> {
-    return this.completedTrainings;
-  }
+    public getCompletedTrainings(): Array<TrainingObj> {
+        return this.completedTrainings;
+    }
 }

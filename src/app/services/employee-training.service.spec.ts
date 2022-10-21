@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from "@angular/core/testing";
 
-import { EmployeeTrainingService } from './employee-training.service';
+import { EmployeeTrainingService } from "./employee-training.service";
 
-describe('EmployeeTrainingService', () => {
-  let service: EmployeeTrainingService;
+describe("EmployeeTrainingService", () => {
+    let service: EmployeeTrainingService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(EmployeeTrainingService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(EmployeeTrainingService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it("should be created", () => {
+        expect(service).toBeTruthy();
+    });
 });
