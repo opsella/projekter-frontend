@@ -13,18 +13,29 @@ import { InventorySuppliesCreationComponent } from "./inventory-supplies-creatio
 import {
     InventoryEquipmentCreationComponent
 } from "./inventory-equipment-creation/inventory-equipment-creation.component";
+import {MatSelectModule} from "@angular/material/select";
+import {MatTableModule} from "@angular/material/table";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
-    declarations: [InventoryListPageComponent, InventorySetupPageComponent, InventorySuppliesCreationComponent, InventoryEquipmentCreationComponent],
-    imports: [
-        CommonModule,
-        InventoryRoutingModule,
-        MatStepperModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatRadioModule,
+    declarations: [
+      InventoryListPageComponent,
+      InventorySetupPageComponent,
+      InventorySuppliesCreationComponent,
+      InventoryEquipmentCreationComponent
     ],
+  imports: [
+    CommonModule,
+    InventoryRoutingModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatTableModule,
+    MatCardModule,
+  ],
 })
 export class InventoryModule {}

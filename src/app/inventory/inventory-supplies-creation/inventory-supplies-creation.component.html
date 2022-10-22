@@ -1,32 +1,61 @@
 <section>
   <mat-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field appearance="fill">
+    <mat-step [stepControl]="itemInformationGroup">
+      <form [formGroup]="itemInformationGroup">
+        <mat-form-field>
           <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+          <input matInput placeholder="Name" formControlName="name" required>
         </mat-form-field>
-        <div>
+
+        <mat-form-field>
+          <mat-label>Code</mat-label>
+          <input matInput placeholder="Code" formControlName="code" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Description" formControlName="description" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Qty</mat-label>
+          <input matInput placeholder="Qty" formControlName="qty" required>
+        </mat-form-field>
+
           <button mat-button matStepperNext>Next</button>
-        </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-      <form [formGroup]="secondFormGroup">
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
+
+    <mat-step [stepControl]="categoryInformationGroup">
+      <form [formGroup]="categoryInformationGroup">
+        <mat-form-field>
+          <mat-label>Apply to existing category?</mat-label>
+          <mat-select formControlName="options">
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+
+        OR
+
+        <mat-form-field>
+          <mat-label>Create New Category</mat-label>
+          <input matInput formControlName="name" placeholder="Name">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Create New Category</mat-label>
+          <input matInput formControlName="description" placeholder="Description">
+        </mat-form-field>
+
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
+
     <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
       <p>You are now done.</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>

@@ -1,5 +1,13 @@
 import { Component } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from "@angular/forms";
 
 @Component({
     selector: "app-inventory-equipment-creation",
@@ -10,9 +18,9 @@ export class InventoryEquipmentCreationComponent {
     constructor(private _formBuilder: FormBuilder) {}
 
     public firstFormGroup = this._formBuilder.group({
-        firstCtrl: ["", Validators.required],
+        firstCtrl: new FormControl("", [Validators.required]),
     });
     public secondFormGroup = this._formBuilder.group({
-        secondCtrl: ["", Validators.required],
+        secondCtrl: new FormControl("", [Validators.required]),
     });
 }

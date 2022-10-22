@@ -1,11 +1,11 @@
-<section *ngIf="!createInventory">
+<section *ngIf="!addInventory">
   <h1>You do not have any inventory</h1>
 
-  <button mat-button (click)="startInventoryCreation()">Add Inventory Item</button>
+  <button mat-button (click)="startProcess()">Add Inventory Item</button>
   <button mat-button>Import Inventory</button>
 </section>
 
-<section *ngIf="createInventory">
+<section *ngIf="addInventory">
   <h1>How will you track this item?</h1>
 
   <form [formGroup]="inventoryType">
@@ -16,9 +16,6 @@
       <mat-radio-button value="/inventory/create/equipment">Individually</mat-radio-button>
     </mat-radio-group>
   </form>
-</section>
 
-<section *ngIf="createInventory">
-  {{ route | async }}
-  <a [routerLink]="route | async">Create</a>
+  <a [routerLink]="itemRoute">Create</a>
 </section>
