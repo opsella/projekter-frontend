@@ -7,8 +7,6 @@ import {FormBuilder, FormControl, Validators} from "@angular/forms";
     styleUrls: ["./setup-page.component.scss"],
 })
 export class SetupPageComponent {
-    public addInventory = false;
-
     constructor(private _formBuilder: FormBuilder) {}
 
     public inventoryType = this._formBuilder.group({
@@ -17,9 +15,5 @@ export class SetupPageComponent {
 
     public get itemRoute(): string {
       return this.inventoryType.controls.options.value!;
-    }
-
-    public startProcess() {
-        this.addInventory = !this.addInventory;
     }
 }

@@ -16,6 +16,7 @@ import {
 import {MatSelectModule} from "@angular/material/select";
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import {MatCardModule} from "@angular/material/card";
     MatSelectModule,
     MatTableModule,
     MatCardModule,
+    SharedModule
   ],
 })
 export class InventoryModule {}
