@@ -3,10 +3,10 @@ import {FormBuilder, FormControl, Validators} from "@angular/forms";
 
 @Component({
     selector: "app-inventory-setup-page",
-    templateUrl: "./inventory-setup-page.component.html",
-    styleUrls: ["./inventory-setup-page.component.scss"],
+    templateUrl: "./setup-page.component.html",
+    styleUrls: ["./setup-page.component.scss"],
 })
-export class InventorySetupPageComponent {
+export class SetupPageComponent {
     public addInventory = false;
 
     constructor(private _formBuilder: FormBuilder) {}

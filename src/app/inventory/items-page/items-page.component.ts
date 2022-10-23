@@ -5,11 +5,11 @@ import {BehaviorSubject, map, Observable, Subscription, tap} from "rxjs";
 import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
-    selector: "app-inventory-list-page",
-    templateUrl: "./inventory-list-page.component.html",
-    styleUrls: ["./inventory-list-page.component.scss"]
+    selector: "app-items-page",
+    templateUrl: "./items-page.component.html",
+    styleUrls: ["./items-page.component.scss"]
 })
-export class InventoryListPageComponent {
+export class ItemsPageComponent {
     private inventoryItemsDataSource: MatTableDataSource<InventoryItem> = new MatTableDataSource<InventoryItem>([]);
     public inventoryItemsDataSource$: Observable<MatTableDataSource<InventoryItem>> = this.activatedRoute.data
       .pipe(

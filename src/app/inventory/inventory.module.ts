@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
-import { InventoryListPageComponent } from "./inventory-list-page/inventory-list-page.component";
-import { InventorySetupPageComponent } from "./inventory-setup-page/inventory-setup-page.component";
+import { ItemsPageComponent } from "./items-page/items-page.component";
+import { SetupPageComponent } from "./setup-page/setup-page.component";
 import { CommonModule } from "@angular/common";
 import { InventoryRoutingModule } from "./inventory-routing.module";
 import { MatStepperModule } from "@angular/material/stepper";
@@ -9,20 +9,20 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 import { MatRadioModule } from "@angular/material/radio";
-import { InventorySuppliesCreationComponent } from "./inventory-supplies-creation/inventory-supplies-creation.component";
+import { SuppliesCreationPageComponent } from "./supplies-creation-page/supplies-creation-page.component";
 import {
-    InventoryEquipmentCreationComponent
-} from "./inventory-equipment-creation/inventory-equipment-creation.component";
+    EquipmentCreationPageComponent
+} from "./equipment-creation-page/equipment-creation-page.component";
 import {MatSelectModule} from "@angular/material/select";
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
     declarations: [
-      InventoryListPageComponent,
-      InventorySetupPageComponent,
-      InventorySuppliesCreationComponent,
-      InventoryEquipmentCreationComponent
+      ItemsPageComponent,
+      SetupPageComponent,
+      SuppliesCreationPageComponent,
+      EquipmentCreationPageComponent,
     ],
   imports: [
     CommonModule,

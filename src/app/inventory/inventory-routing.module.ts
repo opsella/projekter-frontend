@@ -1,12 +1,12 @@
 import { RouterModule, Routes } from "@angular/router";
 import { InventoryResolver } from "./inventory.resolver";
-import { InventoryListPageComponent } from "./inventory-list-page/inventory-list-page.component";
-import { InventorySetupPageComponent } from "./inventory-setup-page/inventory-setup-page.component";
+import { ItemsPageComponent } from "./items-page/items-page.component";
+import { SetupPageComponent } from "./setup-page/setup-page.component";
 import { NgModule } from "@angular/core";
-import { InventorySuppliesCreationComponent } from "./inventory-supplies-creation/inventory-supplies-creation.component";
+import { SuppliesCreationPageComponent } from "./supplies-creation-page/supplies-creation-page.component";
 import {
-    InventoryEquipmentCreationComponent
-} from "./inventory-equipment-creation/inventory-equipment-creation.component";
+    EquipmentCreationPageComponent
+} from "./equipment-creation-page/equipment-creation-page.component";
 
 const routes: Routes = [
     {
@@ -14,19 +14,20 @@ const routes: Routes = [
         resolve: {
             inventoryItems: InventoryResolver,
         },
-        component: InventoryListPageComponent,
+        component: ItemsPageComponent,
     },
     {
         path: "setup",
-        component: InventorySetupPageComponent,
+        component: SetupPageComponent,
     },
     {
         path: "create/supplies",
-        component: InventorySuppliesCreationComponent,
+        component: SuppliesCreationPageComponent,
     },
     {
         path: "create/equipment",
-        component: InventoryEquipmentCreationComponent,
+        component: EquipmentCreationPageComponent,
+    },
     },
     {
         path: "**",

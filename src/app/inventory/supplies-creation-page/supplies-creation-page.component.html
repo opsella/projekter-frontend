@@ -31,9 +31,11 @@
 
     <mat-step [stepControl]="categoryInformationGroup">
       <form [formGroup]="categoryInformationGroup">
+        <h2>Apply to existing category?</h2>
         <mat-form-field>
-          <mat-label>Apply to existing category?</mat-label>
-          <mat-select formControlName="options">
+          <mat-label>Categories</mat-label>
+          <mat-select formControlName="options" placeholder="Select a category...">
+            <mat-option>Select a category...</mat-option>
             <mat-option *ngFor="let category of categories" [value]="category">
               {{ category }}
             </mat-option>
@@ -42,13 +44,12 @@
 
         OR
 
+        <h2>Apply to a new category?</h2>
         <mat-form-field>
-          <mat-label>Create New Category</mat-label>
           <input matInput formControlName="name" placeholder="Name">
           <mat-error *ngIf="categoryInformationGroup.controls.name.hasError('required')">This field is required</mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Create New Category</mat-label>
           <input matInput formControlName="description" placeholder="Description">
           <mat-error *ngIf="categoryInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
         </mat-form-field>
