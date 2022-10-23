@@ -1,0 +1,8 @@
+<div class="avatar-container">
+  <button class="avatar-button" (click)="select.open()"><img src="assets/images/projekter-logo.png" alt="User avatar and additional options" class="avatar" /></button>
+  <mat-select #select id="avatar-select">
+    <mat-option *ngFor="let option of ['Profile', 'Settings']" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-select>
+</div>
