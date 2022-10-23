@@ -5,7 +5,14 @@
         <ng-template matStepLabel>Fill out your name</ng-template>
         <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl">
+          <mat-error *ngIf="firstFormGroup.controls.firstCtrl.hasError('minlength')">This field has a minimum length of 2</mat-error>
+          <mat-error *ngIf="firstFormGroup.controls.firstCtrl.hasError('required')">This field is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input matInput placeholder="Description" formControlName="requiredControl">
+          <mat-error *ngIf="firstFormGroup.controls.requiredControl.hasError('required')">This field is required</mat-error>
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
