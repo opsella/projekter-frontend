@@ -1,31 +1,56 @@
 <section>
   <mat-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
+    <mat-step [stepControl]="itemInformationGroup">
+      <form [formGroup]="itemInformationGroup">
         <ng-template matStepLabel>Fill out your name</ng-template>
+
         <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl">
-          <mat-error *ngIf="firstFormGroup.controls.firstCtrl.hasError('minlength')">This field has a minimum length of 2</mat-error>
-          <mat-error *ngIf="firstFormGroup.controls.firstCtrl.hasError('required')">This field is required</mat-error>
+          <input matInput placeholder="Equipment Name" formControlName="name" required>
+          <mat-error *ngIf="itemInformationGroup.controls.name.hasError('required')">This field is required</mat-error>
         </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Code</mat-label>
+          <input matInput placeholder="Code" formControlName="code" required>
+          <mat-error *ngIf="itemInformationGroup.controls.code.hasError('required')">This field is required</mat-error>
+        </mat-form-field>
+
         <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
-          <input matInput placeholder="Description" formControlName="requiredControl">
-          <mat-error *ngIf="firstFormGroup.controls.requiredControl.hasError('required')">This field is required</mat-error>
+          <input matInput placeholder="Description" formControlName="description" required>
+          <mat-error *ngIf="itemInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
         </mat-form-field>
+
         <div>
           <button mat-button matStepperNext>Next</button>
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-      <form [formGroup]="secondFormGroup">
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
+    <mat-step [stepControl]="categoryInformationGroup" label="Fill out your address">
+      <form [formGroup]="categoryInformationGroup">
+        <mat-form-field>
+          <mat-label>Apply to existing category?</mat-label>
+          <mat-select formControlName="options">
+            <mat-option *ngFor="let category of categories" [value]="category">
+              {{ category }}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+
+        OR
+
+        <mat-form-field>
+          <mat-label>Create New Category</mat-label>
+          <input matInput formControlName="name" placeholder="Name">
+          <mat-error *ngIf="categoryInformationGroup.controls.name.hasError('required')">This field is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Create New Category</mat-label>
+          <input matInput formControlName="description" placeholder="Description">
+          <mat-error *ngIf="categoryInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
+        </mat-form-field>
+
         <div>
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>

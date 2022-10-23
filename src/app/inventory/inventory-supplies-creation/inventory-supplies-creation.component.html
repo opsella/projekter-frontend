@@ -5,16 +5,19 @@
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" formControlName="name" required>
+          <mat-error *ngIf="itemInformationGroup.controls.name.hasError('required')">This field is required</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Code</mat-label>
           <input matInput placeholder="Code" formControlName="code" required>
+          <mat-error *ngIf="itemInformationGroup.controls.code.hasError('required')">This field is required</mat-error>
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Description</mat-label>
           <input matInput placeholder="Description" formControlName="description" required>
+          <mat-error *ngIf="itemInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -42,10 +45,12 @@
         <mat-form-field>
           <mat-label>Create New Category</mat-label>
           <input matInput formControlName="name" placeholder="Name">
+          <mat-error *ngIf="categoryInformationGroup.controls.name.hasError('required')">This field is required</mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Create New Category</mat-label>
           <input matInput formControlName="description" placeholder="Description">
+          <mat-error *ngIf="categoryInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
         </mat-form-field>
 
         <div>

@@ -8,19 +8,24 @@ import { conditionalRequired } from "../../shared/conditional-required.validator
     styleUrls: ["./inventory-equipment-creation.component.scss"],
 })
 export class InventoryEquipmentCreationComponent {
+    public categories = ["Tools", "Vehicles"];
+
     constructor(private _formBuilder: FormBuilder) {}
 
-    public firstFormGroup = this._formBuilder.group({
-        firstCtrl: new FormControl("", Validators.minLength(2)),
-        requiredControl: new FormControl("")
-    }, {
-        validators: [
-            conditionalRequired("firstCtrl", ["requiredControl"]),
-            conditionalRequired("requiredControl", ["firstCtrl"])
-        ]
+    public itemInformationGroup = this._formBuilder.group({
+        name: new FormControl("", [Validators.required]),
+        code: new FormControl("", [Validators.required]),
+        description: new FormControl("", [Validators.required])
     });
 
-    public secondFormGroup = this._formBuilder.group({
-        secondCtrl: new FormControl("", [Validators.required]),
+    public categoryInformationGroup = this._formBuilder.group({
+        options: new FormControl(this.categories),
+        name: new FormControl(""),
+        description: new FormControl("")
+    }, {
+        validators: [
+            conditionalRequired("name", ["description"]),
+            conditionalRequired("description", ["name"])
+        ]
     });
 }
