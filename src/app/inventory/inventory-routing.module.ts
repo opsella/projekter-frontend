@@ -4,9 +4,7 @@ import { ItemsPageComponent } from "./items-page/items-page.component";
 import { SetupPageComponent } from "./setup-page/setup-page.component";
 import { NgModule } from "@angular/core";
 import { SuppliesCreationPageComponent } from "./supplies-creation-page/supplies-creation-page.component";
-import {
-    EquipmentCreationPageComponent
-} from "./equipment-creation-page/equipment-creation-page.component";
+import { EquipmentCreationPageComponent } from "./equipment-creation-page/equipment-creation-page.component";
 
 const routes: Routes = [
     {
@@ -27,7 +25,6 @@ const routes: Routes = [
     {
         path: "create/equipment",
         component: EquipmentCreationPageComponent,
-    },
     },
     {
         path: "**",
