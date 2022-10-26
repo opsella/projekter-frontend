@@ -13,22 +13,22 @@ export class InventoryDataService {
                 {
                     name: "Equipment 1",
                     code: "3434523",
-                    description: ''
+                    description: "The first equipment"
                 },
                 {
                     name: "Equipment 2",
                     code: "34234234",
-                    description: ''
+                    description: "The second equipment"
                 },
                 {
                     name: "Equipment 3",
                     code: "9038023",
-                    description: ''
+                    description: "The third equipment"
                 },
                 {
                     name: "Equipment 4",
                     code: "34509809",
-                    description: ''
+                    description: "The forth equipment"
                 },
             ]);
         } else {

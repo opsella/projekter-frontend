@@ -19,7 +19,8 @@
         <mat-form-field appearance="fill">
           <mat-label>Description</mat-label>
           <input matInput placeholder="Description" formControlName="description" required>
-          <mat-error *ngIf="itemInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
+          <mat-error *ngIf="itemInformationGroup.controls.description.hasError('required')">This field is required
+          </mat-error>
         </mat-form-field>
 
         <div>
@@ -28,34 +29,40 @@
       </form>
     </mat-step>
     <mat-step [stepControl]="categoryInformationGroup" label="Fill out your address">
-      <form [formGroup]="categoryInformationGroup">
+      <form [formGroup]="categoryInformationGroup.controls.existingCategory">
         <mat-form-field>
           <mat-label>Apply to existing category?</mat-label>
-          <mat-select formControlName="options">
+          <mat-select formControlName="category">
             <mat-option *ngFor="let category of categories" [value]="category">
-              {{ category }}
+              {{ category ?? "None" }}
             </mat-option>
           </mat-select>
         </mat-form-field>
+      </form>
 
-        OR
+      OR
 
+      <form [formGroup]="categoryInformationGroup.controls.newCategory">
         <mat-form-field>
           <mat-label>Create New Category</mat-label>
           <input matInput formControlName="name" placeholder="Name">
-          <mat-error *ngIf="categoryInformationGroup.controls.name.hasError('required')">This field is required</mat-error>
+          <mat-error *ngIf="categoryInformationGroup.controls.newCategory.controls.name.hasError('required')">This field
+            is required
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Create New Category</mat-label>
           <input matInput formControlName="description" placeholder="Description">
-          <mat-error *ngIf="categoryInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
+          <mat-error *ngIf="categoryInformationGroup.controls.newCategory.controls.description.hasError('required')">
+            This field is required
+          </mat-error>
         </mat-form-field>
-
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
       </form>
+
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>

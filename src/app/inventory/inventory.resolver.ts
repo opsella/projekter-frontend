@@ -16,7 +16,7 @@ export class InventoryResolver implements Resolve<InventoryItem[]> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<InventoryItem[]> {
-        return this.inventoryData.getData(true).pipe(
+        return this.inventoryData.getData(false).pipe(
             tap(async (inventoryItem) => {
                 if (inventoryItem.length === 0) {
                     await this.route.navigate(["/inventory/setup"]);
