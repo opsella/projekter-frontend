@@ -29,36 +29,14 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="categoryInformationGroup">
-      <form [formGroup]="categoryInformationGroup">
-        <h2>Apply to existing category?</h2>
-        <mat-form-field>
-          <mat-label>Categories</mat-label>
-          <mat-select formControlName="options" placeholder="Select a category...">
-            <mat-option>Select a category...</mat-option>
-            <mat-option *ngFor="let category of categories" [value]="category">
-              {{ category }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        OR
-
-        <h2>Apply to a new category?</h2>
-        <mat-form-field>
-          <input matInput formControlName="name" placeholder="Name">
-          <mat-error *ngIf="categoryInformationGroup.controls.name.hasError('required')">This field is required</mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput formControlName="description" placeholder="Description">
-          <mat-error *ngIf="categoryInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
-        </mat-form-field>
-
-        <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </form>
+    <mat-step [stepControl]="categoryCreationForm">
+      <app-inventory-category-creation-form [categoryCreationForm]="categoryCreationForm"
+                                            [categories]="categories">
+      </app-inventory-category-creation-form>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
     </mat-step>
 
     <mat-step>

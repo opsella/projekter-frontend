@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
-import { FormBuilder, FormControl, Validators } from "@angular/forms";
-import { conditionalRequired } from "../../shared/conditional-required.validator";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { InventoryCategoryFormGroup } from "../inventory-category-form-group";
+import { InventoryCategoryFormBuilderService } from "../inventory-category-form-builder.service";
 
 @Component({
     selector: "app-inventory-supplies-creation",
@@ -10,7 +11,8 @@ import { conditionalRequired } from "../../shared/conditional-required.validator
 export class SuppliesCreationPageComponent {
     public categories = ["Tools", "Vehicles"];
 
-    constructor(private _formBuilder: FormBuilder) {
+    constructor(private _formBuilder: FormBuilder,
+                private _categoryFormBuilder: InventoryCategoryFormBuilderService) {
     }
 
     public itemInformationGroup = this._formBuilder.group({
@@ -20,14 +22,5 @@ export class SuppliesCreationPageComponent {
         qty: new FormControl("", [Validators.required])
     });
 
-    public categoryInformationGroup = this._formBuilder.group({
-        options: new FormControl(this.categories),
-        name: new FormControl(""),
-        description: new FormControl(""),
-    }, {
-        validators: [
-            conditionalRequired("name", ["description"]),
-            conditionalRequired("description", ["name"])
-        ]
-    });
+    public categoryCreationForm: FormGroup<InventoryCategoryFormGroup> = this._categoryFormBuilder.build();
 }
