@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatInputModule } from "@angular/material/input";
 import { CoreModule } from "./core/core.module";
+import { GraphQLModule } from "./graphql.module";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
     declarations: [AppComponent],
@@ -19,6 +21,8 @@ import { CoreModule } from "./core/core.module";
         BrowserAnimationsModule,
         MatExpansionModule,
         MatInputModule,
+        GraphQLModule,
+        HttpClientModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
