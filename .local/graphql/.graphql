@@ -1,0 +1,9 @@
+ query {
+   allTenantChildren(tenantId: "c20f4f10-6d42-4700-a80f-6594d0157af3") {
+     children {
+       id
+       parentId
+       name
+     }
+   }
+ }
