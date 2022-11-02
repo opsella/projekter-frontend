@@ -33,7 +33,20 @@ type EmployeeHired {
 }
 
 type GetMaterialsPayload {
+    materials: [MaterialEntity!]!
+    page: Int!
+    quantityPerPage: Int!
+}
+
+type MaterialEntity {
+    code: String!
+    created: Instant!
+    description: String!
+    id: UUID!
+    inventoryItemId: UUID!
     name: String!
+    tenantId: UUID!
+    updated: Instant!
 }
 
 type Mutation {
@@ -46,7 +59,7 @@ type Mutation {
 
 type Query {
     allTenantChildren(tenantId: UUID!): TenantResponse!
-    materials: GetMaterialsPayload!
+    materials(query: QueryMaterialsInput!): GetMaterialsPayload!
 }
 
 type RegisterEquipmentPayload {
@@ -77,11 +90,23 @@ type TenantResponse {
     children: [SubTenant!]!
 }
 
+"Represents an instant on the global timeline, with nanosecond resolution."
+scalar Instant
+
 scalar UUID
 
 input HireEmployeeInput {
     email: String!
     password: String!
+    tenantId: UUID!
+}
+
+input QueryMaterialsInput {
+    code: String
+    descriptionContains: String
+    materialId: UUID
+    page: Int!
+    quantityPerPage: Int!
     tenantId: UUID!
 }
 
