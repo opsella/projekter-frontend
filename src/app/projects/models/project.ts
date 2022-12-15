@@ -1,3 +1,5 @@
+import {ProjectStage} from "./project-stage";
+
 export interface Project {
     name: string;
     code: string;
@@ -9,10 +11,3 @@ export interface Project {
     stages: ProjectStage[];
 }
 
-export interface ProjectStage {
-    name: string;
-    code: string;
-    description: string;
-    metadata?: object;
-    stages?: ProjectStage[];
-}
