@@ -1,5 +1,8 @@
-import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import {Injectable} from "@angular/core";
+import {Observable, of} from "rxjs";
+import {InventoryEquipment, InventoryItem, InventorySupplies} from "../inventory/models/inventory-item";
+import {environment} from "../../environments/environment";
+import {NotImplementedException} from "../shared/not-implemented-exception";
 
 @Injectable({
     providedIn: "root",
@@ -7,36 +10,41 @@ import { Observable, of } from "rxjs";
 export class InventoryDataService {
     constructor() {}
 
-    public getData(retrievedData: boolean): Observable<InventoryItem[]> {
-        if (retrievedData) {
-            return of([
-                {
-                    name: "Equipment 1",
-                    code: "3434523",
-                    description: "The first equipment"
-                },
-                {
-                    name: "Equipment 2",
-                    code: "34234234",
-                    description: "The second equipment"
-                },
-                {
-                    name: "Equipment 3",
-                    code: "9038023",
-                    description: "The third equipment"
-                },
-                {
-                    name: "Equipment 4",
-                    code: "34509809",
-                    description: "The forth equipment"
-                },
-            ]);
-        } else {
-            return of([]);
+    public query(): Observable<InventoryItem[]> {
+        if (environment.useFakeData) {
+            return this.getFakeData();
         }
-    }
-}
 
-export interface InventoryItem {
-  name: string;
+        throw new NotImplementedException();
+    }
+
+    private getFakeData(): Observable<InventoryItem[]> {
+        return of([
+            {
+                name: "PVC Pipes",
+                code: "PIPE_PVC_01",
+                description: "1.5\" PVC Pipe",
+                manufacturer: "Rainbird",
+                tags: ["pipe", "pvc"],
+                quantity: 100,
+                unitOfMeasure: "ft"
+            } as InventorySupplies,
+            {
+                name: "Trencher",
+                code: "TREN01",
+                description: "Trench digging tool",
+                manufacturer: "CAT",
+                tags: ["cat", "trenching"],
+            } as InventoryEquipment,
+            {
+                name: "PVC Glue",
+                code: "GLUE_PVC_01",
+                description: "Glue for PVC pipe",
+                manufacturer: "rainbird",
+                tags: ["pipe", "glue", "pvc"],
+                quantity: 100,
+                unitOfMeasure: "oz"
+            } as InventorySupplies,
+        ]);
+    }
 }
