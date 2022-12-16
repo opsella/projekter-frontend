@@ -29,8 +29,8 @@ export class SetupPageComponent implements OnInit {
 
     }
 
-    public get projectRoute(): string {
-        return ''
+    public createStage() {
+
     }
 
     public async onSubmit(): Promise<void> {
