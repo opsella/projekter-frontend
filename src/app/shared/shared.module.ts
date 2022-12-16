@@ -6,7 +6,7 @@ import { SetupPageWrapperComponent } from './setup-page-wrapper/setup-page-wrapp
 import { MatButtonModule } from "@angular/material/button";
 import { RouterModule } from "@angular/router";
 import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
-import { ListPageWrapperComponent } from './list-page-wrapper/list-page-wrapper.component';
+import { PageWrapperComponent } from './page-wrapper/page-wrapper.component';
 
 
 @NgModule({
@@ -14,7 +14,7 @@ import { ListPageWrapperComponent } from './list-page-wrapper/list-page-wrapper.
         DropdownAvatarComponent,
         SetupPageWrapperComponent,
         FormWrapperComponent,
-        ListPageWrapperComponent
+        PageWrapperComponent
     ],
     imports: [
         CommonModule,
@@ -26,7 +26,7 @@ import { ListPageWrapperComponent } from './list-page-wrapper/list-page-wrapper.
         DropdownAvatarComponent,
         SetupPageWrapperComponent,
         FormWrapperComponent,
-        ListPageWrapperComponent
+        PageWrapperComponent
     ]
 })
 export class SharedModule { }

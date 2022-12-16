@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListPageWrapperComponent } from './list-page-wrapper.component';
+import { PageWrapperComponent } from './page-wrapper.component';
 
 describe('ListPageWrapperComponent', () => {
-  let component: ListPageWrapperComponent;
-  let fixture: ComponentFixture<ListPageWrapperComponent>;
+  let component: PageWrapperComponent;
+  let fixture: ComponentFixture<PageWrapperComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListPageWrapperComponent ]
+      declarations: [ PageWrapperComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ListPageWrapperComponent);
+    fixture = TestBed.createComponent(PageWrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

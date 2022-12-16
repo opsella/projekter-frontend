@@ -1,4 +1,4 @@
-<app-list-page-wrapper title="Projects">
+<app-page-wrapper title="Projects">
   <mat-table [dataSource]="(projectsDataSource$ | async) ?? []">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -18,4 +18,4 @@
     <mat-header-row *matHeaderRowDef="['name', 'code', 'description']"></mat-header-row>
     <mat-row *matRowDef="let row; columns: ['name', 'code', 'description']"></mat-row>
   </mat-table>
-</app-list-page-wrapper>
+</app-page-wrapper>
