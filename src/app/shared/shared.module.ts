@@ -5,12 +5,16 @@ import { MatSelectModule } from "@angular/material/select";
 import { SetupPageWrapperComponent } from './setup-page-wrapper/setup-page-wrapper.component';
 import { MatButtonModule } from "@angular/material/button";
 import { RouterModule } from "@angular/router";
+import { FormWrapperComponent } from './form-wrapper/form-wrapper.component';
+import { ListPageWrapperComponent } from './list-page-wrapper/list-page-wrapper.component';
 
 
 @NgModule({
     declarations: [
         DropdownAvatarComponent,
-        SetupPageWrapperComponent
+        SetupPageWrapperComponent,
+        FormWrapperComponent,
+        ListPageWrapperComponent
     ],
     imports: [
         CommonModule,
@@ -20,7 +24,9 @@ import { RouterModule } from "@angular/router";
     ],
     exports: [
         DropdownAvatarComponent,
-        SetupPageWrapperComponent
+        SetupPageWrapperComponent,
+        FormWrapperComponent,
+        ListPageWrapperComponent
     ]
 })
 export class SharedModule { }
