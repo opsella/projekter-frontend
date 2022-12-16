@@ -19,6 +19,10 @@ export class ProjectTemplateDataService {
     }
 
     private getFakeData(): Observable<ProjectTemplate[]> {
+        if (environment.returnFakeEmpty) {
+            return of([]);
+        }
+
         return of([
             {
                 name: "Default",

@@ -19,6 +19,10 @@ export class InventoryDataService {
     }
 
     private getFakeData(): Observable<InventoryItem[]> {
+        if (environment.returnFakeEmpty) {
+            return of([]);
+        }
+
         return of([
             {
                 name: "PVC Pipes",

@@ -20,6 +20,10 @@ export class ProjectDataService {
     }
 
     private getFakeData(): Observable<Project[]> {
+        if (environment.returnFakeEmpty) {
+            return of([]);
+        }
+
         return of([
             {
                 name: "Single Stage Project",

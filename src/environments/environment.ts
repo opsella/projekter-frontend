@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    useFakeData: true
+    useFakeData: true,
+    returnFakeEmpty: false,
 };
 
 /*
