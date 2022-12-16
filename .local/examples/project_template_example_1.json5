@@ -1,0 +1,61 @@
+{
+    "name": "Irrigation Installation Template",
+    "version": 1,
+    "project": {
+        "name": "{{string::required::regex(/true|false/)}}",
+        "code": "{{string::readonly('IIT01')}}",
+        "description": "{{string::optional::default('hello world')}}",
+        "start_date": "{{date::required}}",
+        "end_date": "{{required}}",
+        "metadata": null,
+        "inventory_assigned": {
+            "equipment": [
+                {
+                    "id": "{{guid::readonly('65AE0D75-3920-4A1C-B0D2-F223A5B419FE')}}",
+                    "quantity": 100,
+                }
+            ],
+            "supplies": []
+        },
+        "associated_requisitions": [
+            "{{guid}}"
+        ],
+        "stages": [
+            {
+                "name": "Find Shutoff",
+                "code": "{{calculated}}", // IIP01:FS01
+                "stages": [],
+                "metadata": {
+                    "requires_city_notification": "{{required:/true|false/}}"
+                }
+            },
+            {
+                "name": "Install Pipes",
+                "code": "{{calculated}}",
+                "stages": [
+                    {
+                        "name": "Dig Trenches",
+                        "code": "{{calculated}}",
+                        "stages": [],
+                    },
+                    {
+                        "name": "Lay Pipes",
+                        "code": "{{calculated}}",
+                        "stages": [
+                            {
+                                "name": "Glue Pipes",
+                                "code": "{{required}}", // IIP01:IP01:LP01:<they provide>
+                                "stages": []
+                            }
+                        ],
+                    },
+                    {
+                        "name": "Connect Branches",
+                        "code": "{{calculated}}",
+                        "stages": []
+                    }
+                ],
+            }
+        ]
+    }
+}
