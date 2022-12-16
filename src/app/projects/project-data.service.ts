@@ -9,6 +9,8 @@ import {Project} from "./models/project";
 })
 export class ProjectDataService {
 
+    public noDataCreated = true
+
     constructor() { }
 
     public query(): Observable<Project[]> {
@@ -19,8 +21,13 @@ export class ProjectDataService {
         throw new NotImplementedException();
     }
 
+    // temp function to help navigate after "submitting" form
+    public createData(): void {
+        this.noDataCreated = false
+    }
+
     private getFakeData(): Observable<Project[]> {
-        if (environment.returnFakeEmpty) {
+        if (this.noDataCreated) {
             return of([]);
         }
 

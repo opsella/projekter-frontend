@@ -18,7 +18,8 @@ export class SuppliesCreationPageComponent {
     public itemInformationGroup = this._formBuilder.group({
         name: new FormControl("", [Validators.required]),
         code: new FormControl("", [Validators.required]),
-        description: new FormControl("", [Validators.required]),
+        description: new FormControl(""),
+        unit: new FormControl("", [Validators.required]),
         qty: new FormControl("", [Validators.required])
     });
 

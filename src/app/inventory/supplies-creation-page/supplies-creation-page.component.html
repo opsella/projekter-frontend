@@ -16,8 +16,13 @@
 
         <mat-form-field>
           <mat-label>Description</mat-label>
-          <input matInput placeholder="Description" formControlName="description" required>
+          <input matInput placeholder="Description" formControlName="description">
           <mat-error *ngIf="itemInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Unit</mat-label>
+          <input matInput placeholder="Unit" formControlName="unit" required>
         </mat-form-field>
 
         <mat-form-field>

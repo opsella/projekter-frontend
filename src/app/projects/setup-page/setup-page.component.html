@@ -16,13 +16,33 @@
     OR
 
     <div>
-      SOME FORM HERE TO CREATE PROJECT
+      <app-form-wrapper>
+        <form [formGroup]="project" (ngSubmit)="onSubmit()">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Name" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" placeholder="Code" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input matInput formControlName="description" placeholder="Description" />
+          </mat-form-field>
+
+          <hr>
+
+          <button mat-button (click)="createStage()">Add stage +</button>
+
+          <button mat-button type="submit">CREATE</button>
+
+        </form>
+      </app-form-wrapper>
     </div>
   </div>
 
   <div flow2>
     Need to figure out if we can import projects or not
   </div>
-
-  <a mat-button [routerLink]="projectRoute" action>CREATE</a>
 </app-setup-page-wrapper>

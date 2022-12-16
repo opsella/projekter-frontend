@@ -10,7 +10,7 @@ import {ProjectDataService} from "./project-data.service";
 export class ProjectsResolver implements Resolve<Project[]> {
     constructor(
     private projectDataService: ProjectDataService,
-    private route: Router
+    private router: Router
     ) {}
 
     public resolve(
@@ -20,7 +20,7 @@ export class ProjectsResolver implements Resolve<Project[]> {
         return this.projectDataService.query().pipe(
             tap(async (projectData) => {
                 if (projectData.length === 0) {
-                    await this.route.navigate(["/projects/setup"]);
+                    await this.router.navigate(["/projects/setup"]);
                 }
             })
         );
