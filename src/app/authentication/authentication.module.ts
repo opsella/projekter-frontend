@@ -2,10 +2,19 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { AUTH_API_TOKEN } from "./authentication-api";
 import { AuthenticationService } from "./authentication.service";
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import {SharedModule} from "../shared/shared.module";
+import {MatButtonModule} from "@angular/material/button";
+import { AuthPageWrapperComponent } from './auth-page-wrapper/auth-page-wrapper.component';
 
 
 @NgModule({
-    declarations: [],
+    declarations: [
+        LoginComponent,
+        SignupComponent,
+        AuthPageWrapperComponent
+      ],
     providers: [
         {
             provide: AUTH_API_TOKEN,
@@ -13,7 +22,13 @@ import { AuthenticationService } from "./authentication.service";
         }
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        SharedModule,
+        MatButtonModule
+    ],
+    exports: [
+        LoginComponent,
+        AuthPageWrapperComponent
     ]
 })
 export class AuthenticationModule { }

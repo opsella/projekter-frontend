@@ -10,6 +10,8 @@ import { MatInputModule } from "@angular/material/input";
 import { CoreModule } from "./core/core.module";
 import { GraphQLModule } from "./graphql.module";
 import { HttpClientModule } from "@angular/common/http";
+import { AuthModule } from "@auth0/auth0-angular";
+import { environment } from "../environments/environment";
 
 @NgModule({
     declarations: [AppComponent],
@@ -23,6 +25,7 @@ import { HttpClientModule } from "@angular/common/http";
         MatInputModule,
         GraphQLModule,
         HttpClientModule,
+        AuthModule.forRoot(environment.auth0),
     ],
     providers: [],
     bootstrap: [AppComponent],

@@ -1,10 +1,12 @@
-<!--<div class="grid-wrapper">-->
-<div class="grid">
-  <app-top-nav class="header"></app-top-nav>
+<app-login *ngIf="!(auth.isAuthenticated$ | async); else loggedIn"></app-login>
 
-  <app-side-nav class="sidenav"></app-side-nav>
-  <app-main-content class="main"></app-main-content>
+<ng-template #loggedIn>
+  <div class="grid">
+    <app-top-nav class="header"></app-top-nav>
 
-  <app-footer class="footer"></app-footer>
-</div>
-<!--</div>-->
+    <app-side-nav class="sidenav"></app-side-nav>
+    <app-main-content class="main"></app-main-content>
+
+    <app-footer class="footer"></app-footer>
+  </div>
+</ng-template>
