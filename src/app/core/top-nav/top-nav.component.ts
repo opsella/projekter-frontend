@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { AuthService } from "@auth0/auth0-angular";
+import {Router} from "@angular/router";
 
 @Component({
     selector: "app-top-nav",
@@ -36,6 +37,7 @@ export class TopNavComponent {
 
     constructor(
         public auth: AuthService
+        private router: Router
     ) { }
 
     public logout() {

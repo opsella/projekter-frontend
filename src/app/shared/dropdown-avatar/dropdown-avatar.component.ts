@@ -9,6 +9,7 @@ import {AuthService} from "@auth0/auth0-angular";
 })
 export class DropdownAvatarComponent implements OnInit {
     @Input() options: DropDownAvatarElementConfig[] = []
+    @Input() avatarUrl: string | undefined = ""
 
     constructor() { }
 

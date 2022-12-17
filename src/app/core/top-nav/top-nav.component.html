@@ -10,9 +10,9 @@
 
   <div style="display: flex;">
     <div style="display: flex; flex-flow: column">
-      <h6>{{ user.fullName }}</h6>
-      <span style="display: inline-block">{{ user.permission }}</span>
+      <h6>{{ (auth.user$ | async)?.name }}</h6>
+<!--      <span style="display: inline-block">{{ user.permission }}</span>-->
     </div>
-    <app-dropdown-avatar [options]="options"></app-dropdown-avatar>
+    <app-dropdown-avatar [options]="options" [avatarUrl]="(auth.user$ | async)?.picture"></app-dropdown-avatar>
   </div>
 </nav>

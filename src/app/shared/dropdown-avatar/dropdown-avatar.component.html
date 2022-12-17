@@ -1,5 +1,7 @@
 <div class="avatar-container">
-  <button class="avatar-button" (click)="select.open()"><img src="assets/images/projekter-logo.png" alt="User avatar and additional options" class="avatar" /></button>
+  <button class="avatar-button" (click)="select.open()">
+    <img [src]="avatarUrl" alt="User avatar and additional options" class="avatar" />
+  </button>
 
   <mat-select #select id="avatar-select" (selectionChange)="selectionChangedHandler($event)">
     <ng-container *ngFor="let option of options">
