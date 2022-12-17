@@ -43,4 +43,12 @@ export class TopNavComponent {
     public logout() {
         this.auth.logout({ returnTo: document.location.origin })
     }
+
+    public async settings() {
+        await this.router.navigate(["/user/settings"])
+    }
+
+    public async profile() {
+        await this.router.navigate(["/user/profile"])
+    }
 }
