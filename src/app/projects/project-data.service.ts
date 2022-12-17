@@ -26,7 +26,8 @@ export class ProjectDataService {
 
   private getFakeData(): Observable<Project[]> {
     if (this.noDataCreated) {
-      return of([]);
+      return of([
+      ]);
     }
 
     return of([

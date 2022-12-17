@@ -8,7 +8,9 @@ describe("TeamTrainingWrapperComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TeamTrainingWrapperComponent ]
+      declarations: [
+        TeamTrainingWrapperComponent 
+      ]
     })
       .compileComponents();
 

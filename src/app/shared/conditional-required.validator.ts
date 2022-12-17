@@ -3,7 +3,8 @@ import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from "@ang
 export function conditionalRequired(master: string, slaves: string[]): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     let errors = {};
-    const slaveControls: { key: string; control: AbstractControl }[] = [];
+    const slaveControls: { key: string; control: AbstractControl }[] = [
+    ];
 
     for (const slaveControlKey of slaves) {
       const slaveControl = control.get(slaveControlKey);

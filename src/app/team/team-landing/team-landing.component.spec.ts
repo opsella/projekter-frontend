@@ -8,7 +8,9 @@ describe("TeamLandingComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TeamLandingComponent ]
+      declarations: [
+        TeamLandingComponent 
+      ]
     })
       .compileComponents();
 

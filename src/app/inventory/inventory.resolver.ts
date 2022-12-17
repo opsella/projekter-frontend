@@ -17,7 +17,9 @@ export class InventoryResolver implements Resolve<InventoryItem[]> {
     return this.inventoryData.query().pipe(
       tap(async (inventoryItem) => {
         if (inventoryItem.length === 0) {
-          await this.router.navigate(["/inventory/setup"]);
+          await this.router.navigate([
+            "/inventory/setup"
+          ]);
         }
       })
     );

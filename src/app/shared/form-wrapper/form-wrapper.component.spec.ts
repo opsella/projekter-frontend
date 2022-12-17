@@ -8,7 +8,9 @@ describe("FormWrapperComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormWrapperComponent ]
+      declarations: [
+        FormWrapperComponent 
+      ]
     })
       .compileComponents();
 

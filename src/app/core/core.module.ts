@@ -14,8 +14,12 @@ import { SharedModule } from "../shared/shared.module";
     MainContentComponent,
     FooterComponent,
   ],
-  imports : [CommonModule, RouterModule, SharedModule],
-  exports : [
+  imports: [
+    CommonModule,
+    RouterModule,
+    SharedModule
+  ],
+  exports: [
     TopNavComponent,
     SideNavComponent,
     MainContentComponent,

@@ -6,13 +6,17 @@ import { Subscription, tap } from "rxjs";
 @Component({
   selector    : "app-inventory-category-creation-form",
   templateUrl : "./inventory-category-creation-form.component.html",
-  styleUrls   : ["./inventory-category-creation-form.component.scss"]
+  styleUrls   : [
+    "./inventory-category-creation-form.component.scss"
+  ]
 })
 export class InventoryCategoryCreationFormComponent implements OnInit, OnDestroy {
     @Input() public categoryCreationForm!: FormGroup<InventoryCategoryFormGroup>;
-    @Input() public categories: (string)[] = [];
+    @Input() public categories: (string)[] = [
+    ];
 
-    private subscriptions: Subscription[] = [];
+    private subscriptions: Subscription[] = [
+    ];
     public ngOnInit(): void {
       this.subscriptions.push(this.categoryCreationForm.controls.existingCategory.statusChanges.pipe(
         tap((status: string) => {

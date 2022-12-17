@@ -17,7 +17,9 @@ export class ProjectsResolver implements Resolve<Project[]> {
     return this.projectDataService.query().pipe(
       tap(async (projectData) => {
         if (projectData.length === 0) {
-          await this.router.navigate(["/projects/setup"]);
+          await this.router.navigate([
+            "/projects/setup"
+          ]);
         }
       })
     );

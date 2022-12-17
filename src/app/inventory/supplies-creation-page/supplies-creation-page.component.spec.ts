@@ -8,7 +8,9 @@ describe("InventorySuppliesCreationComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SuppliesCreationPageComponent ]
+      declarations: [
+        SuppliesCreationPageComponent 
+      ]
     })
       .compileComponents();
 

@@ -5,7 +5,9 @@ import { Router } from "@angular/router";
 @Component({
   selector    : "app-top-nav",
   templateUrl : "./top-nav.component.html",
-  styleUrls   : ["./top-nav.component.scss"]
+  styleUrls   : [
+    "./top-nav.component.scss"
+  ]
 })
 export class TopNavComponent {
   public user = {
@@ -45,10 +47,14 @@ export class TopNavComponent {
   }
 
   public async settings() {
-    await this.router.navigate(["/user/settings"]);
+    await this.router.navigate([
+      "/user/settings"
+    ]);
   }
 
   public async profile() {
-    await this.router.navigate(["/user/profile"]);
+    await this.router.navigate([
+      "/user/profile"
+    ]);
   }
 }

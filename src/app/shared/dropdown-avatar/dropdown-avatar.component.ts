@@ -4,10 +4,13 @@ import { MatLegacySelectChange as MatSelectChange } from "@angular/material/lega
 @Component({
   selector    : "app-dropdown-avatar",
   templateUrl : "./dropdown-avatar.component.html",
-  styleUrls   : ["./dropdown-avatar.component.scss"]
+  styleUrls   : [
+    "./dropdown-avatar.component.scss"
+  ]
 })
 export class DropdownAvatarComponent  {
-    @Input() public options: DropDownAvatarElementConfig[] = [];
+    @Input() public options: DropDownAvatarElementConfig[] = [
+    ];
     @Input() public avatarUrl: string | undefined = "";
 
 

@@ -14,8 +14,10 @@ import { AuthModule } from "@auth0/auth0-angular";
 import { environment } from "../environments/environment";
 
 @NgModule({
-  declarations : [AppComponent],
-  imports      : [
+  declarations: [
+    AppComponent
+  ],
+  imports: [
     CoreModule,
     BrowserModule,
     AppRoutingModule,
@@ -27,8 +29,11 @@ import { environment } from "../environments/environment";
     HttpClientModule,
     AuthModule.forRoot(environment.auth0),
   ],
-  providers : [],
-  bootstrap : [AppComponent],
+  providers: [
+  ],
+  bootstrap: [
+    AppComponent
+  ],
 })
 export class AppModule {
 }

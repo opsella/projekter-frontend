@@ -13,6 +13,11 @@ import { MatInputModule } from "@angular/material/input";
     EmployeeTrainingComponent,
     EmployeeTrainingsListComponent,
   ],
-  imports: [CommonModule, MatExpansionModule, RouterModule, MatInputModule],
+  imports: [
+    CommonModule,
+    MatExpansionModule,
+    RouterModule,
+    MatInputModule
+  ],
 })
 export class TeamModule {}

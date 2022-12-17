@@ -14,22 +14,38 @@ export class EmployeeTrainingService {
     {
       title       : "Employee Intro",
       description : "(required)",
-      sections    : ["Policies", "Disclosures", "Conduct"],
+      sections    : [
+        "Policies",
+        "Disclosures",
+        "Conduct"
+      ],
     },
     {
       title       : "Sexual Harassment Policy",
       description : "(required)",
-      sections    : ["Policies", "Disclosures", "Conduct"],
+      sections    : [
+        "Policies",
+        "Disclosures",
+        "Conduct"
+      ],
     },
     {
       title       : "Lawn Edging",
       description : "(required)",
-      sections    : ["Policies", "Disclosures", "Conduct"],
+      sections    : [
+        "Policies",
+        "Disclosures",
+        "Conduct"
+      ],
     },
     {
       title       : "Weed Eater Fundamentals",
       description : "(optional)",
-      sections    : ["Policies", "Disclosures", "Conduct"],
+      sections    : [
+        "Policies",
+        "Disclosures",
+        "Conduct"
+      ],
     },
   ];
 
@@ -37,22 +53,38 @@ export class EmployeeTrainingService {
     {
       title       : "Employee Intro",
       description : "(required)",
-      sections    : ["Policies", "Disclosures", "Conduct"],
+      sections    : [
+        "Policies",
+        "Disclosures",
+        "Conduct"
+      ],
     },
     {
       title       : "Sexual Harassment Policy",
       description : "(required)",
-      sections    : ["Policies", "Disclosures", "Conduct"],
+      sections    : [
+        "Policies",
+        "Disclosures",
+        "Conduct"
+      ],
     },
     {
       title       : "Lawn Edging",
       description : "(required)",
-      sections    : ["Policies", "Disclosures", "Conduct"],
+      sections    : [
+        "Policies",
+        "Disclosures",
+        "Conduct"
+      ],
     },
     {
       title       : "Weed Eater Fundamentals",
       description : "(optional)",
-      sections    : ["Policies", "Disclosures", "Conduct"],
+      sections    : [
+        "Policies",
+        "Disclosures",
+        "Conduct"
+      ],
     },
   ];
   

@@ -51,6 +51,8 @@
             }
           }
         ],
+        "array-bracket-newline": ["error", "always"],
+        "array-element-newline": ["error", "always"],
         "object-curly-spacing": [
           "error",
           "always"

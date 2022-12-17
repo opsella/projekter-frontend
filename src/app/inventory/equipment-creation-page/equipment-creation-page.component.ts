@@ -5,10 +5,15 @@ import { InventoryCategoryFormBuilderService } from "../inventory-category-form-
 @Component({
   selector    : "app-equipment-creation-page",
   templateUrl : "./equipment-creation-page.component.html",
-  styleUrls   : ["./equipment-creation-page.component.scss"],
+  styleUrls   : [
+    "./equipment-creation-page.component.scss"
+  ],
 })
 export class EquipmentCreationPageComponent {
-  public categories = ["Tools", "Vehicles"];
+  public categories = [
+    "Tools",
+    "Vehicles"
+  ];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -16,9 +21,15 @@ export class EquipmentCreationPageComponent {
   ) { }
 
   public itemInformationGroup = this._formBuilder.group({
-    name        : new FormControl("", [Validators.required]),
-    code        : new FormControl("", [Validators.required]),
-    description : new FormControl("", [Validators.required]),
+    name: new FormControl("", [
+      Validators.required
+    ]),
+    code: new FormControl("", [
+      Validators.required
+    ]),
+    description: new FormControl("", [
+      Validators.required
+    ]),
   });
 
   public categoryCreationForm = this._inventoryCategoryFormBuilder.build();

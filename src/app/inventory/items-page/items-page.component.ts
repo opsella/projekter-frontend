@@ -7,15 +7,19 @@ import { InventoryItem } from "../models/inventory-item";
 @Component({
   selector    : "app-items-page",
   templateUrl : "./items-page.component.html",
-  styleUrls   : ["./items-page.component.scss"]
+  styleUrls   : [
+    "./items-page.component.scss"
+  ]
 })
 export class ItemsPageComponent {
-  private inventoryItemsDataSource: MatTableDataSource<InventoryItem> = new MatTableDataSource<InventoryItem>([]);
+  private inventoryItemsDataSource: MatTableDataSource<InventoryItem> = new MatTableDataSource<InventoryItem>([
+  ]);
   public inventoryItemsDataSource$: Observable<MatTableDataSource<InventoryItem>> = this.activatedRoute.data
     .pipe(
       map((data: Data) => data["inventoryItems"] as InventoryItem[]),
       map((items?: InventoryItem[]) => {
-        this.inventoryItemsDataSource.data = items ?? [];
+        this.inventoryItemsDataSource.data = items ?? [
+        ];
         return this.inventoryItemsDataSource;
       })
     );

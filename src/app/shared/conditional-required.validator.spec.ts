@@ -9,7 +9,11 @@ describe("conditional-required", () => {
       master        : new FormControl(""),
       requiredSlave : new FormControl("")
     }, {
-      validators: [ conditionalRequired("master", ["requiredSlave"])]
+      validators: [
+        conditionalRequired("master", [
+          "requiredSlave"
+        ])
+      ]
     });
 
     // Act
@@ -24,7 +28,11 @@ describe("conditional-required", () => {
       master        : new FormControl("a"),
       requiredSlave : new FormControl("")
     }, {
-      validators: [ conditionalRequired("master", ["requiredSlave"])]
+      validators: [
+        conditionalRequired("master", [
+          "requiredSlave"
+        ])
+      ]
     });
 
     // Act
@@ -42,7 +50,11 @@ describe("conditional-required", () => {
       master        : new FormControl("a"),
       requiredSlave : new FormControl("")
     }, {
-      validators: [ conditionalRequired("master", ["requiredSlave"])]
+      validators: [
+        conditionalRequired("master", [
+          "requiredSlave"
+        ])
+      ]
     });
 
     // Act
@@ -58,7 +70,11 @@ describe("conditional-required", () => {
       master        : new FormControl("a"),
       requiredSlave : new FormControl("")
     }, {
-      validators: [ conditionalRequired("master", ["requiredSlave"])]
+      validators: [
+        conditionalRequired("master", [
+          "requiredSlave"
+        ])
+      ]
     });
 
     // Act
@@ -80,8 +96,12 @@ describe("conditional-required", () => {
       requiredSlave : new FormControl("")
     }, {
       validators: [
-        conditionalRequired("master", ["requiredSlave"]),
-        conditionalRequired("requiredSlave", ["master"])
+        conditionalRequired("master", [
+          "requiredSlave"
+        ]),
+        conditionalRequired("requiredSlave", [
+          "master"
+        ])
       ]
     });
 
@@ -125,8 +145,12 @@ describe("conditional-required", () => {
       requiredSlave : new FormControl("")
     }, {
       validators: [
-        conditionalRequired("master", ["requiredSlave"]),
-        conditionalRequired("requiredSlave", ["master"])
+        conditionalRequired("master", [
+          "requiredSlave"
+        ]),
+        conditionalRequired("requiredSlave", [
+          "master"
+        ])
       ]
     });
 

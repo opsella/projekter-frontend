@@ -3,7 +3,9 @@ import { Component, Input } from "@angular/core";
 @Component({
   selector    : "app-setup-page-wrapper",
   templateUrl : "./setup-page-wrapper.component.html",
-  styleUrls   : ["./setup-page-wrapper.component.scss"]
+  styleUrls   : [
+    "./setup-page-wrapper.component.scss"
+  ]
 })
 export class SetupPageWrapperComponent {
     @Input() public title = "";

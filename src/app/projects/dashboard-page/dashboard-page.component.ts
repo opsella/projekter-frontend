@@ -8,15 +8,19 @@ import { ActivatedRoute, Data } from "@angular/router";
 @Component({
   selector    : "app-dashboard-page",
   templateUrl : "./dashboard-page.component.html",
-  styleUrls   : ["./dashboard-page.component.scss"]
+  styleUrls   : [
+    "./dashboard-page.component.scss"
+  ]
 })
 export class DashboardPageComponent  {
-  private projectsDataSource: MatTableDataSource<Project> = new MatTableDataSource<Project>([]);
+  private projectsDataSource: MatTableDataSource<Project> = new MatTableDataSource<Project>([
+  ]);
   public projectsDataSource$: Observable<MatTableDataSource<Project>> = this.activatedRoute.data
     .pipe(
       map((data: Data) => data["projectsData"] as Project[]),
       map((projects?: Project[]) => {
-        this.projectsDataSource.data = projects ?? [];
+        this.projectsDataSource.data = projects ?? [
+        ];
         return this.projectsDataSource;
       })
     );

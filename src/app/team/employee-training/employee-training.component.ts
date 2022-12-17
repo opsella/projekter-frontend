@@ -4,11 +4,15 @@ import { EmployeeTrainingService, TrainingObj, } from "../../services/employee-t
 @Component({
   selector    : "app-employee-training",
   templateUrl : "./employee-training.component.html",
-  styleUrls   : ["./employee-training.component.scss"],
+  styleUrls   : [
+    "./employee-training.component.scss"
+  ],
 })
 export class EmployeeTrainingComponent implements OnInit {
-  public toDoTrainings: Array<TrainingObj> = [];
-  public completedTrainings: Array<TrainingObj> = [];
+  public toDoTrainings: Array<TrainingObj> = [
+  ];
+  public completedTrainings: Array<TrainingObj> = [
+  ];
 
   constructor(
     private service: EmployeeTrainingService

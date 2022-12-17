@@ -18,16 +18,20 @@ export class InventoryDataService {
 
   private getFakeData(): Observable<InventoryItem[]> {
     if (environment.returnFakeEmpty) {
-      return of([]);
+      return of([
+      ]);
     }
 
     return of([
             {
-              name          : "PVC Pipes",
-              code          : "PIPE_PVC_01",
-              description   : "1.5\" PVC Pipe",
-              manufacturer  : "Rainbird",
-              tags          : ["pipe", "pvc"],
+              name         : "PVC Pipes",
+              code         : "PIPE_PVC_01",
+              description  : "1.5\" PVC Pipe",
+              manufacturer : "Rainbird",
+              tags         : [
+                "pipe",
+                "pvc"
+              ],
               quantity      : 100,
               unitOfMeasure : "ft"
             } as InventorySupplies,
@@ -36,14 +40,21 @@ export class InventoryDataService {
               code         : "TREN01",
               description  : "Trench digging tool",
               manufacturer : "CAT",
-              tags         : ["cat", "trenching"],
+              tags         : [
+                "cat",
+                "trenching"
+              ],
             } as InventoryEquipment,
             {
-              name          : "PVC Glue",
-              code          : "GLUE_PVC_01",
-              description   : "Glue for PVC pipe",
-              manufacturer  : "rainbird",
-              tags          : ["pipe", "glue", "pvc"],
+              name         : "PVC Glue",
+              code         : "GLUE_PVC_01",
+              description  : "Glue for PVC pipe",
+              manufacturer : "rainbird",
+              tags         : [
+                "pipe",
+                "glue",
+                "pvc"
+              ],
               quantity      : 100,
               unitOfMeasure : "oz"
             } as InventorySupplies,
