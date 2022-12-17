@@ -9,6 +9,6 @@ import { AuthService } from "@auth0/auth0-angular";
 export class SettingsComponent  {
 
   constructor(
-      public auth: AuthService
+    public auth: AuthService
   ) { }
 }

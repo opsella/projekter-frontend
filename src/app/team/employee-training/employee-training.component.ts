@@ -10,7 +10,9 @@ export class EmployeeTrainingComponent implements OnInit {
   public toDoTrainings: Array<TrainingObj> = [];
   public completedTrainings: Array<TrainingObj> = [];
 
-  constructor(private service: EmployeeTrainingService) {}
+  constructor(
+    private service: EmployeeTrainingService
+  ) { }
 
   public ngOnInit(): void {
     this.setTrainings();

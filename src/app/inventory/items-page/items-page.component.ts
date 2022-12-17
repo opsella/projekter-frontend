@@ -20,7 +20,8 @@ export class ItemsPageComponent {
       })
     );
 
-  constructor(private activatedRoute: ActivatedRoute) {
-  }
+  constructor(
+    private activatedRoute: ActivatedRoute
+  ) { }
 }
 

@@ -13,7 +13,7 @@ export class EquipmentCreationPageComponent {
   constructor(
     private _formBuilder: FormBuilder,
     private _inventoryCategoryFormBuilder: InventoryCategoryFormBuilderService
-  ) {}
+  ) { }
 
   public itemInformationGroup = this._formBuilder.group({
     name        : new FormControl("", [Validators.required]),

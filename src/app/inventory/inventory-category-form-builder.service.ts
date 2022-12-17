@@ -10,8 +10,9 @@ import { onlyOneValidator } from "../shared/only-one.validator";
 @Injectable()
 export class InventoryCategoryFormBuilderService {
 
-  constructor(private _formBuilder: FormBuilder) {
-  }
+  constructor(
+    private _formBuilder: FormBuilder
+  ) { }
 
   public build(): FormGroup<InventoryCategoryFormGroup> {
     return this._formBuilder.group<InventoryCategoryFormGroup>({

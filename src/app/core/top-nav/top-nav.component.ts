@@ -36,8 +36,8 @@ export class TopNavComponent {
   ];
 
   constructor(
-        public auth: AuthService,
-        private router: Router
+    public auth: AuthService,
+    private router: Router
   ) { }
 
   public logout() {

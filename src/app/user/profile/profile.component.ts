@@ -9,6 +9,6 @@ import { AuthService } from "@auth0/auth0-angular";
 export class ProfileComponent {
 
   constructor(
-      public auth: AuthService
+    public auth: AuthService
   ) { }
 }

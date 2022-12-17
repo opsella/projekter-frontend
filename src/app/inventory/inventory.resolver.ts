@@ -11,7 +11,7 @@ export class InventoryResolver implements Resolve<InventoryItem[]> {
   constructor(
     private inventoryData: InventoryDataService,
     private router: Router
-  ) {}
+  ) { }
 
   public resolve(): Observable<InventoryItem[]> {
     return this.inventoryData.query().pipe(

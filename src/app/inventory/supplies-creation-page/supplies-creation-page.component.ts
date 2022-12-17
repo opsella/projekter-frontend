@@ -11,9 +11,10 @@ import { InventoryCategoryFormBuilderService } from "../inventory-category-form-
 export class SuppliesCreationPageComponent {
   public categories = ["Tools", "Vehicles"];
 
-  constructor(private _formBuilder: FormBuilder,
-                private _categoryFormBuilder: InventoryCategoryFormBuilderService) {
-  }
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _categoryFormBuilder: InventoryCategoryFormBuilderService
+  ) { }
 
   public itemInformationGroup = this._formBuilder.group({
     name        : new FormControl("", [Validators.required]),

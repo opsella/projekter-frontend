@@ -22,7 +22,7 @@ export class DashboardPageComponent  {
     );
 
   constructor(
-      private projectDataService: ProjectDataService,
-      private activatedRoute: ActivatedRoute
-  ) {}
+    private projectDataService: ProjectDataService,
+    private activatedRoute: ActivatedRoute
+  ) { }
 }

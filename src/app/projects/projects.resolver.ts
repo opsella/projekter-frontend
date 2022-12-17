@@ -11,7 +11,7 @@ export class ProjectsResolver implements Resolve<Project[]> {
   constructor(
     private projectDataService: ProjectDataService,
     private router: Router
-  ) {}
+  ) { }
 
   public resolve(): Observable<Project[]> {
     return this.projectDataService.query().pipe(

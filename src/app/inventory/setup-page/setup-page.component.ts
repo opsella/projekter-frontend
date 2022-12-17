@@ -7,7 +7,9 @@ import { FormBuilder, FormControl, Validators } from "@angular/forms";
   styleUrls   : ["./setup-page.component.scss"],
 })
 export class SetupPageComponent {
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder
+  ) { }
 
   public inventoryType = this._formBuilder.group({
     options: new FormControl("/inventory/create/supplies", [Validators.required]),

@@ -10,10 +10,11 @@ import { ProjectDataService } from "../project-data.service";
 })
 export class SetupPageComponent  {
   public templates: string[] = ["Template 1", "Template 2", "Template 3", "Template 4", "Template 5"];
-  constructor(private _formBuilder: FormBuilder,
-                private router: Router,
-                private projectDataService: ProjectDataService
-  ) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    private projectDataService: ProjectDataService
+  ) { }
 
   public templateOptions = this._formBuilder.group({
     options: new FormControl(this.templates, [Validators.required]),

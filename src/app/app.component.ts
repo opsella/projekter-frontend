@@ -10,7 +10,6 @@ export class AppComponent {
   public title = "projekter-frontend";
 
   constructor(
-        public auth: AuthService
-  ) {
-  }
+    public auth: AuthService
+  ) { }
 }
