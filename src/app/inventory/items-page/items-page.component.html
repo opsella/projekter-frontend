@@ -1,4 +1,6 @@
-<section style="display: flex; justify-content: space-between; align-content: center">
+<section
+  style="display: flex; justify-content: space-between; align-content: center"
+>
   <h1>Inventory</h1>
   <div>
     <a routerLink="/inventory/create/supplies">Create Supplies</a>
@@ -12,21 +14,25 @@
   <mat-table [dataSource]="(inventoryItemsDataSource$ | async) ?? []">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="code">
       <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.code}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.code }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.description}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{ row.description }} </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['name', 'code', 'description']"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['name', 'code', 'description']"></mat-row>
+    <mat-header-row
+      *matHeaderRowDef="['name', 'code', 'description']"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: ['name', 'code', 'description']"
+    ></mat-row>
   </mat-table>
 </section>
 

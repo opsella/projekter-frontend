@@ -1,24 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-setup-page-wrapper',
-  templateUrl: './setup-page-wrapper.component.html',
-  styleUrls: ['./setup-page-wrapper.component.scss']
+  selector    : "app-setup-page-wrapper",
+  templateUrl : "./setup-page-wrapper.component.html",
+  styleUrls   : ["./setup-page-wrapper.component.scss"]
 })
-export class SetupPageWrapperComponent implements OnInit {
-    @Input() title: string = '';
-    @Input() flow1ButtonText: string = '';
-    @Input() flow2ButtonText: string = '';
+export class SetupPageWrapperComponent {
+    @Input() public title = "";
+    @Input() public flow1ButtonText = "";
+    @Input() public flow2ButtonText = "";
 
-    public flow: string | null = null
+    public flow: string | null = null;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  public startFlow(flow: string) {
-      this.flow = flow
-  }
+    public startFlow(flow: string) {
+      this.flow = flow;
+    }
 
 }

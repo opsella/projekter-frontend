@@ -1,4 +1,4 @@
-import {ProjectStage} from "./project-stage";
+import { ProjectStage } from "./project-stage";
 
 export interface Project {
     name: string;

@@ -1,16 +1,16 @@
-import {TestBed} from "@angular/core/testing";
+import { TestBed } from "@angular/core/testing";
 
-import {ProjectDataService} from "./project-data.service";
+import { ProjectDataService } from "./project-data.service";
 
 describe("ProjectDataService", () => {
-    let service: ProjectDataService;
+  let service: ProjectDataService;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({});
-        service = TestBed.inject(ProjectDataService);
-    });
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ProjectDataService);
+  });
 
-    it("should be created", () => {
-        expect(service).toBeTruthy();
-    });
+  it("should be created", () => {
+    expect(service).toBeTruthy();
+  });
 });

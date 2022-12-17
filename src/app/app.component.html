@@ -1,4 +1,6 @@
-<app-login *ngIf="!(auth.isAuthenticated$ | async); else loggedIn"></app-login>
+<app-login
+  *ngIf="(auth.isAuthenticated$ | async) === false; else loggedIn"
+></app-login>
 
 <ng-template #loggedIn>
   <div class="grid">

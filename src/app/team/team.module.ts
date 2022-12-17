@@ -8,11 +8,11 @@ import { RouterModule } from "@angular/router";
 import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
-    declarations: [
-        TeamLandingComponent,
-        EmployeeTrainingComponent,
-        EmployeeTrainingsListComponent,
-    ],
-    imports: [CommonModule, MatExpansionModule, RouterModule, MatInputModule],
+  declarations: [
+    TeamLandingComponent,
+    EmployeeTrainingComponent,
+    EmployeeTrainingsListComponent,
+  ],
+  imports: [CommonModule, MatExpansionModule, RouterModule, MatInputModule],
 })
 export class TeamModule {}

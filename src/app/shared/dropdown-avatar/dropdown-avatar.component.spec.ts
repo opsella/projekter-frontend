@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DropdownAvatarComponent } from './dropdown-avatar.component';
+import { DropdownAvatarComponent } from "./dropdown-avatar.component";
 
-describe('DropdownAvatarComponent', () => {
+describe("DropdownAvatarComponent", () => {
   let component: DropdownAvatarComponent;
   let fixture: ComponentFixture<DropdownAvatarComponent>;
 
@@ -10,14 +10,14 @@ describe('DropdownAvatarComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DropdownAvatarComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DropdownAvatarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -6,25 +6,25 @@ import { SetupPageComponent } from "./setup-page/setup-page.component";
 
 
 const routes: Routes = [
-    {
-        path: "list",
-        resolve: {
-            projectsData: ProjectsResolver,
-        },
-        component: DashboardPageComponent,
+  {
+    path    : "list",
+    resolve : {
+      projectsData: ProjectsResolver,
     },
-    {
-        path: "setup",
-        component: SetupPageComponent,
-    },
-    {
-        path: "**",
-        redirectTo: "/projects/list",
-    },
+    component: DashboardPageComponent,
+  },
+  {
+    path      : "setup",
+    component : SetupPageComponent,
+  },
+  {
+    path       : "**",
+    redirectTo : "/projects/list",
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
+  imports : [RouterModule.forChild(routes)],
+  exports : [RouterModule],
 })
 export class ProjectsRoutingModule {}

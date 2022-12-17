@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SetupPageWrapperComponent } from './setup-page-wrapper.component';
+import { SetupPageWrapperComponent } from "./setup-page-wrapper.component";
 
-describe('SetupPageComponent', () => {
+describe("SetupPageComponent", () => {
   let component: SetupPageWrapperComponent;
   let fixture: ComponentFixture<SetupPageWrapperComponent>;
 
@@ -10,14 +10,14 @@ describe('SetupPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ SetupPageWrapperComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SetupPageWrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

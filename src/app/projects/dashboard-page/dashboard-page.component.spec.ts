@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DashboardPageComponent } from './dashboard-page.component';
+import { DashboardPageComponent } from "./dashboard-page.component";
 
-describe('DashboardPageComponent', () => {
+describe("DashboardPageComponent", () => {
   let component: DashboardPageComponent;
   let fixture: ComponentFixture<DashboardPageComponent>;
 
@@ -10,14 +10,14 @@ describe('DashboardPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ DashboardPageComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

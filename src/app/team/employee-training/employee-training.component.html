@@ -1,6 +1,4 @@
 <div class="trainings-container">
-
-
   <h2>To Do</h2>
   <mat-expansion-panel *ngFor="let tdata of toDoTrainings" class="panel">
     <mat-expansion-panel-header>
@@ -13,7 +11,8 @@
     </mat-expansion-panel-header>
     <ul class="sections">
       <li *ngFor="let tsection of tdata.sections">
-        <a routerLink="">{{ tsection }}</a><img src="assets/images/check.svg" alt="check" />
+        <a routerLink="">{{ tsection }}</a
+        ><img src="assets/images/check.svg" alt="check" />
       </li>
     </ul>
   </mat-expansion-panel>

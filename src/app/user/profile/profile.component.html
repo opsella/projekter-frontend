@@ -2,9 +2,14 @@
   <ul>
     <li>Name: {{ (auth.user$ | async)?.name }}</li>
     <li>Username: {{ (auth.user$ | async)?.nickname }}</li>
-    <li>Email: {{ (auth.user$ | async)?.email }}</li><span>{{ (auth.user$ | async)?.email_verified ? "Verified" : "Unverified" }}</span>
-    <li>Phone: {{ (auth.user$ | async)?.phone_number }}</li><span>{{ (auth.user$ | async)?.phone_number_verified ? "Verified" : "Unverified" }}</span>
+    <li>Email: {{ (auth.user$ | async)?.email }}</li>
+    <span>{{
+      (auth.user$ | async)?.email_verified ? "Verified" : "Unverified"
+    }}</span>
+    <li>Phone: {{ (auth.user$ | async)?.phone_number }}</li>
+    <span>{{
+      (auth.user$ | async)?.phone_number_verified ? "Verified" : "Unverified"
+    }}</span>
     <li>Position: Admin</li>
   </ul>
 </app-page-wrapper>
-

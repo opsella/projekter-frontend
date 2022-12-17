@@ -18,15 +18,26 @@
   <form [formGroup]="categoryCreationForm.controls.newCategory">
     <mat-form-field>
       <mat-label>Create New Category</mat-label>
-      <input matInput formControlName="name" placeholder="Name">
-      <mat-error *ngIf="categoryCreationForm.controls.newCategory.controls.name.hasError('required')">This field
-        is required
+      <input matInput formControlName="name" placeholder="Name" />
+      <mat-error
+        *ngIf="
+          categoryCreationForm.controls.newCategory.controls.name.hasError(
+            'required'
+          )
+        "
+        >This field is required
       </mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Create New Category</mat-label>
-      <input matInput formControlName="description" placeholder="Description">
-      <mat-error *ngIf="categoryCreationForm.controls.newCategory.controls.description.hasError('required')">
+      <input matInput formControlName="description" placeholder="Description" />
+      <mat-error
+        *ngIf="
+          categoryCreationForm.controls.newCategory.controls.description.hasError(
+            'required'
+          )
+        "
+      >
         This field is required
       </mat-error>
     </mat-form-field>

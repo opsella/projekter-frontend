@@ -6,50 +6,50 @@ import { RouterModule, Routes } from "@angular/router";
 // import { TeamTrainingWrapperComponent } from './team/team-training-wrapper/team-training-wrapper.component';
 
 const routes: Routes = [
-    {
-        path: "inventory",
-        loadChildren: () => import("./inventory/inventory.module").then(m => m.InventoryModule)
-    },
-    {
-        path: "projects",
-        loadChildren: () => import("./projects/projects.module").then(m => m.ProjectsModule)
-    },
-    {
-        path: "user",
-        loadChildren: () => import("./user/user.module").then(m => m.UserModule)
-    }
-    // {
-    //   path: 'team',
-    //   component: TeamLandingComponent,
-    //   children: [
-    //     {
-    //       path: 'training',
-    //       component: TeamTrainingWrapperComponent,
-    //       children: [
-    //         {
-    //           path: 'employee',
-    //           component: EmployeeTrainingComponent,
-    //         },
-    //         {
-    //           path: 'list',
-    //           component: EmployeeTrainingsListComponent,
-    //         },
-    //         {
-    //           path: '**',
-    //           redirectTo: 'employee',
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       path: '**',
-    //       component: TeamLandingComponent,
-    //     },
-    //   ],
-    // },
+  {
+    path         : "inventory",
+    loadChildren : () => import("./inventory/inventory.module").then(m => m.InventoryModule)
+  },
+  {
+    path         : "projects",
+    loadChildren : () => import("./projects/projects.module").then(m => m.ProjectsModule)
+  },
+  {
+    path         : "user",
+    loadChildren : () => import("./user/user.module").then(m => m.UserModule)
+  }
+  // {
+  //   path: 'team',
+  //   component: TeamLandingComponent,
+  //   children: [
+  //     {
+  //       path: 'training',
+  //       component: TeamTrainingWrapperComponent,
+  //       children: [
+  //         {
+  //           path: 'employee',
+  //           component: EmployeeTrainingComponent,
+  //         },
+  //         {
+  //           path: 'list',
+  //           component: EmployeeTrainingsListComponent,
+  //         },
+  //         {
+  //           path: '**',
+  //           redirectTo: 'employee',
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       path: '**',
+  //       component: TeamLandingComponent,
+  //     },
+  //   ],
+  // },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule],
+  imports : [RouterModule.forRoot(routes)],
+  exports : [RouterModule],
 })
 export class AppRoutingModule {}

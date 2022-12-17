@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SetupPageComponent } from './setup-page.component';
+import { SetupPageComponent } from "./setup-page.component";
 
-describe('SetupPageComponent', () => {
+describe("SetupPageComponent", () => {
   let component: SetupPageComponent;
   let fixture: ComponentFixture<SetupPageComponent>;
 
@@ -10,14 +10,14 @@ describe('SetupPageComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ SetupPageComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SetupPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AuthPageWrapperComponent } from './auth-page-wrapper.component';
+import { AuthPageWrapperComponent } from "./auth-page-wrapper.component";
 
-describe('AuthPageWrapperComponent', () => {
+describe("AuthPageWrapperComponent", () => {
   let component: AuthPageWrapperComponent;
   let fixture: ComponentFixture<AuthPageWrapperComponent>;
 
@@ -10,14 +10,14 @@ describe('AuthPageWrapperComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ AuthPageWrapperComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(AuthPageWrapperComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

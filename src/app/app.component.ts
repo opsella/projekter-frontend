@@ -2,15 +2,15 @@ import { Component } from "@angular/core";
 import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.scss"]
+  selector    : "app-root",
+  templateUrl : "./app.component.html",
+  styleUrls   : ["./app.component.scss"]
 })
 export class AppComponent {
-    public title = "projekter-frontend";
+  public title = "projekter-frontend";
 
-    constructor(
+  constructor(
         public auth: AuthService
-    ) {
-    }
+  ) {
+  }
 }

@@ -12,5 +12,4 @@ export interface InventorySupplies extends InventoryItem {
     unitOfMeasure: string;
 }
 
-export interface InventoryEquipment extends InventoryItem {
-}
+export type InventoryEquipment = InventoryItem;

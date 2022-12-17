@@ -1,4 +1,8 @@
-<app-setup-page-wrapper title="You do not have any inventory." flow1ButtonText="Create Item" flow2ButtonText="Import Items">
+<app-setup-page-wrapper
+  title="You do not have any inventory."
+  flow1ButtonText="Create Item"
+  flow2ButtonText="Import Items"
+>
   <div flow1>
     <h1>How will you track this item?</h1>
 
@@ -6,8 +10,12 @@
       <ng-template matStepLabel>Select Inventory Type</ng-template>
       <mat-label>How will you track this item?</mat-label>
       <mat-radio-group formControlName="options" required>
-        <mat-radio-button value="/inventory/create/supplies">Quantity</mat-radio-button>
-        <mat-radio-button value="/inventory/create/equipment">Individually</mat-radio-button>
+        <mat-radio-button value="/inventory/create/supplies"
+          >Quantity</mat-radio-button
+        >
+        <mat-radio-button value="/inventory/create/equipment"
+          >Individually</mat-radio-button
+        >
       </mat-radio-group>
     </form>
   </div>

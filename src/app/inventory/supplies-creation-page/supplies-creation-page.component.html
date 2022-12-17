@@ -4,39 +4,56 @@
       <form [formGroup]="itemInformationGroup">
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input matInput placeholder="Name" formControlName="name" required>
-          <mat-error *ngIf="itemInformationGroup.controls.name.hasError('required')">This field is required</mat-error>
+          <input matInput placeholder="Name" formControlName="name" required />
+          <mat-error
+            *ngIf="itemInformationGroup.controls.name.hasError('required')"
+            >This field is required</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Code</mat-label>
-          <input matInput placeholder="Code" formControlName="code" required>
-          <mat-error *ngIf="itemInformationGroup.controls.code.hasError('required')">This field is required</mat-error>
+          <input matInput placeholder="Code" formControlName="code" required />
+          <mat-error
+            *ngIf="itemInformationGroup.controls.code.hasError('required')"
+            >This field is required</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Description</mat-label>
-          <input matInput placeholder="Description" formControlName="description">
-          <mat-error *ngIf="itemInformationGroup.controls.description.hasError('required')">This field is required</mat-error>
+          <input
+            matInput
+            placeholder="Description"
+            formControlName="description"
+          />
+          <mat-error
+            *ngIf="
+              itemInformationGroup.controls.description.hasError('required')
+            "
+            >This field is required</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Unit</mat-label>
-          <input matInput placeholder="Unit" formControlName="unit" required>
+          <input matInput placeholder="Unit" formControlName="unit" required />
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Qty</mat-label>
-          <input matInput placeholder="Qty" formControlName="qty" required>
+          <input matInput placeholder="Qty" formControlName="qty" required />
         </mat-form-field>
 
-          <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext>Next</button>
       </form>
     </mat-step>
 
     <mat-step [stepControl]="categoryCreationForm">
-      <app-inventory-category-creation-form [categoryCreationForm]="categoryCreationForm"
-                                            [categories]="categories">
+      <app-inventory-category-creation-form
+        [categoryCreationForm]="categoryCreationForm"
+        [categories]="categories"
+      >
       </app-inventory-category-creation-form>
       <div>
         <button mat-button matStepperPrevious>Back</button>
