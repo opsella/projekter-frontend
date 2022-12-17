@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {MatSelectChange} from "@angular/material/select";
+import {MatLegacySelectChange as MatSelectChange} from "@angular/material/legacy-select";
 import {AuthService} from "@auth0/auth0-angular";
 
 @Component({

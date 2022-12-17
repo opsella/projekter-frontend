@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {ActivatedRoute, Data} from "@angular/router";
 import {map, Observable} from "rxjs";
-import {MatTableDataSource} from "@angular/material/table";
+import {MatLegacyTableDataSource as MatTableDataSource} from "@angular/material/legacy-table";
 import {InventoryItem} from "../models/inventory-item";
 
 @Component({

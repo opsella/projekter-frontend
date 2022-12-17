@@ -4,7 +4,7 @@ import {AUTH_API_TOKEN} from "./authentication-api";
 import {AuthenticationService} from "./authentication.service";
 import {LoginComponent} from "./login/login.component";
 import {SharedModule} from "../shared/shared.module";
-import {MatButtonModule} from "@angular/material/button";
+import {MatLegacyButtonModule as MatButtonModule} from "@angular/material/legacy-button";
 import {AuthPageWrapperComponent} from "./auth-page-wrapper/auth-page-wrapper.component";
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ProjectDataService} from "../project-data.service";
 import {map, Observable} from "rxjs";
 import {Project} from "../models/project";
-import {MatTableDataSource} from "@angular/material/table";
+import {MatLegacyTableDataSource as MatTableDataSource} from "@angular/material/legacy-table";
 import {ActivatedRoute, Data} from "@angular/router";
 
 @Component({
