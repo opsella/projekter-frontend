@@ -36,7 +36,7 @@ export class TopNavComponent {
     ]
 
     constructor(
-        public auth: AuthService
+        public auth: AuthService,
         private router: Router
     ) { }
 
