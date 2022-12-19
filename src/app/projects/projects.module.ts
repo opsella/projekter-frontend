@@ -12,13 +12,15 @@ import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/lega
 import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
 import { MatLegacyTableModule as MatTableModule } from "@angular/material/legacy-table";
 import { MatIconModule } from "@angular/material/icon";
-
+import { DataListModule } from "../data-list/data-list.module";
+import { ProjectDataListComponent } from "./project-data-list/project-data-list.component";
 
 
 @NgModule({
   declarations: [
     DashboardPageComponent,
-    SetupPageComponent
+    SetupPageComponent,
+    ProjectDataListComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatInputModule,
     FormsModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    DataListModule
   ]
 })
 export class ProjectsModule { }
