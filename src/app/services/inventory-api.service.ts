@@ -15,7 +15,7 @@ export interface ResponseExample {
 @Injectable({
   providedIn: "root",
 })
-export class InventoryDataService {
+export class InventoryApiService {
 
   constructor(private apollo: Apollo) {
   }

@@ -1,17 +1,17 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute, Data } from "@angular/router";
-import { map, Observable } from "rxjs";
 import { MatLegacyTableDataSource as MatTableDataSource } from "@angular/material/legacy-table";
 import { InventoryItem } from "../models/inventory-item";
+import { map, Observable } from "rxjs";
+import { ActivatedRoute, Data } from "@angular/router";
 
 @Component({
-  selector    : "app-items-page",
-  templateUrl : "./items-page.component.html",
+  selector    : "app-inventory-list",
+  templateUrl : "./inventory-list.component.html",
   styleUrls   : [
-    "./items-page.component.scss"
+    "./inventory-list.component.scss"
   ]
 })
-export class ItemsPageComponent {
+export class InventoryListComponent {
   private inventoryItemsDataSource: MatTableDataSource<InventoryItem> = new MatTableDataSource<InventoryItem>([
   ]);
   public inventoryItemsDataSource$: Observable<MatTableDataSource<InventoryItem>> = this.activatedRoute.data
@@ -28,4 +28,3 @@ export class ItemsPageComponent {
     private activatedRoute: ActivatedRoute
   ) { }
 }
-
