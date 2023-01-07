@@ -1,17 +1,53 @@
 aside {
-  background-color: #546467;
-  padding: 3rem 1rem;
-  font-size: 1em;
-  height: 100%;
-  box-sizing: border-box;
+  align-items: center;
+  background-color: #040300;
+  color: #D6D6D6;
+  display: flex;
+  height: 55px;
+  justify-content: space-between;
+  max-height: 55px;
+  padding-left: 6rem;
 
-  ul {
+  .active-user-container {
+    display: flex;
     height: 100%;
+    max-width: 230px;
+    min-width: 80px;
+    padding-right: 1rem;
+    width: auto;
 
-    li {
+    .notification-icon {
+      align-items: center;
+      display: flex;
+      font-size: calc(1rem + 3px);
+
       a {
-        color: white;
+        color: #D6D6D6;
+
+        :hover {
+          color: #DFBA38;
+        }
       }
     }
+
+    .user-info {
+      align-items: flex-end;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      margin-left: 2rem;
+
+      h4, h5 {
+        margin: 0 10px 0 0;
+        padding: 0;
+      }
+    }
+  }
+
+  .maybe-something-useful {
+    background-color: #434240;
+    color: #D6D6D6;
+    height: 80%;
+    width: 11rem;
   }
 }

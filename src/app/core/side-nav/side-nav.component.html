@@ -1,7 +1,27 @@
 <aside>
-  <ul>
-    <!--      <li><a routerLink="team/training">Employee Training</a></li>-->
-    <li><a routerLink="/inventory">Inventory</a></li>
-    <li><a routerLink="/projects">Projects</a></li>
-  </ul>
+  <select class="maybe-something-useful">
+    <option>Something Important</option>
+  </select>
+
+  <div class="active-user-container">
+    <div class="notification-icon">
+      <a
+        routerLink="/notifications"
+        routerLinkActive="active"
+        aria-label="Notifications"
+      >
+        <i class="fa-sharp fa-solid fa-bell"></i>
+      </a>
+    </div>
+
+    <div class="user-info">
+      <h4>{{ (auth.user$ | async)?.name }}</h4>
+      <h5>Admin</h5>
+    </div>
+
+    <app-dropdown-avatar
+      [options]="options"
+      [avatarUrl]="(auth.user$ | async)?.picture"
+    ></app-dropdown-avatar>
+  </div>
 </aside>

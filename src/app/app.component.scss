@@ -1,33 +1,11 @@
-@import "../variables";
+.main-application {
+  display: flex;
+  height: 100%;
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 9fr;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "header header header header"
-    "sidenav main main main"
-    "footer footer footer footer";
-  align-content: stretch;
-  box-sizing: border-box;
-
-  .header {
-    grid-area: header;
-  }
-
-  .sidenav {
-    grid-area: sidenav;
-    height: $max-content-height;
-    max-height: $max-content-height;
-  }
-
-  .main {
-    grid-area: main;
-    height: $max-content-height;
-    max-height: $max-content-height;
-  }
-
-  .footer {
-    grid-area: footer;
+  .main-wrapper {
+    background-color: #D6D6D6;
+    display: flex;
+    flex-flow: column;
+    width: 100%;
   }
 }

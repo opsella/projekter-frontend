@@ -3,12 +3,13 @@
 ></app-login>
 
 <ng-template #loggedIn>
-  <div class="grid">
+  <div class="main-application">
     <app-top-nav class="header"></app-top-nav>
 
-    <app-side-nav class="sidenav"></app-side-nav>
-    <app-main-content class="main"></app-main-content>
+    <div class="main-wrapper">
+      <app-side-nav class="sidenav"></app-side-nav>
 
-    <app-footer class="footer"></app-footer>
+      <app-main-content class="main"></app-main-content>
+    </div>
   </div>
 </ng-template>

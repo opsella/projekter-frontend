@@ -1,7 +1,16 @@
-main {
-  background-image: linear-gradient(#fbfbfb, #e6e8e9);
-  padding: 2rem;
-  overflow-y: auto;
-  height: 100%;
-  box-sizing: border-box;
+#square {
+  background-color: #040300;
+  display: inline-block;
+  height: .5em;
+  width: .5em;
+}
+
+#circle {
+  background-color: #D6D6D6;
+  border-radius: 50%;
+  display: inline-block;
+  height: calc(1em + 3px);
+  position: relative;
+  top: 0;
+  width: calc(1em + 3px);
 }
