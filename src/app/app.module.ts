@@ -12,6 +12,7 @@ import { CoreModule } from "./core/core.module";
 import { HttpClientModule } from "@angular/common/http";
 import { AuthModule } from "@auth0/auth0-angular";
 import { environment } from "../environments/environment";
+import { GraphQLModule } from "./graphql.module";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { environment } from "../environments/environment";
     BrowserAnimationsModule,
     MatExpansionModule,
     MatInputModule,
-    // GraphQLModule,
+    GraphQLModule,
     HttpClientModule,
     AuthModule.forRoot(environment.auth0),
   ],
