@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { EquipmentListService } from "../equipment-list.service";
+import { EquipmentDataService } from "../equipment-data.service";
 import { Equipment } from "../models/equipment";
 import { map, Observable } from "rxjs";
 import { MatTableDataSource } from "@angular/material/table";
@@ -14,12 +14,10 @@ import { MatTableDataSource } from "@angular/material/table";
 export class EquipmentListComponent {
   private equipmentDataSource: MatTableDataSource<Equipment> = new MatTableDataSource<Equipment>([
   ]);
-  public equipmentDataSource$: Observable<MatTableDataSource<Equipment>> = this.equipmentListService.getEquipmentListData({
-    code            : undefined,
-    name            : undefined,
-    description     : undefined,
-    page            : 0,
-    quantityPerPage : 25
+  public equipmentDataSource$: Observable<MatTableDataSource<Equipment>> = this.equipmentListService.getEquipmentData({
+    id          : undefined,
+    code        : undefined,
+    description : undefined,
   })
     .pipe(
       map((items?: Equipment[]) => {
@@ -32,7 +30,7 @@ export class EquipmentListComponent {
 
 
   constructor(
-    private equipmentListService: EquipmentListService
+    private equipmentListService: EquipmentDataService,
   ) {
   }
 }
