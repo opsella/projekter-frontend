@@ -2,7 +2,7 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { AuthConfig } from "@auth0/auth0-angular";
+import {AuthConfig} from "@auth0/auth0-angular";
 
 export const environment = {
   production      : false,
@@ -16,7 +16,9 @@ export const environment = {
     cacheLocation    : "localstorage",
     httpInterceptor  : {
       allowedList: [
-        "https://localhost:7237"
+        {
+          uri: "https://localhost:7237/graphql*"
+        }
       ]
     }
   } as AuthConfig
