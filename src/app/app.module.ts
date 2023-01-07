@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
 import { environment } from "../environments/environment";
 import { GraphQLModule } from "./graphql.module";
+import { ActiveTenantInterceptor } from "./core/active-tenant.interceptor";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,11 @@ import { GraphQLModule } from "./graphql.module";
     {
       provide  : HTTP_INTERCEPTORS,
       useClass : AuthHttpInterceptor,
+      multi    : true
+    },
+    {
+      provide  : HTTP_INTERCEPTORS,
+      useClass : ActiveTenantInterceptor,
       multi    : true
     }
   ],
