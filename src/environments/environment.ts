@@ -2,18 +2,25 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { AuthConfig } from "@auth0/auth0-angular";
+import {AuthConfig} from "@auth0/auth0-angular";
 
 export const environment = {
   production      : false,
-  useFakeData     : true,
+  useFakeData     : false,
   returnFakeEmpty : true,
   auth0           : {
     clientId         : "SHHXAgPz2cfZerNzPQM31TTYEy6jSDVQ",
     domain           : "dev-8nen27hb.us.auth0.com",
     audience         : "https://api.projekter.opsella.com",
     useRefreshTokens : true,
-    cacheLocation    : "localstorage"
+    cacheLocation    : "localstorage",
+    httpInterceptor  : {
+      allowedList: [
+        {
+          uri: "https://localhost:7237/graphql*"
+        }
+      ]
+    }
   } as AuthConfig
 };
 

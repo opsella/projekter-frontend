@@ -8,10 +8,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
 import { CoreModule } from "./core/core.module";
-// import { GraphQLModule } from "./graphql.module";
-import { HttpClientModule } from "@angular/common/http";
-import { AuthModule } from "@auth0/auth0-angular";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
 import { environment } from "../environments/environment";
+import { GraphQLModule } from "./graphql.module";
 
 @NgModule({
   declarations: [
@@ -25,11 +25,16 @@ import { environment } from "../environments/environment";
     BrowserAnimationsModule,
     MatExpansionModule,
     MatInputModule,
-    // GraphQLModule,
+    GraphQLModule,
     HttpClientModule,
     AuthModule.forRoot(environment.auth0),
   ],
   providers: [
+    {
+      provide  : HTTP_INTERCEPTORS,
+      useClass : AuthHttpInterceptor,
+      multi    : true
+    }
   ],
   bootstrap: [
     AppComponent
