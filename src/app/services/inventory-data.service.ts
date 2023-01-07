@@ -3,16 +3,21 @@ import { map, Observable, of } from "rxjs";
 import { InventoryEquipment, InventoryItem, InventorySupplies } from "../inventory/models/inventory-item";
 import { environment } from "../../environments/environment";
 import { Apollo, gql } from "apollo-angular";
-import { HttpHeaders } from "@angular/common/http";
-import { AuthService } from "@auth0/auth0-angular";
+import { Page, Pageable } from "../shared/page";
+
+export interface ResponseExample {
+  id: string;
+  name: string;
+  code: string;
+  description: string;
+}
 
 @Injectable({
   providedIn: "root",
 })
 export class InventoryDataService {
 
-  constructor(private apollo: Apollo,
-              private auth: AuthService) {
+  constructor(private apollo: Apollo) {
   }
 
   public query(): Observable<InventoryItem[]> {
@@ -21,51 +26,56 @@ export class InventoryDataService {
     }
 
     return this.apollo.watchQuery<{
-      materials: {
-        page: number;
-        quantityPerPage: number;
-        materials: {
-          id: string;
-          name: string;
-          code: string;
-          description: string;
-        }[];
-      };
+      equipment: Page<ResponseExample>;
     }>({
       query: gql`
-        query SearchAvailableMaterials($tenant: UUID!) {
-          materials(query: {
-            tenantId: $tenant
-            page: 0
-            quantityPerPage: 50
-          }) {
-            page
-            quantityPerPage
-            materials {
-              id
-              name
-              code
-              description
+        query SearchAvailableEquipment($first: Int, $last: Int, $after: String, $before: String, $code: String, $descriptionContains: String, $equipmentId: UUID) {
+          equipment(
+            first: $first
+            last: $last
+            after: $after
+            before: $before
+            input: {
+              code: $code
+              descriptionContains: $descriptionContains
+              equipmentId: $equipmentId
+            }
+          ) {
+            pageInfo {
+              startCursor
+              endCursor
+              hasNextPage
+              hasPreviousPage
+            }
+            edges {
+              cursor
+              node {
+                id
+                name
+                code
+                description
+              }
             }
           }
         }
       `,
       variables: {
-        tenant: "2fd721b8-34d5-480b-8177-71df1acada9f"
-      },
-      context: {
-        headers: new HttpHeaders()
-          .set("x-tenant", "2fd721b8-34d5-480b-8177-71df1acada9f")
+        ...new Pageable<{
+          descriptionContains?: string | undefined;
+          code?: string | undefined;
+          equipmentId?: string | undefined;
+        }>({})
+          .setFirst(10)
       }
     })
       .valueChanges
       .pipe(
-        map((data) => {
-          return data.data.materials.materials.map(x => {
+        map((response) => {
+          return Page.fromData<ResponseExample>(response.data.equipment).getEdges().map(x => {
             return {
               name        : x.name,
               code        : x.code,
-              description : x.description,
+              description : x.description
             } as InventoryItem;
           });
         })

@@ -70,8 +70,52 @@ type Mutation {
 
 type Query {
   allTenantChildren(tenantId: UUID!): TenantResponse!
-  materials(query: QueryMaterialsInput!): GetMaterialsPayload!
-  equipment(input: QueryEquipmentInput!): GetEquipmentPayload!
+  materials(
+    input: QueryMaterialsInput!
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+  ): MaterialsConnection
+  equipment(
+    input: QueryEquipmentInput!
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+  ): EquipmentConnection
 }
 
 """
@@ -82,6 +126,123 @@ scalar Instant
 enum ApplyPolicy {
   BEFORE_RESOLVER
   AFTER_RESOLVER
+}
+
+"""
+A connection to a list of items.
+"""
+type MaterialsConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [MaterialsEdge!]
+
+  """
+  A flattened list of the nodes.
+  """
+  nodes: [MaterialEntity!]
+}
+
+"""
+A connection to a list of items.
+"""
+type EquipmentConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [EquipmentEdge!]
+
+  """
+  A flattened list of the nodes.
+  """
+  nodes: [EquipmentEntity!]
+}
+
+"""
+Information about pagination in a connection.
+"""
+type PageInfo {
+  """
+  Indicates whether more edges exist following the set defined by the clients arguments.
+  """
+  hasNextPage: Boolean!
+
+  """
+  Indicates whether more edges exist prior the set defined by the clients arguments.
+  """
+  hasPreviousPage: Boolean!
+
+  """
+  When paginating backwards, the cursor to continue.
+  """
+  startCursor: String
+
+  """
+  When paginating forwards, the cursor to continue.
+  """
+  endCursor: String
+}
+
+type MaterialEntity {
+  id: UUID!
+  tenantId: UUID!
+  inventoryItemId: UUID!
+  name: String!
+  code: String!
+  description: String!
+  created: Instant!
+  updated: Instant!
+}
+
+"""
+An edge in a connection.
+"""
+type MaterialsEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: MaterialEntity!
+}
+
+type EquipmentEntity {
+  id: UUID!
+  name: String!
+  code: String!
+  description: String!
+  tenantId: UUID!
+  inventoryItemId: UUID!
+  created: Instant!
+  updated: Instant!
+}
+
+"""
+An edge in a connection.
+"""
+type EquipmentEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: EquipmentEntity!
 }
 
 input RegisterEquipmentInput {
@@ -194,55 +355,16 @@ type TenantResponse {
   children: [SubTenant!]!
 }
 
-type GetMaterialsPayload {
-  page: Int!
-  quantityPerPage: Int!
-  materials: [MaterialEntity!]!
-}
-
 input QueryMaterialsInput {
-  tenantId: UUID!
-  page: Int!
-  quantityPerPage: Int!
   materialId: UUID
   descriptionContains: String
   code: String
 }
 
-type GetEquipmentPayload {
-  page: Int!
-  quantityPerPage: Int!
-  equipment: [EquipmentEntity!]!
-}
-
 input QueryEquipmentInput {
-  page: Int!
-  quantityPerPage: Int!
   equipmentId: UUID
   descriptionContains: String
   code: String
-}
-
-type EquipmentEntity {
-  id: UUID!
-  name: String!
-  code: String!
-  description: String!
-  tenantId: UUID!
-  inventoryItemId: UUID!
-  created: Instant!
-  updated: Instant!
-}
-
-type MaterialEntity {
-  id: UUID!
-  tenantId: UUID!
-  inventoryItemId: UUID!
-  name: String!
-  code: String!
-  description: String!
-  created: Instant!
-  updated: Instant!
 }
 
 type SubTenant {
