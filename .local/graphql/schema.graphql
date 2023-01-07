@@ -1,139 +1,257 @@
-# This file was generated based on ".graphqlconfig". Do not edit manually.
-
-schema {
-    query: Query
-    mutation: Mutation
-}
-
-"The `@defer` directive may be provided for fragment spreads and inline fragments to inform the executor to delay the execution of the current fragment to indicate deprioritization of the current fragment. A query with `@defer` directive will cause the request to potentially return multiple responses, where non-deferred data is delivered in the initial response and data deferred is delivered in a subsequent response. `@include` and `@skip` take precedence over `@defer`."
+"""
+The `@defer` directive may be provided for fragment spreads and inline fragments to inform the executor to delay the execution of the current fragment to indicate deprioritization of the current fragment. A query with `@defer` directive will cause the request to potentially return multiple responses, where non-deferred data is delivered in the initial response and data deferred is delivered in a subsequent response. `@include` and `@skip` take precedence over `@defer`.
+"""
 directive @defer(
-    "Deferred when true."
-    if: Boolean,
-    "If this argument label has a value other than null, it will be passed on to the result of this defer directive. This label is intended to give client applications a way to identify to which fragment a deferred result belongs to."
-    label: String
+  """
+  If this argument label has a value other than null, it will be passed on to the result of this defer directive. This label is intended to give client applications a way to identify to which fragment a deferred result belongs to.
+  """
+  label: String
+
+  """
+  Deferred when true.
+  """
+  if: Boolean
 ) on FRAGMENT_SPREAD | INLINE_FRAGMENT
 
-"The `@stream` directive may be provided for a field of `List` type so that the backend can leverage technology such as asynchronous iterators to provide a partial list in the initial response, and additional list items in subsequent responses. `@include` and `@skip` take precedence over `@stream`."
+"""
+The `@stream` directive may be provided for a field of `List` type so that the backend can leverage technology such as asynchronous iterators to provide a partial list in the initial response, and additional list items in subsequent responses. `@include` and `@skip` take precedence over `@stream`.
+"""
 directive @stream(
-    "Streamed when true."
-    if: Boolean,
-    "The initial elements that shall be send down to the consumer."
-    initialCount: Int! = 0,
-    "If this argument label has a value other than null, it will be passed on to the result of this stream directive. This label is intended to give client applications a way to identify to which fragment a streamed result belongs to."
-    label: String
+  """
+  If this argument label has a value other than null, it will be passed on to the result of this stream directive. This label is intended to give client applications a way to identify to which fragment a streamed result belongs to.
+  """
+  label: String
+
+  """
+  The initial elements that shall be send down to the consumer.
+  """
+  initialCount: Int! = 0
+
+  """
+  Streamed when true.
+  """
+  if: Boolean
 ) on FIELD
 
-type ChildTenantRegistered {
-    parentTenantId: UUID!
-    tenantId: UUID!
-}
+directive @authorize(
+  """
+  The name of the authorization policy that determines access to the annotated resource.
+  """
+  policy: String
 
-type EmployeeHired {
-    id: UUID!
-}
+  """
+  Roles that are allowed to access the annotated resource.
+  """
+  roles: [String!]
 
-type GetMaterialsPayload {
-    materials: [MaterialEntity!]!
-    page: Int!
-    quantityPerPage: Int!
-}
-
-type MaterialEntity {
-    code: String!
-    created: Instant!
-    description: String!
-    id: UUID!
-    inventoryItemId: UUID!
-    name: String!
-    tenantId: UUID!
-    updated: Instant!
-}
-
-type Mutation {
-    createChildTenant(request: RegisterNewChildTenantRequestInput!): ChildTenantRegistered!
-    hireEmployee(request: HireEmployeeInput!): EmployeeHired!
-    registerEquipment(input: RegisterEquipmentInput!): RegisterEquipmentPayload!
-    registerMaterial(input: RegisterMaterialInput!): RegisterMaterialPayload!
-    registerRootTenant(request: RegisterNewTenantRequestInput!): RegistrationComplete!
-}
-
-type Query {
-    allTenantChildren(tenantId: UUID!): TenantResponse!
-    materials(query: QueryMaterialsInput!): GetMaterialsPayload!
-}
-
-type RegisterEquipmentPayload {
-    equipmentId: UUID!
-    name: String!
-    tenantId: UUID!
-}
-
-type RegisterMaterialPayload {
-    materialId: UUID!
-    name: String!
-    tenantId: UUID!
-}
-
-type RegistrationComplete {
-    employeeId: UUID!
-    registrationId: UUID!
-    tenantId: UUID!
-}
-
-type SubTenant {
-    id: UUID!
-    name: String!
-    parentId: UUID!
-}
-
-type TenantResponse {
-    children: [SubTenant!]!
-}
-
-"Represents an instant on the global timeline, with nanosecond resolution."
-scalar Instant
+  """
+  Defines when when the resolver shall be executed.By default the resolver is executed after the policy has determined that the current user is allowed to access the field.
+  """
+  apply: ApplyPolicy! = BEFORE_RESOLVER
+) repeatable on SCHEMA | OBJECT | FIELD_DEFINITION
 
 scalar UUID
 
-input HireEmployeeInput {
-    email: String!
-    password: String!
-    tenantId: UUID!
+type Mutation {
+  registerRootTenant(
+    request: RegisterNewTenantRequestInput!
+  ): RegistrationComplete!
+  createChildTenant(
+    request: RegisterNewChildTenantRequestInput!
+  ): ChildTenantRegistered!
+  hireEmployee(request: HireEmployeeInput!): EmployeeHired!
+  registerEquipment(input: RegisterEquipmentInput!): RegisterEquipmentPayload!
+  updateEquipment(input: UpdateEquipmentInput!): UpdateEquipmentPayload!
+  registerMaterial(input: RegisterMaterialInput!): RegisterMaterialPayload!
+  updateMaterial(input: UpdateMaterialInput!): UpdateMaterialPayload!
+  createProject(input: CreateProjectInput!): CreateProjectPayload!
+  deleteProject(input: DeleteProjectInput!): DeleteProjectPayload!
 }
 
-input QueryMaterialsInput {
-    code: String
-    descriptionContains: String
-    materialId: UUID
-    page: Int!
-    quantityPerPage: Int!
-    tenantId: UUID!
+type Query {
+  allTenantChildren(tenantId: UUID!): TenantResponse!
+  materials(query: QueryMaterialsInput!): GetMaterialsPayload!
+  equipment(input: QueryEquipmentInput!): GetEquipmentPayload!
+}
+
+"""
+Represents an instant on the global timeline, with nanosecond resolution.
+"""
+scalar Instant
+
+enum ApplyPolicy {
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
 }
 
 input RegisterEquipmentInput {
-    equipmentCode: String!
-    equipmentDescription: String!
-    equipmentName: String!
-    tenantId: UUID!
+  equipmentName: String!
+  equipmentCode: String!
+  equipmentDescription: String!
 }
 
-input RegisterMaterialInput {
-    materialCode: String!
-    materialDescription: String!
-    materialName: String!
-    quantityOnHand: Int!
-    tenantId: UUID!
+type RegisterEquipmentPayload {
+  tenantId: UUID!
+  equipmentId: UUID!
+  name: String!
+}
+
+input HireEmployeeInput {
+  tenantId: UUID!
+  email: String!
+  password: String!
+}
+
+type EmployeeHired {
+  id: UUID!
 }
 
 input RegisterNewChildTenantRequestInput {
-    description: String!
-    name: String!
-    parentTenantId: UUID!
+  parentTenantId: UUID!
+  name: String!
+  description: String!
+}
+
+type ChildTenantRegistered {
+  parentTenantId: UUID!
+  tenantId: UUID!
 }
 
 input RegisterNewTenantRequestInput {
-    employeeEmail: String!
-    employeePassword: String!
-    tenantDescription: String!
-    tenantName: String!
+  tenantName: String!
+  tenantDescription: String!
+  employeeEmail: String!
+  employeePassword: String!
+}
+
+type RegistrationComplete {
+  registrationId: UUID!
+  tenantId: UUID!
+  employeeId: UUID!
+}
+
+type UpdateEquipmentPayload {
+  id: UUID!
+}
+
+input UpdateEquipmentInput {
+  id: UUID!
+  equipmentName: String
+  equipmentCode: String
+  equipmentDescription: String
+}
+
+type RegisterMaterialPayload {
+  tenantId: UUID!
+  materialId: UUID!
+  name: String!
+}
+
+input RegisterMaterialInput {
+  materialName: String!
+  materialCode: String!
+  materialDescription: String!
+  quantityOnHand: Int!
+}
+
+type UpdateMaterialPayload {
+  materialId: UUID!
+}
+
+input UpdateMaterialInput {
+  materialId: UUID!
+  materialName: String
+  materialCode: String
+  materialDescription: String
+}
+
+type CreateProjectPayload {
+  tenantId: UUID!
+  projectId: UUID!
+  name: String!
+}
+
+input CreateProjectInput {
+  name: String!
+  code: String!
+  description: String!
+  shortDescription: String!
+  expectedStartDate: Instant
+  expectedEndDate: Instant
+  initiallyAppliedInventory: [AppliedInventoryInput!]!
+}
+
+type DeleteProjectPayload {
+  tenantId: UUID!
+  projectId: UUID!
+}
+
+input DeleteProjectInput {
+  projectId: UUID!
+}
+
+type TenantResponse {
+  children: [SubTenant!]!
+}
+
+type GetMaterialsPayload {
+  page: Int!
+  quantityPerPage: Int!
+  materials: [MaterialEntity!]!
+}
+
+input QueryMaterialsInput {
+  tenantId: UUID!
+  page: Int!
+  quantityPerPage: Int!
+  materialId: UUID
+  descriptionContains: String
+  code: String
+}
+
+type GetEquipmentPayload {
+  page: Int!
+  quantityPerPage: Int!
+  equipment: [EquipmentEntity!]!
+}
+
+input QueryEquipmentInput {
+  page: Int!
+  quantityPerPage: Int!
+  equipmentId: UUID
+  descriptionContains: String
+  code: String
+}
+
+type EquipmentEntity {
+  id: UUID!
+  name: String!
+  code: String!
+  description: String!
+  tenantId: UUID!
+  inventoryItemId: UUID!
+  created: Instant!
+  updated: Instant!
+}
+
+type MaterialEntity {
+  id: UUID!
+  tenantId: UUID!
+  inventoryItemId: UUID!
+  name: String!
+  code: String!
+  description: String!
+  created: Instant!
+  updated: Instant!
+}
+
+type SubTenant {
+  id: UUID!
+  parentId: UUID!
+  name: String!
+}
+
+input AppliedInventoryInput {
+  inventoryItemId: UUID!
+  quantity: Int!
 }
