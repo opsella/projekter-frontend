@@ -1,6 +1,4 @@
 import { Component } from "@angular/core";
-import { AuthService } from "@auth0/auth0-angular";
-import { Router } from "@angular/router";
 
 @Component({
   selector    : "app-top-nav",
@@ -10,51 +8,65 @@ import { Router } from "@angular/router";
   ]
 })
 export class TopNavComponent {
-  public user = {
-    fullName   : "Jessen Gilbert",
-    permission : "Admin",
-    avatar     : "assets/images/projekter-logo.png"
+  protected settingsRoute: NavigationRouteOption = {
+    icon : "fa-sharp fa-solid fa-gear",
+    name : "Settings",
+    path : "/settings"
   };
-
-  public options = [
+  protected mainRoutes: NavigationRouteOption[] = [
     {
-      id        : "logout",
-      name      : "Logout",
-      handler   : () => this.logout(),
-      isVisible : () => true,
+      icon : "fa-sharp fa-solid fa-bars-progress",
+      name : "Projects",
+      path : "/projects"
     },
     {
-      id        : "settings",
-      name      : "Settings",
-      handler   : () => this.settings(),
-      isVisible : () => true,
+      icon : "fa-sharp fa-solid fa-boxes-stacked",
+      name : "Inventory",
+      path : "/inventory"
     },
     {
-      id        : "profile",
-      name      : "Profile",
-      handler   : () => this.profile(),
-      isVisible : () => true,
+      icon : "fa-sharp fa-solid fa-toolbox",
+      name : "Supplies",
+      path : "/supplies"
+    },
+    {
+      icon : "fa-sharp fa-solid fa-shapes",
+      name : "Materials",
+      path : "/materials"
+    },
+    {
+      icon : "fa-sharp fa-solid fa-truck-pickup",
+      name : "Equipment",
+      path : "/equipment"
+    },
+    {
+      icon : "fa-sharp fa-solid fa-users",
+      name : "Employees",
+      path : "/employees"
+    },
+    {
+      icon : "fa-sharp fa-solid fa-copy",
+      name : "Templates",
+      path : "/templates"
     }
   ];
 
-  constructor(
-    public auth: AuthService,
-    private router: Router
-  ) { }
+  protected secondaryRoutes: NavigationRouteOption[] = [
+    {
+      icon : "fa-solid fa-bullhorn",
+      name : "feedback",
+      path : "/feedback"
+    },
+    {
+      icon : "fa-sharp fa-solid fa-question",
+      name : "help",
+      path : "/help"
+    },
+  ];
+}
 
-  public logout() {
-    this.auth.logout({ returnTo: document.location.origin });
-  }
-
-  public async settings() {
-    await this.router.navigate([
-      "/user/settings"
-    ]);
-  }
-
-  public async profile() {
-    await this.router.navigate([
-      "/user/profile"
-    ]);
-  }
+interface NavigationRouteOption {
+  icon: string;
+  name: string;
+  path: string;
 }

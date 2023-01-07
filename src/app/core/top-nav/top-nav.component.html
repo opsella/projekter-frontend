@@ -1,21 +1,52 @@
 <nav>
-  <a routerLink="/">
-    <img src="assets/images/projekter-logo.png" alt="home" />
-  </a>
-  <ul>
-    <!--    <li><a routerLink="team">Team</a></li>-->
-    <!--    <li><a routerLink="">Tasks</a></li>-->
-    <!--    <li><a routerLink="">Jobs</a></li>-->
-  </ul>
-
-  <div style="display: flex">
-    <div style="display: flex; flex-flow: column">
-      <h6>{{ (auth.user$ | async)?.name }}</h6>
-      <!--      <span style="display: inline-block">{{ user.permission }}</span>-->
+  <section class="company-logo-container">
+    <div class="logo">
+      <a routerLink="/">
+        <img
+          class="company-logo"
+          src="assets/images/logo-5-stroke.svg"
+          alt="home"
+        />
+      </a>
     </div>
-    <app-dropdown-avatar
-      [options]="options"
-      [avatarUrl]="(auth.user$ | async)?.picture"
-    ></app-dropdown-avatar>
-  </div>
+
+    <button class="nav-expand-button">
+      <i class="fa-sharp fa-solid fa-angles-right"></i>
+    </button>
+  </section>
+
+  <section class="main-routes">
+    <ul>
+      <li *ngFor="let route of mainRoutes">
+        <app-navigation-route-element
+          [routeName]="route.name"
+          [routeUrl]="route.path"
+        >
+          <i [class]="route.icon" class="icon"></i>
+        </app-navigation-route-element>
+      </li>
+    </ul>
+  </section>
+
+  <section class="secondary-routes">
+    <app-navigation-route-element
+      [routeName]="settingsRoute.name"
+      [routeUrl]="settingsRoute.path"
+    >
+      <i [class]="settingsRoute.icon" class="settings-icon"></i>
+    </app-navigation-route-element>
+
+    <div class="extras">
+      <ul>
+        <li *ngFor="let route of secondaryRoutes">
+          <app-navigation-route-element
+            [routeName]="route.name"
+            [routeUrl]="route.path"
+          >
+            <i [class]="route.icon" class="icon-secondary"></i>
+          </app-navigation-route-element>
+        </li>
+      </ul>
+    </div>
+  </section>
 </nav>
