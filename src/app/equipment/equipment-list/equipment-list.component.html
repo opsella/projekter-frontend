@@ -20,6 +20,7 @@
     *matHeaderRowDef="['name', 'code', 'description']"
   ></mat-header-row>
   <mat-row
+    (click)="handleSelection(row)"
     *matRowDef="let row; columns: ['name', 'code', 'description']"
   ></mat-row>
 </mat-table>

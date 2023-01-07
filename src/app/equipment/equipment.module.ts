@@ -4,10 +4,12 @@ import { EquipmentListComponent } from "./equipment-list/equipment-list.componen
 import { EquipmentRoutingModule } from "./equipment-routing.module";
 import { SharedModule } from "../shared/shared.module";
 import { MatTableModule } from "@angular/material/table";
+import { EquipmentDetailsComponent } from "./equipment-details/equipment-details.component";
 
 @NgModule({
   declarations: [
-    EquipmentListComponent
+    EquipmentListComponent,
+    EquipmentDetailsComponent
   ],
   imports: [
     CommonModule,

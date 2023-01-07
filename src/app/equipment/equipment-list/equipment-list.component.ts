@@ -3,6 +3,7 @@ import { EquipmentDataService } from "../equipment-data.service";
 import { Equipment } from "../models/equipment";
 import { map, Observable } from "rxjs";
 import { MatTableDataSource } from "@angular/material/table";
+import { Router } from "@angular/router";
 
 @Component({
   selector    : "app-equipment-list",
@@ -31,6 +32,12 @@ export class EquipmentListComponent {
 
   constructor(
     private equipmentListService: EquipmentDataService,
+    private router: Router
   ) {
+  }
+  protected async handleSelection(equipment: Equipment) {
+    await this.router.navigateByUrl(
+      `equipment/details/${equipment.name.toLowerCase()}${equipment.code.toLowerCase()}`, { state: equipment }
+    );
   }
 }
