@@ -1,27 +1,16 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { ProjectTemplate } from "./models/project-template";
-import { environment } from "../../environments/environment";
-import { NotImplementedException } from "../shared/not-implemented-exception";
 
 @Injectable({
   providedIn: "root"
 })
 export class ProjectTemplateDataService {
   public query(): Observable<ProjectTemplate[]> {
-    if(environment.useFakeData) {
-      return this.getFakeData();
-    }
-
-    throw new NotImplementedException();
+    return this.getFakeData();
   }
 
   private getFakeData(): Observable<ProjectTemplate[]> {
-    if (environment.returnFakeEmpty) {
-      return of([
-      ]);
-    }
-
     return of([
       {
         name    : "Default",

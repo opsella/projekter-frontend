@@ -11,12 +11,6 @@ import { Router } from "@angular/router";
 })
 export class SideNavComponent {
 
-  public user = {
-    fullName   : "Jessen Gilbert",
-    permission : "Admin",
-    avatar     : "assets/images/projekter-logo.png"
-  };
-
   public options = [
     {
       id        : "logout",

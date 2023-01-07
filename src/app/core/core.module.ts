@@ -6,7 +6,7 @@ import { MainContentComponent } from "./main-content/main-content.component";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared/shared.module";
 import { MatIconModule } from "@angular/material/icon";
-import { NavigationRouteElementComponent } from './top-nav/navigation-route-element/navigation-route-element.component';
+import { NavigationRouteElementComponent } from "./top-nav/navigation-route-element/navigation-route-element.component";
 
 @NgModule({
   declarations: [
