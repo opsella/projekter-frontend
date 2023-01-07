@@ -1,0 +1,25 @@
+<app-page-wrapper title="Projects">
+  <mat-table [dataSource]="(projectsDataSource$ | async) ?? []">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.code }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.description }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row
+      *matHeaderRowDef="['name', 'code', 'description']"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: ['name', 'code', 'description']"
+    ></mat-row>
+  </mat-table>
+</app-page-wrapper>

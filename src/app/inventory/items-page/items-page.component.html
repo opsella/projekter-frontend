@@ -1,0 +1,54 @@
+<section
+  style="display: flex; justify-content: space-between; align-content: center"
+>
+  <h1>Inventory</h1>
+  <div>
+    <a routerLink="/inventory/create/supplies">Create Supplies</a>
+    <a routerLink="/inventory/create/supplies">Create Equipment</a>
+  </div>
+</section>
+
+<section>
+  <h2>Uncategorized Inventory</h2>
+
+  <mat-table [dataSource]="(inventoryItemsDataSource$ | async) ?? []">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.code }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.description }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row
+      *matHeaderRowDef="['name', 'code', 'description']"
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="let row; columns: ['name', 'code', 'description']"
+    ></mat-row>
+  </mat-table>
+</section>
+
+<section>
+  <h2>Categorized Inventory</h2>
+
+  <mat-card style="max-width: 80px">
+    <mat-card-title>Vehicles</mat-card-title>
+    <mat-card-subtitle>sub title</mat-card-subtitle>
+    <mat-card-content>
+      <p>body text 1</p>
+      <p>body text 2</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button>Add Vehicle</button>
+    </mat-card-actions>
+    <mat-card-footer>Total Items: 20</mat-card-footer>
+  </mat-card>
+</section>

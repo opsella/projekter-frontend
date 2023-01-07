@@ -1,18 +1,17 @@
-import { Component, Inject } from '@angular/core'
-import { AUTH_API_TOKEN, AuthenticationApi } from './authentication/authentication-api'
+import { Component } from "@angular/core";
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector    : "app-root",
+  templateUrl : "./app.component.html",
+  styleUrls   : [
+    "./app.component.scss"
+  ]
 })
 export class AppComponent {
-  title = 'projekter-frontend';
-  public other: Promise<string>;
+  public title = "projekter-frontend";
 
   constructor(
-    @Inject(AUTH_API_TOKEN) authApi: AuthenticationApi
-  ) {
-    this.other = authApi.login()
-  }
+    public auth: AuthService
+  ) { }
 }

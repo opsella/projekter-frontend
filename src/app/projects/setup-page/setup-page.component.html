@@ -1,0 +1,53 @@
+<app-setup-page-wrapper
+  title="You do not have any projects."
+  flow1ButtonText="Create Project"
+  flow2ButtonText="Import Projects"
+>
+  <div flow1>
+    <h1>How will you track this item?</h1>
+
+    <form [formGroup]="templateOptions">
+      <ng-template matStepLabel>Select Template</ng-template>
+      <mat-label>Templates</mat-label>
+      <mat-select formControlName="options" placeholder="Select a template...">
+        <mat-option>Select a template...</mat-option>
+        <mat-option *ngFor="let template of templates" [value]="template">
+          {{ template }}
+        </mat-option>
+      </mat-select>
+    </form>
+
+    OR
+
+    <div>
+      <app-form-wrapper>
+        <form [formGroup]="project" (ngSubmit)="onSubmit()">
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Name" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" placeholder="Code" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <input
+              matInput
+              formControlName="description"
+              placeholder="Description"
+            />
+          </mat-form-field>
+
+          <hr />
+
+          <button mat-button>Add stage +</button>
+
+          <button mat-button type="submit">CREATE</button>
+        </form>
+      </app-form-wrapper>
+    </div>
+  </div>
+
+  <div flow2>Need to figure out if we can import projects or not</div>
+</app-setup-page-wrapper>

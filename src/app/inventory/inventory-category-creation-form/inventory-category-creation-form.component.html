@@ -1,0 +1,45 @@
+<p>inventory-category-creation-form works!</p>
+
+<ng-container *ngIf="categoryCreationForm !== undefined">
+  <form [formGroup]="categoryCreationForm.controls.existingCategory">
+    <mat-form-field>
+      <mat-label>Apply to existing category?</mat-label>
+      <mat-select formControlName="category">
+        <mat-option [value]="null">None</mat-option>
+        <mat-option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+
+  OR
+
+  <form [formGroup]="categoryCreationForm.controls.newCategory">
+    <mat-form-field>
+      <mat-label>Create New Category</mat-label>
+      <input matInput formControlName="name" placeholder="Name" />
+      <mat-error
+        *ngIf="
+          categoryCreationForm.controls.newCategory.controls.name.hasError(
+            'required'
+          )
+        "
+        >This field is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Create New Category</mat-label>
+      <input matInput formControlName="description" placeholder="Description" />
+      <mat-error
+        *ngIf="
+          categoryCreationForm.controls.newCategory.controls.description.hasError(
+            'required'
+          )
+        "
+      >
+        This field is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+</ng-container>

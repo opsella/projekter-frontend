@@ -1,0 +1,14 @@
+{
+    "name": "Default",
+    "version": 1,
+    "project": {
+        "name": "{{string::optional::default('My first project')}}",
+        "code": "{{string::optional::default('PROJECT_1234')}}",
+        "description": "{{string::optional::default('My first description for a project!')}}",
+        "metadata": {},
+        "tags": [],
+        "inventory_assigned": {},
+        "associated_requisitions": [],
+        "stages": []
+    }
+}

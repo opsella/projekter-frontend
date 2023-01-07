@@ -1,0 +1,36 @@
+nav {
+  background-color: #0B2227;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-around;
+  height: 70px;
+  max-height: 70px;
+  padding: 5px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  align-items: center;
+  color: white;
+
+  img {
+    height: auto;
+    width: 65px;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    margin-left: 2rem;
+
+    li {
+      a {
+        color: white;
+      }
+
+      &:not(:first-child) {
+        margin-left: 2rem;
+      }
+    }
+  }
+}

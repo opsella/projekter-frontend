@@ -1,0 +1,28 @@
+<app-setup-page-wrapper
+  title="You do not have any inventory."
+  flow1ButtonText="Create Item"
+  flow2ButtonText="Import Items"
+>
+  <div flow1>
+    <h1>How will you track this item?</h1>
+
+    <form [formGroup]="inventoryType">
+      <ng-template matStepLabel>Select Inventory Type</ng-template>
+      <mat-label>How will you track this item?</mat-label>
+      <mat-radio-group formControlName="options" required>
+        <mat-radio-button value="/inventory/create/supplies"
+          >Quantity</mat-radio-button
+        >
+        <mat-radio-button value="/inventory/create/equipment"
+          >Individually</mat-radio-button
+        >
+      </mat-radio-group>
+    </form>
+  </div>
+
+  <div flow2>
+    <h1>Need to figure out importing for this flow</h1>
+  </div>
+
+  <a mat-button [routerLink]="itemRoute" action>CREATE</a>
+</app-setup-page-wrapper>

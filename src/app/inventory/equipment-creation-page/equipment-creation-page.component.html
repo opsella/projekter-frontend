@@ -1,0 +1,74 @@
+<section>
+  <mat-stepper [linear]="true" #stepper>
+    <mat-step [stepControl]="itemInformationGroup">
+      <form [formGroup]="itemInformationGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Name</mat-label>
+          <input
+            matInput
+            placeholder="Equipment Name"
+            formControlName="name"
+            required
+          />
+          <mat-error
+            *ngIf="itemInformationGroup.controls.name.hasError('required')"
+            >This field is required</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Code</mat-label>
+          <input matInput placeholder="Code" formControlName="code" required />
+          <mat-error
+            *ngIf="itemInformationGroup.controls.code.hasError('required')"
+            >This field is required</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input
+            matInput
+            placeholder="Description"
+            formControlName="description"
+            required
+          />
+          <mat-error
+            *ngIf="
+              itemInformationGroup.controls.description.hasError('required')
+            "
+            >This field is required
+          </mat-error>
+        </mat-form-field>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step
+      [stepControl]="categoryCreationForm"
+      label="Fill out your address"
+    >
+      <app-inventory-category-creation-form
+        [categoryCreationForm]="categoryCreationForm"
+        [categories]="categories"
+      >
+      </app-inventory-category-creation-form>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</section>

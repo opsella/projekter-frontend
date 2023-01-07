@@ -1,3 +1,14 @@
-<router-outlet></router-outlet>
+<app-login
+  *ngIf="(auth.isAuthenticated$ | async) === false; else loggedIn"
+></app-login>
 
-<p>{{other | async}}</p>
+<ng-template #loggedIn>
+  <div class="grid">
+    <app-top-nav class="header"></app-top-nav>
+
+    <app-side-nav class="sidenav"></app-side-nav>
+    <app-main-content class="main"></app-main-content>
+
+    <app-footer class="footer"></app-footer>
+  </div>
+</ng-template>
