@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { environment } from "../../environments/environment";
-import { NotImplementedException } from "../shared/not-implemented-exception";
 import { Project } from "./models/project";
 
 @Injectable({
@@ -12,11 +10,7 @@ export class ProjectDataService {
   public noDataCreated = true;
 
   public query(): Observable<Project[]> {
-    if (environment.useFakeData) {
-      return this.getFakeData();
-    }
-
-    throw new NotImplementedException();
+    return this.getFakeData();
   }
 
   // temp function to help navigate after "submitting" form

@@ -1,23 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EquipmentListComponent } from './equipment-list.component';
+import { EquipmentListComponent } from "./equipment-list.component";
 
-describe('EquipmentListComponent', () => {
+describe("EquipmentListComponent", () => {
   let component: EquipmentListComponent;
   let fixture: ComponentFixture<EquipmentListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EquipmentListComponent ]
+      declarations: [
+        EquipmentListComponent
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EquipmentListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
