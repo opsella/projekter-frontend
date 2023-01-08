@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Router } from "@angular/router";
 import { Material } from "../models/material";
 import { MaterialsDataService } from "../materials-data.service";
 import { MatTableDataSource } from "@angular/material/table";
@@ -30,6 +31,13 @@ export class MaterialsListComponent {
 
   constructor(
     private materialsDataService: MaterialsDataService,
+    private router: Router
   ) {
   }
+  protected async handleSelection(material: Material) {
+    await this.router.navigateByUrl(
+      `materials/details/${material.name.toLowerCase()}${material.code.toLowerCase()}`, { state: material }
+    );
+  }
+
 }
