@@ -15,7 +15,7 @@ import { Router } from "@angular/router";
 export class EquipmentListComponent {
   private equipmentDataSource: MatTableDataSource<Equipment> = new MatTableDataSource<Equipment>([
   ]);
-  public equipmentDataSource$: Observable<MatTableDataSource<Equipment>> = this.equipmentListService.getEquipmentData({
+  public equipmentDataSource$: Observable<MatTableDataSource<Equipment>> = this.equipmentDataService.getEquipmentData({
     id          : undefined,
     code        : undefined,
     description : undefined,
@@ -31,7 +31,7 @@ export class EquipmentListComponent {
 
 
   constructor(
-    private equipmentListService: EquipmentDataService,
+    private equipmentDataService: EquipmentDataService,
     private router: Router
   ) {
   }
