@@ -1,31 +1,39 @@
-<h1>Materials</h1>
+<app-page-wrapper title="Materials">
+  <mat-table [dataSource]="(materialDataSource$ | async) ?? []">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+    </ng-container>
 
-<mat-table [dataSource]="(materialDataSource$ | async) ?? []">
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.code }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="code">
-    <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.code }} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="quantity">
+      <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.quantity }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="code">
-    <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.quantity }} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="unit">
+      <mat-header-cell *matHeaderCellDef> Unit </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.unit }} </mat-cell>
+    </ng-container>
 
-  <ng-container matColumnDef="description">
-    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{ row.description }} </mat-cell>
-  </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.description }} </mat-cell>
+    </ng-container>
 
-  <mat-header-row
-    *matHeaderRowDef="['name', 'code', 'quantity', 'description']"
-  ></mat-header-row>
-  <mat-row
-    (click)="handleSelection(row)"
-    *matRowDef="let row; columns: ['name', 'code', 'quantity', 'description']"
-  ></mat-row>
-</mat-table>
+    <mat-header-row
+      *matHeaderRowDef="['name', 'code', 'quantity', 'unit', 'description']"
+    ></mat-header-row>
+    <mat-row
+      (click)="handleSelection(row)"
+      *matRowDef="
+        let row;
+        columns: ['name', 'code', 'quantity', 'unit', 'description']
+      "
+    ></mat-row>
+  </mat-table>
+</app-page-wrapper>
