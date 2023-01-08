@@ -1,0 +1,30 @@
+<h1>Materials</h1>
+
+<mat-table [dataSource]="(materialDataSource$ | async) ?? []">
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.name }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="code">
+    <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.code }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="code">
+    <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.quantity }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{ row.description }} </mat-cell>
+  </ng-container>
+
+  <mat-header-row
+    *matHeaderRowDef="['name', 'code', 'quantity', 'description']"
+  ></mat-header-row>
+  <mat-row
+    *matRowDef="let row; columns: ['name', 'code', 'quantity', 'description']"
+  ></mat-row>
+</mat-table>
