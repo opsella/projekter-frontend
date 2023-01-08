@@ -1,4 +1,6 @@
 <app-page-wrapper title="Equipment">
+  <button (click)="createEquipment()">Create</button>
+
   <mat-table [dataSource]="(equipmentDataSource$ | async) ?? []">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -19,8 +21,11 @@
       *matHeaderRowDef="['name', 'code', 'description']"
     ></mat-header-row>
     <mat-row
-      (click)="handleSelection(row)"
+      (click)="viewEquipment(row)"
       *matRowDef="let row; columns: ['name', 'code', 'description']"
     ></mat-row>
   </mat-table>
 </app-page-wrapper>
+
+<!--this button will eventually be an "action" in the table row-->
+<button (click)="editEquipment()">Edit</button>
