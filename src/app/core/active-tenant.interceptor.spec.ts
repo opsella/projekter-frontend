@@ -4,9 +4,7 @@ import { ActiveTenantInterceptor } from "./active-tenant.interceptor";
 
 describe("ActiveTenantInterceptor", () => {
   beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      ActiveTenantInterceptor
-    ]
+    providers: [ActiveTenantInterceptor]
   }));
 
   it("should be created", () => {

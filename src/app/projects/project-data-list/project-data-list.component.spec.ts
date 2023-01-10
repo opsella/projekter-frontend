@@ -8,9 +8,7 @@ describe("ProjectDataListComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        ProjectDataListComponent
-      ]
+      declarations: [ProjectDataListComponent]
     })
       .compileComponents();
 

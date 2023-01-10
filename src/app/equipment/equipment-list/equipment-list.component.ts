@@ -8,13 +8,10 @@ import { Router } from "@angular/router";
 @Component({
   selector    : "app-equipment-list",
   templateUrl : "./equipment-list.component.html",
-  styleUrls   : [
-    "./equipment-list.component.scss"
-  ]
+  styleUrls   : ["./equipment-list.component.scss"]
 })
 export class EquipmentListComponent {
-  private equipmentDataSource: MatTableDataSource<Equipment> = new MatTableDataSource<Equipment>([
-  ]);
+  private equipmentDataSource: MatTableDataSource<Equipment> = new MatTableDataSource<Equipment>([]);
   public equipmentDataSource$: Observable<MatTableDataSource<Equipment>> = this.equipmentDataService.getEquipmentData({
     id          : undefined,
     code        : undefined,
@@ -22,8 +19,7 @@ export class EquipmentListComponent {
   })
     .pipe(
       map((items?: Equipment[]) => {
-        this.equipmentDataSource.data = items ?? [
-        ];
+        this.equipmentDataSource.data = items ?? [];
 
         return this.equipmentDataSource;
       })

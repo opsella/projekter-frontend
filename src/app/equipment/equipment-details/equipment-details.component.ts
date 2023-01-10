@@ -5,9 +5,7 @@ import { Equipment } from "../models/equipment";
 @Component({
   selector    : "app-equipment-view",
   templateUrl : "./equipment-details.component.html",
-  styleUrls   : [
-    "./equipment-details.component.scss"
-  ]
+  styleUrls   : ["./equipment-details.component.scss"]
 })
 export class EquipmentDetailsComponent {
 

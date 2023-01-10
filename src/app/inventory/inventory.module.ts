@@ -37,9 +37,7 @@ import { InventoryListComponent } from "./inventory-list/inventory-list.componen
     MatCardModule,
     SharedModule
   ],
-  providers: [
-    InventoryCategoryFormBuilderService
-  ]
+  providers: [InventoryCategoryFormBuilderService]
 })
 export class InventoryModule {
 }

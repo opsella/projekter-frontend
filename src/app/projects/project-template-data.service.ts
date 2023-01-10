@@ -19,13 +19,11 @@ export class ProjectTemplateDataService {
           name        : "{{required}}",
           code        : "{{required}}",
           description : "{{required}}",
-          stages      : [
-            {
-              name        : "{{required}}",
-              code        : "{{required}}",
-              description : "{{required}}",
-            }
-          ]
+          stages      : [{
+            name        : "{{required}}",
+            code        : "{{required}}",
+            description : "{{required}}",
+          }]
         }
       },
       {
@@ -58,13 +56,11 @@ export class ProjectTemplateDataService {
                   name        : "Lay Pipes",
                   code        : "{{calculated}}",
                   description : "Place pipes inside of trenches",
-                  stages      : [
-                    {
-                      name        : "Glue Pipes",
-                      code        : "{{calculated}}",
-                      description : "Take current pipes and glue them together"
-                    }
-                  ]
+                  stages      : [{
+                    name        : "Glue Pipes",
+                    code        : "{{calculated}}",
+                    description : "Take current pipes and glue them together"
+                  }]
                 },
                 {
                   name        : "Connect Pipe Branches",

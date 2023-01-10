@@ -4,13 +4,10 @@ import { MatSelectChange } from "@angular/material/select";
 @Component({
   selector    : "app-dropdown-avatar",
   templateUrl : "./dropdown-avatar.component.html",
-  styleUrls   : [
-    "./dropdown-avatar.component.scss"
-  ]
+  styleUrls   : ["./dropdown-avatar.component.scss"]
 })
 export class DropdownAvatarComponent  {
-    @Input() public options: DropDownAvatarElementConfig[] = [
-    ];
+    @Input() public options: DropDownAvatarElementConfig[] = [];
     @Input() public avatarUrl: string | undefined = "";
 
     public selectionChangedHandler($event: MatSelectChange): void {

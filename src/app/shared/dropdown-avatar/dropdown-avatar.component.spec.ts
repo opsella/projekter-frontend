@@ -8,9 +8,7 @@ describe("DropdownAvatarComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        DropdownAvatarComponent 
-      ]
+      declarations: [DropdownAvatarComponent]
     })
       .compileComponents();
 

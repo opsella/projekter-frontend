@@ -7,19 +7,15 @@ import { ActivatedRoute, Data } from "@angular/router";
 @Component({
   selector    : "app-inventory-list",
   templateUrl : "./inventory-list.component.html",
-  styleUrls   : [
-    "./inventory-list.component.scss"
-  ]
+  styleUrls   : ["./inventory-list.component.scss"]
 })
 export class InventoryListComponent {
-  private inventoryItemsDataSource: MatTableDataSource<InventoryItem> = new MatTableDataSource<InventoryItem>([
-  ]);
+  private inventoryItemsDataSource: MatTableDataSource<InventoryItem> = new MatTableDataSource<InventoryItem>([]);
   public inventoryItemsDataSource$: Observable<MatTableDataSource<InventoryItem>> = this.activatedRoute.data
     .pipe(
       map((data: Data) => data["inventoryItems"] as InventoryItem[]),
       map((items?: InventoryItem[]) => {
-        this.inventoryItemsDataSource.data = items ?? [
-        ];
+        this.inventoryItemsDataSource.data = items ?? [];
         return this.inventoryItemsDataSource;
       })
     );

@@ -8,9 +8,7 @@ describe("InventoryCategoryCreationFormComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        InventoryCategoryCreationFormComponent 
-      ]
+      declarations: [InventoryCategoryCreationFormComponent]
     })
       .compileComponents();
 

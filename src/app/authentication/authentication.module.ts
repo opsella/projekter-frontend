@@ -13,12 +13,10 @@ import { AuthPageWrapperComponent } from "./auth-page-wrapper/auth-page-wrapper.
     LoginComponent,
     AuthPageWrapperComponent
   ],
-  providers: [
-    {
-      provide  : AUTH_API_TOKEN,
-      useClass : AuthenticationService
-    }
-  ],
+  providers: [{
+    provide  : AUTH_API_TOKEN,
+    useClass : AuthenticationService
+  }],
   imports: [
     CommonModule,
     SharedModule,

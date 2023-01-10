@@ -12,9 +12,7 @@ describe("DataListComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        DataListComponent
-      ]
+      declarations: [DataListComponent]
     })
       .compileComponents();
 

@@ -8,9 +8,7 @@ describe("ListPageWrapperComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        PageWrapperComponent 
-      ]
+      declarations: [PageWrapperComponent]
     })
       .compileComponents();
 
