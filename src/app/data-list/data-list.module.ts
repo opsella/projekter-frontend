@@ -4,14 +4,8 @@ import { DataListComponent } from "./data-list/data-list.component";
 
 
 @NgModule({
-  declarations: [
-    DataListComponent,
-  ],
-  exports: [
-    DataListComponent,
-  ],
-  imports: [
-    CommonModule
-  ]
+  declarations : [DataListComponent,],
+  exports      : [DataListComponent,],
+  imports      : [CommonModule]
 })
 export class DataListModule { }

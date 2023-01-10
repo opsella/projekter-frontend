@@ -20,8 +20,7 @@ export class ProjectDataService {
 
   private getFakeData(): Observable<Project[]> {
     if (this.noDataCreated) {
-      return of([
-      ]);
+      return of([]);
     }
 
     return of([
@@ -29,13 +28,11 @@ export class ProjectDataService {
         name        : "Single Stage Project",
         code        : "SSP01",
         description : "The first single stage project",
-        stages      : [
-          {
-            name        : "Stage 1",
-            code        : "{{calculated}}",
-            description : "The first and only stage of the single stage project",
-          }
-        ],
+        stages      : [{
+          name        : "Stage 1",
+          code        : "{{calculated}}",
+          description : "The first and only stage of the single stage project",
+        }],
       },
       {
         name        : "Install Pipes at School",
@@ -64,13 +61,11 @@ export class ProjectDataService {
                 name        : "Lay Pipes",
                 code        : "IPS01:IP01:LP01",
                 description : "Place pipes inside of trenches",
-                stages      : [
-                  {
-                    name        : "Glue Pipes",
-                    code        : "IPS01:IP01:LP01:GP01",
-                    description : "Take current pipes and glue them together"
-                  }
-                ]
+                stages      : [{
+                  name        : "Glue Pipes",
+                  code        : "IPS01:IP01:LP01:GP01",
+                  description : "Take current pipes and glue them together"
+                }]
               },
               {
                 name        : "Connect Pipe Branches",

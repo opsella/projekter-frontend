@@ -5,13 +5,10 @@ import { Observable } from "rxjs";
 @Component({
   selector    : "app-data-list",
   templateUrl : "./data-list.component.html",
-  styleUrls   : [
-    "./data-list.component.scss"
-  ]
+  styleUrls   : ["./data-list.component.scss"]
 })
 export class DataListComponent<TData>  {
-  @Input() public data: DataSource<TData> = new ArrayDataSource<TData>([
-  ]);
+  @Input() public data: DataSource<TData> = new ArrayDataSource<TData>([]);
 
   @ContentChild("ContentHeader") public ContentHeader: TemplateRef<unknown> | null = null;
   @ContentChild("ContentBody") public ContentBody: TemplateRef<unknown> | null = null;

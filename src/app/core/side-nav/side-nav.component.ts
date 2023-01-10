@@ -5,9 +5,7 @@ import { Router } from "@angular/router";
 @Component({
   selector    : "app-side-nav",
   templateUrl : "./side-nav.component.html",
-  styleUrls   : [
-    "./side-nav.component.scss"
-  ]
+  styleUrls   : ["./side-nav.component.scss"]
 })
 export class SideNavComponent {
 
@@ -41,14 +39,10 @@ export class SideNavComponent {
   }
 
   public async settings() {
-    await this.router.navigate([
-      "/user/settings"
-    ]);
+    await this.router.navigate(["/user/settings"]);
   }
 
   public async profile() {
-    await this.router.navigate([
-      "/user/profile"
-    ]);
+    await this.router.navigate(["/user/profile"]);
   }
 }

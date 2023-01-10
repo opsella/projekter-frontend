@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { MaterialsListComponent } from './materials-list.component';
+import { MaterialsListComponent } from "./materials-list.component";
 
-describe('MaterialsListComponent', () => {
+describe("MaterialsListComponent", () => {
   let component: MaterialsListComponent;
   let fixture: ComponentFixture<MaterialsListComponent>;
 
@@ -10,14 +10,14 @@ describe('MaterialsListComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ MaterialsListComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(MaterialsListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

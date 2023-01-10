@@ -17,31 +17,23 @@ export class InventoryCategoryFormBuilderService {
   public build(): FormGroup<InventoryCategoryFormGroup> {
     return this._formBuilder.group<InventoryCategoryFormGroup>({
       existingCategory: this._formBuilder.group<InventoryExistingCategoryFormGroup>({
-        category: new FormControl<string | null>(null, [
-          Validators.required
-        ])
+        category: new FormControl<string | null>(null, [Validators.required])
       }),
       newCategory: this._formBuilder.group<InventoryNewCategoryFormGroup>({
         name: new FormControl<string>("", {
-          validators: [
-            Validators.required
-          ],
-          nonNullable: true,
+          validators  : [Validators.required],
+          nonNullable : true,
         }),
         description: new FormControl<string>("", {
-          validators: [
-            Validators.required
-          ],
-          nonNullable: true,
+          validators  : [Validators.required],
+          nonNullable : true,
         })
       })
     }, {
-      validators: [
-        onlyOneValidator([
-          "existingCategory",
-          "newCategory"
-        ])
-      ],
+      validators: [onlyOneValidator([
+        "existingCategory",
+        "newCategory"
+      ])],
     });
   }
 }

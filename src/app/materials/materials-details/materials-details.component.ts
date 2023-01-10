@@ -5,9 +5,7 @@ import { Material } from "../models/material";
 @Component({
   selector    : "app-materials-details",
   templateUrl : "./materials-details.component.html",
-  styleUrls   : [
-    "./materials-details.component.scss"
-  ]
+  styleUrls   : ["./materials-details.component.scss"]
 })
 export class MaterialsDetailsComponent {
   protected material: Material | undefined;

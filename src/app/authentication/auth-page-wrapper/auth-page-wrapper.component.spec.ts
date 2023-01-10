@@ -8,9 +8,7 @@ describe("AuthPageWrapperComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        AuthPageWrapperComponent 
-      ]
+      declarations: [AuthPageWrapperComponent]
     })
       .compileComponents();
 

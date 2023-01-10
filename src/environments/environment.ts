@@ -13,11 +13,9 @@ export const environment = {
     useRefreshTokens : true,
     cacheLocation    : "localstorage",
     httpInterceptor  : {
-      allowedList: [
-        {
-          uri: "https://localhost:7237/graphql*"
-        }
-      ]
+      allowedList: [{
+        uri: "https://localhost:7237/graphql*"
+      }]
     }
   } as AuthConfig
 };

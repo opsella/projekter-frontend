@@ -8,13 +8,10 @@ import { map, Observable } from "rxjs";
 @Component({
   selector    : "app-materials-list",
   templateUrl : "./materials-list.component.html",
-  styleUrls   : [
-    "./materials-list.component.scss"
-  ]
+  styleUrls   : ["./materials-list.component.scss"]
 })
 export class MaterialsListComponent {
-  private materialsDataSource: MatTableDataSource<Material> = new MatTableDataSource<Material>([
-  ]);
+  private materialsDataSource: MatTableDataSource<Material> = new MatTableDataSource<Material>([]);
   public materialDataSource$: Observable<MatTableDataSource<Material>> = this.materialsDataService.getMaterialsData({
     id          : undefined,
     code        : undefined,
@@ -22,8 +19,7 @@ export class MaterialsListComponent {
   })
     .pipe(
       map((items?: Material[]) => {
-        this.materialsDataSource.data = items ?? [
-        ];
+        this.materialsDataSource.data = items ?? [];
 
         return this.materialsDataSource;
       })

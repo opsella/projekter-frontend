@@ -15,8 +15,7 @@ export class Page<TEntity> {
         return edge.node;
       });
 
-    return (value?.filter(x => x !== undefined) ?? [
-    ]) as TEntity[];
+    return (value?.filter(x => x !== undefined) ?? []) as TEntity[];
   }
 
   public getNodes(): TEntity[] {
@@ -29,8 +28,7 @@ export class Page<TEntity> {
         return edge.node;
       });
 
-    return (value?.filter(x => x !== undefined) ?? [
-    ]) as TEntity[];
+    return (value?.filter(x => x !== undefined) ?? []) as TEntity[];
   }
 
   public getPageInfo(): PageInfo {

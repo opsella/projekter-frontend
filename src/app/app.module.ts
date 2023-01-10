@@ -14,10 +14,8 @@ import { ActiveTenantInterceptor } from "./core/active-tenant.interceptor";
 import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
+  declarations : [AppComponent],
+  imports      : [
     CoreModule,
     BrowserModule,
     AppRoutingModule,
@@ -41,9 +39,7 @@ import { MatInputModule } from "@angular/material/input";
       multi    : true
     }
   ],
-  bootstrap: [
-    AppComponent
-  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
