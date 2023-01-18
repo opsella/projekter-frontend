@@ -1,0 +1,7 @@
+<section>
+  <ul>
+    <li *ngFor="let action of actions">
+      <button (click)="handleClick(action)">{{ action.text }}</button>
+    </li>
+  </ul>
+</section>

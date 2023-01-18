@@ -12,4 +12,12 @@ export class EquipmentDataService {
   public getEquipmentData(filters: EquipmentFilters): Observable<Equipment[]> {
     return this.inventoryApiService.queryEquipment(filters);
   }
+
+  public createEquipment() {
+
+  }
+
+  public editEquipment() {
+
+  }
 }

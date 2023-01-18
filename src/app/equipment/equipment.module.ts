@@ -5,17 +5,23 @@ import { EquipmentRoutingModule } from "./equipment-routing.module";
 import { SharedModule } from "../shared/shared.module";
 import { MatTableModule } from "@angular/material/table";
 import { EquipmentDetailsComponent } from "./equipment-details/equipment-details.component";
+import { EquipmentEditComponent } from "./equipment-edit/equipment-edit.component";
+import { ReactiveFormsModule } from "@angular/forms";
+import { CoreModule } from "../core/core.module";
 
 @NgModule({
   declarations: [
     EquipmentListComponent,
-    EquipmentDetailsComponent
+    EquipmentDetailsComponent,
+    EquipmentEditComponent
   ],
   imports: [
     CommonModule,
     EquipmentRoutingModule,
     SharedModule,
-    MatTableModule
+    MatTableModule,
+    ReactiveFormsModule,
+    CoreModule
   ]
 })
 export class EquipmentModule { }

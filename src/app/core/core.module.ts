@@ -7,13 +7,15 @@ import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared/shared.module";
 import { MatIconModule } from "@angular/material/icon";
 import { NavigationRouteElementComponent } from "./top-nav/navigation-route-element/navigation-route-element.component";
+import { ActionFooterComponent } from "./action-footer/action-footer.component";
 
 @NgModule({
   declarations: [
     TopNavComponent,
     SideNavComponent,
     MainContentComponent,
-    NavigationRouteElementComponent
+    NavigationRouteElementComponent,
+    ActionFooterComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +26,8 @@ import { NavigationRouteElementComponent } from "./top-nav/navigation-route-elem
   exports: [
     TopNavComponent,
     SideNavComponent,
-    MainContentComponent
+    MainContentComponent,
+    ActionFooterComponent
   ],
 })
 export class CoreModule {}
