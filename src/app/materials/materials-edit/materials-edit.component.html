@@ -1,0 +1,19 @@
+<form [formGroup]="materialForm" (ngSubmit)="handleSubmit()">
+  <label>Name</label>
+  <input type="text" id="name" formControlName="name" />
+
+  <label>Code</label>
+  <input type="text" id="code" formControlName="code" />
+
+  <label>Code</label>
+  <input type="text" id="quantity" formControlName="quantity" />
+
+  <label>Code</label>
+  <input type="text" id="unit" formControlName="unit" />
+
+  <label>Description</label>
+  <input type="text" id="description" formControlName="description" />
+
+  <button routerLink="/materials/list">Cancel</button>
+  <button type="submit">Submit</button>
+</form>

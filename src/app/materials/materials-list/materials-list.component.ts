@@ -4,6 +4,7 @@ import { Material } from "../models/material";
 import { MaterialsDataService } from "../materials-data.service";
 import { MatTableDataSource } from "@angular/material/table";
 import { map, Observable } from "rxjs";
+import { Action } from "../../core/action-footer/action-footer.component";
 
 @Component({
   selector    : "app-materials-list",
@@ -25,14 +26,30 @@ export class MaterialsListComponent {
       })
     );
 
+  public actions: Action[] = [];
+
   constructor(
     private materialsDataService: MaterialsDataService,
     private router: Router
   ) {
+    const routerClone = this.router;
+
+    this.actions.push({
+      text: "Add Material",
+      async action() {
+        await routerClone.navigate(["materials/edit/new"]);
+      }
+    });
   }
-  protected async handleSelection(material: Material) {
+  protected async viewMaterial(material: Material): Promise<void> {
     await this.router.navigateByUrl(
       `materials/details/${material.name.toLowerCase()}${material.code.toLowerCase()}`, { state: material }
+    );
+  }
+
+  protected async editMaterial(row: Material): Promise<void> {
+    await this.router.navigateByUrl(
+      `materials/edit/${row.name.toLowerCase()}${row.code.toLowerCase()}`, { state: row }
     );
   }
 

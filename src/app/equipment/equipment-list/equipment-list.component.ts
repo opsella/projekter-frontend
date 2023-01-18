@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { EquipmentDataService } from "../equipment-data.service";
 import { Equipment } from "../models/equipment";
 import { Router } from "@angular/router";
-import { FormBuilder, FormGroup } from "@angular/forms";
 import { Action } from "../../core/action-footer/action-footer.component";
 import { map, Observable } from "rxjs";
 import { MatTableDataSource } from "@angular/material/table";
@@ -27,20 +26,12 @@ export class EquipmentListComponent {
       })
     );
 
-  public equipmentForm: FormGroup;
   public actions: Action[] = [];
 
   constructor(
     private equipmentDataService: EquipmentDataService,
     private router: Router,
-    private formBuilder: FormBuilder
   ) {
-    this.equipmentForm = this.formBuilder.group({
-      name        : [""],
-      code        : [""],
-      description : [""]
-    });
-
     const routerClone = this.router;
 
     this.actions.push({

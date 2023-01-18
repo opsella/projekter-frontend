@@ -25,15 +25,34 @@
       <mat-cell *matCellDef="let row"> {{ row.description }} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button (click)="editMaterial(row)">Edit</button>
+        <button (click)="viewMaterial(row)">Details</button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row
-      *matHeaderRowDef="['name', 'code', 'quantity', 'unit', 'description']"
+      *matHeaderRowDef="[
+        'name',
+        'code',
+        'quantity',
+        'unit',
+        'description',
+        'actions'
+      ]"
     ></mat-header-row>
     <mat-row
-      (click)="handleSelection(row)"
       *matRowDef="
         let row;
-        columns: ['name', 'code', 'quantity', 'unit', 'description']
+        columns: ['name', 'code', 'quantity', 'unit', 'description', 'actions']
       "
     ></mat-row>
   </mat-table>
+
+  <app-action-footer
+    [actions]="actions"
+    (actionEvent)="$event.action?.()"
+  ></app-action-footer>
 </app-page-wrapper>

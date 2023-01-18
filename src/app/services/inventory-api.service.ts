@@ -17,7 +17,7 @@ export interface MaterialsResponse {
   name: string;
   code: string;
   quantity: number;
-  unit: number;
+  unit: string;
   description: string;
 }
 

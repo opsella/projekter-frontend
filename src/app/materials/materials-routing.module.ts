@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { MaterialsListComponent } from "./materials-list/materials-list.component";
 import { MaterialsDetailsComponent } from "./materials-details/materials-details.component";
+import { MaterialsEditComponent } from "./materials-edit/materials-edit.component";
 
 const routes: Routes = [
   {
@@ -11,6 +12,10 @@ const routes: Routes = [
   {
     path      : "details/:name",
     component : MaterialsDetailsComponent
+  },
+  {
+    path      : "edit/:name",
+    component : MaterialsEditComponent
   },
   {
     path       : "**",

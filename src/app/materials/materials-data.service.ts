@@ -12,4 +12,12 @@ export class MaterialsDataService {
   public getMaterialsData(filters: MaterialsFilters): Observable<Material[]> {
     return this.inventoryApiService.queryMaterials(filters);
   }
+
+  public createMaterial() {
+
+  }
+
+  public editMaterial() {
+
+  }
 }
