@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 import { EquipmentDataService } from "../equipment-data.service";
 import { Equipment } from "../models/equipment";
-import { map, Observable } from "rxjs";
-import { MatTableDataSource } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import { Action } from "../../core/action-footer/action-footer.component";
+import { map, Observable } from "rxjs";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector    : "app-equipment-list",
@@ -27,7 +28,7 @@ export class EquipmentListComponent {
     );
 
   public equipmentForm: FormGroup;
-
+  public actions: Action[] = [];
 
   constructor(
     private equipmentDataService: EquipmentDataService,
@@ -35,38 +36,30 @@ export class EquipmentListComponent {
     private formBuilder: FormBuilder
   ) {
     this.equipmentForm = this.formBuilder.group({
-      name: [
-        ""
-      ],
-      code: [
-        ""
-      ],
-      description: [
-        ""
-      ]
+      name        : [""],
+      code        : [""],
+      description : [""]
+    });
+
+    const routerClone = this.router;
+
+    this.actions.push({
+      text: "Add Equipment",
+      async action() {
+        await routerClone.navigate(["equipment/edit/new"]);
+      }
     });
   }
+
   protected async viewEquipment(equipment: Equipment): Promise<void> {
     await this.router.navigateByUrl(
       `equipment/details/${equipment.name.toLowerCase()}${equipment.code.toLowerCase()}`, { state: equipment }
     );
   }
 
-  protected async editEquipment(): Promise<void> {
-    const equipment = {
-      name        : "Test",
-      code        : "TT - 234234",
-      description : "This is a Test"
-    };
-
+  protected async editEquipment(row: Equipment): Promise<void> {
     await this.router.navigateByUrl(
-      `equipment/edit/${equipment.name.toLowerCase()}${equipment.code.toLowerCase()}`, { state: equipment }
+      `equipment/edit/${row.name.toLowerCase()}${row.code.toLowerCase()}`, { state: row }
     );
-  }
-
-  protected async createEquipment(): Promise<void> {
-    await this.router.navigate([
-      "equipment/edit/new"
-    ]);
   }
 }

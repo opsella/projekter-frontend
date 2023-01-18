@@ -1,6 +1,4 @@
 <app-page-wrapper title="Equipment">
-  <button (click)="createEquipment()">Create</button>
-
   <mat-table [dataSource]="(equipmentDataSource$ | async) ?? []">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
@@ -17,15 +15,24 @@
       <mat-cell *matCellDef="let row"> {{ row.description }} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button (click)="editEquipment(row)">Edit</button>
+        <button (click)="viewEquipment(row)">Details</button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row
-      *matHeaderRowDef="['name', 'code', 'description']"
+      *matHeaderRowDef="['name', 'code', 'description', 'actions']"
     ></mat-header-row>
     <mat-row
-      (click)="viewEquipment(row)"
-      *matRowDef="let row; columns: ['name', 'code', 'description']"
+      *matRowDef="let row; columns: ['name', 'code', 'description', 'actions']"
     ></mat-row>
   </mat-table>
-</app-page-wrapper>
 
-<!--this button will eventually be an "action" in the table row-->
-<button (click)="editEquipment()">Edit</button>
+  <app-action-footer
+    [actions]="actions"
+    (actionEvent)="$event.action?.()"
+  ></app-action-footer>
+</app-page-wrapper>

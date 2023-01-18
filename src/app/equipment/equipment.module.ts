@@ -7,6 +7,7 @@ import { MatTableModule } from "@angular/material/table";
 import { EquipmentDetailsComponent } from "./equipment-details/equipment-details.component";
 import { EquipmentEditComponent } from "./equipment-edit/equipment-edit.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { CoreModule } from "../core/core.module";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     EquipmentRoutingModule,
     SharedModule,
     MatTableModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CoreModule
   ]
 })
 export class EquipmentModule { }

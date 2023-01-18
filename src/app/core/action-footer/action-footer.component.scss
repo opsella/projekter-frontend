@@ -1,0 +1,19 @@
+section {
+  position: sticky;
+  bottom: 5em;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    height: 4em;
+    width: 6em;
+    border: none;
+    background-color: #dfba38;
+    font-weight: bold;
+    box-shadow: 2px 2px 8px #040300;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

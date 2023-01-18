@@ -7,9 +7,7 @@ import { Router } from "@angular/router";
 @Component({
   selector    : "app-equipment-edit",
   templateUrl : "./equipment-edit.component.html",
-  styleUrls   : [
-    "./equipment-edit.component.scss"
-  ]
+  styleUrls   : ["./equipment-edit.component.scss"]
 })
 export class EquipmentEditComponent {
   protected equipment: Equipment | undefined;
@@ -21,15 +19,9 @@ export class EquipmentEditComponent {
     private router: Router
   ) {
     const formControls = {
-      name: [
-        ""
-      ],
-      code: [
-        ""
-      ],
-      description: [
-        ""
-      ]
+      name        : [""],
+      code        : [""],
+      description : [""]
     };
 
     this.equipment = this.router.getCurrentNavigation()?.extras?.state as Equipment;
