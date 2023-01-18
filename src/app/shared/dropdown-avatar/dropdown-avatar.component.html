@@ -1,5 +1,5 @@
 <div class="avatar-container">
-  <button class="avatar-button" (click)="select.open()">
+  <button class="avatar-button" (click)="openDropdown()">
     <img
       [src]="avatarUrl"
       alt="User avatar and additional options"
@@ -7,15 +7,13 @@
     />
   </button>
 
-  <mat-select
-    #select
-    class="avatar-select"
-    (selectionChange)="selectionChangedHandler($event)"
-  >
-    <ng-container *ngFor="let option of options">
-      <mat-option *ngIf="option.isVisible()" [value]="option.id">
-        {{ option.name }}
-      </mat-option>
-    </ng-container>
-  </mat-select>
+  <div class="dropdown">
+    <div class="dropdown-content" [class.dropdown-content-open]="dropdownOpen">
+      <ng-container *ngFor="let option of options">
+        <a *ngIf="option.isVisible()" (click)="dropdownClicked(option.id)">
+          {{ option.name }}
+        </a>
+      </ng-container>
+    </div>
+  </div>
 </div>

@@ -17,19 +17,39 @@
       width: auto;
     }
   }
-
-  ::ng-deep.mat-select-arrow {
-    border: none;
-  }
-
-  .avatar-select {
-    display: none;
-  }
 }
 
-::ng-deep.cdk-overlay-container {
-  position: absolute;
-  //left: 400px;
-  left: 95%;
-  //top: 5%;
+.dropdown {
+  position: relative;
+  display: inline-block;
+  right: 165px;
+
+  &-content {
+    display: none;
+    position: absolute;
+    background-color: grey;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+    &-open {
+      display: block;
+    }
+
+    a {
+      color: black;
+      padding: 12px 18px;
+      text-decoration: none;
+      display: block;
+
+      &:hover {
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        background-color: #dfba38;
+      }
+
+      &:active {
+        background-color: rgba(223, 186, 56, 0.47);
+      }
+    }
+  }
 }

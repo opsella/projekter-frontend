@@ -8,6 +8,7 @@ import { SharedModule } from "../shared/shared.module";
 import { MatIconModule } from "@angular/material/icon";
 import { NavigationRouteElementComponent } from "./top-nav/navigation-route-element/navigation-route-element.component";
 import { ActionFooterComponent } from "./action-footer/action-footer.component";
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ActionFooterComponent } from "./action-footer/action-footer.component";
     CommonModule,
     RouterModule,
     SharedModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   exports: [
     TopNavComponent,
