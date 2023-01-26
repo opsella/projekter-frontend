@@ -16,11 +16,15 @@ import {
 } from "./inventory-category-creation-form/inventory-category-creation-form.component";
 import { InventoryCategoryFormBuilderService } from "./inventory-category-form-builder.service";
 import { InventoryListComponent } from "./inventory-list/inventory-list.component";
+import { ListComponent } from "./list/list.component";
+import { CdkTableModule } from "@angular/cdk/table";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [
     InventoryCategoryCreationFormComponent,
     InventoryListComponent,
+    ListComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { InventoryListComponent } from "./inventory-list/inventory-list.componen
     MatSelectModule,
     MatTableModule,
     MatCardModule,
-    SharedModule
+    SharedModule,
+    CdkTableModule,
+    MatIconModule
   ],
   providers: [InventoryCategoryFormBuilderService]
 })
