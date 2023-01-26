@@ -1,6 +1,9 @@
-import { Component, Input } from "@angular/core";
+import { Component } from "@angular/core";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { MatTableDataSource } from "@angular/material/table";
+import { ExpandableData } from "../../dynamic-expansion-table/expandable-data";
+import { InventoryExpansionDetailComponent } from "../inventory-expansion-detail/inventory-expansion-detail.component";
+import { TestExpansionComponent } from "../test-expansion/test-expansion.component";
 
 @Component({
   selector    : "app-list",
@@ -13,46 +16,40 @@ import { MatTableDataSource } from "@angular/material/table";
   ]),],
 })
 export class ListComponent {
-  @Input() public data: MatTableDataSource<{ name: string; code: string; quantity: number; description: string }> = new MatTableDataSource([
+  protected data: MatTableDataSource<ExpandableData<InventoryData>> = new MatTableDataSource<ExpandableData<InventoryData>>([
     {
-      name        : "test    1",
-      code        : "code    1",
-      quantity    : 1000,
-      description : "dfas 3333"
+      data: {
+        name        : "test    1",
+        code        : "code    1",
+        quantity    : 1000,
+        description : "dfas 3333",
+      },
+      expansionComponent: InventoryExpansionDetailComponent
     },
     {
-      name        : "test    2",
-      code        : "code    2",
-      quantity    : 2000,
-      description : "dfas 2222"
+      data: {
+        name        : "test    2",
+        code        : "code    2",
+        quantity    : 2000,
+        description : "dfas 2222",
+      },
+      expansionComponent: TestExpansionComponent
     },
     {
-      name        : "test    3",
-      code        : "code    3",
-      quantity    : 3000,
-      description : "dfas 1111"
+      data: {
+        name        : "test    2",
+        code        : "code    2",
+        quantity    : 2000,
+        description : "dfas 2222",
+      },
+      expansionComponent: InventoryExpansionDetailComponent
     }
   ]);
-
-  protected expandedElement: null | undefined;
-
-  protected columnHeaders: string[] = [
-    "name", "code", "quantity", "description"
-  ];
-
-  protected columnHeadersWithActions: string[] = [
-    ...this.columnHeaders,
-    "actions",
-    "expand"
-  ];
-
-  protected columnHeadersWithExpandedDetail: string[] = [
-    ...this.columnHeadersWithActions,
-    "expandedDetail"
-  ];
-
 }
 
-// export interface ViewableOnCollapsed {
-//
-// }
+export interface InventoryData {
+  name: string;
+  code: string;
+  quantity: number;
+  description: string;
+}

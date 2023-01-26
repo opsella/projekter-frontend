@@ -19,12 +19,17 @@ import { InventoryListComponent } from "./inventory-list/inventory-list.componen
 import { ListComponent } from "./list/list.component";
 import { CdkTableModule } from "@angular/cdk/table";
 import { MatIconModule } from "@angular/material/icon";
+import { DynamicExpansionTableModule } from "../dynamic-expansion-table/dynamic-expansion-table.module";
+import { InventoryExpansionDetailComponent } from "./inventory-expansion-detail/inventory-expansion-detail.component";
+import { TestExpansionComponent } from "./test-expansion/test-expansion.component";
 
 @NgModule({
   declarations: [
     InventoryCategoryCreationFormComponent,
     InventoryListComponent,
     ListComponent,
+    InventoryExpansionDetailComponent,
+    TestExpansionComponent,
   ],
   imports: [
     CommonModule,
@@ -41,7 +46,8 @@ import { MatIconModule } from "@angular/material/icon";
     MatCardModule,
     SharedModule,
     CdkTableModule,
-    MatIconModule
+    MatIconModule,
+    DynamicExpansionTableModule
   ],
   providers: [InventoryCategoryFormBuilderService]
 })
