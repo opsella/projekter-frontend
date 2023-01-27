@@ -22,6 +22,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { DynamicExpansionTableModule } from "../dynamic-expansion-table/dynamic-expansion-table.module";
 import { InventoryExpansionDetailComponent } from "./inventory-expansion-detail/inventory-expansion-detail.component";
 import { TestExpansionComponent } from "./test-expansion/test-expansion.component";
+import { InventorySelectorComponent } from './inventory-selector/inventory-selector.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { TestExpansionComponent } from "./test-expansion/test-expansion.componen
     ListComponent,
     InventoryExpansionDetailComponent,
     TestExpansionComponent,
+    InventorySelectorComponent,
   ],
   imports: [
     CommonModule,

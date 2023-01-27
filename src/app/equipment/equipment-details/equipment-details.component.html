@@ -1,9 +1,9 @@
 <app-page-wrapper title="Equipment Details">
   <section>
     <ul>
-      <li>Name: {{ equipment?.name }}</li>
-      <li>Code: {{ equipment?.code }}</li>
-      <li>Description: {{ equipment?.description }}</li>
+      <li>Name: {{ (equipment | async)?.name }}</li>
+      <li>Code: {{ (equipment | async)?.code }}</li>
+      <li>Description: {{ (equipment | async)?.description }}</li>
     </ul>
   </section>
 </app-page-wrapper>

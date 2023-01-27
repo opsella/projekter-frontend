@@ -66,6 +66,32 @@ type Mutation {
   updateMaterial(input: UpdateMaterialInput!): UpdateMaterialPayload!
   createProject(input: CreateProjectInput!): CreateProjectPayload!
   deleteProject(input: DeleteProjectInput!): DeleteProjectPayload!
+  addProjectStageToProject(
+    input: AddProjectStageToProjectInput!
+  ): ProjectStageAdded!
+  projects(
+    input: QueryProjectsInput
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+  ): ProjectsConnection
 }
 
 type Query {
@@ -93,6 +119,8 @@ type Query {
     """
     before: String
   ): MaterialsConnection
+  materialById(materialId: UUID!): MaterialEntity!
+  materialByCode(materialCode: String!): MaterialEntity!
   equipment(
     input: QueryEquipmentInput!
 
@@ -116,6 +144,53 @@ type Query {
     """
     before: String
   ): EquipmentConnection
+  equipmentById(equipmentId: UUID!): EquipmentEntity!
+  equipmentByCode(equipmentCode: String!): EquipmentEntity!
+  inventoryItems(
+    input: QueryInventoryItemsInput!
+
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+  ): InventoryItemsConnection
+  inventoryById(id: UUID!): InventoryEntity!
+  projects(
+    """
+    Returns the first _n_ elements from the list.
+    """
+    first: Int
+
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """
+    Returns the last _n_ elements from the list.
+    """
+    last: Int
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+  ): ProjectsConnection
 }
 
 """
@@ -126,6 +201,26 @@ scalar Instant
 enum ApplyPolicy {
   BEFORE_RESOLVER
   AFTER_RESOLVER
+}
+
+"""
+A connection to a list of items.
+"""
+type ProjectsConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [ProjectsEdge!]
+
+  """
+  A flattened list of the nodes.
+  """
+  nodes: [ProjectEntity!]
 }
 
 """
@@ -169,6 +264,26 @@ type EquipmentConnection {
 }
 
 """
+A connection to a list of items.
+"""
+type InventoryItemsConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [InventoryItemsEdge!]
+
+  """
+  A flattened list of the nodes.
+  """
+  nodes: [InventoryEntity!]
+}
+
+"""
 Information about pagination in a connection.
 """
 type PageInfo {
@@ -191,6 +306,39 @@ type PageInfo {
   When paginating forwards, the cursor to continue.
   """
   endCursor: String
+}
+
+type ProjectEntity {
+  id: UUID!
+  tenantId: UUID!
+  name: String!
+  code: String!
+  shortDescription: String!
+  description: String!
+  statusCode: String!
+  startDate: Instant
+  expectedStartDate: Instant
+  endDate: Instant
+  expectedEndDate: Instant
+  stages: [ProjectStageEntity!]!
+  appliedInventory: [ProjectInventoryEntity!]!
+  created: Instant!
+  updated: Instant!
+}
+
+"""
+An edge in a connection.
+"""
+type ProjectsEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: ProjectEntity!
 }
 
 type MaterialEntity {
@@ -245,6 +393,41 @@ type EquipmentEdge {
   node: EquipmentEntity!
 }
 
+type InventoryEntity {
+  id: UUID!
+  tenantId: UUID!
+  inventoryType: InventoryTypes!
+  quantity: Int!
+  createdDate: Instant!
+  lastModifiedDate: Instant!
+}
+
+"""
+An edge in a connection.
+"""
+type InventoryItemsEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: InventoryEntity!
+}
+
+input UpdateEquipmentInput {
+  id: UUID!
+  equipmentName: String
+  equipmentCode: String
+  equipmentDescription: String
+}
+
+type UpdateEquipmentPayload {
+  id: UUID!
+}
+
 input RegisterEquipmentInput {
   equipmentName: String!
   equipmentCode: String!
@@ -289,17 +472,6 @@ type RegistrationComplete {
   registrationId: UUID!
   tenantId: UUID!
   employeeId: UUID!
-}
-
-type UpdateEquipmentPayload {
-  id: UUID!
-}
-
-input UpdateEquipmentInput {
-  id: UUID!
-  equipmentName: String
-  equipmentCode: String
-  equipmentDescription: String
 }
 
 type RegisterMaterialPayload {
@@ -351,6 +523,27 @@ input DeleteProjectInput {
   projectId: UUID!
 }
 
+type ProjectStageAdded {
+  tenantId: UUID!
+  projectId: UUID!
+  projectStageId: UUID!
+}
+
+input AddProjectStageToProjectInput {
+  parentProjectId: UUID!
+  parentStageId: UUID
+  name: String!
+  code: String!
+  description: String!
+}
+
+input QueryProjectsInput {
+  projectId: UUID
+  projectName: String
+  projectCode: String
+  includeStages: Boolean
+}
+
 type TenantResponse {
   children: [SubTenant!]!
 }
@@ -359,12 +552,60 @@ input QueryMaterialsInput {
   materialId: UUID
   descriptionContains: String
   code: String
+  name: String
+}
+
+enum InventoryTypes {
+  EQUIPMENT
+  MATERIAL
 }
 
 input QueryEquipmentInput {
   equipmentId: UUID
   descriptionContains: String
   code: String
+  name: String
+}
+
+type ProjectInventoryEntity {
+  projectId: UUID!
+  project: ProjectEntity!
+  inventoryItemId: UUID!
+  quantity: Int!
+}
+
+input QueryInventoryItemsInput {
+  inventoryItemId: UUID
+  quantity: QuantityQueryInput
+  inventoryType: InventoryTypes
+}
+
+type ProjectStageEntity {
+  id: UUID!
+  tenantId: UUID!
+  name: String!
+  code: String!
+  description: String!
+  parentProjectId: UUID!
+  parentProject: ProjectEntity!
+  parentStageId: UUID
+  parentStage: ProjectStageEntity
+  appliedInventory: [ProjectStageInventoryEntity!]!
+  childStages: [ProjectStageEntity!]!
+  created: Instant!
+  updated: Instant!
+}
+
+type ProjectStageInventoryEntity {
+  projectStageId: UUID!
+  projectStage: ProjectStageEntity!
+  inventoryItemId: UUID!
+  quantity: Int!
+}
+
+input QuantityQueryInput {
+  quantity: Int!
+  comparisonOperation: ComparisonOperation!
 }
 
 type SubTenant {
@@ -376,4 +617,13 @@ type SubTenant {
 input AppliedInventoryInput {
   inventoryItemId: UUID!
   quantity: Int!
+}
+
+enum ComparisonOperation {
+  EQUALS
+  NOT_EQUALS
+  GREATER_THEN
+  GREATER_THEN_OR_EQUALS
+  LESS_THEN
+  LESS_THEN_OR_EQUALS
 }

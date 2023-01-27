@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { MatTableDataSource } from "@angular/material/table";
-import { ExpandableData } from "../../dynamic-expansion-table/expandable-data";
+import { ExpansionTableData } from "../../dynamic-expansion-table/expandable-data";
 import { InventoryExpansionDetailComponent } from "../inventory-expansion-detail/inventory-expansion-detail.component";
 import { TestExpansionComponent } from "../test-expansion/test-expansion.component";
 
@@ -16,15 +16,30 @@ import { TestExpansionComponent } from "../test-expansion/test-expansion.compone
   ]),],
 })
 export class ListComponent {
-  protected data: MatTableDataSource<ExpandableData<InventoryData>> = new MatTableDataSource<ExpandableData<InventoryData>>([
+  protected data: MatTableDataSource<ExpansionTableData<InventoryData>> = new MatTableDataSource<ExpansionTableData<InventoryData>>([
     {
       data: {
-        name        : "test    1",
-        code        : "code    1",
+        name        : "Name: test    1",
+        code        : "Code: code    1",
         quantity    : 1000,
         description : "dfas 3333",
       },
+      actions: [
+        {
+          title   : "View",
+          enabled : () => true,
+          visible : () => true,
+          action  : () => {  }
+        },
+        {
+          title   : "Edit",
+          enabled : () => true,
+          visible : () => true,
+          action  : () => {  }
+        }
+      ],
       expansionComponent: InventoryExpansionDetailComponent
+      // notifications might be something to add as a component
     },
     {
       data: {
@@ -33,6 +48,20 @@ export class ListComponent {
         quantity    : 2000,
         description : "dfas 2222",
       },
+      actions: [
+        {
+          title   : "View",
+          enabled : () => true,
+          visible : () => true,
+          action  : () => { }
+        },
+        {
+          title   : "Edit",
+          enabled : () => true,
+          visible : () => true,
+          action  : () => { }
+        }
+      ],
       expansionComponent: TestExpansionComponent
     },
     {
@@ -42,6 +71,20 @@ export class ListComponent {
         quantity    : 2000,
         description : "dfas 2222",
       },
+      actions: [
+        {
+          title   : "View",
+          enabled : () => true,
+          visible : () => true,
+          action  : () => { }
+        },
+        {
+          title   : "Edit",
+          enabled : () => true,
+          visible : () => true,
+          action  : () => { }
+        }
+      ],
       expansionComponent: InventoryExpansionDetailComponent
     }
   ]);

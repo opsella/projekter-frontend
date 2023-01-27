@@ -1,9 +1,11 @@
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
-import { Apollo, gql } from "apollo-angular";
 import { Equipment } from "../equipment/models/equipment";
 import { Page, Pageable } from "../shared/page";
 import { Material } from "../materials/models/material";
+import { EquipmentFilters, getAllEquipment, getEquipmentById } from "../queries/equipment-queries";
+import { Apollo, gql } from "apollo-angular";
+import { createEquipment, editEquipment } from "../queries/equipment-mutations";
 
 export interface EquipmentResponse {
   id: string;
@@ -30,58 +32,19 @@ export class InventoryApiService {
   }
 
   public queryEquipment(filters: EquipmentFilters): Observable<Equipment[]> {
-    return this.apollo.watchQuery<{
-      equipment: Page<Equipment>;
-    }>({
-      query: gql`
-        query SearchAvailableEquipment($first: Int, $last: Int, $after: String, $before: String, $code: String, $description: String, $id: UUID) {
-          equipment(
-            first: $first
-            last: $last
-            after: $after
-            before: $before
-            input: {
-              code: $code
-              descriptionContains: $description
-              equipmentId: $id
-            }
-          ) {
-            pageInfo {
-              startCursor
-              endCursor
-              hasNextPage
-              hasPreviousPage
-            }
-            edges {
-              cursor
-              node {
-                id
-                name
-                code
-                description
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        ...new Pageable<EquipmentFilters>(filters)
-          .setFirst(10)
-      }
-    })
-      .valueChanges
-      .pipe(
-        map((response) => {
-          return Page.fromData<EquipmentResponse>(response.data.equipment).getEdges().map(x => {
-            return {
-              id          : x.id,
-              name        : x.name,
-              code        : x.code,
-              description : x.description
-            } as Equipment;
-          });
-        })
-      );
+    return getAllEquipment(this.apollo, filters);
+  }
+
+  public getEquipmentById(equipmentId: string): Observable<Equipment> {
+    return getEquipmentById(this.apollo, equipmentId);
+  }
+
+  public createEquipment(equipment: Equipment): void {
+    createEquipment(this.apollo, equipment);
+  }
+
+  public async editEquipment(equipment: Equipment) {
+    editEquipment(this.apollo, equipment);
   }
 
   public queryMaterials(filters: MaterialsFilters): Observable<Material[]> {
@@ -142,14 +105,10 @@ export class InventoryApiService {
   }
 }
 
-export interface EquipmentFilters {
-  id: string | undefined;
-  code: string | undefined;
-  description: string | undefined;
-}
+
 
 export interface MaterialsFilters {
-  id: string | undefined;
-  code: string | undefined;
-  description: string | undefined;
+  id?: string | undefined;
+  code?: string | undefined;
+  description?: string | undefined;
 }

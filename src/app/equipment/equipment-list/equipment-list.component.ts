@@ -53,13 +53,13 @@ export class EquipmentListComponent {
 
   protected async viewEquipment(equipment: Equipment): Promise<void> {
     await this.router.navigateByUrl(
-      `equipment/details/${equipment.name.toLowerCase()}${equipment.code.toLowerCase()}`, { state: equipment }
+      `equipment/details/${equipment.name.toLowerCase()}${equipment.code.toLowerCase()}`, { state: { equipmentId: equipment.id } }
     );
   }
 
-  protected async editEquipment(row: Equipment): Promise<void> {
+  protected async editEquipment(equipment: Equipment): Promise<void> {
     await this.router.navigateByUrl(
-      `equipment/edit/${row.name.toLowerCase()}${row.code.toLowerCase()}`, { state: row }
+      `equipment/edit/${equipment.name.toLowerCase()}${equipment.code.toLowerCase()}`, { state: { equipmentId: equipment.id } }
     );
   }
 }
