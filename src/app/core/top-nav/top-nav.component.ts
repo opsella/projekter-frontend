@@ -23,21 +23,6 @@ export class TopNavComponent {
       path : "/inventory"
     },
     {
-      icon : "fa-sharp fa-solid fa-toolbox",
-      name : "Supplies",
-      path : "/supplies"
-    },
-    {
-      icon : "fa-sharp fa-solid fa-shapes",
-      name : "Materials",
-      path : "/materials"
-    },
-    {
-      icon : "fa-sharp fa-solid fa-truck-pickup",
-      name : "Equipment",
-      path : "/equipment"
-    },
-    {
       icon : "fa-sharp fa-solid fa-users",
       name : "Employees",
       path : "/employees"

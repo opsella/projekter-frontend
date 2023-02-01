@@ -2,8 +2,9 @@ import { Component } from "@angular/core";
 import { ProjectDataService } from "../project-data.service";
 import { map, Observable } from "rxjs";
 import { Project } from "../models/project";
-import { MatLegacyTableDataSource as MatTableDataSource } from "@angular/material/legacy-table";
 import { ActivatedRoute, Data } from "@angular/router";
+import { MatTableDataSource } from "@angular/material/table";
+import { ExpansionTableData } from "../../dynamic-expansion-table/expandable-data";
 
 @Component({
   selector    : "app-dashboard-page",
@@ -11,11 +12,11 @@ import { ActivatedRoute, Data } from "@angular/router";
   styleUrls   : ["./dashboard-page.component.scss"]
 })
 export class DashboardPageComponent  {
-  private projectsDataSource: MatTableDataSource<Project> = new MatTableDataSource<Project>([]);
-  public projectsDataSource$: Observable<MatTableDataSource<Project>> = this.activatedRoute.data
+  private projectsDataSource: MatTableDataSource<ExpansionTableData<Project>> = new MatTableDataSource<ExpansionTableData<Project>>([]);
+  public projectsDataSource$: Observable<MatTableDataSource<ExpansionTableData<Project>>> = this.activatedRoute.data
     .pipe(
-      map((data: Data) => data["projectsData"] as Project[]),
-      map((projects?: Project[]) => {
+      map((data: Data) => data["projectsData"] as ExpansionTableData<Project>[]),
+      map((projects?: ExpansionTableData<Project>[]) => {
         this.projectsDataSource.data = projects ?? [];
         return this.projectsDataSource;
       })

@@ -23,6 +23,7 @@ import { DynamicExpansionTableModule } from "../dynamic-expansion-table/dynamic-
 import { InventoryExpansionDetailComponent } from "./inventory-expansion-detail/inventory-expansion-detail.component";
 import { TestExpansionComponent } from "./test-expansion/test-expansion.component";
 import { InventorySelectorComponent } from './inventory-selector/inventory-selector.component';
+import { ExpansionDetailComponent } from './expansion-detail/expansion-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { InventorySelectorComponent } from './inventory-selector/inventory-selec
     InventoryExpansionDetailComponent,
     TestExpansionComponent,
     InventorySelectorComponent,
+    ExpansionDetailComponent,
   ],
   imports: [
     CommonModule,

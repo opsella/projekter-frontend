@@ -1,5 +1,3 @@
-<div>
-  <!--  these will emit events to update the table-->
-  <button>Equipment</button>
-  <button>Material</button>
-</div>
+<button *ngFor="let option of options" (click)="option.action()">
+  {{ option.title }}
+</button>

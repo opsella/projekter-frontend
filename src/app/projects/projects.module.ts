@@ -13,6 +13,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatTableModule } from "@angular/material/table";
+import { DynamicExpansionTableModule } from "../dynamic-expansion-table/dynamic-expansion-table.module";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MatTableModule } from "@angular/material/table";
     FormsModule,
     MatTableModule,
     MatIconModule,
-    DataListModule
+    DataListModule,
+    DynamicExpansionTableModule
   ]
 })
 export class ProjectsModule { }
