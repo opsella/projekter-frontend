@@ -10,7 +10,7 @@ import { Material } from "../../materials/models/material";
 import { InventoryDataService } from "../inventory-data.service";
 import { Store } from "@ngrx/store";
 import { selectEquipmentFromInventory } from "../../state/inventory/inventory.selectors";
-import { loadEquipment } from "../../state/inventory/inventory.actions";
+import { searchEquipment } from "../../state/inventory/inventory.actions";
 
 export interface InventoryOptions {
   title: string;
@@ -37,9 +37,7 @@ export class InventoryListComponent implements OnInit {
       action : () => this.updateTableData("Supplies")
     }
   ];
-  protected data$: Observable<Equipment[] | Material[]> | undefined;
-
-  protected equipment$: Observable<Equipment[]> = this.store.select(selectEquipmentFromInventory);
+  protected data$: Observable<Equipment[] | Material[]> | undefined = this.store.select(selectEquipmentFromInventory);
 
   constructor(
     private inventoryDataService: InventoryDataService,
@@ -49,7 +47,11 @@ export class InventoryListComponent implements OnInit {
 
   public async ngOnInit() {
     // await this.updateTableData("default");
-    this.store.dispatch(loadEquipment());
+    this.store.dispatch(searchEquipment({
+      query: {
+        description: "Placeat eius"
+      }
+    }));
   }
 
   protected async updateTableData(dataType: string): Promise<void> {

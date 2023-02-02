@@ -20,7 +20,7 @@ export const loadEquipment = createAction(
 
 export const searchEquipment = createAction(
   InventoryActions.searchEquipment,
-  props<{ query?: EquipmentFilters }>
+  props<{ query?: EquipmentFilters }>()
 );
 
 export const loadEquipmentSuccess = createAction(

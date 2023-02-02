@@ -2,7 +2,7 @@
   <app-inventory-selector [options]="inventoryOptions"></app-inventory-selector>
   <app-dynamic-expansion-table [data]="tempData"></app-dynamic-expansion-table>
 
-  <div *ngFor="let e of equipment$ | async">
+  <div *ngFor="let e of data$ | async">
     <p>{{ e?.description }}</p>
   </div>
 </app-page-wrapper>

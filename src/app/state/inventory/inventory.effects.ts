@@ -21,9 +21,7 @@ export class InventoryEffects {
     return this.actions$.pipe(
       ofType(searchEquipment),
       switchMap((action) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore - this should not be an error
-        return this.equipmentService.getEquipmentData(action.query ?? {})
+        return this.equipmentService.getEquipmentData(action?.query ?? {})
           .pipe(
             map(equipment => loadEquipmentSuccess({ payload: equipment })),
             catchError(() => EMPTY)

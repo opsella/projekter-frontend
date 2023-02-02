@@ -4,7 +4,7 @@ import * as InventoryActions from "./inventory.actions";
 
 export interface InventoryState {
   equipment: Equipment[];
-  error: string;
+  error?: string;
   status: "loading" | "success" | "error" | "pending";
 }
 
@@ -30,8 +30,6 @@ export const inventoryReducer = createReducer(
       status: "loading"
     };
   }),
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
   on(InventoryActions.loadEquipmentSuccess, (state, { payload }) => {
     return {
       ...state,
