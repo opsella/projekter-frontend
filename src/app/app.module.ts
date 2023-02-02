@@ -12,6 +12,10 @@ import { environment } from "../environments/environment";
 import { GraphQLModule } from "./graphql.module";
 import { ActiveTenantInterceptor } from "./core/active-tenant.interceptor";
 import { MatInputModule } from "@angular/material/input";
+import { StoreModule } from "@ngrx/store";
+import { equipmentReducer } from "../state/equipment/equipment.reducer";
+import { EffectsModule } from "@ngrx/effects";
+import { EquipmentEffects } from "../state/equipment/equipment.effects";
 
 @NgModule({
   declarations : [AppComponent],
@@ -26,6 +30,10 @@ import { MatInputModule } from "@angular/material/input";
     GraphQLModule,
     HttpClientModule,
     AuthModule.forRoot(environment.auth0),
+    StoreModule.forRoot({
+      equipment: equipmentReducer
+    }, {}),
+    EffectsModule.forRoot([EquipmentEffects]),
   ],
   providers: [
     {

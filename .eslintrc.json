@@ -51,11 +51,21 @@
             }
           }
         ],
-        "array-bracket-newline": ["error", { "minItems": 2 }],
-        "array-element-newline": ["error", {
-          "ArrayExpression": "consistent",
-          "ArrayPattern": { "minItems":  2 }
-        }],
+        "array-bracket-newline": [
+          "error",
+          {
+            "minItems": 2
+          }
+        ],
+        "array-element-newline": [
+          "error",
+          {
+            "ArrayExpression": "consistent",
+            "ArrayPattern": {
+              "minItems": 2
+            }
+          }
+        ],
         "object-curly-spacing": [
           "error",
           "always"
@@ -90,8 +100,7 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {
-      }
+      "rules": {}
     },
     {
       "files": [
@@ -112,6 +121,14 @@
           }
         ]
       }
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/all-requiring-type-checking"
+      ]
     }
   ]
 }
