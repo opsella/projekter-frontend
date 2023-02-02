@@ -14,7 +14,7 @@ export const initialState: InventoryState = {
   status    : "pending"
 };
 
-export const equipmentReducer = createReducer(
+export const inventoryReducer = createReducer(
   initialState,
   on(InventoryActions.addEquipment, (state, { equipment }) => {
     return {
@@ -24,4 +24,20 @@ export const equipmentReducer = createReducer(
       ]
     };
   }),
+  on(InventoryActions.loadEquipment, (state) => {
+    return {
+      ...state,
+      status: "loading"
+    };
+  }),
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  on(InventoryActions.loadEquipmentSuccess, (state, { payload }) => {
+    return {
+      ...state,
+      status    : "success",
+      equipment : [...payload],
+      error     : undefined
+    };
+  })
 );

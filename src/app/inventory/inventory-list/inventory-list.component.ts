@@ -8,6 +8,9 @@ import { Observable } from "rxjs";
 import { Equipment } from "../../equipment/models/equipment";
 import { Material } from "../../materials/models/material";
 import { InventoryDataService } from "../inventory-data.service";
+import { Store } from "@ngrx/store";
+import { selectEquipmentFromInventory } from "../../state/inventory/inventory.selectors";
+import { loadEquipment } from "../../state/inventory/inventory.actions";
 
 export interface InventoryOptions {
   title: string;
@@ -36,14 +39,17 @@ export class InventoryListComponent implements OnInit {
   ];
   protected data$: Observable<Equipment[] | Material[]> | undefined;
 
+  protected equipment$: Observable<Equipment[]> = this.store.select(selectEquipmentFromInventory);
 
   constructor(
-    private inventoryDataService: InventoryDataService
+    private inventoryDataService: InventoryDataService,
+    private readonly store: Store
   ) {
   }
 
   public async ngOnInit() {
-    await this.updateTableData("default");
+    // await this.updateTableData("default");
+    this.store.dispatch(loadEquipment());
   }
 
   protected async updateTableData(dataType: string): Promise<void> {
