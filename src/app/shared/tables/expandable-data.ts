@@ -12,7 +12,7 @@ export interface Action {
 }
 
 export interface ActionData {
-  actions: Action[];
+  actions?: Action[];
 }
 
 export interface ExpansionTableData<TDataType> extends ExpandableData<TDataType>, ActionData { }
@@ -23,13 +23,4 @@ export interface ExpandableComponent {
 
 export interface ExpansionContentData {
   data?: unknown;
-}
-
-
-
-export interface ExpansionTableData2 {
-  id: string;
-  code: string;
-  name: string;
-  description?: string;
 }

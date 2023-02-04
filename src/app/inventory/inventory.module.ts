@@ -17,6 +17,8 @@ import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { InventoryDetailsComponent } from "./inventory-details/inventory-details.component";
+import { EquipmentTableContentComponent } from './equipment-table-content/equipment-table-content.component';
+import { MaterialsTableContentComponent } from './materials-table-content/materials-table-content.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { InventoryDetailsComponent } from "./inventory-details/inventory-details
     TableDataSelectorComponent,
     ExpansionDetailComponent,
     InventoryDetailsComponent,
+    EquipmentTableContentComponent,
+    MaterialsTableContentComponent,
   ],
   imports: [
     CommonModule,

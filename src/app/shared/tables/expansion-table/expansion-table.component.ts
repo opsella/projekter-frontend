@@ -3,7 +3,7 @@ import { animate, state, style, transition, trigger } from "@angular/animations"
 import { CdkTable } from "@angular/cdk/table";
 import { Router } from "@angular/router";
 import { MatTableDataSource } from "@angular/material/table";
-import { ExpansionTableData2 } from "../expandable-data";
+import { ExpandableData } from "../expandable-data";
 
 @Component({
   selector    : "app-expansion-table",
@@ -16,10 +16,17 @@ import { ExpansionTableData2 } from "../expandable-data";
   ]),],
 })
 export class ExpansionTableComponent implements OnInit {
+  @Input() public set data(value: ExpandableData<any>[] | null) {
+    if (value !== null) {
+      this.dataSource.data = [ ...value ];
+    }
+    this.dataSource.data = [];
+  }
+  @ViewChild("table") public cdkTable!: CdkTable<ExpandableData<any>>;
+
   // So far as I can tell the ExpandableData<any> in this situation must be marked as type ANY as you cannot convert a type back into an unknown
   // If you know a way to do this please help me remove this any
-  @Input() public data: MatTableDataSource<ExpansionTableData2> = new MatTableDataSource<ExpansionTableData2>([]);
-  @ViewChild("table") public cdkTable!: CdkTable<ExpansionTableData2>;
+  protected readonly dataSource: MatTableDataSource<ExpandableData<any>> = new MatTableDataSource<ExpandableData<any>>([]);
 
   protected expandedElement: null | undefined;
   protected columnHeaders: string[] = [];
@@ -34,8 +41,10 @@ export class ExpansionTableComponent implements OnInit {
   ) {
   }
 
+
+
   public ngOnInit(): void {
-    this.columnHeaders = [...Object.keys(this.data)];
+    this.columnHeaders = [...Object.keys(this.dataSource.data[0].data)];
 
     this.columnHeadersWithActions = [
       ...this.columnHeaders,

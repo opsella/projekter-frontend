@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { InventoryApiService } from "../services/inventory-api.service";
+import { InventoryApiService, MaterialsFilters } from "../services/inventory-api.service";
 import { Observable } from "rxjs";
-import { Equipment } from "../equipment/models/equipment";
-import { Material } from "../materials/models/material";
 import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
+import { EquipmentFilters } from "../queries/equipment-queries";
+import { InventoryTypes, SupportedInventory } from "./inventory-list/inventory.store";
 
 @Injectable({
   providedIn: "root"
@@ -14,22 +14,19 @@ export class InventoryDataService {
   ) {
   }
 
-  public async inventoryTableQuery(dataType: string): Promise<Observable<Equipment[] | Material[]>> {
-    switch (dataType) {
-    case "Equipment":
-      return this.inventoryApiService.queryEquipment({});
-    case "Materials":
-      return this.inventoryApiService.queryMaterials({});
-    default:
-      return this.inventoryApiService.queryEquipment({});
-    }
-  }
+  private readonly SUPPORTED_INVENTORY_TYPES = {
+    equipment : "equipment",
+    materials : "materials"
+  };
 
-  public async getExpansionDetails(id: string | undefined, dataType: string | undefined) {
-    if (dataType === "Equipment") {
-      // return this.inventoryApiService.queryEquipmentExpansionDetails({});
-    } else if (dataType === "Materials") {
-      // return this.inventoryApiService.queryMaterialsExpansionDetails({});
+  public inventoryTableQuery(filters: InventoryFilters, type: InventoryTypes): Observable<SupportedInventory> {
+    switch (type) {
+    case this.SUPPORTED_INVENTORY_TYPES.equipment:
+      return this.inventoryApiService.queryEquipment(filters);
+    case this.SUPPORTED_INVENTORY_TYPES.materials:
+      return this.inventoryApiService.queryMaterials(filters);
+    default:
+      return this.inventoryApiService.queryEquipment(filters);
     }
   }
 
@@ -37,3 +34,5 @@ export class InventoryDataService {
     return this.inventoryApiService.getInventoryItemById(itemId);
   }
 }
+
+export type InventoryFilters = EquipmentFilters | MaterialsFilters;

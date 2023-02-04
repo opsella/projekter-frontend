@@ -1,0 +1,11 @@
+import { Component } from "@angular/core";
+import { ExpansionContentData } from "../../shared/tables/expandable-data";
+
+@Component({
+  selector    : "app-equipment-table-content",
+  templateUrl : "./equipment-table-content.component.html",
+  styleUrls   : ["./equipment-table-content.component.scss"]
+})
+export class EquipmentTableContentComponent implements ExpansionContentData {
+
+}
