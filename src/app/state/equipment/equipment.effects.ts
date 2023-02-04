@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, EMPTY, map, switchMap } from "rxjs";
 import { loadEquipment, loadEquipmentSuccess, searchEquipment } from "./equipment.actions";
-import { EquipmentDataService } from "../../../equipment/equipment-data.service";
+import { EquipmentDataService } from "../../equipment/equipment-data.service";
 
 @Injectable()
 export class EquipmentEffects {

@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
-import { Equipment } from "../../../equipment/models/equipment";
-import { EquipmentFilters } from "../../../queries/equipment-queries";
+import { Equipment } from "../../equipment/models/equipment";
+import { EquipmentFilters } from "../../queries/equipment-queries";
 
 export enum EquipmentActions {
   addEquipment = "[Inventory Page] Add Equipment",

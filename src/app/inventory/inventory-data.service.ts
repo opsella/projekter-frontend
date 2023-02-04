@@ -3,6 +3,7 @@ import { InventoryApiService } from "../services/inventory-api.service";
 import { Observable } from "rxjs";
 import { Equipment } from "../equipment/models/equipment";
 import { Material } from "../materials/models/material";
+import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
 
 @Injectable({
   providedIn: "root"
@@ -30,5 +31,9 @@ export class InventoryDataService {
     } else if (dataType === "Materials") {
       // return this.inventoryApiService.queryMaterialsExpansionDetails({});
     }
+  }
+
+  public getInventoryItemById(itemId: string): Observable<InventoryItem> {
+    return this.inventoryApiService.getInventoryItemById(itemId);
   }
 }

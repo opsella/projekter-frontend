@@ -58,6 +58,7 @@
           <app-expansion-table-content
             [data]="element"
           ></app-expansion-table-content>
+          <button (click)="viewItem(element.data)">Details</button>
         </div>
       </cdk-cell>
     </ng-container>

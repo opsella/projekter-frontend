@@ -2,9 +2,9 @@
   <app-table-data-selector
     [actions]="inventoryOptions"
   ></app-table-data-selector>
-  <app-expansion-table [data]="tempData"></app-expansion-table>
+  <app-expansion-table [data]="data$ | async"></app-expansion-table>
 
   <div *ngFor="let e of data$ | async">
-    <p>{{ e?.description }}</p>
+    <p>{{ e | json }}</p>
   </div>
 </app-page-wrapper>

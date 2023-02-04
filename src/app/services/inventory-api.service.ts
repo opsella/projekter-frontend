@@ -6,6 +6,8 @@ import { Material } from "../materials/models/material";
 import { EquipmentFilters, getAllEquipment, getEquipmentById } from "../queries/equipment-queries";
 import { Apollo, gql } from "apollo-angular";
 import { createEquipment, editEquipment } from "../queries/equipment-mutations";
+import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
+import { getInventoryItemById } from "../queries/inventory-queries";
 
 export interface EquipmentResponse {
   id: string;
@@ -29,6 +31,10 @@ export interface MaterialsResponse {
 export class InventoryApiService {
 
   constructor(private apollo: Apollo) {
+  }
+
+  public getInventoryItemById(itemId: string): Observable<InventoryItem> {
+    return getInventoryItemById(this.apollo, itemId);
   }
 
   public queryEquipment(filters: EquipmentFilters): Observable<Equipment[]> {

@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
 import { InventoryCategoryFormBuilderService } from "./inventory-category-form-builder.service";
 import { InventoryListComponent } from "./inventory-list/inventory-list.component";
-import { CdkTableModule } from "@angular/cdk/table";
 import { MatIconModule } from "@angular/material/icon";
 import { TableDataSelectorComponent } from "../shared/tables/table-data-selector/table-data-selector.component";
 import { ExpansionDetailComponent } from "./expansion-detail/expansion-detail.component";
@@ -17,12 +16,14 @@ import { MatCardModule } from "@angular/material/card";
 import { MatRadioModule } from "@angular/material/radio";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
+import { InventoryDetailsComponent } from "./inventory-details/inventory-details.component";
 
 @NgModule({
   declarations: [
     InventoryListComponent,
     TableDataSelectorComponent,
     ExpansionDetailComponent,
+    InventoryDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +39,6 @@ import { MatInputModule } from "@angular/material/input";
     MatTableModule,
     MatCardModule,
     SharedModule,
-    CdkTableModule,
     MatIconModule
   ],
   providers: [InventoryCategoryFormBuilderService]

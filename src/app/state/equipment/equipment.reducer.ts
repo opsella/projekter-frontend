@@ -1,4 +1,4 @@
-import { Equipment } from "../../../equipment/models/equipment";
+import { Equipment } from "../../equipment/models/equipment";
 import { createReducer, on } from "@ngrx/store";
 import * as EquipmentActions from "./equipment.actions";
 

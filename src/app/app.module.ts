@@ -14,8 +14,9 @@ import { ActiveTenantInterceptor } from "./core/active-tenant.interceptor";
 import { MatInputModule } from "@angular/material/input";
 import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
-import { EquipmentEffects } from "./state/inventory/equipment/equipment.effects";
-import { equipmentInventoryReducer } from "./state/inventory/equipment/equipment.reducer";
+import { EquipmentEffects } from "./state/equipment/equipment.effects";
+import { equipmentInventoryReducer } from "./state/equipment/equipment.reducer";
+import { inventoryItemsReducer } from "./state/all-inventory/all-inventory.reducer";
 
 @NgModule({
   declarations : [AppComponent],
@@ -31,7 +32,8 @@ import { equipmentInventoryReducer } from "./state/inventory/equipment/equipment
     HttpClientModule,
     AuthModule.forRoot(environment.auth0),
     StoreModule.forRoot({
-      equipmentInventory: equipmentInventoryReducer
+      equipment : equipmentInventoryReducer,
+      inventory : inventoryItemsReducer
     }, {}),
     EffectsModule.forRoot([EquipmentEffects]),
   ],
