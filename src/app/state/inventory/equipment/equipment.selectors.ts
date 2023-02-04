@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { InventoryState } from "./inventory.reducer";
+import { EquipmentState } from "./equipment.reducer";
 
 export const INVENTORY_KEY = "inventory";
 
-export const selectInventory = createFeatureSelector<InventoryState>(INVENTORY_KEY);
+export const selectInventory = createFeatureSelector<EquipmentState>(INVENTORY_KEY);
 
 export const selectEquipmentFromInventory = createSelector(
   selectInventory,

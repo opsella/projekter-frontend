@@ -1,11 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, EMPTY, map, switchMap } from "rxjs";
-import { loadEquipment, loadEquipmentSuccess, searchEquipment } from "./inventory.actions";
-import { EquipmentDataService } from "../../equipment/equipment-data.service";
+import { loadEquipment, loadEquipmentSuccess, searchEquipment } from "./equipment.actions";
+import { EquipmentDataService } from "../../../equipment/equipment-data.service";
 
 @Injectable()
-export class InventoryEffects {
+export class EquipmentEffects {
   public loadEquipment$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(loadEquipment),

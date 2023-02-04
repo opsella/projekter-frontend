@@ -1,8 +1,8 @@
 import { createAction, props } from "@ngrx/store";
-import { Equipment } from "../../equipment/models/equipment";
-import { EquipmentFilters } from "../../queries/equipment-queries";
+import { Equipment } from "../../../equipment/models/equipment";
+import { EquipmentFilters } from "../../../queries/equipment-queries";
 
-export enum InventoryActions {
+export enum EquipmentActions {
   addEquipment = "[Inventory Page] Add Equipment",
   loadEquipment = "[Inventory Page] Load Equipment",
   loadEquipmentSuccess = "[Equipment API] Load Success",
@@ -10,20 +10,20 @@ export enum InventoryActions {
 }
 
 export const addEquipment = createAction(
-  InventoryActions.addEquipment,
+  EquipmentActions.addEquipment,
   props<{ equipment: Equipment }>()
 );
 
 export const loadEquipment = createAction(
-  InventoryActions.loadEquipment
+  EquipmentActions.loadEquipment
 );
 
 export const searchEquipment = createAction(
-  InventoryActions.searchEquipment,
+  EquipmentActions.searchEquipment,
   props<{ query?: EquipmentFilters }>()
 );
 
 export const loadEquipmentSuccess = createAction(
-  InventoryActions.loadEquipmentSuccess,
+  EquipmentActions.loadEquipmentSuccess,
   props<{ payload: Equipment[] }>()
 );

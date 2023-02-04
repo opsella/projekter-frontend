@@ -9,8 +9,8 @@ import { Equipment } from "../../equipment/models/equipment";
 import { Material } from "../../materials/models/material";
 import { InventoryDataService } from "../inventory-data.service";
 import { Store } from "@ngrx/store";
-import { selectEquipmentFromInventory } from "../../state/inventory/inventory.selectors";
-import { searchEquipment } from "../../state/inventory/inventory.actions";
+import { selectEquipmentFromInventory } from "../../state/inventory/equipment/equipment.selectors";
+import { searchEquipment } from "../../state/inventory/equipment/equipment.actions";
 
 export interface InventoryOptions {
   title: string;

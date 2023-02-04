@@ -1,22 +1,22 @@
-import { Equipment } from "../../equipment/models/equipment";
+import { Equipment } from "../../../equipment/models/equipment";
 import { createReducer, on } from "@ngrx/store";
-import * as InventoryActions from "./inventory.actions";
+import * as EquipmentActions from "./equipment.actions";
 
-export interface InventoryState {
+export interface EquipmentState {
   equipment: Equipment[];
   error?: string;
   status: "loading" | "success" | "error" | "pending";
 }
 
-export const initialState: InventoryState = {
+export const initialState: EquipmentState = {
   equipment : [],
   error     : "",
   status    : "pending"
 };
 
-export const inventoryReducer = createReducer(
+export const equipmentInventoryReducer = createReducer(
   initialState,
-  on(InventoryActions.addEquipment, (state, { equipment }) => {
+  on(EquipmentActions.addEquipment, (state, { equipment }) => {
     return {
       ...state,
       equipment: [
@@ -24,13 +24,13 @@ export const inventoryReducer = createReducer(
       ]
     };
   }),
-  on(InventoryActions.loadEquipment, (state) => {
+  on(EquipmentActions.loadEquipment, (state) => {
     return {
       ...state,
       status: "loading"
     };
   }),
-  on(InventoryActions.loadEquipmentSuccess, (state, { payload }) => {
+  on(EquipmentActions.loadEquipmentSuccess, (state, { payload }) => {
     return {
       ...state,
       status    : "success",
