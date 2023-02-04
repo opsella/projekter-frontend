@@ -1,8 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { ExpansionTableData } from "../../dynamic-expansion-table/expandable-data";
-import { InventoryExpansionDetailComponent } from "../inventory-expansion-detail/inventory-expansion-detail.component";
-import { TestExpansionComponent } from "../test-expansion/test-expansion.component";
-import { InventoryData } from "../list/list.component";
 import { MatTableDataSource } from "@angular/material/table";
 import { Observable } from "rxjs";
 import { Equipment } from "../../equipment/models/equipment";
@@ -11,11 +7,9 @@ import { InventoryDataService } from "../inventory-data.service";
 import { Store } from "@ngrx/store";
 import { selectEquipmentFromInventory } from "../../state/inventory/equipment/equipment.selectors";
 import { searchEquipment } from "../../state/inventory/equipment/equipment.actions";
-
-export interface InventoryOptions {
-  title: string;
-  action: () => { };
-}
+import { ExpansionDetailComponent } from "../expansion-detail/expansion-detail.component";
+import { ExpansionTableData } from "../../shared/tables/expandable-data";
+import { TableDataSelectorActions } from "../../shared/tables/table-data-selector/table-data-selector-actions";
 
 @Component({
   selector    : "app-inventory-list",
@@ -23,7 +17,7 @@ export interface InventoryOptions {
   styleUrls   : ["./inventory-list.component.scss"]
 })
 export class InventoryListComponent implements OnInit {
-  public inventoryOptions: InventoryOptions[] = [
+  public inventoryOptions: TableDataSelectorActions[] = [
     {
       title  : "Equipment",
       action : () => this.updateTableData("Equipment")
@@ -62,7 +56,7 @@ export class InventoryListComponent implements OnInit {
     // Similar to the chunk of "tempData" below
   }
 
-  protected tempData: MatTableDataSource<ExpansionTableData<InventoryData>> = new MatTableDataSource<ExpansionTableData<InventoryData>>([
+  protected tempData: MatTableDataSource<ExpansionTableData<any>> = new MatTableDataSource<ExpansionTableData<any>>([
     {
       data: {
         name        : "Name: test    1",
@@ -84,7 +78,7 @@ export class InventoryListComponent implements OnInit {
           action  : () => {  }
         }
       ],
-      expansionComponent: InventoryExpansionDetailComponent
+      expansionComponent: ExpansionDetailComponent
       // notifications might be something to add as a component
     },
     {
@@ -108,7 +102,7 @@ export class InventoryListComponent implements OnInit {
           action  : () => { }
         }
       ],
-      expansionComponent: TestExpansionComponent
+      expansionComponent: ExpansionDetailComponent
     },
     {
       data: {
@@ -131,7 +125,7 @@ export class InventoryListComponent implements OnInit {
           action  : () => { }
         }
       ],
-      expansionComponent: InventoryExpansionDetailComponent
+      expansionComponent: ExpansionDetailComponent
     }
   ]);
 }

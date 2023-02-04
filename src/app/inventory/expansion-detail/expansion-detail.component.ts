@@ -8,13 +8,13 @@ import { InventoryDataService } from "../inventory-data.service";
 })
 export class ExpansionDetailComponent implements OnInit {
   @Input() public id?: string;
-  @Input() public dataType?: string;
+  @Input() public data: string | undefined;
 
   constructor(
     private inventoryDataService: InventoryDataService
   ) {
   }
   public async ngOnInit() {
-    await this.inventoryDataService.getExpansionDetails(this.id, this.dataType);
+    await this.inventoryDataService.getExpansionDetails(this.id, this.data);
   }
 }

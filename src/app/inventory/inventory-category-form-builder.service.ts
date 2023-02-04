@@ -5,7 +5,7 @@ import {
   InventoryExistingCategoryFormGroup,
   InventoryNewCategoryFormGroup
 } from "./inventory-category-form-group";
-import { onlyOneValidator } from "../shared/only-one.validator";
+import { onlyOneValidator } from "../shared/validators/only-one.validator";
 
 @Injectable()
 export class InventoryCategoryFormBuilderService {

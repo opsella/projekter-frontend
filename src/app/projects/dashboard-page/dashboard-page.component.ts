@@ -4,7 +4,7 @@ import { map, Observable } from "rxjs";
 import { Project } from "../models/project";
 import { ActivatedRoute, Data } from "@angular/router";
 import { MatTableDataSource } from "@angular/material/table";
-import { ExpansionTableData } from "../../dynamic-expansion-table/expandable-data";
+import { ExpansionTableData } from "../../shared/tables/expandable-data";
 
 @Component({
   selector    : "app-dashboard-page",

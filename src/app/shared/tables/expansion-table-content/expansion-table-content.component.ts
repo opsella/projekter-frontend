@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { ExpansionContentDirective } from "../expansion-content.directive";
-import { ExpandableData, ExpansionTableContentComponent } from "../expandable-data";
+import { ExpansionContentDirective } from "./expansion-content.directive";
+import { ExpandableData, ExpansionContentData } from "../expandable-data";
 
 @Component({
-  selector    : "app-expansion-content",
-  templateUrl : "./expansion-content.component.html",
-  styleUrls   : ["./expansion-content.component.scss"]
+  selector    : "app-expansion-table-content",
+  templateUrl : "./expansion-table-content.component.html",
+  styleUrls   : ["./expansion-table-content.component.scss"]
 })
-export class ExpansionContentComponent implements OnInit {
+export class ExpansionTableContentComponent implements OnInit {
   @Input() public data!: ExpandableData<unknown>;
   @ViewChild(ExpansionContentDirective, { static: true }) public expansionContent!: ExpansionContentDirective;
 
@@ -19,7 +19,7 @@ export class ExpansionContentComponent implements OnInit {
     const viewContainerRef = this.expansionContent.viewContainerRef;
     viewContainerRef.clear();
 
-    const componentRef = viewContainerRef.createComponent<ExpansionTableContentComponent>(this.data.expansionComponent);
+    const componentRef = viewContainerRef.createComponent<ExpansionContentData>(this.data.expansionComponent);
     componentRef.instance.data = this.data.data;
   }
 }

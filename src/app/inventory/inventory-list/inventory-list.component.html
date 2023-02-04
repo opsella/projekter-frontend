@@ -1,6 +1,8 @@
 <app-page-wrapper title="Inventory">
-  <app-inventory-selector [options]="inventoryOptions"></app-inventory-selector>
-  <app-dynamic-expansion-table [data]="tempData"></app-dynamic-expansion-table>
+  <app-table-data-selector
+    [actions]="inventoryOptions"
+  ></app-table-data-selector>
+  <app-expansion-table [data]="tempData"></app-expansion-table>
 
   <div *ngFor="let e of data$ | async">
     <p>{{ e?.description }}</p>

@@ -18,9 +18,9 @@ export interface ActionData {
 export interface ExpansionTableData<TDataType> extends ExpandableData<TDataType>, ActionData { }
 
 export interface ExpandableComponent {
-  expansionComponent: Type<ExpansionTableContentComponent>;
+  expansionComponent: Type<ExpansionContentData>;
 }
 
-export interface ExpansionTableContentComponent {
+export interface ExpansionContentData {
   data?: unknown;
 }

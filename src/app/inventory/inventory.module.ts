@@ -3,36 +3,25 @@ import { CommonModule } from "@angular/common";
 import { InventoryRoutingModule } from "./inventory-routing.module";
 import { MatStepperModule } from "@angular/material/stepper";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MatLegacyFormFieldModule as MatFormFieldModule } from "@angular/material/legacy-form-field";
-import { MatLegacyInputModule as MatInputModule } from "@angular/material/legacy-input";
-import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
-import { MatLegacyRadioModule as MatRadioModule } from "@angular/material/legacy-radio";
-import { MatLegacySelectModule as MatSelectModule } from "@angular/material/legacy-select";
-import { MatLegacyTableModule as MatTableModule } from "@angular/material/legacy-table";
-import { MatLegacyCardModule as MatCardModule } from "@angular/material/legacy-card";
 import { SharedModule } from "../shared/shared.module";
-import {
-  InventoryCategoryCreationFormComponent
-} from "./inventory-category-creation-form/inventory-category-creation-form.component";
 import { InventoryCategoryFormBuilderService } from "./inventory-category-form-builder.service";
 import { InventoryListComponent } from "./inventory-list/inventory-list.component";
-import { ListComponent } from "./list/list.component";
 import { CdkTableModule } from "@angular/cdk/table";
 import { MatIconModule } from "@angular/material/icon";
-import { DynamicExpansionTableModule } from "../dynamic-expansion-table/dynamic-expansion-table.module";
-import { InventoryExpansionDetailComponent } from "./inventory-expansion-detail/inventory-expansion-detail.component";
-import { TestExpansionComponent } from "./test-expansion/test-expansion.component";
-import { InventorySelectorComponent } from './inventory-selector/inventory-selector.component';
-import { ExpansionDetailComponent } from './expansion-detail/expansion-detail.component';
+import { TableDataSelectorComponent } from "../shared/tables/table-data-selector/table-data-selector.component";
+import { ExpansionDetailComponent } from "./expansion-detail/expansion-detail.component";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatTableModule } from "@angular/material/table";
+import { MatSelectModule } from "@angular/material/select";
+import { MatCardModule } from "@angular/material/card";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
   declarations: [
-    InventoryCategoryCreationFormComponent,
     InventoryListComponent,
-    ListComponent,
-    InventoryExpansionDetailComponent,
-    TestExpansionComponent,
-    InventorySelectorComponent,
+    TableDataSelectorComponent,
     ExpansionDetailComponent,
   ],
   imports: [
@@ -50,8 +39,7 @@ import { ExpansionDetailComponent } from './expansion-detail/expansion-detail.co
     MatCardModule,
     SharedModule,
     CdkTableModule,
-    MatIconModule,
-    DynamicExpansionTableModule
+    MatIconModule
   ],
   providers: [InventoryCategoryFormBuilderService]
 })

@@ -55,7 +55,9 @@
             element === expandedElement ? 'expanded' : 'collapsed'
           "
         >
-          <app-expansion-content [data]="element"></app-expansion-content>
+          <app-expansion-table-content
+            [data]="element"
+          ></app-expansion-table-content>
         </div>
       </cdk-cell>
     </ng-container>
