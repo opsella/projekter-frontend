@@ -18,7 +18,7 @@ import { ExpansionTableStore } from "../expansion-table.store";
   providers: [ExpansionTableStore]
 })
 export class ExpansionTableComponent {
-  @Input() public set data(data: ExpandableData<any>[]) {
+  @Input() public set data(data: ExpandableData<unknown>[]) {
     this.expansionTableStore.setTableData(data);
   }
 
@@ -26,7 +26,7 @@ export class ExpansionTableComponent {
     // this.expansionTableStore.setFilterOptions(filters);
   }
 
-  @ViewChild("table") public cdkTable!: CdkTable<ExpandableData<any>>;
+  @ViewChild("table") public cdkTable!: CdkTable<ExpandableData<unknown>>;
 
   protected expandedElement: null | undefined;
 
@@ -38,7 +38,7 @@ export class ExpansionTableComponent {
 
   public readonly vm$ = this.expansionTableStore.vm$;
 
-  protected async viewItem(item: { name: string; code: string; id: any }) {
+  protected async viewItem(item: { name: string; code: string; id: string }) {
     await this.router.navigateByUrl(
       `inventory/details/${item.name.toLowerCase()}`, { state: { itemId: item.id } }
     );

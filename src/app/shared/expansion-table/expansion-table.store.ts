@@ -2,9 +2,10 @@ import { ComponentStore } from "@ngrx/component-store";
 import { Injectable } from "@angular/core";
 import { ExpandableData } from "./expandable-data";
 import { TableFilterActions } from "./table-filters/table-filter-actions";
+import { MatTableDataSource } from "@angular/material/table";
 
 export interface ExpansionTableState {
-  tableData: ExpandableData<unknown>[];
+  tableData: MatTableDataSource<ExpandableData<unknown>>;
   filterOptions: TableFilterActions[];
   columnHeaders: string[];
   columnHeadersWithActions: string[];
@@ -15,7 +16,7 @@ export interface ExpansionTableState {
 export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
   constructor() {
     super({
-      tableData                : [] as ExpandableData<unknown>[],
+      tableData                : new MatTableDataSource<ExpandableData<unknown>>([]),
       filterOptions            : [] as TableFilterActions[],
       columnHeaders            : [],
       columnHeadersWithActions : []
@@ -26,9 +27,8 @@ export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
   public readonly setTableData = this.updater((state, data: ExpandableData<unknown>[]) => {
     const keys: string[] = [ ...Object.keys(data[0]?.data ?? {}) ];
 
-    return {
+    const newState = {
       ...state,
-      tableData                : data,
       columnHeaders            : keys,
       columnHeadersWithActions : [
         ...keys,
@@ -36,6 +36,9 @@ export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
         "expand"
       ]
     };
+    newState.tableData.data = data;
+
+    return newState;
   });
 
   // public readonly setFilterOptions = this.updater((state, filters: TableFilterActions[]) => ({
