@@ -13,21 +13,21 @@
       cdkColumnDef="{{ propertyName }}"
     >
       <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row" class="column">
+      <cdk-cell *cdkCellDef="let row" class="cell">
         {{ row.data[propertyName] }}
       </cdk-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="actions">
       <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row" class="column">
+      <cdk-cell *cdkCellDef="let row" class="cell">
         This should be there
       </cdk-cell>
     </ng-container>
 
     <ng-container cdkColumnDef="expand">
       <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
-      <cdk-cell *cdkCellDef="let element">
+      <cdk-cell *cdkCellDef="let element" class="cell cell-expand">
         <button
           mat-icon-button
           aria-label="expand row"
@@ -71,7 +71,7 @@
     ></cdk-header-row>
     <cdk-row
       *cdkRowDef="let element; columns: vm.columnHeadersWithActions"
-      class="example-element-row"
+      class="row"
       [class.example-expanded-row]="expandedElement === element"
       (click)="expandedElement = expandedElement === element ? null : element"
     ></cdk-row>
