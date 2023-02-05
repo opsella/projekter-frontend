@@ -4,7 +4,7 @@ import { CdkTable } from "@angular/cdk/table";
 import { Router } from "@angular/router";
 import { ExpandableData } from "../expandable-data";
 import { TableFilterActions } from "../table-filters/table-filter-actions";
-import { ExpansionTableStore } from "../expansion-table-state.store";
+import { ExpansionTableStore } from "../expansion-table.store";
 
 @Component({
   selector    : "app-expansion-table",
@@ -27,10 +27,6 @@ export class ExpansionTableComponent {
   }
 
   @ViewChild("table") public cdkTable!: CdkTable<ExpandableData<any>>;
-
-  // So far as I can tell the ExpandableData<any> in this situation must be marked as type ANY as you cannot convert a type back into an unknown
-  // If you know a way to do this please help me remove this any
-  // protected readonly dataSource: MatTableDataSource<ExpandableData<any>> = new MatTableDataSource<ExpandableData<any>>([]);
 
   protected expandedElement: null | undefined;
 

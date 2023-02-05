@@ -1,11 +1,10 @@
 import { ComponentStore } from "@ngrx/component-store";
 import { Injectable } from "@angular/core";
-import { TableFilterActions } from "./table-filters/table-filter-actions";
 import { ExpandableData } from "./expandable-data";
-import { MatTableDataSource } from "@angular/material/table";
+import { TableFilterActions } from "./table-filters/table-filter-actions";
 
 export interface ExpansionTableState {
-  tableData: ExpandableData<any>[];
+  tableData: ExpandableData<unknown>[];
   filterOptions: TableFilterActions[];
   columnHeaders: string[];
   columnHeadersWithActions: string[];
@@ -16,7 +15,7 @@ export interface ExpansionTableState {
 export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
   constructor() {
     super({
-      tableData                : [] as ExpandableData<any>[],
+      tableData                : [] as ExpandableData<unknown>[],
       filterOptions            : [] as TableFilterActions[],
       columnHeaders            : [],
       columnHeadersWithActions : []
@@ -24,16 +23,20 @@ export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
   }
 
   // Updaters
-  public readonly setTableData = this.updater((state, data: ExpandableData<any>[]) => ({
-    ...state,
-    tableData                : data,
-    columnHeaders            : [...Object.keys(data[0].data)] as string[],
-    columnHeadersWithActions : [
-      ...Object.keys(data[0].data),
-      "actions",
-      "expand"
-    ] as string[]
-  }));
+  public readonly setTableData = this.updater((state, data: ExpandableData<unknown>[]) => {
+    const keys: string[] = [ ...Object.keys(data[0]?.data ?? {}) ];
+
+    return {
+      ...state,
+      tableData                : data,
+      columnHeaders            : keys,
+      columnHeadersWithActions : [
+        ...keys,
+        "actions",
+        "expand"
+      ]
+    };
+  });
 
   // public readonly setFilterOptions = this.updater((state, filters: TableFilterActions[]) => ({
   //   ...state,
@@ -45,12 +48,11 @@ export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
   //   filter: filter
   // }));
 
-
   // Selectors
   public readonly vm$ = this.select(
     this.state$,
     (state) => ({
-      tableData                : state.tableData as unknown as MatTableDataSource<ExpandableData<any>>,
+      tableData                : state.tableData,
       filterOptions            : state.filterOptions,
       columnHeaders            : state.columnHeaders,
       columnHeadersWithActions : state.columnHeadersWithActions
