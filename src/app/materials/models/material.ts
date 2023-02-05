@@ -14,4 +14,8 @@ export class Material {
   public static fromMaterialResponse(response: MaterialsResponse) {
     return new Material(response.id, response.code, response.name, response.description, response.quantity, response.unit);
   }
+
+  public static isMaterial(value: unknown): value is Material {
+    return value instanceof Material;
+  }
 }

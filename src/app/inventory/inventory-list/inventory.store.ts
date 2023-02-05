@@ -80,8 +80,8 @@ export class InventoryListStore extends ComponentStore<InventoryState> {
               code        : data.code,
               name        : data.name,
               description : data?.description,
-              quantity    : this.isMaterial(data) ? data.quantity : null,
-              unit        : this.isMaterial(data) ? data.quantity : null,
+              quantity    : Material.isMaterial(data) ? data.quantity : null,
+              unit        : Material.isMaterial(data) ? data.quantity : null,
             },
             expansionComponent: this._expansionComponent(data),
           } as ExpansionTableData<InventoryListData>;
@@ -94,11 +94,6 @@ export class InventoryListStore extends ComponentStore<InventoryState> {
     inventory$ : this.selectTableData(),
     hasData$   : this.hasData$
   });
-
-  // TODO: This should probably be on the `Material
-  private isMaterial(value: Equipment | Material): value is Material {
-    return value instanceof Material;
-  }
 
   private _expansionComponent(data: Equipment | Material): Type<ExpansionContentData> {
     if (data instanceof Equipment) {
