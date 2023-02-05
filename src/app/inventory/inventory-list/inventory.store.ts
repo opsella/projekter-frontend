@@ -4,7 +4,7 @@ import { Equipment } from "../../equipment/models/equipment";
 import { Material } from "../../materials/models/material";
 import { catchError, EMPTY, Observable, switchMap, tap } from "rxjs";
 import { EquipmentDataService } from "../../equipment/equipment-data.service";
-import { ExpansionContentData, ExpansionTableData } from "../../shared/tables/expandable-data";
+import { ExpansionContentData, ExpansionTableData } from "../../shared/expansion-table/expandable-data";
 import { InventoryListData } from "./inventory-list.component";
 import { InventoryDataService, InventoryFilters } from "../inventory-data.service";
 import { EquipmentTableContentComponent } from "../equipment-table-content/equipment-table-content.component";
@@ -43,8 +43,11 @@ export class InventoryListStore extends ComponentStore<InventoryState> {
       switchMap(
         (filters) => this.inventoryDataService.inventoryTableQuery(filters.filters, filters.type).pipe(
           tap({
-            next  : (equipment) => this.setInventoryTableData(equipment),
-            error : () => EMPTY
+            next: (data) => {
+              this.setInventoryTableData(data);
+              this.setStatusSucceeded();
+            },
+            error: () => EMPTY
           }),
           catchError(() => EMPTY)
         )
@@ -56,6 +59,15 @@ export class InventoryListStore extends ComponentStore<InventoryState> {
     ...state,
     inventory: [ ...value ]
   }));
+
+  private readonly setStatusSucceeded = this.updater((state) => ({
+    ...state,
+    status: "succeeded"
+  }));
+
+  public readonly hasData$ = this.select(
+    ({ status }) => status === "succeeded"
+  );
 
   private selectTableData(): Observable<ExpansionTableData<InventoryListData>[]> {
     return this.select(
@@ -79,7 +91,8 @@ export class InventoryListStore extends ComponentStore<InventoryState> {
   }
 
   public readonly vm$ = this.select({
-    inventory$: this.selectTableData()
+    inventory$ : this.selectTableData(),
+    hasData$   : this.hasData$
   });
 
   // TODO: This should probably be on the `Material

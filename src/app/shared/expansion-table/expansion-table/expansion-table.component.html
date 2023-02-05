@@ -1,13 +1,15 @@
-<div>
+<div *ngIf="vm$ | async as vm">
+  <!--  <app-table-filters [filters]="vm.filterOptions"></app-table-filters>-->
+
   <cdk-table
-    [dataSource]="dataSource"
+    [dataSource]="vm.tableData"
     multiTemplateDataRows
     class="table"
     #table
     style="display: flex; flex-flow: column; width: 98%; border: solid 1px red"
   >
     <ng-container
-      *ngFor="let propertyName of columnHeaders"
+      *ngFor="let propertyName of vm.columnHeaders"
       cdkColumnDef="{{ propertyName }}"
     >
       <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
@@ -47,7 +49,7 @@
     <ng-container cdkColumnDef="expandedDetail">
       <cdk-cell
         *cdkCellDef="let element"
-        [attr.colspan]="columnHeadersWithActions"
+        [attr.colspan]="vm.columnHeadersWithActions"
       >
         <div
           class="example-element-detail"
@@ -64,11 +66,11 @@
     </ng-container>
 
     <cdk-header-row
-      *cdkHeaderRowDef="columnHeadersWithActions"
+      *cdkHeaderRowDef="vm.columnHeadersWithActions"
       class="mf-header"
     ></cdk-header-row>
     <cdk-row
-      *cdkRowDef="let element; columns: columnHeadersWithActions"
+      *cdkRowDef="let element; columns: vm.columnHeadersWithActions"
       class="example-element-row"
       [class.example-expanded-row]="expandedElement === element"
       (click)="expandedElement = expandedElement === element ? null : element"

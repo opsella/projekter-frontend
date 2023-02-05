@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ExpansionContentData } from "../../shared/tables/expandable-data";
+import { ExpansionContentData } from "../../shared/expansion-table/expandable-data";
 import { InventoryListData } from "../inventory-list/inventory-list.component";
 
 @Component({

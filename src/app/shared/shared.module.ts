@@ -5,11 +5,13 @@ import { RouterModule } from "@angular/router";
 import { PageWrapperComponent } from "./page-wrapper/page-wrapper.component";
 import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
-import { ExpansionTableComponent } from "./tables/expansion-table/expansion-table.component";
+import { ExpansionTableComponent } from "./expansion-table/expansion-table/expansion-table.component";
 import { CdkTableModule } from "@angular/cdk/table";
 import { MatIconModule } from "@angular/material/icon";
-import { ExpansionTableContentComponent } from "./tables/expansion-table-content/expansion-table-content.component";
-import { ExpansionContentDirective } from "./tables/expansion-table-content/expansion-content.directive";
+import {
+  ExpansionTableContentComponent
+} from "./expansion-table/expansion-table-content/expansion-table-content.component";
+import { ExpansionContentDirective } from "./expansion-table/expansion-table-content/expansion-content.directive";
 
 
 @NgModule({
@@ -26,7 +28,7 @@ import { ExpansionContentDirective } from "./tables/expansion-table-content/expa
     MatButtonModule,
     RouterModule,
     CdkTableModule,
-    MatIconModule
+    MatIconModule,
   ],
   exports: [
     DropdownAvatarComponent,

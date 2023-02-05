@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { TableDataSelectorComponent } from "./table-data-selector.component";
+import { TableFiltersComponent } from "./table-filters.component";
 
 describe("InventorySelectorComponent", () => {
-  let component: TableDataSelectorComponent;
-  let fixture: ComponentFixture<TableDataSelectorComponent>;
+  let component: TableFiltersComponent;
+  let fixture: ComponentFixture<TableFiltersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableDataSelectorComponent ]
+      declarations: [ TableFiltersComponent ]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(TableDataSelectorComponent);
+    fixture = TestBed.createComponent(TableFiltersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

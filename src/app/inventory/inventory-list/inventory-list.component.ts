@@ -1,8 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { map, Observable } from "rxjs";
 import { InventoryDataService } from "../inventory-data.service";
-import { TableDataSelectorActions } from "../../shared/tables/table-data-selector/table-data-selector-actions";
-import { ExpansionTableData } from "../../shared/tables/expandable-data";
+import { TableFilterActions } from "../../shared/expansion-table/table-filters/table-filter-actions";
 import { InventoryListStore } from "./inventory.store";
 
 export interface InventoryListData {
@@ -21,7 +19,7 @@ export interface InventoryListData {
   providers   : [InventoryListStore]
 })
 export class InventoryListComponent implements OnInit {
-  public inventoryOptions: TableDataSelectorActions[] = [
+  public inventoryOptions: TableFilterActions[] = [
     {
       title  : "Equipment",
       action : () => this.store.getInventoryTableData({ filters: {}, type: "equipment" })
@@ -32,8 +30,13 @@ export class InventoryListComponent implements OnInit {
     },
   ];
 
-  protected readonly data$: Observable<ExpansionTableData<InventoryListData>[]> = 
-    this.store.vm$.pipe(map(vm => vm.inventory$));
+  // protected readonly data$: Observable<ExpansionTableData<InventoryListData>[]> =
+  //   this.store.vm$.pipe(map(vm => {
+  //     console.log(" vm inventory ", vm.inventory$);
+  //     return vm.inventory$;
+  //   }));
+
+  public readonly vm$ = this.store.vm$;
 
   constructor(
     private readonly componentStore: InventoryListStore,
