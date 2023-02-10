@@ -6,7 +6,7 @@ import { MatTableDataSource } from "@angular/material/table";
 
 export interface ExpansionTableState {
   tableData: MatTableDataSource<ExpandableData<unknown>>;
-  filterOptions: TableFilterActions[];
+  filters: TableFilterActions[];
   columnHeaders: string[];
   columnHeadersWithActions: string[];
   // filter: string;
@@ -17,7 +17,7 @@ export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
   constructor() {
     super({
       tableData                : new MatTableDataSource<ExpandableData<unknown>>([]),
-      filterOptions            : [] as TableFilterActions[],
+      filters                  : [] as TableFilterActions[],
       columnHeaders            : [],
       columnHeadersWithActions : []
     });
@@ -41,22 +41,17 @@ export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
     return newState;
   });
 
-  // public readonly setFilterOptions = this.updater((state, filters: TableFilterActions[]) => ({
-  //   ...state,
-  //   filterOptions: filters
-  // }));
-
-  // public readonly setTableFilter = this.updater((state, filter: string) => ({
-  //   ...state,
-  //   filter: filter
-  // }));
+  public readonly setFilters = this.updater((state, filters: TableFilterActions[]) => ({
+    ...state,
+    filters: filters
+  }));
 
   // Selectors
   public readonly vm$ = this.select(
     this.state$,
     (state) => ({
       tableData                : state.tableData,
-      filterOptions            : state.filterOptions,
+      filters                  : state.filters,
       columnHeaders            : state.columnHeaders,
       columnHeadersWithActions : state.columnHeadersWithActions
     })

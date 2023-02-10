@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { InventoryDataService } from "../inventory-data.service";
-import { TableFilterActions } from "../../shared/expansion-table/table-filters/table-filter-actions";
-import { InventoryListStore } from "./inventory.store";
+import { InventoryListStore } from "./inventory-list.store";
 
 export interface InventoryListData {
   id: string;
@@ -19,33 +18,16 @@ export interface InventoryListData {
   providers   : [InventoryListStore]
 })
 export class InventoryListComponent implements OnInit {
-  public inventoryOptions: TableFilterActions[] = [
-    {
-      title  : "Equipment",
-      action : () => this.store.getInventoryTableData({ filters: {}, type: "equipment" })
-    },
-    {
-      title  : "Materials",
-      action : () => this.store.getInventoryTableData({ filters: {}, type: "materials" })
-    },
-  ];
-
-  // protected readonly data$: Observable<ExpansionTableData<InventoryListData>[]> =
-  //   this.store.vm$.pipe(map(vm => {
-  //     console.log(" vm inventory ", vm.inventory$);
-  //     return vm.inventory$;
-  //   }));
-
-  public readonly vm$ = this.store.vm$;
+  public readonly vm$ = this.inventoryListStore.vm$;
 
   constructor(
     private readonly componentStore: InventoryListStore,
     private inventoryDataService: InventoryDataService,
-    private readonly store: InventoryListStore
+    private readonly inventoryListStore: InventoryListStore
   ) {
   }
 
   public ngOnInit() {
-    this.store.getInventoryTableData({ filters: {}, type: "equipment" });
+    this.inventoryListStore.getInventoryTableData({ filters: {}, type: "equipment" });
   }
 }

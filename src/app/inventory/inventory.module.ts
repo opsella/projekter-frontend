@@ -7,7 +7,6 @@ import { SharedModule } from "../shared/shared.module";
 import { InventoryCategoryFormBuilderService } from "./inventory-category-form-builder.service";
 import { InventoryListComponent } from "./inventory-list/inventory-list.component";
 import { MatIconModule } from "@angular/material/icon";
-import { TableFiltersComponent } from "../shared/expansion-table/table-filters/table-filters.component";
 import { ExpansionDetailComponent } from "./expansion-detail/expansion-detail.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatTableModule } from "@angular/material/table";
@@ -23,7 +22,6 @@ import { MaterialsTableContentComponent } from "./materials-table-content/materi
 @NgModule({
   declarations: [
     InventoryListComponent,
-    TableFiltersComponent,
     ExpansionDetailComponent,
     InventoryDetailsComponent,
     EquipmentTableContentComponent,
@@ -45,8 +43,7 @@ import { MaterialsTableContentComponent } from "./materials-table-content/materi
     SharedModule,
     MatIconModule
   ],
-  exports   : [TableFiltersComponent],
-  providers : [InventoryCategoryFormBuilderService]
+  providers: [InventoryCategoryFormBuilderService]
 })
 export class InventoryModule {
 }

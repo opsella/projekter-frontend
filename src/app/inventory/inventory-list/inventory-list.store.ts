@@ -10,9 +10,11 @@ import { InventoryDataService, InventoryFilters } from "../inventory-data.servic
 import { EquipmentTableContentComponent } from "../equipment-table-content/equipment-table-content.component";
 import { MaterialsTableContentComponent } from "../materials-table-content/materials-table-content.component";
 import { UnreachableException } from "../../shared/exceptions/unreachable-exception";
+import { TableFilterActions } from "../../shared/expansion-table/table-filters/table-filter-actions";
 
-export interface InventoryState {
+export interface InventoryListState {
   inventory: Equipment[] | Material[];
+  tableFilters: TableFilterActions[];
   status: "pending" | "loading" | "succeeded" | "failed";
 }
 
@@ -20,14 +22,24 @@ export type SupportedInventory = Equipment[] | Material[];
 export type InventoryTypes = "equipment" | "materials";
 
 @Injectable()
-export class InventoryListStore extends ComponentStore<InventoryState> {
+export class InventoryListStore extends ComponentStore<InventoryListState> {
   constructor(
     private equipmentService: EquipmentDataService,
     private inventoryDataService: InventoryDataService,
   ) {
     super({
-      inventory : [] as SupportedInventory,
-      status    : "pending"
+      inventory    : [] as SupportedInventory,
+      tableFilters : [
+        {
+          title  : "Equipment",
+          action : () => this.getInventoryTableData({ filters: {}, type: "equipment" })
+        },
+        {
+          title  : "Materials",
+          action : () => this.getInventoryTableData({ filters: {}, type: "materials" })
+        },
+      ],
+      status: "pending"
     });
   }
 
@@ -65,7 +77,10 @@ export class InventoryListStore extends ComponentStore<InventoryState> {
     status: "succeeded"
   }));
 
-  public readonly hasData$ = this.select(
+  private readonly tableFilters$ = this.select(
+    ({ tableFilters }) => tableFilters
+  );
+  private readonly hasData$ = this.select(
     ({ status }) => status === "succeeded"
   );
 
@@ -91,8 +106,9 @@ export class InventoryListStore extends ComponentStore<InventoryState> {
   }
 
   public readonly vm$ = this.select({
-    inventory$ : this.selectTableData(),
-    hasData$   : this.hasData$
+    inventory$    : this.selectTableData(),
+    hasData$      : this.hasData$,
+    tableFilters$ : this.tableFilters$
   });
 
   private _expansionComponent(data: Equipment | Material): Type<ExpansionContentData> {

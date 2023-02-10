@@ -12,6 +12,7 @@ import {
   ExpansionTableContentComponent
 } from "./expansion-table/expansion-table-content/expansion-table-content.component";
 import { ExpansionContentDirective } from "./expansion-table/expansion-table-content/expansion-content.directive";
+import { TableFiltersComponent } from "./expansion-table/table-filters/table-filters.component";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ExpansionContentDirective } from "./expansion-table/expansion-table-con
     PageWrapperComponent,
     ExpansionTableComponent,
     ExpansionContentDirective,
-    ExpansionTableContentComponent
+    ExpansionTableContentComponent,
+    TableFiltersComponent
   ],
   imports: [
     CommonModule,

@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
+import { Observable } from "rxjs";
 import { Equipment } from "../equipment/models/equipment";
-import { Page, Pageable } from "../shared/page";
 import { Material } from "../materials/models/material";
 import { EquipmentFilters, getAllEquipment, getEquipmentById } from "../queries/equipment-queries";
-import { Apollo, gql } from "apollo-angular";
+import { Apollo } from "apollo-angular";
 import { createEquipment, editEquipment } from "../queries/equipment-mutations";
 import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
 import { getInventoryItemById } from "../queries/inventory-queries";
+import { getAllMaterials, MaterialsFilters } from "../queries/materials-queries";
 
 export interface EquipmentResponse {
   id: string;
@@ -41,6 +41,10 @@ export class InventoryApiService {
     return getAllEquipment(this.apollo, filters);
   }
 
+  public queryMaterials(filters: MaterialsFilters): Observable<Material[]> {
+    return getAllMaterials(this.apollo, filters);
+  }
+
   public getEquipmentById(equipmentId: string): Observable<Equipment> {
     return getEquipmentById(this.apollo, equipmentId);
   }
@@ -52,69 +56,4 @@ export class InventoryApiService {
   public async editEquipment(equipment: Equipment) {
     editEquipment(this.apollo, equipment);
   }
-
-  public queryMaterials(filters: MaterialsFilters): Observable<Material[]> {
-    return this.apollo.watchQuery<{
-      materials: Page<Material>;
-    }>({
-      query: gql`
-        query SearchAvailableMaterials($first: Int, $last: Int, $after: String, $before: String, $code: String, $description: String, $id: UUID) {
-          materials(
-            first: $first
-            last: $last
-            after: $after
-            before: $before
-            input: {
-              code: $code
-              descriptionContains: $description
-              materialId: $id
-            }
-          ) {
-            pageInfo {
-              startCursor
-              endCursor
-              hasNextPage
-              hasPreviousPage
-            }
-            edges {
-              cursor
-              node {
-                id
-                name
-                code
-                description
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        ...new Pageable<MaterialsFilters>(filters)
-          .setFirst(10)
-      }
-    })
-      .valueChanges
-      .pipe(
-        map((response) => {
-          return Page.fromData<MaterialsResponse>(response.data.materials).getEdges().map(x => {
-            return {
-              id          : x.id,
-              name        : x.name,
-              code        : x.code,
-              quantity    : x.quantity,
-              unit        : x.unit,
-              description : x.description
-            } as Material;
-          });
-        })
-      );
-  }
-}
-
-
-
-export interface MaterialsFilters {
-  id?: string | undefined;
-  code?: string | undefined;
-  description?: string | undefined;
 }

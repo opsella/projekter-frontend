@@ -23,7 +23,7 @@ export class ExpansionTableComponent {
   }
 
   @Input() public set filters(filters: TableFilterActions[]) {
-    // this.expansionTableStore.setFilterOptions(filters);
+    this.expansionTableStore.setFilters(filters);
   }
 
   @ViewChild("table") public cdkTable!: CdkTable<ExpandableData<unknown>>;
@@ -38,9 +38,15 @@ export class ExpansionTableComponent {
 
   public readonly vm$ = this.expansionTableStore.vm$;
 
-  protected async viewItem(item: { name: string; code: string; id: string }) {
+  protected async viewItem(row: any) {
     await this.router.navigateByUrl(
-      `inventory/details/${item.name.toLowerCase()}`, { state: { itemId: item.id } }
+      `inventory/details/${row.data.name.toLowerCase()}`, { state: { itemId: row.data.id } }
     );
+  }
+
+  protected async editItem(row: any) {
+    // await this.router.navigateByUrl(
+    //   `inventory/edit/${row.data.name.toLowerCase()}`, { state: { itemId: row.data.id } }
+    // );
   }
 }

@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
-import { InventoryApiService, MaterialsFilters } from "../services/inventory-api.service";
+import { InventoryApiService } from "../services/inventory-api.service";
 import { Observable } from "rxjs";
 import { Material } from "./models/material";
+import { MaterialsFilters } from "../queries/materials-queries";
 
 @Injectable({
   providedIn: "root"

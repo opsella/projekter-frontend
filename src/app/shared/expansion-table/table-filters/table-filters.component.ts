@@ -7,8 +7,5 @@ import { TableFilterActions } from "./table-filter-actions";
   styleUrls   : ["./table-filters.component.scss"]
 })
 export class TableFiltersComponent {
-  @Input() public actions: TableFilterActions[] = [];
-
-  @Input() public filters: [] = [];
-
+  @Input() public filters: TableFilterActions[] = [];
 }

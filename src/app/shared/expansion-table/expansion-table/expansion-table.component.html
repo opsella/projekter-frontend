@@ -1,5 +1,5 @@
 <div *ngIf="vm$ | async as vm">
-  <!--  <app-table-filters [filters]="vm.filterOptions"></app-table-filters>-->
+  <app-table-filters [filters]="vm.filters"></app-table-filters>
 
   <cdk-table
     [dataSource]="vm.tableData"
@@ -21,7 +21,10 @@
     <ng-container cdkColumnDef="actions">
       <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
       <cdk-cell *cdkCellDef="let row" class="cell">
-        This should be there
+        <button (click)="viewItem(row); $event.stopPropagation()">
+          Details
+        </button>
+        <button (click)="editItem(row); $event.stopPropagation()">Edit</button>
       </cdk-cell>
     </ng-container>
 
@@ -60,7 +63,6 @@
           <app-expansion-table-content
             [data]="element"
           ></app-expansion-table-content>
-          <button (click)="viewItem(element.data)">Details</button>
         </div>
       </cdk-cell>
     </ng-container>

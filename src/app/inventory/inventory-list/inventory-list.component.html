@@ -1,12 +1,9 @@
 <app-page-wrapper title="Inventory">
-  <!--  <app-table-data-selector-->
-  <!--    [actions]="inventoryOptions"-->
-  <!--  ></app-table-data-selector>-->
   <div *ngIf="vm$ | async as vm">
     <app-expansion-table
       *ngIf="vm.hasData$"
       [data]="vm.inventory$"
-      [filters]="inventoryOptions"
+      [filters]="vm.tableFilters$"
     ></app-expansion-table>
   </div>
 </app-page-wrapper>
