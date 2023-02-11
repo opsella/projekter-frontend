@@ -39,6 +39,7 @@ export class ExpansionTableComponent {
   public readonly vm$ = this.expansionTableStore.vm$;
 
   protected async viewItem(row: any) {
+    // Might be able to leverage router state to know what edit page to go to
     await this.router.navigateByUrl(
       `inventory/details/${row.data.name.toLowerCase()}`, { state: { itemId: row.data.id } }
     );

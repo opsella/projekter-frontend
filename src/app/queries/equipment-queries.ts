@@ -1,5 +1,5 @@
 import { Page, Pageable } from "../shared/page";
-import { Equipment } from "../equipment/models/equipment";
+import { Equipment } from "../models/equipment";
 import { map, Observable } from "rxjs";
 import { EquipmentResponse } from "../services/inventory-api.service";
 import { Apollo, gql } from "apollo-angular";

@@ -1,6 +1,6 @@
 import { createAction, props } from "@ngrx/store";
-import { Equipment } from "../../equipment/models/equipment";
-import { Material } from "../../materials/models/material";
+import { Equipment } from "../../models/equipment";
+import { Material } from "../../models/material";
 
 export enum InventoryActions {
   loadInventoryItemDetails = "[Inventory Details] Get Inventory Item By ID",

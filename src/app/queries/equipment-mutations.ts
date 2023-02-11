@@ -1,5 +1,5 @@
 import { Apollo, gql } from "apollo-angular";
-import { Equipment } from "../equipment/models/equipment";
+import { Equipment } from "../models/equipment";
 
 export function createEquipment(apollo: Apollo, equipment: Equipment): void {
   apollo.mutate<{

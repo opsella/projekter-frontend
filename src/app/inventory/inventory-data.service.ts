@@ -5,6 +5,8 @@ import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
 import { EquipmentFilters } from "../queries/equipment-queries";
 import { InventoryTypes, SupportedInventory } from "./inventory-list/inventory-list.store";
 import { MaterialsFilters } from "../queries/materials-queries";
+import { Equipment } from "../models/equipment";
+import { Material } from "../models/material";
 
 @Injectable({
   providedIn: "root"
@@ -29,6 +31,10 @@ export class InventoryDataService {
     default:
       return this.inventoryApiService.queryEquipment(filters);
     }
+  }
+
+  public inventoryDetailsQuery(inventoryId: string): Observable<Equipment | Material> {
+    return this.inventoryApiService.getInventoryDetailsById(inventoryId);
   }
 
   public getInventoryItemById(itemId: string): Observable<InventoryItem> {

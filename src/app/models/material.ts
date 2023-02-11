@@ -1,4 +1,4 @@
-import { MaterialsResponse } from "../../services/inventory-api.service";
+import { MaterialsResponse } from "../services/inventory-api.service";
 
 export class Material {
   constructor(

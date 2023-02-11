@@ -1,24 +1,30 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { Store } from "@ngrx/store";
-import { loadInventoryItemDetails } from "../../state/all-inventory/all-inventory.actions";
-import { Observable } from "rxjs";
-import { selectInventoryItemDetails } from "../../state/all-inventory/all-inventory.selectors";
+import { InventoryDetailsStore } from "./inventory-details.store";
+import { Material } from "../../models/material";
+import { Equipment } from "../../models/equipment";
 
 @Component({
   selector    : "app-inventory-view",
   templateUrl : "./inventory-details.component.html",
-  styleUrls   : ["./inventory-details.component.scss"]
+  styleUrls   : ["./inventory-details.component.scss"],
+  providers   : [InventoryDetailsStore]
 })
 export class InventoryDetailsComponent {
-  protected inventoryItem$: Observable<any> | undefined = this.store.select(selectInventoryItemDetails);
+  public readonly vm$ = this.inventoryDetailsStore.vm$;
 
   constructor(
     private router: Router,
-    private readonly store: Store
+    private readonly inventoryDetailsStore: InventoryDetailsStore
   ) {
-    this.store.dispatch(loadInventoryItemDetails({
-      itemId: this.router.getCurrentNavigation()?.extras.state?.["itemId"]
-    }));
+    this.inventoryDetailsStore.getInventoryDetails(this.router.getCurrentNavigation()?.extras.state?.["itemId"]);
+  }
+
+  protected isMaterial(inventoryDetails: Equipment | Material): boolean {
+    return Material.isMaterial(inventoryDetails);
+  }
+
+  protected isEquipment(inventoryDetails: Equipment | Material): boolean {
+    return Equipment.isEquipment(inventoryDetails);
   }
 }

@@ -1,4 +1,4 @@
-import { EquipmentResponse } from "../../services/inventory-api.service";
+import { EquipmentResponse } from "../services/inventory-api.service";
 
 export class Equipment {
   constructor(
@@ -11,5 +11,9 @@ export class Equipment {
 
   public static fromEquipmentResponse(response: EquipmentResponse) {
     return new Equipment(response.id, response.code, response.name, response.description);
+  }
+
+  public static isEquipment(value: unknown): value is Equipment {
+    return value instanceof Equipment;
   }
 }

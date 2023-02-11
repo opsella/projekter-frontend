@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { Equipment } from "../../equipment/models/equipment";
+import { Equipment } from "../../models/equipment";
 import { EquipmentFilters } from "../../queries/equipment-queries";
 
 export enum EquipmentActions {

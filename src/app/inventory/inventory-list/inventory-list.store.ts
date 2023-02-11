@@ -1,9 +1,8 @@
 import { ComponentStore } from "@ngrx/component-store";
 import { Injectable, Type } from "@angular/core";
-import { Equipment } from "../../equipment/models/equipment";
-import { Material } from "../../materials/models/material";
+import { Equipment } from "../../models/equipment";
+import { Material } from "../../models/material";
 import { catchError, EMPTY, Observable, switchMap, tap } from "rxjs";
-import { EquipmentDataService } from "../../equipment/equipment-data.service";
 import { ExpansionContentData, ExpansionTableData } from "../../shared/expansion-table/expandable-data";
 import { InventoryListData } from "./inventory-list.component";
 import { InventoryDataService, InventoryFilters } from "../inventory-data.service";
@@ -24,7 +23,6 @@ export type InventoryTypes = "equipment" | "materials";
 @Injectable()
 export class InventoryListStore extends ComponentStore<InventoryListState> {
   constructor(
-    private equipmentService: EquipmentDataService,
     private inventoryDataService: InventoryDataService,
   ) {
     super({

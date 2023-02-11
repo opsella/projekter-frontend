@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Equipment } from "../equipment/models/equipment";
-import { Material } from "../materials/models/material";
+import { Equipment } from "../models/equipment";
+import { Material } from "../models/material";
 import { EquipmentFilters, getAllEquipment, getEquipmentById } from "../queries/equipment-queries";
 import { Apollo } from "apollo-angular";
 import { createEquipment, editEquipment } from "../queries/equipment-mutations";
 import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
 import { getInventoryItemById } from "../queries/inventory-queries";
 import { getAllMaterials, MaterialsFilters } from "../queries/materials-queries";
+import { getInventoryDetailsById } from "../queries/inventory-details";
 
 export interface EquipmentResponse {
   id: string;
@@ -35,6 +36,14 @@ export class InventoryApiService {
 
   public getInventoryItemById(itemId: string): Observable<InventoryItem> {
     return getInventoryItemById(this.apollo, itemId);
+  }
+
+  public getInventoryDetailsById(inventoryId: string): Observable<InventoryItem> {
+    // This might return something different than 'InventoryItem'. If we build out all
+    // the data that we want in the endpoint, we can build interfaces to match those.
+    // Ideally, this would return everything needed for a details page in some digestable
+    // format. We can discuss this more.
+    return getInventoryDetailsById(this.apollo, inventoryId);
   }
 
   public queryEquipment(filters: EquipmentFilters): Observable<Equipment[]> {

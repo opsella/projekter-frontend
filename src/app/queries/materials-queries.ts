@@ -1,5 +1,5 @@
 import { map, Observable } from "rxjs";
-import { Material } from "../materials/models/material";
+import { Material } from "../models/material";
 import { Page, Pageable } from "../shared/page";
 import { Apollo, gql } from "apollo-angular";
 import { MaterialsResponse } from "../services/inventory-api.service";

@@ -18,6 +18,8 @@ import { MatInputModule } from "@angular/material/input";
 import { InventoryDetailsComponent } from "./inventory-details/inventory-details.component";
 import { EquipmentTableContentComponent } from "./equipment-table-content/equipment-table-content.component";
 import { MaterialsTableContentComponent } from "./materials-table-content/materials-table-content.component";
+import { EquipimentDetailsComponent } from './equipiment-details/equipiment-details.component';
+import { MaterialDetailsComponent } from './material-details/material-details.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { MaterialsTableContentComponent } from "./materials-table-content/materi
     InventoryDetailsComponent,
     EquipmentTableContentComponent,
     MaterialsTableContentComponent,
+    EquipimentDetailsComponent,
+    MaterialDetailsComponent,
   ],
   imports: [
     CommonModule,
