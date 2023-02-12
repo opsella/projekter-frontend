@@ -3,11 +3,11 @@
     This area could be for "Cards" displaying analytics (# of active projects,
     clocked in employees, etc).
   </section>
-  <template *ngIf="vm$ | async as vm">
+  <div *ngIf="vm$ | async as vm">
     <app-expansion-table
       *ngIf="vm.hasData$"
       [data]="vm.projects$"
       [filters]="vm.tableFilters$"
     ></app-expansion-table>
-  </template>
+  </div>
 </app-page-wrapper>

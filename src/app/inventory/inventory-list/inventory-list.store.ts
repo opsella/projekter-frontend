@@ -110,6 +110,7 @@ export class InventoryListStore extends ComponentStore<InventoryListState> {
   });
 
   private _expansionComponent(data: Equipment | Material): Type<ExpansionContentData> {
+    console.log("wtf ", data);
     if (data instanceof Equipment) {
       return EquipmentTableContentComponent;
     } else if (data instanceof Material) {
