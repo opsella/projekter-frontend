@@ -13,11 +13,13 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatButtonModule } from "@angular/material/button";
 import { MatInputModule } from "@angular/material/input";
 import { MatTableModule } from "@angular/material/table";
+import { ProjectTableContentComponent } from "./project-table-content/project-table-content.component";
 
 @NgModule({
   declarations: [
     DashboardPageComponent,
     ProjectDataListComponent,
+    ProjectTableContentComponent,
   ],
   imports: [
     CommonModule,

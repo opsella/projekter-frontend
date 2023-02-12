@@ -1,9 +1,9 @@
 <app-page-wrapper title="Inventory">
-  <div *ngIf="vm$ | async as vm">
+  <template *ngIf="vm$ | async as vm">
     <app-expansion-table
       *ngIf="vm.hasData$"
       [data]="vm.inventory$"
       [filters]="vm.tableFilters$"
     ></app-expansion-table>
-  </div>
+  </template>
 </app-page-wrapper>

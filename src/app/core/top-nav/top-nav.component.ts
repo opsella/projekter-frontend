@@ -24,8 +24,8 @@ export class TopNavComponent {
     },
     {
       icon : "fa-sharp fa-solid fa-users",
-      name : "Employees",
-      path : "/employees"
+      name : "Team",
+      path : "/team"
     },
     {
       icon : "fa-sharp fa-solid fa-copy",

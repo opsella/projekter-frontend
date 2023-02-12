@@ -1,29 +1,30 @@
-import { Component } from "@angular/core";
-import { ProjectDataService } from "../project-data.service";
-import { map, Observable } from "rxjs";
-import { Project } from "../models/project";
-import { ActivatedRoute, Data } from "@angular/router";
-import { MatTableDataSource } from "@angular/material/table";
-import { ExpansionTableData } from "../../shared/expansion-table/expandable-data";
+import { Component, OnInit } from "@angular/core";
+import { InventoryDataService } from "../../inventory/inventory-data.service";
+import { ProjectsDashboardStore } from "./projects-dashboard.store";
+
+export interface ProjectTableData {
+  id: string;
+  name: string;
+  code: string;
+  description?: string;
+}
 
 @Component({
   selector    : "app-dashboard-page",
   templateUrl : "./dashboard-page.component.html",
-  styleUrls   : ["./dashboard-page.component.scss"]
+  styleUrls   : ["./dashboard-page.component.scss"],
+  providers   : [ProjectsDashboardStore]
 })
-export class DashboardPageComponent  {
-  private projectsDataSource: MatTableDataSource<ExpansionTableData<Project>> = new MatTableDataSource<ExpansionTableData<Project>>([]);
-  public projectsDataSource$: Observable<MatTableDataSource<ExpansionTableData<Project>>> = this.activatedRoute.data
-    .pipe(
-      map((data: Data) => data["projectsData"] as ExpansionTableData<Project>[]),
-      map((projects?: ExpansionTableData<Project>[]) => {
-        this.projectsDataSource.data = projects ?? [];
-        return this.projectsDataSource;
-      })
-    );
+export class DashboardPageComponent implements OnInit {
+  public readonly vm$ = this.projectsDashboardStore.vm$;
 
   constructor(
-    private projectDataService: ProjectDataService,
-    private activatedRoute: ActivatedRoute
-  ) { }
+    private inventoryDataService: InventoryDataService,
+    private readonly projectsDashboardStore: ProjectsDashboardStore
+  ) {
+  }
+
+  public ngOnInit() {
+    this.projectsDashboardStore.getProjectsTableData({ filters: {} });
+  }
 }

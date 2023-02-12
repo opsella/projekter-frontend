@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { ArrayDataSource, DataSource } from "@angular/cdk/collections";
-import { Project } from "../models/project";
+import { Project } from "../../models/project";
 
 @Component({
   selector    : "app-project-data-list",
