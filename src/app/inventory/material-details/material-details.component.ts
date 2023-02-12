@@ -6,5 +6,5 @@ import { Component, Input } from "@angular/core";
   styleUrls   : ["./material-details.component.scss"]
 })
 export class MaterialDetailsComponent {
-  @Input() private details: any;
+  @Input() public details: any;
 }

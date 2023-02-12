@@ -20,11 +20,11 @@ export class InventoryDetailsComponent {
     this.inventoryDetailsStore.getInventoryDetails(this.router.getCurrentNavigation()?.extras.state?.["itemId"]);
   }
 
-  protected isMaterial(inventoryDetails: Equipment | Material): boolean {
+  protected isMaterial(inventoryDetails: Equipment | Material | null): boolean {
     return Material.isMaterial(inventoryDetails);
   }
 
-  protected isEquipment(inventoryDetails: Equipment | Material): boolean {
+  protected isEquipment(inventoryDetails: Equipment | Material | null): boolean {
     return Equipment.isEquipment(inventoryDetails);
   }
 }

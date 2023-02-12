@@ -12,11 +12,6 @@ import { environment } from "../environments/environment";
 import { GraphQLModule } from "./graphql.module";
 import { ActiveTenantInterceptor } from "./core/active-tenant.interceptor";
 import { MatInputModule } from "@angular/material/input";
-import { StoreModule } from "@ngrx/store";
-import { EffectsModule } from "@ngrx/effects";
-import { EquipmentEffects } from "./state/equipment/equipment.effects";
-import { equipmentInventoryReducer } from "./state/equipment/equipment.reducer";
-import { inventoryItemsReducer } from "./state/all-inventory/all-inventory.reducer";
 
 @NgModule({
   declarations : [AppComponent],
@@ -31,11 +26,6 @@ import { inventoryItemsReducer } from "./state/all-inventory/all-inventory.reduc
     GraphQLModule,
     HttpClientModule,
     AuthModule.forRoot(environment.auth0),
-    StoreModule.forRoot({
-      equipment : equipmentInventoryReducer,
-      inventory : inventoryItemsReducer
-    }, {}),
-    EffectsModule.forRoot([EquipmentEffects]),
   ],
   providers: [
     {

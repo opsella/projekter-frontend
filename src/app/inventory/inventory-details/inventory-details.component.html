@@ -3,10 +3,10 @@
     <!--    Still debating on whether or not to have separate components to render-->
     <!--    data. Or leave it all in this component with conditional rendering of specific-->
     <!--    elements.-->
-    <app-equipiment-details
+    <app-equipment-details
       *ngIf="isEquipment(vm.inventoryDetails)"
       [details]="vm.inventoryDetails"
-    ></app-equipiment-details>
+    ></app-equipment-details>
 
     <app-material-details
       *ngIf="isMaterial(vm.inventoryDetails)"

@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { InventoryApiService } from "../services/inventory-api.service";
+import { InventoryApiService, InventoryItem } from "../services/inventory-api.service";
 import { Observable } from "rxjs";
-import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
 import { EquipmentFilters } from "../queries/equipment-queries";
 import { InventoryTypes, SupportedInventory } from "./inventory-list/inventory-list.store";
 import { MaterialsFilters } from "../queries/materials-queries";

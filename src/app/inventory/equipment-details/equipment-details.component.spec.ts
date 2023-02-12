@@ -1,8 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { EquipimentDetailsComponent } from './equipiment-details.component';
+import { EquipimentDetailsComponent } from "./equipment-details.component";
 
-describe('EquipimentDetailsComponent', () => {
+describe("EquipimentDetailsComponent", () => {
   let component: EquipimentDetailsComponent;
   let fixture: ComponentFixture<EquipimentDetailsComponent>;
 
@@ -10,14 +10,14 @@ describe('EquipimentDetailsComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ EquipimentDetailsComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(EquipimentDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

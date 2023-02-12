@@ -1,8 +1,14 @@
 import { Apollo, gql } from "apollo-angular";
-import { map } from "rxjs";
-import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
+import { map, Observable } from "rxjs";
+import { InventoryItem } from "../services/inventory-api.service";
 
-export function getInventoryDetailsById(apollo: Apollo, inventoryId: string) {
+/**
+ *
+ * We need to either make it possible to send any inventory item id and get it back
+ * or we need to have separate calls for the different inventory types. This current
+ * foundation is assuming we can do it with one.
+ */
+export function getInventoryDetailsById(apollo: Apollo, inventoryId: string): Observable<any> {
   return apollo.watchQuery<{
     inventoryById: InventoryItem;
   }>({
@@ -20,7 +26,7 @@ export function getInventoryDetailsById(apollo: Apollo, inventoryId: string) {
     .valueChanges
     .pipe(
       map((response) => {
-        return; // some data that contains all inventory details for a given ID
+        return response;// return proper data
       })
     );
 }

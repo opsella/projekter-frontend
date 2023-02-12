@@ -5,7 +5,6 @@ import { Material } from "../models/material";
 import { EquipmentFilters, getAllEquipment, getEquipmentById } from "../queries/equipment-queries";
 import { Apollo } from "apollo-angular";
 import { createEquipment, editEquipment } from "../queries/equipment-mutations";
-import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
 import { getInventoryItemById } from "../queries/inventory-queries";
 import { getAllMaterials, MaterialsFilters } from "../queries/materials-queries";
 import { getInventoryDetailsById } from "../queries/inventory-details";
@@ -25,6 +24,8 @@ export interface MaterialsResponse {
   unit: number;
   description: string;
 }
+
+export type InventoryItem = Equipment | Material;
 
 @Injectable({
   providedIn: "root",

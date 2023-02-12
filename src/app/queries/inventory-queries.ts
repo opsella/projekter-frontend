@@ -1,7 +1,7 @@
 import { Apollo, gql } from "apollo-angular";
 import { map } from "rxjs";
 import { Equipment } from "../models/equipment";
-import { InventoryItem } from "../state/all-inventory/all-inventory.actions";
+import { InventoryItem } from "../services/inventory-api.service";
 
 export function getInventoryItemById(apollo: Apollo, itemId: string) {
   return apollo.watchQuery<{
