@@ -6,6 +6,6 @@ import { Component, Input } from "@angular/core";
   styleUrls   : ["./material-edit-form.component.scss"]
 })
 export class MaterialEditFormComponent {
+  // @Input() public details: Material | null = null;
   @Input() public details: any;
-
 }

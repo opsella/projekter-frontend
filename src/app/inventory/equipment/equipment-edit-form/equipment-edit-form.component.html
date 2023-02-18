@@ -1,1 +1,16 @@
-<p>equipment-edit-form works!</p>
+<section>
+  <form [formGroup]="equipmentForm" (ngSubmit)="onSubmit(equipmentForm)">
+    <label for="name">Name: </label>
+    <input id="name" type="text" formControlName="name" />
+    <p *ngIf="name?.invalid && (name?.dirty || name?.touched)">Invalid entry</p>
+
+    <label for="code">Code: </label>
+    <input id="code" type="text" formControlName="code" />
+    <p *ngIf="code?.invalid && (code?.dirty || code?.touched)">Invalid entry</p>
+
+    <label for="description">Description: </label>
+    <input id="description" type="text" formControlName="description" />
+
+    <button type="submit">Save</button>
+  </form>
+</section>

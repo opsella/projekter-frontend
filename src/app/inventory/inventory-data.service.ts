@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import { InventoryApiService } from "../services/inventory-api.service";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { EquipmentFilters } from "../queries/equipment-queries";
 import { InventoryTypes, SupportedInventory } from "./inventory-list/inventory-list.store";
 import { MaterialsFilters } from "../queries/materials-queries";
 import { Equipment } from "../models/equipment";
 import { Material } from "../models/material";
+import { MutationResult } from "apollo-angular";
+import { UnreachableException } from "../shared/exceptions/unreachable-exception";
 
 @Injectable({
   providedIn: "root"
@@ -32,14 +34,9 @@ export class InventoryDataService {
     }
   }
 
-  // public inventoryEdit(type: InventoryTypes, item: Equipment | Material) {
-  //   switch (type) {
-  //   case this.SUPPORTED_INVENTORY_TYPES.equipment:
-  //     return this.inventoryApiService.editEquipment(item);
-  //   default:
-  //     break;
-  //   }
-  // }
+  public inventoryEditEquipment(equipment: Equipment): Observable<MutationResult<{ updateEquipment: { id: string }}>> {
+    return this.inventoryApiService.editEquipment(equipment);
+  }
 
   // public inventoryCreate(type: InventoryTypes) {
   //   switch (type) {
@@ -50,15 +47,14 @@ export class InventoryDataService {
   //   }
   // }
 
-  // @ts-ignore
   public inventoryDetailsQuery(id: InventoryFilters, type: InventoryTypes): Observable<Equipment | Material> {
     switch (type) {
     case this.SUPPORTED_INVENTORY_TYPES.equipment:
       return this.inventoryApiService.getEquipmentById(id);
     case this.SUPPORTED_INVENTORY_TYPES.materials:
-      return this.inventoryApiService.getMaterialById(id);
+      return this.inventoryApiService.getMaterialById(id).pipe(tap(v => console.log("Inventory Details Query", v)));
     default:
-      break;
+      throw new UnreachableException("This should not be reached");
     }
   }
 }
