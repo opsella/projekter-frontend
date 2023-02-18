@@ -6,10 +6,11 @@ import { catchError, EMPTY, Observable, switchMap, tap } from "rxjs";
 import { ExpansionContentData, ExpansionTableData } from "../../shared/expansion-table/expandable-data";
 import { InventoryListData } from "./inventory-list.component";
 import { InventoryDataService, InventoryFilters } from "../inventory-data.service";
-import { EquipmentTableContentComponent } from "../equipment-table-content/equipment-table-content.component";
-import { MaterialsTableContentComponent } from "../materials-table-content/materials-table-content.component";
+import { EquipmentTableContentComponent } from "../equipment/equipment-table-content/equipment-table-content.component";
+import { MaterialsTableContentComponent } from "../materials/materials-table-content/materials-table-content.component";
 import { UnreachableException } from "../../shared/exceptions/unreachable-exception";
 import { TableFilterActions } from "../../shared/expansion-table/table-filters/table-filter-actions";
+import { Router } from "@angular/router";
 
 export interface InventoryListState {
   inventory: Equipment[] | Material[];
@@ -24,6 +25,7 @@ export type InventoryTypes = "equipment" | "materials";
 export class InventoryListStore extends ComponentStore<InventoryListState> {
   constructor(
     private inventoryDataService: InventoryDataService,
+    private router: Router
   ) {
     super({
       inventory    : [] as SupportedInventory,
@@ -93,9 +95,23 @@ export class InventoryListStore extends ComponentStore<InventoryListState> {
               code        : data.code,
               name        : data.name,
               description : data?.description,
-              quantity    : Material.isMaterial(data) ? data.quantity : null,
-              unit        : Material.isMaterial(data) ? data.quantity : null,
+              quantity    : Material.isMaterial(data) ? data?.quantity : null,
+              unit        : Material.isMaterial(data) ? data?.unit : null,
             },
+            actions: [
+              {
+                title   : "Details",
+                enabled : () => true,
+                visible : () => true,
+                action  : async (row: any) => await this._navRouteAndState(row, data, "details")
+              },
+              {
+                title   : "Edit",
+                enabled : () => true,
+                visible : () => true,
+                action  : async (row: any) => await this._navRouteAndState(row, data, "edit")
+              }
+            ],
             expansionComponent: this._expansionComponent(data),
           } as ExpansionTableData<InventoryListData>;
         });
@@ -110,7 +126,6 @@ export class InventoryListStore extends ComponentStore<InventoryListState> {
   });
 
   private _expansionComponent(data: Equipment | Material): Type<ExpansionContentData> {
-    console.log("wtf ", data);
     if (data instanceof Equipment) {
       return EquipmentTableContentComponent;
     } else if (data instanceof Material) {
@@ -118,5 +133,10 @@ export class InventoryListStore extends ComponentStore<InventoryListState> {
     } else {
       throw new UnreachableException();
     }
+  }
+
+  private async _navRouteAndState(row: any, data: Equipment | Material, path: string): Promise<void> {
+    const type = Material.isMaterial(data) ? "materials" : "equipment";
+    await this.router.navigateByUrl(`inventory/${path}/${row.data.name.toLowerCase()}`, { state: { itemId: row.data.id, type } });
   }
 }

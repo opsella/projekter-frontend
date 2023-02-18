@@ -3,6 +3,7 @@ import { Equipment } from "../models/equipment";
 import { map, Observable } from "rxjs";
 import { EquipmentResponse } from "../services/inventory-api.service";
 import { Apollo, gql } from "apollo-angular";
+import { InventoryFilters } from "../inventory/inventory-data.service";
 
 export interface EquipmentFilters {
   id?: string | undefined;
@@ -57,7 +58,7 @@ export function getAllEquipment(apollo: Apollo, filters: EquipmentFilters): Obse
     );
 }
 
-export function getEquipmentById(apollo: Apollo, equipmentId: string): Observable<Equipment> {
+export function getEquipmentById(apollo: Apollo, equipmentId: InventoryFilters): Observable<Equipment> {
   return apollo.watchQuery<{
     equipmentById: EquipmentResponse;
   }>({

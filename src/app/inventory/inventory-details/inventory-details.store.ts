@@ -1,9 +1,10 @@
 import { ComponentStore } from "@ngrx/component-store";
-import { InventoryDataService } from "../inventory-data.service";
+import { InventoryDataService, InventoryFilters } from "../inventory-data.service";
 import { Equipment } from "../../models/equipment";
 import { Material } from "../../models/material";
 import { catchError, EMPTY, Observable, switchMap, tap } from "rxjs";
 import { Injectable } from "@angular/core";
+import { InventoryTypes } from "../inventory-list/inventory-list.store";
 
 export interface InventoryDetailsState {
   inventoryDetails: Equipment | Material | null;
@@ -22,13 +23,14 @@ export class InventoryDetailsStore extends ComponentStore<InventoryDetailsState>
   }
 
   public readonly getInventoryDetails = this.effect<{
-    inventoryId: string;
+    filters: InventoryFilters;
+    type: InventoryTypes;
   }>((
-    filters$: Observable<{inventoryId: string}>
+    filters$: Observable<{filters: InventoryFilters; type: InventoryTypes }>
   ) => {
     return filters$.pipe(
       switchMap(
-        (filters) => this.inventoryDataService.inventoryDetailsQuery(filters.inventoryId).pipe(
+        (filters) => this.inventoryDataService.inventoryDetailsQuery(filters.filters, filters.type).pipe(
           tap({
             next: (data) => {
               this.setInventoryDetails(data);
@@ -42,10 +44,12 @@ export class InventoryDetailsStore extends ComponentStore<InventoryDetailsState>
     );
   });
 
-  private readonly setInventoryDetails = this.updater((state, value: Equipment | Material) => ({
-    ...state,
-    inventoryDetails: value
-  }));
+  private readonly setInventoryDetails = this.updater((state, value: Equipment | Material) => {
+    return {
+      ...state,
+      inventoryDetails: value
+    };
+  });
 
   private readonly setStatusSucceeded = this.updater((state) => ({
     ...state,

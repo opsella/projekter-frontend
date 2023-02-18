@@ -17,7 +17,10 @@ export class InventoryDetailsComponent {
     private router: Router,
     private readonly inventoryDetailsStore: InventoryDetailsStore
   ) {
-    this.inventoryDetailsStore.getInventoryDetails(this.router.getCurrentNavigation()?.extras.state?.["itemId"]);
+    const id = this.router.getCurrentNavigation()?.extras.state?.["itemId"];
+    const type = this.router.getCurrentNavigation()?.extras.state?.["type"];
+    console.log("id ", id, " type ", type);
+    this.inventoryDetailsStore.getInventoryDetails({ filters: id, type });
   }
 
   protected isMaterial(inventoryDetails: Equipment | Material | null): boolean {

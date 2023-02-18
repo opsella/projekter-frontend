@@ -21,10 +21,13 @@
     <ng-container cdkColumnDef="actions">
       <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
       <cdk-cell *cdkCellDef="let row" class="cell">
-        <button (click)="viewItem(row); $event.stopPropagation()">
-          Details
+        <button
+          *ngFor="let action of row.actions"
+          (click)="action.action(row); $event.stopPropagation()"
+          [disabled]="!action.enabled"
+        >
+          {{ action.title }}
         </button>
-        <button (click)="editItem(row); $event.stopPropagation()">Edit</button>
       </cdk-cell>
     </ng-container>
 

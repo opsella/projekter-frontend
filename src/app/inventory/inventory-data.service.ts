@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { InventoryApiService, InventoryItem } from "../services/inventory-api.service";
+import { InventoryApiService } from "../services/inventory-api.service";
 import { Observable } from "rxjs";
 import { EquipmentFilters } from "../queries/equipment-queries";
 import { InventoryTypes, SupportedInventory } from "./inventory-list/inventory-list.store";
@@ -32,12 +32,34 @@ export class InventoryDataService {
     }
   }
 
-  public inventoryDetailsQuery(inventoryId: string): Observable<Equipment | Material> {
-    return this.inventoryApiService.getInventoryDetailsById(inventoryId);
-  }
+  // public inventoryEdit(type: InventoryTypes, item: Equipment | Material) {
+  //   switch (type) {
+  //   case this.SUPPORTED_INVENTORY_TYPES.equipment:
+  //     return this.inventoryApiService.editEquipment(item);
+  //   default:
+  //     break;
+  //   }
+  // }
 
-  public getInventoryItemById(itemId: string): Observable<InventoryItem> {
-    return this.inventoryApiService.getInventoryItemById(itemId);
+  // public inventoryCreate(type: InventoryTypes) {
+  //   switch (type) {
+  //   case this.SUPPORTED_INVENTORY_TYPES.equipment:
+  //     return this.inventoryApiService.createEquipment(filters);
+  //   default:
+  //     break;
+  //   }
+  // }
+
+  // @ts-ignore
+  public inventoryDetailsQuery(id: InventoryFilters, type: InventoryTypes): Observable<Equipment | Material> {
+    switch (type) {
+    case this.SUPPORTED_INVENTORY_TYPES.equipment:
+      return this.inventoryApiService.getEquipmentById(id);
+    case this.SUPPORTED_INVENTORY_TYPES.materials:
+      return this.inventoryApiService.getMaterialById(id);
+    default:
+      break;
+    }
   }
 }
 

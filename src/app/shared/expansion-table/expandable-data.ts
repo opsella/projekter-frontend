@@ -8,7 +8,7 @@ export interface Action {
   title: string;
   enabled: () => boolean;
   visible: () => boolean;
-  action: () => void;
+  action: () => any;
 }
 
 export interface ActionData {

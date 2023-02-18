@@ -3,6 +3,7 @@ import { Material } from "../models/material";
 import { Page, Pageable } from "../shared/page";
 import { Apollo, gql } from "apollo-angular";
 import { MaterialsResponse } from "../services/inventory-api.service";
+import { InventoryFilters } from "../inventory/inventory-data.service";
 
 export interface MaterialsFilters {
   id?: string | undefined;
@@ -54,6 +55,32 @@ export function getAllMaterials(apollo: Apollo, filters: MaterialsFilters): Obse
     .pipe(
       map((response) => {
         return Page.fromData<MaterialsResponse>(response.data.materials).getEdges().map(Material.fromMaterialResponse);
+      })
+    );
+}
+
+export function getMaterialById(apollo: Apollo, materialId: InventoryFilters): Observable<Material> {
+  return apollo.watchQuery<{
+    materialId: MaterialsResponse;
+  }>({
+    query: gql`
+      query GetMaterialById($materialId: UUID!) {
+        materialById(materialId: $materialId) {
+          id
+          name
+          code
+          description
+        }
+      }
+    `,
+    variables: {
+      materialId
+    }
+  })
+    .valueChanges
+    .pipe(
+      map((response) => {
+        return Material.fromMaterialResponse(response.data.materialId);
       })
     );
 }

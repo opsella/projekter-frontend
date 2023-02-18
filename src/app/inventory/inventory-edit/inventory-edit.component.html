@@ -1,0 +1,16 @@
+<app-page-wrapper title="Details">
+  <div *ngIf="vm$ | async as vm">
+    <!--    Still debating on whether or not to have separate components to render-->
+    <!--    data. Or leave it all in this component with conditional rendering of specific-->
+    <!--    elements.-->
+    <!--    <app-equipment-edit-form-->
+    <!--      *ngIf="isEquipment(vm.inventoryDetails)"-->
+    <!--      [details]="vm.inventoryDetails"-->
+    <!--    ></app-equipment-edit-form>-->
+
+    <!--    <app-material-edit-form-->
+    <!--      *ngIf="isMaterial(vm.inventoryDetails)"-->
+    <!--      [details]="vm.inventoryDetails"-->
+    <!--    ></app-material-edit-form>-->
+  </div>
+</app-page-wrapper>

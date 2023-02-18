@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ExpansionContentData } from "../../shared/expansion-table/expandable-data";
+import { ExpansionContentData } from "../../../shared/expansion-table/expandable-data";
 
 @Component({
   selector    : "app-materials-table-content",
