@@ -88,31 +88,26 @@ export class InventoryListStore extends ComponentStore<InventoryListState> {
     return this.select(
       this.inventory$,
       (inventory): ExpansionTableData<InventoryListData>[] => {
-        return inventory.map(data => {
+        return inventory.map(inventoryItem => {
           return {
             data: {
-              id          : data.id,
-              code        : data.code,
-              name        : data.name,
-              description : data?.description,
-              quantity    : Material.isMaterial(data) ? data?.quantity : null,
-              unit        : Material.isMaterial(data) ? data?.unit : null,
+              ...inventoryItem
             },
             actions: [
               {
                 title   : "Details",
                 enabled : () => true,
                 visible : () => true,
-                action  : async (row: any) => await this._navRouteAndState(row, data, "details")
+                action  : async (row: any) => await this._navRouteAndState(row, inventoryItem, "details")
               },
               {
                 title   : "Edit",
                 enabled : () => true,
                 visible : () => true,
-                action  : async (row: any) => await this._navRouteAndState(row, data, "edit")
+                action  : async (row: any) => await this._navRouteAndState(row, inventoryItem, "edit")
               }
             ],
-            expansionComponent: this._expansionComponent(data),
+            expansionComponent: this._expansionComponent(inventoryItem),
           } as ExpansionTableData<InventoryListData>;
         });
       }

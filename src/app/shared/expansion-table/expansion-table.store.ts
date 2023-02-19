@@ -9,7 +9,6 @@ export interface ExpansionTableState {
   filters: TableFilterActions[];
   columnHeaders: string[];
   columnHeadersWithActions: string[];
-  // filter: string;
 }
 
 @Injectable()
@@ -25,7 +24,7 @@ export class ExpansionTableStore extends ComponentStore<ExpansionTableState> {
 
   // Updaters
   public readonly setTableData = this.updater((state, data: ExpandableData<unknown>[]) => {
-    const keys: string[] = [ ...Object.keys(data[0]?.data ?? {}) ];
+    const keys: string[] = [ ...Object.keys(data[0]?.data ?? {}) ].filter(key => key !== "id");
 
     const newState = {
       ...state,

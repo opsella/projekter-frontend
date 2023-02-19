@@ -10,11 +10,15 @@ const routes: Routes = [
     component : InventoryListComponent
   },
   {
-    path      : "details/:name",
+    path      : "details/:code",
     component : InventoryDetailsComponent
   },
   {
-    path      : "edit/:name",
+    path      : "edit/:code",
+    component : InventoryEditComponent
+  },
+  {
+    path      : "create/:code",
     component : InventoryEditComponent
   },
   {
