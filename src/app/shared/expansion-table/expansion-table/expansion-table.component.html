@@ -36,15 +36,12 @@
         <button
           mat-icon-button
           aria-label="expand row"
-          (click)="
-            expandedElement = expandedElement === element ? null : element;
-            $event.stopPropagation()
-          "
+          (click)="updateExpandedElements(element)"
         >
-          <mat-icon *ngIf="expandedElement !== element"
+          <mat-icon *ngIf="!elementIsExpanded(element)"
             >keyboard_arrow_down</mat-icon
           >
-          <mat-icon *ngIf="expandedElement === element"
+          <mat-icon *ngIf="elementIsExpanded(element)"
             >keyboard_arrow_up</mat-icon
           >
         </button>
@@ -58,9 +55,7 @@
       >
         <div
           class="expansion-content"
-          [@detailExpand]="
-            element === expandedElement ? 'expanded' : 'collapsed'
-          "
+          [@detailExpand]="elementTransitionStage(element)"
         >
           <app-expansion-table-content
             [data]="element"
@@ -76,8 +71,7 @@
     <cdk-row
       *cdkRowDef="let element; columns: vm.columnHeadersWithActions"
       class="row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element"
+      [class.example-expanded-row]="elementIsExpanded(element)"
     ></cdk-row>
     <cdk-row *cdkRowDef="let row; columns: ['expandedDetail']"></cdk-row>
   </cdk-table>

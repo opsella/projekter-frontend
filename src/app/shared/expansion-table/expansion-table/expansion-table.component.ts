@@ -28,7 +28,7 @@ export class ExpansionTableComponent {
 
   @ViewChild("table") public cdkTable!: CdkTable<ExpandableData<unknown>>;
 
-  protected expandedElement: null | undefined;
+  protected expandedElements: any[] = [];
 
   constructor(
     private router: Router,
@@ -37,4 +37,18 @@ export class ExpansionTableComponent {
   }
 
   public readonly vm$ = this.expansionTableStore.vm$;
+
+  protected updateExpandedElements(element: any) {
+    this.elementIsExpanded(element)
+      ? this.expandedElements = this.expandedElements.filter(elementId => elementId !== element.data.id)
+      : this.expandedElements.push(element.data.id);
+  }
+
+  protected elementIsExpanded(element: any) {
+    return this.expandedElements.includes(element.data.id);
+  }
+
+  protected elementTransitionStage(element: any) {
+    return this.elementIsExpanded(element) ? "expanded" : "collapsed";
+  }
 }
