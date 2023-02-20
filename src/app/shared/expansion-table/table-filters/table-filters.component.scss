@@ -1,0 +1,15 @@
+.table-filters {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 3em;
+  padding: .5em;
+
+  button {
+    background-color: transparent;
+
+    &:hover {
+      color: grey;
+    }
+  }
+}

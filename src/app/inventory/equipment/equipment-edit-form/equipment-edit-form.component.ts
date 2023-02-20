@@ -9,10 +9,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
   providers   : [EquipmentEditFormStore]
 })
 export class EquipmentEditFormComponent implements OnInit {
-  @Input() public id!: string;
-  @Input() public details: any;
+  @Input() public details?: any;
 
-  // public readonly vm$ = this.equipmentEditFormStore.vm$;
   protected equipmentForm!: FormGroup;
 
   constructor(
@@ -22,17 +20,20 @@ export class EquipmentEditFormComponent implements OnInit {
   }
 
   public ngOnInit() {
+    const name = this.details?.name ?? "";
+    const code = this.details?.code ?? "";
+    const description = this.details?.description ?? "";
+
     this.equipmentForm = this.formBuilder.group({
-      name        : new FormControl(this.details.name, [Validators.required]),
-      code        : new FormControl(this.details.code, Validators.required),
-      description : new FormControl(this.details?.description),
+      name        : new FormControl( name, [Validators.required]),
+      code        : new FormControl(code, Validators.required),
+      description : new FormControl(description),
     });
   }
 
   protected onSubmit(form: FormGroup) {
-    console.log("FORM ON SUBMMIT ", form.value);
     const equipment = {
-      id: this.id,
+      id: this.details.id,
       ...form.value
     };
 

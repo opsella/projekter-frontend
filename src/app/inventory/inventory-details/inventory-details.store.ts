@@ -31,7 +31,6 @@ export class InventoryDetailsStore extends ComponentStore<InventoryDetailsState>
     return filters$.pipe(
       switchMap(
         (filters) => this.inventoryDataService.inventoryDetailsQuery(filters.filters, filters.type).pipe(
-          tap(v => console.log("THE VALUE ", v)),
           tap({
             next: (data) => {
               this.setInventoryDetails(data);

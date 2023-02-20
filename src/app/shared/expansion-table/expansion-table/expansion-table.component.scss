@@ -1,6 +1,10 @@
 .expansion-table {
   display: flex;
   flex-flow: column;
+  height: calc(100% - 3em);
+  max-height: calc(100% - 3em);
+  overflow-y: auto;
+  padding: 0 1em;
 
   .row {
     background-color: #bdbcbc;

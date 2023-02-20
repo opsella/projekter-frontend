@@ -22,6 +22,7 @@ import { MaterialDetailsComponent } from "./materials/material-details/material-
 import { InventoryEditComponent } from "./inventory-edit/inventory-edit.component";
 import { EquipmentEditFormComponent } from "./equipment/equipment-edit-form/equipment-edit-form.component";
 import { MaterialEditFormComponent } from "./materials/material-edit-form/material-edit-form.component";
+import { InventoryAddComponent } from './inventory-add/inventory-add.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MaterialEditFormComponent } from "./materials/material-edit-form/materi
     InventoryEditComponent,
     EquipmentEditFormComponent,
     MaterialEditFormComponent,
+    InventoryAddComponent,
   ],
   imports: [
     CommonModule,

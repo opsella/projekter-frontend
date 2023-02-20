@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { InventoryListStore } from "./inventory-list.store";
+import { Router } from "@angular/router";
 
 export interface InventoryListData {
   id: string;
@@ -20,7 +21,8 @@ export class InventoryListComponent implements OnInit {
   public readonly vm$ = this.inventoryListStore.vm$;
 
   constructor(
-    private readonly inventoryListStore: InventoryListStore
+    private readonly inventoryListStore: InventoryListStore,
+    private router: Router
   ) {
   }
 

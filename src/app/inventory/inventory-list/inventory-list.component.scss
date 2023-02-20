@@ -1,0 +1,25 @@
+.inventory-list {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  height: calc(100% - 4em);
+  max-height: calc(100% - 4em);
+
+  .inventory-table-wrap {
+    flex: 1;
+    max-height: calc(100% - 6em);
+  }
+
+  .inventory-list-actions {
+    min-height: 4em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: .5em 2em;
+
+    a {
+      padding: 1em;
+      background-color: #dfba38;
+    }
+  }
+}

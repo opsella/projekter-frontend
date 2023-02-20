@@ -14,15 +14,22 @@ import { Equipment } from "../../models/equipment";
 })
 export class InventoryEditComponent {
   public readonly vm$ = this.inventoryEditStore.vm$;
+  protected readonly title: string = "Add Inventory";
+  protected editInventory = true;
 
   constructor(
     private router: Router,
     private readonly inventoryEditStore: InventoryEditStore
   ) {
-    const itemId = this.router.getCurrentNavigation()?.extras.state?.["itemId"];
+    this.editInventory = (this.router.url !== "/inventory/create" && this.router.url !== "/inventory/create/equipment" && this.router.url !== "/inventory/create/material");
     const itemType = this.router.getCurrentNavigation()?.extras.state?.["type"];
+
     this.inventoryEditStore.setInventoryType(itemType);
-    if (itemId) {
+
+    if (this.editInventory) {
+      this.title = "Edit Inventory";
+      const itemId = this.router.getCurrentNavigation()?.extras.state?.["itemId"];
+
       this.inventoryEditStore.getInventoryDetailsForEdit({ itemId, type: itemType });
       this.inventoryEditStore.setInventoryItemId(itemId);
     }

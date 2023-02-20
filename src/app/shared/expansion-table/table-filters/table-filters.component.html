@@ -1,3 +1,5 @@
-<button *ngFor="let filter of filters" (click)="filter.action()">
-  {{ filter.title }}
-</button>
+<div class="table-filters">
+  <button mat-button *ngFor="let filter of filters" (click)="filter.action()">
+    {{ filter.title }}
+  </button>
+</div>
