@@ -24,6 +24,11 @@ const routes: Routes = [
     component : InventoryEditComponent,
     children  : [
       {
+        path       : "",
+        redirectTo : "equipment",
+        pathMatch  : "full"
+      },
+      {
         path      : "equipment",
         component : EquipmentEditFormComponent
       },

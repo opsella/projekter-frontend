@@ -1,10 +1,18 @@
-<nav>
-  <ul style="display: flex">
-    <li><a routerLink="/inventory/create/equipment">Equipment</a></li>
-    <li style="margin-left: 5px">
-      <a routerLink="/inventory/create/material">Material</a>
-    </li>
-  </ul>
+<div>
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/inventory/create/equipment" routerLinkActive="active"
+          >EQUIPMENT</a
+        >
+      </li>
+      <li>
+        <a routerLink="/inventory/create/material" routerLinkActive="active"
+          >MATERIAL</a
+        >
+      </li>
+    </ul>
+  </nav>
 
   <router-outlet></router-outlet>
-</nav>
+</div>

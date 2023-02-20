@@ -1,0 +1,25 @@
+div {
+  height: 100%;
+  padding-top: 2em;
+
+  nav {
+    margin-bottom: 2em;
+
+    ul {
+      display: flex;
+      border-bottom: solid 1px #040300;
+
+      li:last-child {
+        margin-left: 1em;
+      }
+
+      li a {
+        color: grey;
+      }
+    }
+  }
+}
+
+.active {
+  color: #040300 !important;
+}

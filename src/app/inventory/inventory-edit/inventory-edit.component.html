@@ -1,5 +1,5 @@
 <app-page-wrapper [title]="title">
-  <div *ngIf="vm$ | async as vm">
+  <div *ngIf="vm$ | async as vm" class="inventory-edit">
     <app-equipment-edit-form
       *ngIf="vm.isEquipment$ && vm.hasData$"
       [details]="vm.inventoryItem$"

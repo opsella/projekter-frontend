@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { EquipmentEditFormStore } from "./equipment-edit-form.store";
-import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 
 @Component({
   selector    : "app-equipment-edit-form",
@@ -8,43 +8,22 @@ import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms"
   styleUrls   : ["./equipment-edit-form.component.scss"],
   providers   : [EquipmentEditFormStore]
 })
-export class EquipmentEditFormComponent implements OnInit {
-  @Input() public details?: any;
+export class EquipmentEditFormComponent {
+  @Input() public set details(data: any) {
+    this.equipmentEditFormStore.setFormData(data);
+  }
 
-  protected equipmentForm!: FormGroup;
+  protected vm$ = this.equipmentEditFormStore.vm$;
 
   constructor(
     private equipmentEditFormStore: EquipmentEditFormStore,
-    private formBuilder: FormBuilder
   ) {
   }
 
-  public ngOnInit() {
-    const name = this.details?.name ?? "";
-    const code = this.details?.code ?? "";
-    const description = this.details?.description ?? "";
-
-    this.equipmentForm = this.formBuilder.group({
-      name        : new FormControl( name, [Validators.required]),
-      code        : new FormControl(code, Validators.required),
-      description : new FormControl(description),
-    });
-  }
-
   protected onSubmit(form: FormGroup) {
-    const equipment = {
-      id: this.details.id,
-      ...form.value
-    };
+    this.equipmentEditFormStore.setStatusLoading();
 
-    this.equipmentEditFormStore.editEquipment({ equipment });
-  }
-
-  protected get name() {
-    return this.equipmentForm.get("name");
-  }
-
-  protected get code() {
-    return this.equipmentForm.get("code");
+    const values = { ...form.value };
+    this.equipmentEditFormStore.createInventory({ values });
   }
 }

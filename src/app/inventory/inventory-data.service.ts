@@ -34,18 +34,21 @@ export class InventoryDataService {
     }
   }
 
+  public mutateInventoryEquipment(equipment: Equipment): Observable<MutationResult<{ registerEquipment: {tenantId: string; equipmentId: string; name: string}} | { updateEquipment: { id: string }}>> {
+    if (equipment?.id) {
+      return this.inventoryEditEquipment(equipment);
+    } else {
+      return this.inventoryCreateEquipment(equipment);
+    }
+  }
+
   public inventoryEditEquipment(equipment: Equipment): Observable<MutationResult<{ updateEquipment: { id: string }}>> {
     return this.inventoryApiService.editEquipment(equipment);
   }
 
-  // public inventoryCreate(type: InventoryTypes) {
-  //   switch (type) {
-  //   case this.SUPPORTED_INVENTORY_TYPES.equipment:
-  //     return this.inventoryApiService.createEquipment(filters);
-  //   default:
-  //     break;
-  //   }
-  // }
+  public inventoryCreateEquipment(equipment: Equipment): Observable<MutationResult<{ registerEquipment: {tenantId: string; equipmentId: string; name: string}}>> {
+    return this.inventoryApiService.createEquipment(equipment);
+  }
 
   public inventoryDetailsQuery(id: InventoryFilters, type: InventoryTypes): Observable<Equipment | Material> {
     switch (type) {

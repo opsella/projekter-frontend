@@ -2,8 +2,8 @@ import { Apollo, gql, MutationResult } from "apollo-angular";
 import { Equipment } from "../models/equipment";
 import { Observable } from "rxjs";
 
-export function createEquipment(apollo: Apollo, equipment: Equipment): void {
-  apollo.mutate<{
+export function createEquipment(apollo: Apollo, equipment: Equipment): Observable<MutationResult<{ registerEquipment: {tenantId: string; equipmentId: string; name: string}}>> {
+  return apollo.mutate<{
     registerEquipment: {tenantId: string; equipmentId: string; name: string};
   }>({
     mutation: gql`
