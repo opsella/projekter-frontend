@@ -1,3 +1,26 @@
-<section>
-  {{ details | json }}
+<section *ngIf="vm$ | async as vm">
+  <form [formGroup]="vm.materialForm" (ngSubmit)="onSubmit(vm.materialForm)">
+    <label for="name">Name: </label>
+    <input id="name" type="text" formControlName="name" />
+    <p *ngIf="vm.nameInputInvalid">Invalid name</p>
+
+    <label for="code">Code: </label>
+    <input id="code" type="text" formControlName="code" />
+    <p *ngIf="vm.codeInputInvalid">Invalid code</p>
+
+    <label for="quantity">Quantity: </label>
+    <input id="quantity" type="text" formControlName="quantity" />
+    <p *ngIf="vm.quantityInvalidInput">Invalid quantity</p>
+
+    <label for="unit">Unit: </label>
+    <input id="unit" type="text" formControlName="unit" />
+    <p *ngIf="vm.unitInvalidInput">Invalid unit</p>
+
+    <label for="description">Description: </label>
+    <input id="description" type="text" formControlName="description" />
+
+    <button mat-button type="submit" [disabled]="vm.status === 'loading'">
+      Save
+    </button>
+  </form>
 </section>

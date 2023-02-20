@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Observable, tap } from "rxjs";
+import { Observable } from "rxjs";
 import { Equipment } from "../models/equipment";
 import { Material } from "../models/material";
 import { createEquipment, editEquipment } from "../queries/equipment-mutations";
+import { createMaterial, editMaterial } from "../queries/materials-mutations";
 import { EquipmentFilters, getAllEquipment, getEquipmentById } from "../queries/equipment-queries";
 import { Apollo } from "apollo-angular";
 import { getAllMaterials, getMaterialById, MaterialsFilters } from "../queries/materials-queries";
@@ -47,8 +48,7 @@ export class InventoryApiService {
   }
 
   public getMaterialById(materialId: InventoryFilters): Observable<Material> {
-    console.log("GETTING MATERIAL DATA ");
-    return getMaterialById(this.apollo, materialId).pipe(tap(v => console.log("WHAT THE", v)));
+    return getMaterialById(this.apollo, materialId);
   }
 
   public createEquipment(equipment: Equipment) {
@@ -57,5 +57,13 @@ export class InventoryApiService {
 
   public editEquipment(equipment: Equipment) {
     return editEquipment(this.apollo, equipment);
+  }
+
+  public createMaterial(material: Material) {
+    return createMaterial(this.apollo, material);
+  }
+
+  public editMaterial(material: Material) {
+    return editMaterial(this.apollo, material);
   }
 }

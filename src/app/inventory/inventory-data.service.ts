@@ -34,6 +34,22 @@ export class InventoryDataService {
     }
   }
 
+  public mutateInventoryMaterial(material: Material): Observable<MutationResult<{ registerMaterial: {tenantId: string; materialId: string; name: string}} | { updateMaterial: { id: string }}>> {
+    if (material?.id) {
+      return this.inventoryEditMaterial(material);
+    } else {
+      return this.inventoryCreateMaterial(material);
+    }
+  }
+
+  public inventoryEditMaterial(material: Material): Observable<MutationResult<{ updateMaterial: { id: string }}>> {
+    return this.inventoryApiService.editMaterial(material);
+  }
+
+  public inventoryCreateMaterial(material: Material): Observable<MutationResult<{ registerMaterial: {tenantId: string; materialId: string; name: string}}>> {
+    return this.inventoryApiService.createMaterial(material);
+  }
+
   public mutateInventoryEquipment(equipment: Equipment): Observable<MutationResult<{ registerEquipment: {tenantId: string; equipmentId: string; name: string}} | { updateEquipment: { id: string }}>> {
     if (equipment?.id) {
       return this.inventoryEditEquipment(equipment);

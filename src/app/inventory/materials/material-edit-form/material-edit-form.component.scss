@@ -1,0 +1,18 @@
+section {
+  height: calc(100% - 2em);
+
+  form {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+
+    input {
+      margin-bottom: 1em;
+    }
+
+    button {
+      margin-top: 2em;
+      background-color: #dfba38;
+    }
+  }
+}
