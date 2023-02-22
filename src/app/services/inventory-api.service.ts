@@ -8,12 +8,26 @@ import { EquipmentFilters, getAllEquipment, getEquipmentById } from "../queries/
 import { Apollo } from "apollo-angular";
 import { getAllMaterials, getMaterialById, MaterialsFilters } from "../queries/materials-queries";
 import { InventoryFilters } from "../inventory/inventory-data.service";
+import { Contacts } from "../models/contacts";
 
 export interface EquipmentResponse {
   id: string;
   name: string;
   code: string;
   description: string;
+}
+
+export interface CustomerResponse {
+  id: string;
+  code: string;
+  name: string;
+  status: string;
+  category: string;
+  location: string;
+  locationDescription: string;
+  summary: string;
+  description: string;
+  contacts: Contacts[];
 }
 
 export interface MaterialsResponse {

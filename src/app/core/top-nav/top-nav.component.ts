@@ -15,7 +15,7 @@ export class TopNavComponent {
     {
       icon : "fa-sharp fa-solid fa-bars-progress",
       name : "Projects",
-      path : "/projects"
+      path : "/project"
     },
     {
       icon : "fa-sharp fa-solid fa-boxes-stacked",
@@ -28,9 +28,14 @@ export class TopNavComponent {
       path : "/team"
     },
     {
-      icon : "fa-sharp fa-solid fa-copy",
+      icon : "fa-sharp fa-solid fa-clipboard",
       name : "Templates",
-      path : "/templates"
+      path : "/template"
+    },
+    {
+      icon : "fa-sharp fa-solid fa-user-tag",
+      name : "Customers",
+      path : "/customer"
     }
   ];
 

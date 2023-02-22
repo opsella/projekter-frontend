@@ -71,6 +71,12 @@ nav {
     min-height: 70%;
     padding-top: calc(1rem + 5px);
 
+    li {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+    }
+
     ul li:not(:last-child) {
       margin-bottom: 2rem;
     }

@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path       : "**",
-    redirectTo : "/projects/list",
+    redirectTo : "/project/list",
   },
 ];
 

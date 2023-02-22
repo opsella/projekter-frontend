@@ -1,0 +1,17 @@
+<app-page-wrapper title="Customers">
+  <ng-container *ngIf="vm$ | async as vm" class="does">
+    <div class="inventory-list">
+      <div class="inventory-table-wrap">
+        <app-expansion-table
+          *ngIf="vm.hasData$"
+          [data]="vm.customers$"
+          [filters]="vm.tableFilters$"
+        ></app-expansion-table>
+      </div>
+
+      <div class="inventory-list-actions">
+        <a mat-button routerLink="/inventory/create"> Add Customer </a>
+      </div>
+    </div>
+  </ng-container>
+</app-page-wrapper>
