@@ -1,17 +1,21 @@
-<app-page-wrapper title="Inventory">
-  <ng-container *ngIf="vm$ | async as vm" class="does">
-    <div class="inventory-list">
-      <div class="inventory-table-wrap">
+<app-page-wrapper>
+  <div pageTitle>
+    <h1>Inventory</h1>
+  </div>
+
+  <div pageContent>
+    <app-card>
+      <div *ngIf="vm$ | async as vm">
         <app-expansion-table
           *ngIf="vm.hasData$"
           [data]="vm.inventory$"
           [filters]="vm.tableFilters$"
         ></app-expansion-table>
       </div>
+    </app-card>
+  </div>
 
-      <div class="inventory-list-actions">
-        <a mat-button routerLink="/inventory/create"> Add Inventory </a>
-      </div>
-    </div>
-  </ng-container>
+  <div pageFooter>
+    <a mat-button routerLink="/inventory/create"> Add Inventory </a>
+  </div>
 </app-page-wrapper>

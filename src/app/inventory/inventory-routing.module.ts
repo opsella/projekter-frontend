@@ -9,15 +9,24 @@ import { MaterialEditFormComponent } from "./materials/material-edit-form/materi
 const routes: Routes = [
   {
     path      : "list",
-    component : InventoryListComponent
+    component : InventoryListComponent,
+    data      : {
+      title: "Inventory"
+    }
   },
   {
     path      : "details/:code",
-    component : InventoryDetailsComponent
+    component : InventoryDetailsComponent,
+    data      : {
+      title: ""
+    }
   },
   {
     path      : "edit/:code",
-    component : InventoryEditComponent
+    component : InventoryEditComponent,
+    data      : {
+      title: ""
+    }
   },
   {
     path      : "create",

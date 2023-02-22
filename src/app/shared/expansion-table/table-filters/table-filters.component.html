@@ -1,5 +1,10 @@
 <div class="table-filters">
-  <button mat-button *ngFor="let filter of filters" (click)="filter.action()">
+  <button
+    mat-button
+    *ngFor="let filter of filters"
+    (click)="handleClick(filter)"
+    [class]="{ active: isActive(filter.title) }"
+  >
     {{ filter.title }}
   </button>
 </div>

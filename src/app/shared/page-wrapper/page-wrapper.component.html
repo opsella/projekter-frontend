@@ -1,4 +1,11 @@
 <section>
-  <h1>{{ title }}</h1>
-  <ng-content></ng-content>
+  <div class="title">
+    <ng-content select="[pageTitle]"></ng-content>
+  </div>
+  <div class="content">
+    <ng-content select="[pageContent]"></ng-content>
+  </div>
+  <div class="footer">
+    <ng-content select="[pageFooter]"></ng-content>
+  </div>
 </section>

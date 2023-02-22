@@ -1,9 +1,8 @@
 .expansion-table {
   display: flex;
   flex-flow: column;
-  height: calc(100% - 3em);
-  max-height: calc(100% - 3em);
-  overflow-y: auto;
+  //height: calc(100% - 3em);
+  //max-height: calc(100% - 3em);
   padding: 0 1em;
 
   .row {
@@ -18,7 +17,7 @@
       align-items: center;
       display: flex;
       justify-content: start;
-      max-width: 30em;
+      max-width: 26em;
       overflow: hidden;
       padding: .5em;
       text-overflow: ellipsis;

@@ -13,6 +13,8 @@ import {
 } from "./expansion-table/expansion-table-content/expansion-table-content.component";
 import { ExpansionContentDirective } from "./expansion-table/expansion-table-content/expansion-content.directive";
 import { TableFiltersComponent } from "./expansion-table/table-filters/table-filters.component";
+import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
+import { CardComponent } from "./card/card.component";
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { TableFiltersComponent } from "./expansion-table/table-filters/table-fil
     ExpansionTableComponent,
     ExpansionContentDirective,
     ExpansionTableContentComponent,
-    TableFiltersComponent
+    TableFiltersComponent,
+    LoadingSpinnerComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +39,9 @@ import { TableFiltersComponent } from "./expansion-table/table-filters/table-fil
   exports: [
     DropdownAvatarComponent,
     PageWrapperComponent,
-    ExpansionTableComponent
+    ExpansionTableComponent,
+    LoadingSpinnerComponent,
+    CardComponent
   ]
 })
 export class SharedModule { }

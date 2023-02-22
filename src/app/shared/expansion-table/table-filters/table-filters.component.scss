@@ -4,9 +4,14 @@
   align-items: center;
   min-height: 3em;
   padding: .5em;
+  border-bottom: solid 1px #040300;
 
   button {
     background-color: transparent;
+
+    &.active {
+      color: grey;
+    }
 
     &:hover {
       color: grey;
