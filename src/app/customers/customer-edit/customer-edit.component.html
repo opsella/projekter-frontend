@@ -1,0 +1,40 @@
+<app-page-wrapper *ngIf="vm$ | async as vm">
+  <form [formGroup]="vm.customerForm" (ngSubmit)="onSubmit(vm.customerForm)">
+    <label for="name">Name: </label>
+    <input id="name" type="text" formControlName="name" />
+    <p *ngIf="vm.nameInputInvalid">Invalid name</p>
+
+    <label for="code">Code: </label>
+    <input id="code" type="text" formControlName="code" />
+    <p *ngIf="vm.codeInputInvalid">Invalid code</p>
+
+    <label for="contacts">Contacts: </label>
+    <input id="contacts" type="text" formControlName="contacts" />
+
+    <label for="category">Category: </label>
+    <input id="category" type="text" formControlName="category" />
+
+    <label for="location">Location: </label>
+    <input id="location" type="text" formControlName="location" />
+
+    <label for="locationDescription">Location Description: </label>
+    <input
+      id="locationDescription"
+      type="text"
+      formControlName="locationDescription"
+    />
+
+    <label for="status">Status: </label>
+    <input id="status" type="text" formControlName="status" />
+
+    <label for="summary">Summary: </label>
+    <input id="summary" type="text" formControlName="summary" />
+
+    <label for="description">Description: </label>
+    <input id="description" type="text" formControlName="description" />
+
+    <button mat-button type="submit" [disabled]="vm.status === 'loading'">
+      Save
+    </button>
+  </form>
+</app-page-wrapper>

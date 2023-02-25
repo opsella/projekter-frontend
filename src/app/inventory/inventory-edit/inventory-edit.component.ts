@@ -1,8 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { InventoryEditStore } from "./inventory-edit.store";
-import { Material } from "../../models/material";
-import { Equipment } from "../../models/equipment";
 
 // import { InventoryEditStore } from "./inventory-edit.store";
 
@@ -33,13 +31,5 @@ export class InventoryEditComponent {
       this.inventoryEditStore.getInventoryDetailsForEdit({ itemId, type: itemType });
       this.inventoryEditStore.setInventoryItemId(itemId);
     }
-  }
-
-  protected isMaterial(inventoryDetails: Equipment | Material | null): boolean {
-    return Material.isMaterial(inventoryDetails);
-  }
-
-  protected isEquipment(inventoryDetails: Equipment | Material | null): boolean {
-    return Equipment.isEquipment(inventoryDetails);
   }
 }

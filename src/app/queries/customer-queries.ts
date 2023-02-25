@@ -3,6 +3,7 @@ import { map, Observable } from "rxjs";
 import { Page, Pageable } from "../shared/page";
 import { CustomerResponse } from "../services/inventory-api.service";
 import { Customer } from "../models/customer";
+import { InventoryFilters } from "../inventory/inventory-data.service";
 
 export interface CustomerFilters {
   id?: string | undefined;
@@ -54,6 +55,32 @@ export function getAllCustomers(apollo: Apollo, filters: CustomerFilters): Obser
     .pipe(
       map((response) => {
         return Page.fromData<CustomerResponse>(response.data.customer).getEdges().map(Customer.fromCustomerResponse);
+      })
+    );
+}
+
+export function getCustomerById(apollo: Apollo, customerId: InventoryFilters): Observable<Customer> {
+  return apollo.watchQuery<{
+    customerById: CustomerResponse;
+  }>({
+    query: gql`
+      query GetCustomerById($customerId: UUID!) {
+        customerById(customerId: $customerId) {
+          id
+          name
+          code
+          description
+        }
+      }
+    `,
+    variables: {
+      customerId
+    }
+  })
+    .valueChanges
+    .pipe(
+      map((response) => {
+        return Customer.fromCustomerResponse(response.data.customerById);
       })
     );
 }
