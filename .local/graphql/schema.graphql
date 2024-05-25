@@ -1,56 +1,15 @@
-"""
-The `@defer` directive may be provided for fragment spreads and inline fragments to inform the executor to delay the execution of the current fragment to indicate deprioritization of the current fragment. A query with `@defer` directive will cause the request to potentially return multiple responses, where non-deferred data is delivered in the initial response and data deferred is delivered in a subsequent response. `@include` and `@skip` take precedence over `@defer`.
-"""
-directive @defer(
-  """
-  If this argument label has a value other than null, it will be passed on to the result of this defer directive. This label is intended to give client applications a way to identify to which fragment a deferred result belongs to.
-  """
-  label: String
-
-  """
-  Deferred when true.
-  """
-  if: Boolean
-) on FRAGMENT_SPREAD | INLINE_FRAGMENT
-
-"""
-The `@stream` directive may be provided for a field of `List` type so that the backend can leverage technology such as asynchronous iterators to provide a partial list in the initial response, and additional list items in subsequent responses. `@include` and `@skip` take precedence over `@stream`.
-"""
-directive @stream(
-  """
-  If this argument label has a value other than null, it will be passed on to the result of this stream directive. This label is intended to give client applications a way to identify to which fragment a streamed result belongs to.
-  """
-  label: String
-
-  """
-  The initial elements that shall be send down to the consumer.
-  """
-  initialCount: Int! = 0
-
-  """
-  Streamed when true.
-  """
-  if: Boolean
-) on FIELD
-
-directive @authorize(
-  """
-  The name of the authorization policy that determines access to the annotated resource.
-  """
-  policy: String
-
-  """
-  Roles that are allowed to access the annotated resource.
-  """
-  roles: [String!]
-
-  """
-  Defines when when the resolver shall be executed.By default the resolver is executed after the policy has determined that the current user is allowed to access the field.
-  """
-  apply: ApplyPolicy! = BEFORE_RESOLVER
-) repeatable on SCHEMA | OBJECT | FIELD_DEFINITION
-
 scalar UUID
+
+"""
+Represents an instant on the global timeline, with nanosecond resolution.
+"""
+scalar Instant
+
+enum ApplyPolicy {
+  BEFORE_RESOLVER
+  AFTER_RESOLVER
+  VALIDATION
+}
 
 type Mutation {
   registerRootTenant(
@@ -69,29 +28,10 @@ type Mutation {
   addProjectStageToProject(
     input: AddProjectStageToProjectInput!
   ): ProjectStageAdded!
-  projects(
-    input: QueryProjectsInput
-
-    """
-    Returns the first _n_ elements from the list.
-    """
-    first: Int
-
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """
-    Returns the last _n_ elements from the list.
-    """
-    last: Int
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-  ): ProjectsConnection
+  applyRequisitionToProject(
+    input: ApplyRequisitionToProjectInput!
+  ): ApplyRequisitionPayload!
+  createCustomer(input: CreateCustomerInput!): CustomerCreated!
 }
 
 type Query {
@@ -171,6 +111,8 @@ type Query {
   ): InventoryItemsConnection
   inventoryById(id: UUID!): InventoryEntity!
   projects(
+    input: QueryProjectsInput!
+
     """
     Returns the first _n_ elements from the list.
     """
@@ -191,36 +133,6 @@ type Query {
     """
     before: String
   ): ProjectsConnection
-}
-
-"""
-Represents an instant on the global timeline, with nanosecond resolution.
-"""
-scalar Instant
-
-enum ApplyPolicy {
-  BEFORE_RESOLVER
-  AFTER_RESOLVER
-}
-
-"""
-A connection to a list of items.
-"""
-type ProjectsConnection {
-  """
-  Information to aid in pagination.
-  """
-  pageInfo: PageInfo!
-
-  """
-  A list of edges.
-  """
-  edges: [ProjectsEdge!]
-
-  """
-  A flattened list of the nodes.
-  """
-  nodes: [ProjectEntity!]
 }
 
 """
@@ -284,6 +196,26 @@ type InventoryItemsConnection {
 }
 
 """
+A connection to a list of items.
+"""
+type ProjectsConnection {
+  """
+  Information to aid in pagination.
+  """
+  pageInfo: PageInfo!
+
+  """
+  A list of edges.
+  """
+  edges: [ProjectsEdge!]
+
+  """
+  A flattened list of the nodes.
+  """
+  nodes: [GetProjectsPayload!]
+}
+
+"""
 Information about pagination in a connection.
 """
 type PageInfo {
@@ -306,39 +238,6 @@ type PageInfo {
   When paginating forwards, the cursor to continue.
   """
   endCursor: String
-}
-
-type ProjectEntity {
-  id: UUID!
-  tenantId: UUID!
-  name: String!
-  code: String!
-  shortDescription: String!
-  description: String!
-  statusCode: String!
-  startDate: Instant
-  expectedStartDate: Instant
-  endDate: Instant
-  expectedEndDate: Instant
-  stages: [ProjectStageEntity!]!
-  appliedInventory: [ProjectInventoryEntity!]!
-  created: Instant!
-  updated: Instant!
-}
-
-"""
-An edge in a connection.
-"""
-type ProjectsEdge {
-  """
-  A cursor for use in pagination.
-  """
-  cursor: String!
-
-  """
-  The item at the end of the edge.
-  """
-  node: ProjectEntity!
 }
 
 type MaterialEntity {
@@ -417,6 +316,62 @@ type InventoryItemsEdge {
   node: InventoryEntity!
 }
 
+type GetProjectsPayload {
+  requisitions: [RequisitionPayload!]!
+  tenantId: UUID!
+  projectId: UUID!
+  name: String!
+  code: String!
+  description: String!
+  shortDescription: String!
+  expectedStartDate: Instant
+  actualStartDate: Instant
+  expectedEndDate: Instant
+  actualEndDate: Instant
+  statusCode: String!
+  stages: [ProjectStageEntity!]!
+  inventoryItems: [ProjectInventoryEntity!]!
+}
+
+"""
+An edge in a connection.
+"""
+type ProjectsEdge {
+  """
+  A cursor for use in pagination.
+  """
+  cursor: String!
+
+  """
+  The item at the end of the edge.
+  """
+  node: GetProjectsPayload!
+}
+
+input UpdateMaterialInput {
+  materialId: UUID!
+  materialName: String
+  materialCode: String
+  materialDescription: String
+}
+
+type UpdateMaterialPayload {
+  materialId: UUID!
+}
+
+input RegisterMaterialInput {
+  materialName: String!
+  materialCode: String!
+  materialDescription: String!
+  quantityOnHand: Int!
+}
+
+type RegisterMaterialPayload {
+  tenantId: UUID!
+  materialId: UUID!
+  name: String!
+}
+
 input UpdateEquipmentInput {
   id: UUID!
   equipmentName: String
@@ -474,30 +429,6 @@ type RegistrationComplete {
   employeeId: UUID!
 }
 
-type RegisterMaterialPayload {
-  tenantId: UUID!
-  materialId: UUID!
-  name: String!
-}
-
-input RegisterMaterialInput {
-  materialName: String!
-  materialCode: String!
-  materialDescription: String!
-  quantityOnHand: Int!
-}
-
-type UpdateMaterialPayload {
-  materialId: UUID!
-}
-
-input UpdateMaterialInput {
-  materialId: UUID!
-  materialName: String
-  materialCode: String
-  materialDescription: String
-}
-
 type CreateProjectPayload {
   tenantId: UUID!
   projectId: UUID!
@@ -537,11 +468,36 @@ input AddProjectStageToProjectInput {
   description: String!
 }
 
-input QueryProjectsInput {
-  projectId: UUID
-  projectName: String
-  projectCode: String
-  includeStages: Boolean
+type ApplyRequisitionPayload {
+  requisitionId: UUID!
+  projectId: UUID!
+  projectStageId: UUID
+}
+
+input ApplyRequisitionToProjectInput {
+  projectId: UUID!
+  projectStageId: UUID
+  requiredByDate: Instant!
+  releasedByDate: Instant!
+  lineItems: [RequisitionLineItemInput!]!
+}
+
+type CustomerCreated {
+  eventType: String!
+  customerId: UUID!
+}
+
+input CreateCustomerInput {
+  name: String!
+  code: String!
+  status: String!
+  category: String!
+  location: String!
+  locationDescription: String!
+  summary: String!
+  description: String!
+  primaryContact: AssignCustomerContactInput!
+  otherContacts: [AssignCustomerContactInput!]
 }
 
 type TenantResponse {
@@ -553,31 +509,6 @@ input QueryMaterialsInput {
   descriptionContains: String
   code: String
   name: String
-}
-
-enum InventoryTypes {
-  EQUIPMENT
-  MATERIAL
-}
-
-input QueryEquipmentInput {
-  equipmentId: UUID
-  descriptionContains: String
-  code: String
-  name: String
-}
-
-type ProjectInventoryEntity {
-  projectId: UUID!
-  project: ProjectEntity!
-  inventoryItemId: UUID!
-  quantity: Int!
-}
-
-input QueryInventoryItemsInput {
-  inventoryItemId: UUID
-  quantity: QuantityQueryInput
-  inventoryType: InventoryTypes
 }
 
 type ProjectStageEntity {
@@ -596,9 +527,44 @@ type ProjectStageEntity {
   updated: Instant!
 }
 
-type ProjectStageInventoryEntity {
-  projectStageId: UUID!
-  projectStage: ProjectStageEntity!
+input QueryEquipmentInput {
+  equipmentId: UUID
+  descriptionContains: String
+  code: String
+  name: String
+}
+
+type RequisitionPayload {
+  requisitionId: UUID!
+  projectId: UUID!
+  projectStageId: UUID
+  requiredByDate: Instant!
+  releasedByDate: Instant!
+  lineItems: [RequisitionLineItemEntity!]!
+}
+
+input QueryInventoryItemsInput {
+  inventoryItemId: UUID
+  quantity: QuantityQueryInput
+  inventoryType: InventoryTypes
+}
+
+enum InventoryTypes {
+  EQUIPMENT
+  MATERIAL
+}
+
+input QueryProjectsInput {
+  projectId: UUID
+  projectName: String
+  projectCode: String
+  includeStages: Boolean
+  includeInventory: Boolean
+}
+
+type ProjectInventoryEntity {
+  projectId: UUID!
+  project: ProjectEntity!
   inventoryItemId: UUID!
   quantity: Int!
 }
@@ -608,15 +574,80 @@ input QuantityQueryInput {
   comparisonOperation: ComparisonOperation!
 }
 
+type RequisitionLineItemEntity {
+  requisitionId: UUID!
+  resourceId: UUID!
+  lineItemType: RequisitionLineItemTypes!
+  quantityRequired: Int!
+  requisition: RequisitionEntity!
+  createdDate: Instant!
+  lastModifiedDate: Instant!
+}
+
+type ProjectStageInventoryEntity {
+  projectStageId: UUID!
+  projectStage: ProjectStageEntity!
+  inventoryItemId: UUID!
+  quantity: Int!
+}
+
+type ProjectEntity {
+  id: UUID!
+  tenantId: UUID!
+  name: String!
+  code: String!
+  shortDescription: String!
+  description: String!
+  statusCode: String!
+  startDate: Instant
+  expectedStartDate: Instant
+  endDate: Instant
+  expectedEndDate: Instant
+  stages: [ProjectStageEntity!]!
+  appliedInventory: [ProjectInventoryEntity!]!
+  created: Instant!
+  updated: Instant!
+}
+
 type SubTenant {
   id: UUID!
   parentId: UUID!
   name: String!
 }
 
+input AssignCustomerContactInput {
+  name: String!
+  phoneNumber: String!
+  preferredContactMethod: String!
+  notes: String!
+}
+
+input RequisitionLineItemInput {
+  resourceId: UUID!
+  lineItemType: RequisitionLineItemTypes!
+  quantityRequired: Int!
+}
+
 input AppliedInventoryInput {
   inventoryItemId: UUID!
   quantity: Int!
+}
+
+enum RequisitionLineItemTypes {
+  EMPLOYEE
+  MATERIAL
+  EQUIPMENT
+}
+
+type RequisitionEntity {
+  id: UUID!
+  projectId: UUID!
+  projectStageId: UUID
+  requiredByDate: Instant!
+  releasedByDate: Instant!
+  requisitionLineItems: [RequisitionLineItemEntity!]!
+  createdDate: Instant!
+  lastModifiedDate: Instant!
 }
 
 enum ComparisonOperation {
