@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { OidcSecurityService } from "angular-auth-oidc-client";
 import { AuthenticationService } from "./authentication/authentication.service";
+import { BehaviorSubject } from "rxjs";
 
 @Component({
   selector    : "app-root",
@@ -9,6 +10,7 @@ import { AuthenticationService } from "./authentication/authentication.service";
 })
 export class AppComponent implements OnInit {
   public title = "projekter-frontend";
+  protected isAuthenticated$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     private oidcSecurityService: OidcSecurityService,
@@ -20,6 +22,7 @@ export class AppComponent implements OnInit {
       .checkAuth()
       .subscribe(loginResponse => {
         const { isAuthenticated, userData, accessToken, idToken, configId } = loginResponse;
+        this.isAuthenticated$.next(isAuthenticated);
       });
   }
 }

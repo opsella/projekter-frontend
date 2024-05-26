@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AuthService } from "@auth0/auth0-angular";
+import { OidcSecurityService } from "angular-auth-oidc-client";
 
 @Component({
   selector    : "app-settings",
@@ -9,6 +9,6 @@ import { AuthService } from "@auth0/auth0-angular";
 export class SettingsComponent  {
 
   constructor(
-    public auth: AuthService
+    public auth: OidcSecurityService
   ) { }
 }

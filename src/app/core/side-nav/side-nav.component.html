@@ -16,13 +16,13 @@
     </div>
 
     <div class="user-info">
-      <h4>{{ (auth.user$ | async)?.name }}</h4>
+      <h4>{{ (auth.userData$ | async)?.userData.name }}</h4>
       <h5>Admin</h5>
     </div>
 
     <app-dropdown-avatar
       [options]="options"
-      [avatarUrl]="(auth.user$ | async)?.picture"
+      [avatarUrl]="(auth.userData$ | async)?.userData.picture"
     ></app-dropdown-avatar>
   </div>
 </aside>

@@ -2,13 +2,15 @@
   <ul>
     <li>Name: {{ (auth.userData$ | async)?.userData.name }}</li>
     <li>Username: {{ (auth.userData$ | async)?.userData.nickname }}</li>
-    <li>Email: {{ (auth.userData$ | async)?.email }}</li>
+    <li>Email: {{ (auth.userData$ | async)?.userData.email }}</li>
     <span>{{
-      (auth.userData$ | async)?.email_verified ? "Verified" : "Unverified"
+      (auth.userData$ | async)?.userData.email_verified
+        ? "Verified"
+        : "Unverified"
     }}</span>
-    <li>Phone: {{ (auth.userData$ | async)?.phone_number }}</li>
+    <li>Phone: {{ (auth.userData$ | async)?.userData.phone_number }}</li>
     <span>{{
-      (auth.userData$ | async)?.phone_number_verified
+      (auth.userData$ | async)?.userData.phone_number_verified
         ? "Verified"
         : "Unverified"
     }}</span>

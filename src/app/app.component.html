@@ -1,5 +1,5 @@
 <app-login
-  *ngIf="(auth.isAuthenticated$ | async) === false; else loggedIn"
+  *ngIf="(isAuthenticated$ | async) === false; else loggedIn"
 ></app-login>
 
 <ng-template #loggedIn>
