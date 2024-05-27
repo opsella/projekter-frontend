@@ -7,6 +7,7 @@ import { SharedModule } from "../shared/shared.module";
 import { AuthPageWrapperComponent } from "./auth-page-wrapper/auth-page-wrapper.component";
 import { MatButtonModule } from "@angular/material/button";
 import { AuthModule } from "angular-auth-oidc-client";
+import { environment } from "../../environments/environment";
 
 
 @NgModule({
@@ -23,17 +24,7 @@ import { AuthModule } from "angular-auth-oidc-client";
     SharedModule,
     MatButtonModule,
     AuthModule.forRoot({
-      config: {
-        authority                            : "https://authority.opsella.com",
-        redirectUrl                          : window.location.origin,
-        postLogoutRedirectUri                : window.location.origin,
-        clientId                             : "projekter.client",
-        scope                                : "openid profile offline_access email tenant-management-api.read tenant-management-api.write", // 'openid profile offline_access ' + your scopes
-        responseType                         : "code",
-        silentRenew                          : true,
-        useRefreshToken                      : true,
-        renewTimeBeforeTokenExpiresInSeconds : 30,
-      }
+      config: environment.oidc
     })
   ],
   exports: [

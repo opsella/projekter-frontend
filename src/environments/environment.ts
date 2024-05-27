@@ -3,20 +3,24 @@
 // The list of file replacements can be found in `angular.json`.
 
 
+import { OpenIdConfiguration } from "angular-auth-oidc-client";
+
 export const environment = {
   production : false,
-  auth0      : {
-    clientId         : "SHHXAgPz2cfZerNzPQM31TTYEy6jSDVQ",
-    domain           : "dev-8nen27hb.us.auth0.com",
-    audience         : "https://api.projekter.opsella.com",
-    useRefreshTokens : true,
-    cacheLocation    : "localstorage",
-    httpInterceptor  : {
-      allowedList: [{
-        uri: "https://localhost:7237/graphql*"
-      }]
-    }
-  }
+  oidc       : {
+    authority               : "https://localhost:5443",
+    redirectUrl             : window.location.origin,
+    postLogoutRedirectUri   : window.location.origin,
+    clientId                : "projekter.client",
+    scope                   : "openid profile offline_access email", // 'openid profile offline_access ' + your scopes
+    responseType            : "code",
+    customParamsCodeRequest : {
+      client_secret: "ZAQ!2wsxZAQ!2wsx"
+    },
+    silentRenew                          : true,
+    useRefreshToken                      : true,
+    renewTimeBeforeTokenExpiresInSeconds : 30,
+  } as OpenIdConfiguration,
 };
 
 /*

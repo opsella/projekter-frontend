@@ -1,27 +1,35 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { AuthenticationApi } from "./authentication-api";
 import { OidcSecurityService } from "angular-auth-oidc-client";
-import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthenticationService implements AuthenticationApi {
-  public user$?: Observable<{ name: string }> = undefined;
+  private readonly oidcSecurityService: OidcSecurityService = inject(OidcSecurityService);
+  private readonly authenticated$ = this.oidcSecurityService.isAuthenticated$
+    .subscribe(result => {
+      this.isAuthenticated = result.isAuthenticated;
+      console.warn("Authenticated: " + this.isAuthenticated);
+    });
+  public configuration$ = this.oidcSecurityService.getConfiguration();
+  public userData$ = this.oidcSecurityService.userData$;
 
-  constructor(
-    public oidcSecurityService: OidcSecurityService
-  ) {
-  }
+  public isAuthenticated: boolean = false;
 
-  public login(): Promise<string> {
+  public login(): void {
     this.oidcSecurityService.authorize();
-    return Promise.resolve("username");
   }
 
-  public logout(): Promise<void> {
-    this.oidcSecurityService.logoff()
+  public logout(): void {
+    this.oidcSecurityService
+      .logoff()
       .subscribe(result => console.log(result));
-    return Promise.resolve(undefined);
+  }
+
+  public refreshSession(): void {
+    this.oidcSecurityService
+      .forceRefreshSession()
+      .subscribe(result => console.log(result));
   }
 }
