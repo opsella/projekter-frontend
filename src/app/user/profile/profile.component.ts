@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { OidcSecurityService } from "angular-auth-oidc-client";
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
   selector    : "app-profile",
@@ -7,9 +7,8 @@ import { OidcSecurityService } from "angular-auth-oidc-client";
   styleUrls   : ["./profile.component.scss"]
 })
 export class ProfileComponent {
-  public userData = this.auth.userData$;
 
   constructor(
-    public auth: OidcSecurityService
+    public auth: AuthService
   ) { }
 }

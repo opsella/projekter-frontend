@@ -6,14 +6,12 @@ import { LoginComponent } from "./login/login.component";
 import { SharedModule } from "../shared/shared.module";
 import { AuthPageWrapperComponent } from "./auth-page-wrapper/auth-page-wrapper.component";
 import { MatButtonModule } from "@angular/material/button";
-import { AuthModule } from "angular-auth-oidc-client";
-import { environment } from "../../environments/environment";
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    AuthPageWrapperComponent,
+    AuthPageWrapperComponent
   ],
   providers: [{
     provide  : AUTH_API_TOKEN,
@@ -23,14 +21,10 @@ import { environment } from "../../environments/environment";
     CommonModule,
     SharedModule,
     MatButtonModule,
-    AuthModule.forRoot({
-      config: environment.oidc
-    })
   ],
   exports: [
     LoginComponent,
-    AuthPageWrapperComponent,
-    AuthModule,
+    AuthPageWrapperComponent
   ]
 })
 export class AuthenticationModule { }

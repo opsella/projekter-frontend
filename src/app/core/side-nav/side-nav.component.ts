@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { OidcSecurityService } from "angular-auth-oidc-client";
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
   selector    : "app-side-nav",
@@ -30,13 +30,13 @@ export class SideNavComponent {
     }
   ];
   constructor(
-    public auth: OidcSecurityService,
+    protected auth: AuthService,
     private router: Router
   ) { }
 
   public logout() {
     // TODO: update this after the oidc changes
-    this.auth.logoff();
+    this.auth.logout();
   }
 
   public async settings() {

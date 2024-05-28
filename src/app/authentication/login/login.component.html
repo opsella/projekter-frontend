@@ -4,7 +4,12 @@
   </div>
 
   <div class="button-container">
-    <button mat-button mat-raised-button color="primary" (click)="auth.login()">
+    <button
+      mat-button
+      mat-raised-button
+      color="primary"
+      (click)="auth.loginWithRedirect()"
+    >
       Login
     </button>
     <button mat-button mat-raised-button color="accent">Signup</button>
