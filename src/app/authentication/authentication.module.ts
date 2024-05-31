@@ -6,12 +6,13 @@ import { LoginComponent } from "./login/login.component";
 import { SharedModule } from "../shared/shared.module";
 import { AuthPageWrapperComponent } from "./auth-page-wrapper/auth-page-wrapper.component";
 import { MatButtonModule } from "@angular/material/button";
+import { AuthenticationRouteModule } from "./authentication-route.module";
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    AuthPageWrapperComponent
+    AuthPageWrapperComponent,
   ],
   providers: [{
     provide  : AUTH_API_TOKEN,
@@ -19,12 +20,13 @@ import { MatButtonModule } from "@angular/material/button";
   }],
   imports: [
     CommonModule,
+    AuthenticationRouteModule,
     SharedModule,
     MatButtonModule,
   ],
   exports: [
     LoginComponent,
-    AuthPageWrapperComponent
+    AuthPageWrapperComponent,
   ]
 })
 export class AuthenticationModule { }

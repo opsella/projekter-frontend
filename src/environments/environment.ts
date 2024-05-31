@@ -10,7 +10,6 @@ export const environment = {
   auth0      : {
     clientId         : "SHHXAgPz2cfZerNzPQM31TTYEy6jSDVQ",
     domain           : "dev-8nen27hb.us.auth0.com",
-    audience         : "https://api.projekter.opsella.com",
     useRefreshTokens : true,
     cacheLocation    : "localstorage",
     httpInterceptor  : {
@@ -19,8 +18,9 @@ export const environment = {
       }]
     },
     authorizationParams: {
+      audience     : "https://api.projekter.opsella.com",
       redirect_uri : "http://localhost:4200",
-      scope        : "openid profile offline_access email",
+      scope        : "openid profile offline_access email project:read tenant:delete",
     }
   } as AuthConfig
 };

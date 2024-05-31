@@ -1,8 +1,4 @@
-<app-login
-  *ngIf="(auth.isAuthenticated$ | async) === false; else loggedIn"
-></app-login>
-
-<ng-template #loggedIn>
+<div *ngIf="(auth.isAuthenticated$ | async) === true; else loggedOut">
   <div class="main-application">
     <app-top-nav></app-top-nav>
 
@@ -12,4 +8,8 @@
       <app-main-content class="content"></app-main-content>
     </div>
   </div>
+</div>
+
+<ng-template #loggedOut>
+  <router-outlet></router-outlet>
 </ng-template>
