@@ -1,7 +1,7 @@
 import { ComponentStore } from "@ngrx/component-store";
 import { InventoryDataService } from "../../inventory-data.service";
 import { Injectable } from "@angular/core";
-import { catchError, EMPTY, Observable, switchMap, tap } from "rxjs";
+import { Observable } from "rxjs";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { Material } from "../../../models/material";
 
@@ -34,22 +34,7 @@ export class MaterialEditFormStore extends ComponentStore<MaterialEditFormState>
     filters$: Observable<{values: Material}>
   ) => {
     return filters$.pipe(
-      switchMap(
-        (formData) => this.inventoryDataService.mutateInventoryMaterial(formData.values).pipe(
-          tap({
-            next: (data) => {
-              if (data?.data) {
-                this.setStatusSucceeded();
-                this.clearForm();
-              } else {
-                this.setStatusFailed();
-              }
-            },
-            error: () => EMPTY
-          }),
-          catchError(() => EMPTY)
-        )
-      )
+
     );
   });
 

@@ -14,7 +14,7 @@ export const environment = {
     cacheLocation    : "localstorage",
     httpInterceptor  : {
       allowedList: [{
-        uri: "https://localhost:7237/graphql*"
+        uri: "/users/*",
       }]
     },
     authorizationParams: {
@@ -22,7 +22,10 @@ export const environment = {
       redirect_uri : "http://localhost:4200",
       scope        : "openid profile offline_access email project:read tenant:delete",
     }
-  } as AuthConfig
+  } as AuthConfig,
+  projekterApi: {
+    host: "http://localhost:5261"
+  }
 };
 
 /*

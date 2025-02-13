@@ -1,15 +1,1 @@
-<app-page-wrapper [title]="title">
-  <div *ngIf="vm$ | async as vm" class="inventory-edit">
-    <app-equipment-edit-form
-      *ngIf="vm.isEquipment$ && vm.hasData$"
-      [details]="vm.inventoryItem$"
-    ></app-equipment-edit-form>
-
-    <app-material-edit-form
-      *ngIf="vm.isMaterial$ && vm.hasData$"
-      [details]="vm.inventoryItem$"
-    ></app-material-edit-form>
-
-    <app-inventory-add *ngIf="!editInventory"></app-inventory-add>
-  </div>
-</app-page-wrapper>
+<app-page-wrapper [title]="title"> </app-page-wrapper>

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthService } from "@auth0/auth0-angular";
+import { AuthenticationService } from "../../authentication/authentication.service";
 
 @Component({
   selector    : "app-side-nav",
@@ -30,7 +30,7 @@ export class SideNavComponent {
     }
   ];
   constructor(
-    protected auth: AuthService,
+    protected auth: AuthenticationService,
     private router: Router
   ) { }
 

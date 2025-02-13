@@ -1,5 +1,4 @@
-import { Component, OnInit } from "@angular/core";
-import { InventoryListStore } from "./inventory-list.store";
+import { Component } from "@angular/core";
 
 export interface InventoryListData {
   id: string;
@@ -14,17 +13,6 @@ export interface InventoryListData {
   selector    : "app-inventory-list",
   templateUrl : "./inventory-list.component.html",
   styleUrls   : ["./inventory-list.component.scss"],
-  providers   : [InventoryListStore]
 })
-export class InventoryListComponent implements OnInit {
-  public readonly vm$ = this.inventoryListStore.vm$;
-
-  constructor(
-    private readonly inventoryListStore: InventoryListStore
-  ) {
-  }
-
-  public ngOnInit() {
-    this.inventoryListStore.getInventoryTableData({ filters: {}, type: "equipment" });
-  }
+export class InventoryListComponent {
 }

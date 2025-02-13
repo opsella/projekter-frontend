@@ -1,14 +1,12 @@
 <app-page-wrapper title="Profile">
   <ul>
-    <li>Name: {{ (auth.user$ | async)?.name }}</li>
-    <li>Username: {{ (auth.user$ | async)?.nickname }}</li>
-    <li>Email: {{ (auth.user$ | async)?.email }}</li>
+    <li>Name: {{ auth.user()?.name }}</li>
+    <li>Username: {{ auth.user()?.nickname }}</li>
+    <li>Email: {{ auth.user()?.email }}</li>
+    <span>{{ auth.user()?.email_verified ? "Verified" : "Unverified" }}</span>
+    <li>Phone: {{ auth.user()?.phone_number }}</li>
     <span>{{
-      (auth.user$ | async)?.email_verified ? "Verified" : "Unverified"
-    }}</span>
-    <li>Phone: {{ (auth.user$ | async)?.phone_number }}</li>
-    <span>{{
-      (auth.user$ | async)?.phone_number_verified ? "Verified" : "Unverified"
+      auth.user()?.phone_number_verified ? "Verified" : "Unverified"
     }}</span>
     <li>Position: Admin</li>
   </ul>

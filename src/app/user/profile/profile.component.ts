@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AuthService } from "@auth0/auth0-angular";
+import { AuthenticationService } from "../../authentication/authentication.service";
 
 @Component({
   selector    : "app-profile",
@@ -9,6 +9,6 @@ import { AuthService } from "@auth0/auth0-angular";
 export class ProfileComponent {
 
   constructor(
-    public auth: AuthService
+    public auth: AuthenticationService
   ) { }
 }

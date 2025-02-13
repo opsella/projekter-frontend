@@ -9,7 +9,6 @@ import { CoreModule } from "./core/core.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
 import { environment } from "../environments/environment";
-import { GraphQLModule } from "./graphql.module";
 import { ActiveTenantInterceptor } from "./core/active-tenant.interceptor";
 import { MatInputModule } from "@angular/material/input";
 
@@ -23,7 +22,6 @@ import { MatInputModule } from "@angular/material/input";
     BrowserAnimationsModule,
     MatExpansionModule,
     MatInputModule,
-    GraphQLModule,
     HttpClientModule,
     AuthModule.forRoot(environment.auth0),
   ],
