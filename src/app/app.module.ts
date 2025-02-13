@@ -6,15 +6,14 @@ import { AuthenticationModule } from "./authentication/authentication.module";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { CoreModule } from "./core/core.module";
-import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
 import { environment } from "../environments/environment";
 import { ActiveTenantInterceptor } from "./core/active-tenant.interceptor";
 import { MatInputModule } from "@angular/material/input";
 
-@NgModule({
-  declarations : [AppComponent],
-  imports      : [
+@NgModule({ declarations : [AppComponent],
+  bootstrap    : [AppComponent], imports      : [
     CoreModule,
     BrowserModule,
     AppRoutingModule,
@@ -22,10 +21,8 @@ import { MatInputModule } from "@angular/material/input";
     BrowserAnimationsModule,
     MatExpansionModule,
     MatInputModule,
-    HttpClientModule,
-    AuthModule.forRoot(environment.auth0),
-  ],
-  providers: [
+    AuthModule.forRoot(environment.auth0)
+  ], providers: [
     {
       provide  : HTTP_INTERCEPTORS,
       useClass : AuthHttpInterceptor,
@@ -35,9 +32,8 @@ import { MatInputModule } from "@angular/material/input";
       provide  : HTTP_INTERCEPTORS,
       useClass : ActiveTenantInterceptor,
       multi    : true
-    }
-  ],
-  bootstrap: [AppComponent],
-})
+    },
+    provideHttpClient(withInterceptorsFromDi())
+  ] })
 export class AppModule {
 }
