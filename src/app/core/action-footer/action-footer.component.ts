@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector    : "app-action-footer",
-  templateUrl : "./action-footer.component.html",
-  styleUrls   : ["./action-footer.component.scss"]
+    selector: "app-action-footer",
+    templateUrl: "./action-footer.component.html",
+    styleUrls: ["./action-footer.component.scss"],
+    standalone: false
 })
 export class ActionFooterComponent {
   @Input() public actions: Action[] | undefined;

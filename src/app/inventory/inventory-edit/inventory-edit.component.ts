@@ -4,9 +4,10 @@ import { Router } from "@angular/router";
 // import { InventoryEditStore } from "./inventory-edit.store";
 
 @Component({
-  selector    : "app-inventory-edit",
-  templateUrl : "./inventory-edit.component.html",
-  styleUrls   : ["./inventory-edit.component.scss"],
+    selector: "app-inventory-edit",
+    templateUrl: "./inventory-edit.component.html",
+    styleUrls: ["./inventory-edit.component.scss"],
+    standalone: false
 })
 export class InventoryEditComponent {
   protected readonly title: string = "Add Inventory";

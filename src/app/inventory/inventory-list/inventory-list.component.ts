@@ -10,9 +10,10 @@ export interface InventoryListData {
 }
 
 @Component({
-  selector    : "app-inventory-list",
-  templateUrl : "./inventory-list.component.html",
-  styleUrls   : ["./inventory-list.component.scss"],
+    selector: "app-inventory-list",
+    templateUrl: "./inventory-list.component.html",
+    styleUrls: ["./inventory-list.component.scss"],
+    standalone: false
 })
 export class InventoryListComponent {
 }

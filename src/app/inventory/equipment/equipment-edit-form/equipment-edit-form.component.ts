@@ -3,10 +3,11 @@ import { EquipmentEditFormStore } from "./equipment-edit-form.store";
 import { FormGroup } from "@angular/forms";
 
 @Component({
-  selector    : "app-equipment-edit-form",
-  templateUrl : "./equipment-edit-form.component.html",
-  styleUrls   : ["./equipment-edit-form.component.scss"],
-  providers   : [EquipmentEditFormStore]
+    selector: "app-equipment-edit-form",
+    templateUrl: "./equipment-edit-form.component.html",
+    styleUrls: ["./equipment-edit-form.component.scss"],
+    providers: [EquipmentEditFormStore],
+    standalone: false
 })
 export class EquipmentEditFormComponent {
   @Input() public set details(data: any) {

@@ -3,10 +3,11 @@ import { FormGroup } from "@angular/forms";
 import { MaterialEditFormStore } from "./material-edit-form.store";
 
 @Component({
-  selector    : "app-material-edit-form",
-  templateUrl : "./material-edit-form.component.html",
-  styleUrls   : ["./material-edit-form.component.scss"],
-  providers   : [MaterialEditFormStore]
+    selector: "app-material-edit-form",
+    templateUrl: "./material-edit-form.component.html",
+    styleUrls: ["./material-edit-form.component.scss"],
+    providers: [MaterialEditFormStore],
+    standalone: false
 })
 export class MaterialEditFormComponent {
   @Input() public set details(data: any) {

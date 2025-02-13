@@ -2,9 +2,10 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 
 @Component({
-  selector    : "app-inventory-view",
-  templateUrl : "./inventory-details.component.html",
-  styleUrls   : ["./inventory-details.component.scss"],
+    selector: "app-inventory-view",
+    templateUrl: "./inventory-details.component.html",
+    styleUrls: ["./inventory-details.component.scss"],
+    standalone: false
 })
 export class InventoryDetailsComponent {
   constructor(

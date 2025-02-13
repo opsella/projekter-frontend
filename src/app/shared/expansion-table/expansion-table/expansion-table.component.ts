@@ -7,15 +7,16 @@ import { TableFilterActions } from "../table-filters/table-filter-actions";
 import { ExpansionTableStore } from "../expansion-table.store";
 
 @Component({
-  selector    : "app-expansion-table",
-  templateUrl : "./expansion-table.component.html",
-  styleUrls   : ["./expansion-table.component.scss"],
-  animations  : [trigger("detailExpand", [
-    state("collapsed", style({ height: "0px", minHeight: "0" })),
-    state("expanded", style({ height: "*" })),
-    transition("expanded <=> collapsed", animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")),
-  ]),],
-  providers: [ExpansionTableStore]
+    selector: "app-expansion-table",
+    templateUrl: "./expansion-table.component.html",
+    styleUrls: ["./expansion-table.component.scss"],
+    animations: [trigger("detailExpand", [
+            state("collapsed", style({ height: "0px", minHeight: "0" })),
+            state("expanded", style({ height: "*" })),
+            transition("expanded <=> collapsed", animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")),
+        ]),],
+    providers: [ExpansionTableStore],
+    standalone: false
 })
 export class ExpansionTableComponent {
   @Input() public set data(data: ExpandableData<unknown>[]) {

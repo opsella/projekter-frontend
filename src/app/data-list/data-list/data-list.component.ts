@@ -3,9 +3,10 @@ import { ArrayDataSource, CollectionViewer, DataSource, ListRange } from "@angul
 import { Observable } from "rxjs";
 
 @Component({
-  selector    : "app-data-list",
-  templateUrl : "./data-list.component.html",
-  styleUrls   : ["./data-list.component.scss"]
+    selector: "app-data-list",
+    templateUrl: "./data-list.component.html",
+    styleUrls: ["./data-list.component.scss"],
+    standalone: false
 })
 export class DataListComponent<TData>  {
   @Input() public data: DataSource<TData> = new ArrayDataSource<TData>([]);

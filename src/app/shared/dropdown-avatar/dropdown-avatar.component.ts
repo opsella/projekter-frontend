@@ -1,9 +1,10 @@
 import { Component, Input } from "@angular/core";
 
 @Component({
-  selector    : "app-dropdown-avatar",
-  templateUrl : "./dropdown-avatar.component.html",
-  styleUrls   : ["./dropdown-avatar.component.scss"]
+    selector: "app-dropdown-avatar",
+    templateUrl: "./dropdown-avatar.component.html",
+    styleUrls: ["./dropdown-avatar.component.scss"],
+    standalone: false
 })
 export class DropdownAvatarComponent  {
     @Input() public options: DropDownAvatarElementConfig[] = [];
