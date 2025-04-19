@@ -1,13 +1,14 @@
 <app-page-wrapper title="Profile">
   <ul>
-    <li>Name: {{ auth.user()?.name }}</li>
+    <li>Name: {{ auth.user()?.firstname }} {{ auth.user()?.lastname }}</li>
     <li>Username: {{ auth.user()?.nickname }}</li>
     <li>Email: {{ auth.user()?.email }}</li>
-    <span>{{ auth.user()?.email_verified ? "Verified" : "Unverified" }}</span>
-    <li>Phone: {{ auth.user()?.phone_number }}</li>
-    <span>{{
-      auth.user()?.phone_number_verified ? "Verified" : "Unverified"
-    }}</span>
-    <li>Position: Admin</li>
+    <span>{{ auth.user()?.emailVerified ? "Verified" : "Unverified" }}</span>
+  </ul>
+
+  <ul>
+    @for (permission of auth.permissions(); track permission.permissionName) {
+      <li>{{ permission.permissionName }}: {{ permission.description }}</li>
+    }
   </ul>
 </app-page-wrapper>

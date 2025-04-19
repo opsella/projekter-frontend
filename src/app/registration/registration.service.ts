@@ -1,14 +1,16 @@
-import { Injectable } from "@angular/core";
-import { map, Observable } from "rxjs";
-import { RequestService } from "../core/request.service";
-import { JsonObject, JsonProperty } from "typescript-json-serializer";
-import { ApiResponse } from "../models/api/api-response";
+import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { RequestService } from '../core/request.service';
+import { JsonObject, JsonProperty } from 'typescript-json-serializer';
+import { ApiResponse } from '../models/api/api-response';
 
 @JsonObject()
 export class UserInfoResponse {
   constructor(
     @JsonProperty({ name: "user_id" })
     public id: string,
+    @JsonProperty({ name: "tenant_id" })
+    public tenantId: string,
     @JsonProperty({ name: "username" })
     public username: string,
     @JsonProperty({ name: "nickname" })

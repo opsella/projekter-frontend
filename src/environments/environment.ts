@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-import { AuthConfig } from "@auth0/auth0-angular";
+import { AuthConfig } from '@auth0/auth0-angular';
 
 export const environment = {
   production : false,
@@ -19,7 +19,7 @@ export const environment = {
     },
     authorizationParams: {
       audience     : "https://api.projekter.opsella.com",
-      redirect_uri : "http://localhost:4200",
+      redirect_uri : window.location.origin,
       scope        : "openid profile offline_access email project:read tenant:delete",
     }
   } as AuthConfig,
