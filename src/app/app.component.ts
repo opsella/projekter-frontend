@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
-import { AuthService } from "@auth0/auth0-angular";
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '@auth0/auth0-angular';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: "app-root",
@@ -7,10 +8,21 @@ import { AuthService } from "@auth0/auth0-angular";
     styleUrls: ["./app.component.scss"],
     standalone: false
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public title = "projekter-frontend";
 
   constructor(
-    public auth: AuthService
+    protected auth: AuthService,
+    private httpClient: HttpClient
   ) { }
+
+  ngOnInit() {
+    // this.auth.idTokenClaims$.subscribe(claims => console.log(claims));
+    //
+    // this.httpClient.get(`https://localhost:7209/users/me`).pipe(
+    //   switchMap((response: any) => {
+    //     return this.httpClient.get(`https://localhost:7209/users/${ response['data']['user_id'] }/permissions`)
+    //   }),
+    // ).subscribe();
+  }
 }

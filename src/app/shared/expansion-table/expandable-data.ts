@@ -1,7 +1,7 @@
-import { Type } from "@angular/core";
+import { Type } from '@angular/core';
 
 export interface ExpandableData<TDataType> extends ExpandableComponent {
-  data?: TDataType;
+  data: TDataType;
 }
 
 export interface Action {

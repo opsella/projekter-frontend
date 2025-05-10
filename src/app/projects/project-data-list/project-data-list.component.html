@@ -1,14 +1,16 @@
-<app-data-list [data]="projects">
-  <ng-template #ContentHeader let-project>
-    header for {{ project.name }}
-  </ng-template>
-  <ng-template #ContentBody let-project>
-    body for
-    {{ project.name }}
-    {{ project.description }}
-    {{ project.code }}
-  </ng-template>
-  <ng-template #ContentFooter let-project>
-    footer for {{ project.name }}
-  </ng-template>
-</app-data-list>
+<!--<app-data-list [data]="projects">-->
+<!--  <ng-template #ContentHeader let-project>-->
+<!--    header for {{ project.name }}-->
+<!--  </ng-template>-->
+<!--  <ng-template #ContentBody let-project>-->
+<!--    body for-->
+<!--    {{ project.name }}-->
+<!--    {{ project.description }}-->
+<!--    {{ project.code }}-->
+<!--  </ng-template>-->
+<!--  <ng-template #ContentFooter let-project>-->
+<!--    footer for {{ project.name }}-->
+<!--  </ng-template>-->
+<!--</app-data-list>-->
+
+<app-expansion-table [tableData]="projects$"></app-expansion-table>

@@ -1,5 +1,4 @@
-import { Component } from "@angular/core";
-import { InventoryDataService } from "../../inventory/inventory-data.service";
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 export interface ProjectTableData {
   id: string;
@@ -12,13 +11,9 @@ export interface ProjectTableData {
     selector: "app-dashboard-page",
     templateUrl: "./dashboard-page.component.html",
     styleUrls: ["./dashboard-page.component.scss"],
-    standalone: false
+    standalone: false,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardPageComponent {
-
-  constructor(
-    private inventoryDataService: InventoryDataService,
-  ) {
-  }
 
 }

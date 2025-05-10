@@ -1,14 +1,14 @@
-<ng-container *ngIf="vm$ | async as vm">
-  <app-table-filters [filters]="vm.filters"></app-table-filters>
+<ng-container>
+  <app-table-filters [filters]="tableFilters$ | async"></app-table-filters>
 
   <cdk-table
-    [dataSource]="vm.tableData"
+    [dataSource]="tableDataSource"
     multiTemplateDataRows
     class="expansion-table"
     #table
   >
     <ng-container
-      *ngFor="let propertyName of vm.columnHeaders"
+      *ngFor="let propertyName of columnHeaders"
       cdkColumnDef="{{ propertyName }}"
     >
       <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
@@ -38,10 +38,10 @@
           aria-label="expand row"
           (click)="updateExpandedElements(element)"
         >
-          <mat-icon *ngIf="!elementIsExpanded(element)"
+          <mat-icon *ngIf="elementIsExpanded(element)"
             >keyboard_arrow_down</mat-icon
           >
-          <mat-icon *ngIf="elementIsExpanded(element)"
+          <mat-icon *ngIf="!elementIsExpanded(element)"
             >keyboard_arrow_up</mat-icon
           >
         </button>
@@ -51,7 +51,7 @@
     <ng-container cdkColumnDef="expandedDetail" class="test">
       <cdk-cell
         *cdkCellDef="let element"
-        [attr.colspan]="vm.columnHeadersWithActions"
+        [attr.colspan]="columnHeadersWithActions"
       >
         <div
           class="expansion-content"
@@ -65,14 +65,15 @@
     </ng-container>
 
     <cdk-header-row
-      *cdkHeaderRowDef="vm.columnHeadersWithActions"
+      *cdkHeaderRowDef="columnHeadersWithActions"
       class="mf-header"
     ></cdk-header-row>
     <cdk-row
-      *cdkRowDef="let element; columns: vm.columnHeadersWithActions"
+      *cdkRowDef="let element; columns: columnHeadersWithActions"
       class="row"
       [class.example-expanded-row]="elementIsExpanded(element)"
     ></cdk-row>
+
     <cdk-row *cdkRowDef="let row; columns: ['expandedDetail']"></cdk-row>
   </cdk-table>
 </ng-container>

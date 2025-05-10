@@ -14,7 +14,8 @@ export const environment = {
     cacheLocation    : "localstorage",
     httpInterceptor  : {
       allowedList: [{
-        uri: "/users/*",
+        uriMatcher: () => true,
+        allowAnonymous: true
       }]
     },
     authorizationParams: {

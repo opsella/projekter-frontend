@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { ExpansionContentDirective } from "./expansion-content.directive";
-import { ExpandableData, ExpansionContentData } from "../expandable-data";
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ExpansionContentDirective } from './expansion-content.directive';
+import { ExpandableData, ExpansionContentData } from '../expandable-data';
 
 @Component({
     selector: "app-expansion-table-content",
@@ -13,10 +13,6 @@ export class ExpansionTableContentComponent implements OnInit {
   @ViewChild(ExpansionContentDirective, { static: true }) public expansionContent!: ExpansionContentDirective;
 
   public ngOnInit(): void {
-    this.loadComponent();
-  }
-
-  private loadComponent(): void {
     const viewContainerRef = this.expansionContent.viewContainerRef;
     viewContainerRef.clear();
 
