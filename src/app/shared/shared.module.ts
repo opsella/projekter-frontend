@@ -1,18 +1,19 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { DropdownAvatarComponent } from "./dropdown-avatar/dropdown-avatar.component";
-import { RouterModule } from "@angular/router";
-import { PageWrapperComponent } from "./page-wrapper/page-wrapper.component";
-import { MatSelectModule } from "@angular/material/select";
-import { MatButtonModule } from "@angular/material/button";
-import { ExpansionTableComponent } from "./expansion-table/expansion-table/expansion-table.component";
-import { CdkTableModule } from "@angular/cdk/table";
-import { MatIconModule } from "@angular/material/icon";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DropdownAvatarComponent } from './dropdown-avatar/dropdown-avatar.component';
+import { RouterModule } from '@angular/router';
+import { PageWrapperComponent } from './page-wrapper/page-wrapper.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { ExpansionTableComponent } from './expansion-table/expansion-table/expansion-table.component';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatIconModule } from '@angular/material/icon';
 import {
   ExpansionTableContentComponent
-} from "./expansion-table/expansion-table-content/expansion-table-content.component";
-import { ExpansionContentDirective } from "./expansion-table/expansion-table-content/expansion-content.directive";
-import { TableFiltersComponent } from "./expansion-table/table-filters/table-filters.component";
+} from './expansion-table/expansion-table-content/expansion-table-content.component';
+import { ExpansionContentDirective } from './expansion-table/expansion-table-content/expansion-content.directive';
+import { TableFiltersComponent } from './expansion-table/table-filters/table-filters.component';
+import { CardComponent } from './card/card.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TableFiltersComponent } from "./expansion-table/table-filters/table-fil
     ExpansionTableComponent,
     ExpansionContentDirective,
     ExpansionTableContentComponent,
-    TableFiltersComponent
+    TableFiltersComponent,
+    CardComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,8 @@ import { TableFiltersComponent } from "./expansion-table/table-filters/table-fil
   exports: [
     DropdownAvatarComponent,
     PageWrapperComponent,
-    ExpansionTableComponent
+    ExpansionTableComponent,
+    CardComponent
   ]
 })
 export class SharedModule { }

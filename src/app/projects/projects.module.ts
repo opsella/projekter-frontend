@@ -15,12 +15,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { ProjectTableContentComponent } from './project-table-content/project-table-content.component';
 import { ProjectService } from './services/project.service';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
 
 @NgModule({
   declarations: [
     DashboardPageComponent,
     ProjectDataListComponent,
     ProjectTableContentComponent,
+    ProjectDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -35,7 +37,7 @@ import { ProjectService } from './services/project.service';
     FormsModule,
     MatTableModule,
     MatIconModule,
-    DataListModule,
+    DataListModule
   ],
   providers: [ProjectService]
 })
