@@ -8,13 +8,20 @@ import { MatButtonModule } from '@angular/material/button';
 import { ExpansionTableComponent } from './expansion-table/expansion-table/expansion-table.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  ExpansionTableContentComponent
-} from './expansion-table/expansion-table-content/expansion-table-content.component';
+import { ExpansionTableContentComponent } from './expansion-table/expansion-table-content/expansion-table-content.component';
 import { ExpansionContentDirective } from './expansion-table/expansion-table-content/expansion-content.directive';
 import { TableFiltersComponent } from './expansion-table/table-filters/table-filters.component';
 import { CardComponent } from './card/card.component';
-
+import {
+  AgendaService,
+  DayService,
+  MonthAgendaService,
+  MonthService,
+  TimelineMonthService,
+  TimelineViewsService,
+  WeekService,
+  WorkWeekService,
+} from '@syncfusion/ej2-angular-schedule';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,7 @@ import { CardComponent } from './card/card.component';
     ExpansionContentDirective,
     ExpansionTableContentComponent,
     TableFiltersComponent,
-    CardComponent
+    CardComponent,
   ],
   imports: [
     CommonModule,
@@ -38,7 +45,17 @@ import { CardComponent } from './card/card.component';
     DropdownAvatarComponent,
     PageWrapperComponent,
     ExpansionTableComponent,
-    CardComponent
-  ]
+    CardComponent,
+  ],
+  providers: [
+    DayService,
+    WeekService,
+    WorkWeekService,
+    MonthService,
+    AgendaService,
+    MonthAgendaService,
+    TimelineViewsService,
+    TimelineMonthService,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

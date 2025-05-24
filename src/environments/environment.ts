@@ -2,31 +2,33 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-
 import { AuthConfig } from '@auth0/auth0-angular';
 
 export const environment = {
-  production : false,
-  auth0      : {
-    clientId         : "SHHXAgPz2cfZerNzPQM31TTYEy6jSDVQ",
-    domain           : "dev-8nen27hb.us.auth0.com",
-    useRefreshTokens : true,
-    cacheLocation    : "localstorage",
-    httpInterceptor  : {
-      allowedList: [{
-        uriMatcher: () => true,
-        allowAnonymous: true
-      }]
+  production: false,
+  auth0: {
+    clientId: 'SHHXAgPz2cfZerNzPQM31TTYEy6jSDVQ',
+    domain: 'dev-8nen27hb.us.auth0.com',
+    useRefreshTokens: true,
+    cacheLocation: 'localstorage',
+    httpInterceptor: {
+      allowedList: [
+        {
+          uriMatcher: () => true,
+          allowAnonymous: true,
+        },
+      ],
     },
     authorizationParams: {
-      audience     : "https://api.projekter.opsella.com",
-      redirect_uri : window.location.origin,
-      scope        : "openid profile offline_access email project:read tenant:delete",
-    }
+      audience: 'https://api.projekter.opsella.com',
+      redirect_uri: window.location.origin,
+      scope:
+        'openid profile offline_access email project:read project:write tenant:delete',
+    },
   } as AuthConfig,
   projekterApi: {
-    host: "http://localhost:5261"
-  }
+    host: 'http://localhost:5261',
+  },
 };
 
 /*

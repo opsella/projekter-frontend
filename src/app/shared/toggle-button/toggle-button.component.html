@@ -1,0 +1,5 @@
+<mat-button-toggle-group [value]="view" (change)="onToggleChange($event)">
+  <mat-button-toggle *ngFor="let option of toggleOptions" [value]="option">
+    {{ option | uppercase }}
+  </mat-button-toggle>
+</mat-button-toggle-group>

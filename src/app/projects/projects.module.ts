@@ -16,13 +16,20 @@ import { MatTableModule } from '@angular/material/table';
 import { ProjectTableContentComponent } from './project-table-content/project-table-content.component';
 import { ProjectService } from './services/project.service';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { GanttChartComponent } from '../shared/gantt-chart/gantt-chart.component';
+import { CalendarComponent } from '../shared/calendar/calendar.component';
+import {
+  MatButtonToggle,
+  MatButtonToggleGroup,
+} from '@angular/material/button-toggle';
+import { ToggleButtonComponent } from '../shared/toggle-button/toggle-button.component';
 
 @NgModule({
   declarations: [
     DashboardPageComponent,
     ProjectDataListComponent,
     ProjectTableContentComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -37,8 +44,13 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
     FormsModule,
     MatTableModule,
     MatIconModule,
-    DataListModule
+    DataListModule,
+    GanttChartComponent,
+    CalendarComponent,
+    MatButtonToggleGroup,
+    MatButtonToggle,
+    ToggleButtonComponent,
   ],
-  providers: [ProjectService]
+  providers: [ProjectService],
 })
-export class ProjectsModule { }
+export class ProjectsModule {}

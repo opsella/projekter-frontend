@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Project } from '../../models/project';
 import { ProjectService } from '../services/project.service';
-import { map, Observable } from 'rxjs';
-import { ExpansionTableData } from '../../shared/expansion-table/expandable-data';
-import { ProjectTableContentComponent } from '../project-table-content/project-table-content.component';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -15,7 +13,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectDataListComponent {
-  public projects$: Observable<ExpansionTableData<Project>[]>;
+  // public projects$: Observable<ExpansionTableData<Project>[]>;
+  public projects$: Observable<Project[]>;
   public projects = [
     {
       id: 1,
@@ -64,6 +63,8 @@ export class ProjectDataListComponent {
     projectName: new FormControl('', [Validators.required]),
     image: new FormControl(''),
   });
+  public view = 'calendar';
+  public toggleOptions = ['calendar', 'list'];
 
   protected openModal = false;
 
@@ -71,32 +72,34 @@ export class ProjectDataListComponent {
     private projectService: ProjectService,
     private router: Router,
   ) {
-    this.projects$ = this.projectService.getProjects<Project[]>().pipe(
-      map((projects: Project[]): ExpansionTableData<Project>[] => {
-        return projects.map((project: Project): ExpansionTableData<Project> => {
-          return {
-            data: {
-              ...project,
-            },
-            actions: [
-              {
-                title: 'Details',
-                enabled: () => true,
-                visible: () => true,
-                action: async (): Promise<any> => {},
-              },
-              {
-                title: 'Edit',
-                enabled: () => true,
-                visible: () => true,
-                action: async (): Promise<any> => {},
-              },
-            ],
-            expansionComponent: ProjectTableContentComponent,
-          };
-        });
-      }),
-    );
+    // this.projects$ = this.projectService.getProjects<Project[]>().pipe(
+    //   map((projects: Project[]): ExpansionTableData<Project>[] => {
+    //     return projects.map((project: Project): ExpansionTableData<Project> => {
+    //       return {
+    //         data: {
+    //           ...project,
+    //         },
+    //         actions: [
+    //           {
+    //             title: 'Details',
+    //             enabled: () => true,
+    //             visible: () => true,
+    //             action: async (): Promise<any> => {},
+    //           },
+    //           {
+    //             title: 'Edit',
+    //             enabled: () => true,
+    //             visible: () => true,
+    //             action: async (): Promise<any> => {},
+    //           },
+    //         ],
+    //         expansionComponent: ProjectTableContentComponent,
+    //       };
+    //     });
+    //   }),
+    // );
+
+    this.projects$ = this.projectService.getProjects();
   }
 
   public async viewDetails(id: number): Promise<void> {
@@ -110,6 +113,8 @@ export class ProjectDataListComponent {
   public onSubmit() {
     const project = {
       name: this.projectCreationForm.get('projectName').value,
+      start_timestamp: this.projectCreationForm.get('start_timestamp').value,
+      end_timestamp: this.projectCreationForm.get('end_timestamp').value,
     };
 
     this.projectService.createProject<Project>(project).subscribe({
@@ -124,5 +129,9 @@ export class ProjectDataListComponent {
     });
 
     this.openModal = false;
+  }
+
+  public updateView(view: string) {
+    this.view = view;
   }
 }
