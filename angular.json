@@ -119,7 +119,10 @@
             "configDir": ".storybook",
             "browserTarget": "projekter-frontend:build",
             "compodoc": false,
-            "port": 6006
+            "port": 6006,
+            "styles": [
+              "src/styles.scss"
+            ]
           }
         },
         "build-storybook": {
