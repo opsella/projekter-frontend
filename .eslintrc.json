@@ -130,5 +130,8 @@
         "plugin:@ngrx/all-requiring-type-checking"
       ]
     }
+  ],
+  "extends": [
+    "plugin:storybook/recommended"
   ]
 }
