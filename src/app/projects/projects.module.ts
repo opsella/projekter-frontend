@@ -16,6 +16,7 @@ import { MatTableModule } from '@angular/material/table';
 import { ProjectTableContentComponent } from './project-table-content/project-table-content.component';
 import { ProjectService } from './services/project.service';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { ContentSectionComponent } from '../shared/content-section/content-section.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ProjectDetailsComponent } from './project-details/project-details.compo
     FormsModule,
     MatTableModule,
     MatIconModule,
-    DataListModule
+    DataListModule,
+    ContentSectionComponent
   ],
   providers: [ProjectService]
 })

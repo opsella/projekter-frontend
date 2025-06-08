@@ -1,13 +1,23 @@
 <div>
   <mat-toolbar class="header">
-    <span>{{title}}</span>
+    <span>{{ title }}</span>
     <span class="spacer"></span>
-    <button mat-icon-button>
-      <mat-icon>home</mat-icon>
-    </button>
+    @if (expandable === true) {
+      <button matIconButton (click)="toggleExpansion()">
+        @if (expanded) {
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        } @else {
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        }
+      </button>
+    }
   </mat-toolbar>
 
-  <div class="content-container mat-elevation-z8">
-    content
-  </div>
+  @if (expanded) {
+    <div class="content-container">
+      <div class="content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  }
 </div>

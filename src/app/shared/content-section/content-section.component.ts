@@ -15,5 +15,10 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class ContentSectionComponent {
   @Input() title: string;
+  @Input() expandable: boolean = true;
   @Input() expanded: boolean = true;
+
+  protected toggleExpansion() {
+    this.expanded = !this.expanded;
+  }
 }

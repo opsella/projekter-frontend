@@ -121,7 +121,12 @@
             "compodoc": false,
             "port": 6006,
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "@fontsource/roboto/300.css",
+              "@fontsource/roboto/400.css",
+              "@fontsource/roboto/500.css",
+              "@fontsource/roboto/700.css",
+              "@fontsource/material-icons"
             ]
           }
         },
@@ -133,7 +138,12 @@
             "compodoc": false,
             "outputDir": "storybook-static",
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "@fontsource/roboto/300.css",
+              "@fontsource/roboto/400.css",
+              "@fontsource/roboto/500.css",
+              "@fontsource/roboto/700.css",
+              "@fontsource/material-icons"
             ]
           }
         }

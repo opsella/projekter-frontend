@@ -7,9 +7,16 @@
 .header {
   background: var(--mat-sys-on-surface);
   color: var(--mat-sys-surface-tint);
+
+  button {
+    color: var(--mat-sys-surface-tint);
+  }
 }
 
 .content-container {
-  padding: 16px;
-  margin-bottom: 16px;
+  @include mat.elevation(8);
+
+  .content {
+    padding: 16px;
+  }
 }

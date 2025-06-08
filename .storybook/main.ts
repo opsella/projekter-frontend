@@ -1,4 +1,4 @@
-import type {StorybookConfig} from '@storybook/angular';
+import type { StorybookConfig } from '@storybook/angular';
 
 const config: StorybookConfig = {
   "stories": [
@@ -12,6 +12,12 @@ const config: StorybookConfig = {
   "framework": {
     "name": "@storybook/angular",
     "options": {}
+  },
+  previewHead: (head) => {
+    return `
+      ${head}
+      ${'<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />'}
+    `;
   }
 };
 export default config;

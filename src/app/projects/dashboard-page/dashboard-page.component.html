@@ -1,8 +1,10 @@
-<app-page-wrapper title="Projects">
-<!--  <section style="border: solid 1px red; height: 80px">-->
-<!--    This area could be for "Cards" displaying analytics (# of active projects,-->
-<!--    clocked in employees, etc).-->
-<!--  </section>-->
 
-  <app-project-data-list></app-project-data-list>
+
+
+<app-page-wrapper title="Projects">
+
+  <app-content-section title="Projects" [expandable]="true">
+    <app-project-data-list></app-project-data-list>
+  </app-content-section>
+
 </app-page-wrapper>

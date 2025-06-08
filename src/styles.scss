@@ -7,7 +7,10 @@ html {
   color-scheme: light;
   @include mat.theme((
     color-scheme: light dark,
-    color: mat.$violet-palette,
+    color: (
+      primary: projektor.$primary-palette,
+      tertiary: projektor.$tertiary-palette,
+    ),
     typography: Roboto,
     density: 0,
   ));
