@@ -1,18 +1,3 @@
-<section *ngIf="vm$ | async as vm">
-  <form [formGroup]="vm.equipmentForm" (ngSubmit)="onSubmit(vm.equipmentForm)">
-    <label for="name">Name: </label>
-    <input id="name" type="text" formControlName="name" />
-    <p *ngIf="vm.nameInputInvalid">Invalid name</p>
-
-    <label for="code">Code: </label>
-    <input id="code" type="text" formControlName="code" />
-    <p *ngIf="vm.codeInputInvalid">Invalid code</p>
-
-    <label for="description">Description: </label>
-    <input id="description" type="text" formControlName="description" />
-
-    <button mat-button type="submit" [disabled]="vm.status === 'loading'">
-      Save
-    </button>
-  </form>
+<section>
+  equipment edit form here
 </section>
