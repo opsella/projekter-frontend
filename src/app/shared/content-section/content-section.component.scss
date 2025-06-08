@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.header {
+  background: var(--mat-sys-on-surface);
+  color: var(--mat-sys-surface-tint);
+}
+
+.content-container {
+  padding: 16px;
+  margin-bottom: 16px;
+}

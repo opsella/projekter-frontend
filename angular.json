@@ -131,7 +131,10 @@
             "configDir": ".storybook",
             "browserTarget": "projekter-frontend:build",
             "compodoc": false,
-            "outputDir": "storybook-static"
+            "outputDir": "storybook-static",
+            "styles": [
+              "src/styles.scss"
+            ]
           }
         }
       }
