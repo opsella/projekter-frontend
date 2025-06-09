@@ -1,5 +1,5 @@
-import { ContentSectionComponent } from '../app/shared/content-section/content-section.component';
-import { Meta, StoryObj } from '@storybook/angular';
+import { ContentSectionComponent } from "../app/shared/content-section/content-section.component";
+import type { Meta, StoryObj } from "@storybook/angular";
 
 const meta: Meta<ContentSectionComponent> = {
   title     : "Shared/Content Section",
@@ -7,13 +7,13 @@ const meta: Meta<ContentSectionComponent> = {
   tags      : ["autodocs"],
   argTypes  : {
     title: {
-      control : "text"
+      control: "text"
     },
     expanded: {
-      control : "boolean"
+      control: "boolean"
     },
     expandable: {
-      control : "boolean"
+      control: "boolean"
     }
   },
   args: {

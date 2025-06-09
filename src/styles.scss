@@ -11,7 +11,13 @@ html {
       primary: projektor.$primary-palette,
       tertiary: projektor.$tertiary-palette,
     ),
-    typography: Roboto,
+    typography: (
+      plain-family: Roboto,
+      brand-family: Roboto,
+      bold-weight: 900,
+      medium-weight: 600,
+      regular-weight: 400,
+    ),
     density: 0,
   ));
 }/* You can add global styles to this file, and also import other style files */

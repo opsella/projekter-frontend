@@ -22,17 +22,20 @@
         "@typescript-eslint/semi": [
           "error"
         ],
-        "@typescript-eslint/member-delimiter-style": {
-          "multiline": {
-            "delimiter": "semi",
-            "requireLast": true
-          },
-          "singleline": {
-            "delimiter": "semi",
-            "requireLast": true
-          },
-          "multilineDetection": "brackets"
-        },
+        "@typescript-eslint/member-delimiter-style": [
+          "error",
+          {
+            "multiline": {
+              "delimiter": "semi",
+              "requireLast": true
+            },
+            "singleline": {
+              "delimiter": "semi",
+              "requireLast": true
+            },
+            "multilineDetection": "brackets"
+          }
+        ],
         "@typescript-eslint/explicit-member-accessibility": [
           "error",
           {

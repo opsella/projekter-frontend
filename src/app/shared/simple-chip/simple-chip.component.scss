@@ -1,0 +1,10 @@
+@use "@angular/material" as mat;
+@use "src/theme-colors" as projektor;
+
+mat-chip {
+  @include mat.chips-overrides((
+    container-shape-radius: 1px,
+    elevated-container-color: var(--mat-sys-secondary),
+    label-text-color: var(--mat-sys-on-secondary)
+  ));
+}
