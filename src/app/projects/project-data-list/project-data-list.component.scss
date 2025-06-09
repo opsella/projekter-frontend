@@ -1,14 +1,7 @@
-.project-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-  gap: 1rem;
-}
-
 .actions {
   display: flex;
   justify-content: flex-end;
 }
-
 
 .modal-overlay {
   display: flex;

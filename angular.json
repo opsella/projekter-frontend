@@ -31,6 +31,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/theme-colors.scss",
               "src/styles.scss",
               "src/variables.scss"
             ],
@@ -99,6 +100,7 @@
               "src/assets"
             ],
             "styles": [
+              "src/theme-colors.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -121,6 +123,7 @@
             "compodoc": false,
             "port": 6006,
             "styles": [
+              "src/theme-colors.scss",
               "src/styles.scss",
               "@fontsource/roboto/300.css",
               "@fontsource/roboto/400.css",
@@ -138,6 +141,7 @@
             "compodoc": false,
             "outputDir": "storybook-static",
             "styles": [
+              "src/theme-colors.scss",
               "src/styles.scss",
               "@fontsource/roboto/300.css",
               "@fontsource/roboto/400.css",

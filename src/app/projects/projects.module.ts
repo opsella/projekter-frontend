@@ -17,6 +17,8 @@ import { ProjectTableContentComponent } from './project-table-content/project-ta
 import { ProjectService } from './services/project.service';
 import { ProjectDetailsComponent } from './project-details/project-details.component';
 import { ContentSectionComponent } from '../shared/content-section/content-section.component';
+import { ProjectCardComponent } from './project-card/project-card.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ContentSectionComponent } from '../shared/content-section/content-secti
     MatTableModule,
     MatIconModule,
     DataListModule,
-    ContentSectionComponent
+    ContentSectionComponent,
+    ProjectCardComponent,
+    MatGridListModule
   ],
   providers: [ProjectService]
 })

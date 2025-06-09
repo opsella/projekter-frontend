@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-@use "src/theme-colors" as projektor;
+@use "src/theme-colors.scss" as projektor;
 
 mat-chip {
   @include mat.chips-overrides((

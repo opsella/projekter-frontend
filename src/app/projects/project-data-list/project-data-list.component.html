@@ -1,28 +1,35 @@
-<!--<app-expansion-table [tableData]="projects$"></app-expansion-table>-->
-
 <section class="actions">
   <button (click)="createProject()">New Project</button>
 </section>
-<section class="project-section">
-  <app-card
-    *ngFor="let project of projects"
-    [title]="project.title"
-    [status]="project.status"
-    [allocatedTime]="project.allocatedTime"
-    [totalTime]="project.totalTime"
-    (click)="viewDetails(project.id)"
-  ></app-card>
+
+<section>
+  <mat-grid-list cols="6">
+    @for (project of projects; track project.id) {
+      <mat-grid-tile>
+        <app-project-card
+          [title]="project.title"
+          [status]="project.status"
+          [photo]="project.photo"
+        >
+        </app-project-card>
+      </mat-grid-tile>
+    }
+  </mat-grid-list>
 </section>
 
-<div *ngIf="openModal" class="modal-overlay">
-  <div class="modal-form">
-    {{ openModal }}
+@if (openModal) {
+  <div class="modal-overlay">
+    <div class="modal-form">
+      {{ openModal }}
 
-    <form [formGroup]="projectCreationForm" (ngSubmit)="onSubmit()">
-      <label for="first-name">Project Name</label>
-      <input id="first-name" type="text" formControlName="projectName" />
+      <form [formGroup]="projectCreationForm" (ngSubmit)="onSubmit()">
+        <label for="first-name">Project Name</label>
+        <input id="first-name" type="text" formControlName="projectName" />
 
-      <button type="submit" [disabled]="projectCreationForm.invalid">Save</button>
-    </form>
+        <button type="submit" [disabled]="projectCreationForm.valid">
+          Save
+        </button>
+      </form>
+    </div>
   </div>
-</div>
+}

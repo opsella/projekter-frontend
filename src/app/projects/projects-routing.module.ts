@@ -9,16 +9,12 @@ const routes: Routes = [
   {
     path        : "list",
     component   : DashboardPageComponent,
-    canActivate : [
-      AuthGuard
-    ]
+    canActivate : [AuthGuard]
   },
   {
-    path: 'details/:id',
-    component: ProjectDetailsComponent,
-    canActivate : [
-      AuthGuard
-    ]
+    path        : "details/:id",
+    component   : ProjectDetailsComponent,
+    canActivate : [AuthGuard]
   },
   {
     path       : "**",

@@ -8,61 +8,68 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-project-data-list',
-  templateUrl: './project-data-list.component.html',
-  styleUrls: ['./project-data-list.component.scss'],
-  standalone: false,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector        : "app-project-data-list",
+  templateUrl     : "./project-data-list.component.html",
+  styleUrls       : ["./project-data-list.component.scss"],
+  changeDetection : ChangeDetectionStrategy.OnPush,
+  standalone      : false
 })
 export class ProjectDataListComponent {
   public projects$: Observable<ExpansionTableData<Project>[]>;
   public projects = [
     {
-      id: 1,
-      title: 'Oliver Fence In The Old Western',
-      status: 'Draft',
-      allocatedTime: '200h',
-      totalTime: '200h',
+      id            : 1,
+      title         : "Oliver Fence In The Old Western",
+      status        : "Draft",
+      allocatedTime : "200h",
+      totalTime     : "200h",
+      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
     },
     {
-      id: 1,
-      title: 'Oliver Fence In The Old Western',
-      status: 'Draft',
-      allocatedTime: '200h',
-      totalTime: '200h',
+      id            : 1,
+      title         : "Oliver Fence In The Old Western",
+      status        : "Draft",
+      allocatedTime : "200h",
+      totalTime     : "200h",
+      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
     },
     {
-      id: 1,
-      title: 'Oliver Fence In The Old Western',
-      status: 'Draft',
-      allocatedTime: '200h',
-      totalTime: '200h',
+      id            : 1,
+      title         : "Oliver Fence In The Old Western",
+      status        : "Draft",
+      allocatedTime : "200h",
+      totalTime     : "200h",
+      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
     },
     {
-      id: 1,
-      title: 'Oliver Fence In The Old Western',
-      status: 'Draft',
-      allocatedTime: '200h',
-      totalTime: '200h',
+      id            : 1,
+      title         : "Oliver Fence In The Old Western",
+      status        : "Draft",
+      allocatedTime : "200h",
+      totalTime     : "200h",
+      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
     },
     {
-      id: 1,
-      title: 'Oliver Fence In The Old Western',
-      status: 'Draft',
-      allocatedTime: '200h',
-      totalTime: '200h',
+      id            : 1,
+      title         : "Oliver Fence In The Old Western",
+      status        : "Draft",
+      allocatedTime : "200h",
+      totalTime     : "200h",
+      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
     },
     {
-      id: 1,
-      title: 'Oliver Fence In The Old Western',
-      status: 'Draft',
-      allocatedTime: '200h',
-      totalTime: '200h',
+      id            : 1,
+      title         : "Oliver Fence In The Old Western",
+      status        : "Draft",
+      allocatedTime : "200h",
+      totalTime     : "200h",
+      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
     },
   ];
+
   public projectCreationForm = new FormGroup({
-    projectName: new FormControl('', [Validators.required]),
-    image: new FormControl(''),
+    projectName : new FormControl("", [Validators.required]),
+    image       : new FormControl(""),
   });
 
   protected openModal = false;
@@ -80,16 +87,16 @@ export class ProjectDataListComponent {
             },
             actions: [
               {
-                title: 'Details',
-                enabled: () => true,
-                visible: () => true,
-                action: async (): Promise<any> => {},
+                title   : "Details",
+                enabled : () => true,
+                visible : () => true,
+                action  : async (): Promise<any> => {},
               },
               {
-                title: 'Edit',
-                enabled: () => true,
-                visible: () => true,
-                action: async (): Promise<any> => {},
+                title   : "Edit",
+                enabled : () => true,
+                visible : () => true,
+                action  : async (): Promise<any> => {},
               },
             ],
             expansionComponent: ProjectTableContentComponent,
@@ -100,7 +107,9 @@ export class ProjectDataListComponent {
   }
 
   public async viewDetails(id: number): Promise<void> {
-    await this.router.navigate(['project/details', id]);
+    await this.router.navigate([
+      "project/details", id
+    ]);
   }
 
   public createProject() {
@@ -109,12 +118,14 @@ export class ProjectDataListComponent {
 
   public onSubmit() {
     const project = {
-      name: this.projectCreationForm.get('projectName').value,
+      name: this.projectCreationForm.get("projectName").value,
     };
 
     this.projectService.createProject<Project>(project).subscribe({
       next: async (project: Project): Promise<void> => {
-        await this.router.navigate(['project/details', project.id], {
+        await this.router.navigate([
+          "project/details", project.id
+        ], {
           queryParams: { new: true },
         });
       },
