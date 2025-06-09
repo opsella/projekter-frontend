@@ -7,17 +7,19 @@ const meta: Meta<ContentSectionComponent> = {
   tags      : ["autodocs"],
   argTypes  : {
     title: {
-      name    : "Title",
       control : "text"
     },
     expanded: {
-      name    : "Is Expanded",
+      control : "boolean"
+    },
+    expandable: {
       control : "boolean"
     }
   },
   args: {
-    title    : "Project Title",
-    expanded : true
+    title      : "Project Title",
+    expanded   : true,
+    expandable : true,
   }
 };
 
@@ -26,7 +28,16 @@ type Story = StoryObj<ContentSectionComponent>;
 
 export const Default: Story = {
   args: {
-    title    : "Project Title",
-    expanded : true
+    title      : "Project Title",
+    expanded   : true,
+    expandable : true
   }
 };
+
+export const LockedExpanded: Story = {
+  args: {
+    title      : "Project Title",
+    expanded   : true,
+    expandable : false,
+  }
+}
