@@ -2,7 +2,7 @@ import { ContentSectionComponent } from '../app/shared/content-section/content-s
 import { Meta, StoryObj } from '@storybook/angular';
 
 const meta: Meta<ContentSectionComponent> = {
-  title     : "Example/Content-Section",
+  title     : "Shared/Content Section",
   component : ContentSectionComponent,
   tags      : ["autodocs"],
   argTypes  : {
