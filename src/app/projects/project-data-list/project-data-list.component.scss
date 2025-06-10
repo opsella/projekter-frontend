@@ -11,6 +11,14 @@
   ));
 }
 
+.project-grid {
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  column-gap: 10px;
+  row-gap: 15px;
+}
+
 .modal-overlay {
   display: flex;
   position: fixed;

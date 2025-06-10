@@ -1,7 +1,3 @@
-
-
-
-
 <section class="actions">
   <button mat-flat-button
           (click)="createProject()">
@@ -10,18 +6,16 @@
 </section>
 
 <section>
-  <mat-grid-list cols="6">
+  <div class="project-grid">
     @for (project of projects; track project.id) {
-      <mat-grid-tile>
-        <app-project-card
-          [title]="project.title"
-          [status]="project.status"
-          [photo]="project.photo"
-        >
-        </app-project-card>
-      </mat-grid-tile>
+      <app-project-card
+        [title]="project.title"
+        [status]="project.status"
+        [photo]="project.photo"
+      >
+      </app-project-card>
     }
-  </mat-grid-list>
+  </div>
 </section>
 
 @if (openModal) {
