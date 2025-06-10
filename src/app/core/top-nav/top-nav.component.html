@@ -13,14 +13,16 @@
 
   <section class="main-routes">
     <ul>
-      <li *ngFor="let route of mainRoutes">
-        <app-navigation-route-element
-          [routeName]="route.name"
-          [routeUrl]="route.path"
-        >
-          <i [class]="route.icon" class="icon"></i>
-        </app-navigation-route-element>
-      </li>
+      @for (route of mainRoutes; track route.name) {
+        <li>
+          <app-navigation-route-element
+            [routeName]="route.name"
+            [routeUrl]="route.path"
+          >
+            <i [class]="route.icon" class="icon"></i>
+          </app-navigation-route-element>
+        </li>
+      }
     </ul>
   </section>
 
@@ -34,14 +36,16 @@
 
     <div class="extras">
       <ul>
-        <li *ngFor="let route of secondaryRoutes">
-          <app-navigation-route-element
-            [routeName]="route.name"
-            [routeUrl]="route.path"
-          >
-            <i [class]="route.icon" class="icon-secondary"></i>
-          </app-navigation-route-element>
-        </li>
+        @for (route of secondaryRoutes; track route.name) {
+          <li>
+            <app-navigation-route-element
+              [routeName]="route.name"
+              [routeUrl]="route.path"
+            >
+              <i [class]="route.icon" class="icon-secondary"></i>
+            </app-navigation-route-element>
+          </li>
+        }
       </ul>
     </div>
   </section>

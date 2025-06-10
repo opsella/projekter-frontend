@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
+import Main from '../../../../.storybook/main';
 
 @Component({
     selector: "app-top-nav",
@@ -52,6 +53,7 @@ export class TopNavComponent {
       path : "/help"
     },
   ];
+  protected readonly main = Main;
 }
 
 interface NavigationRouteOption {

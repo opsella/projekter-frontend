@@ -5,6 +5,8 @@
 
 html {
   color-scheme: light;
+  height: 100%;
+
   @include mat.theme((
     color-scheme: light dark,
     color: (
@@ -22,7 +24,33 @@ html {
   ));
 }/* You can add global styles to this file, and also import other style files */
 
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h2 {
+  //font-size: clamp(2rem, 80vw, 80vh);
+  font-size: 100px;
+}
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sr-only {
+  visibility: hidden;
+  position: absolute;
+  left: -1000px;
+  height: 0;
+  width: 0;
+}

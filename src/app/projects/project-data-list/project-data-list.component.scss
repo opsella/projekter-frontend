@@ -1,6 +1,14 @@
+@use "@angular/material" as mat;
+
 .actions {
   display: flex;
   justify-content: flex-end;
+}
+
+:root {
+  @include mat.button-overrides((
+    filled-container-color: var(--mat-sys-tertiary),
+  ));
 }
 
 .modal-overlay {
