@@ -16,56 +16,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ProjectDataListComponent {
   public projects$: Observable<ExpansionTableData<Project>[]>;
-  public projects = [
-    {
-      id            : 1,
-      title         : "Oliver Fence In The Old Western",
-      status        : "Draft",
-      allocatedTime : "200h",
-      totalTime     : "200h",
-      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
-    },
-    {
-      id            : 1,
-      title         : "Oliver Fence In The Old Western",
-      status        : "Draft",
-      allocatedTime : "200h",
-      totalTime     : "200h",
-      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
-    },
-    {
-      id            : 1,
-      title         : "Oliver Fence In The Old Western",
-      status        : "Draft",
-      allocatedTime : "200h",
-      totalTime     : "200h",
-      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
-    },
-    {
-      id            : 1,
-      title         : "Oliver Fence In The Old Western",
-      status        : "Draft",
-      allocatedTime : "200h",
-      totalTime     : "200h",
-      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
-    },
-    {
-      id            : 1,
-      title         : "Oliver Fence In The Old Western",
-      status        : "Draft",
-      allocatedTime : "200h",
-      totalTime     : "200h",
-      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
-    },
-    {
-      id            : 1,
-      title         : "Oliver Fence In The Old Western",
-      status        : "Draft",
-      allocatedTime : "200h",
-      totalTime     : "200h",
-      photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
-    },
-  ];
+  public projects = Array.from({length: 30}, (x, i) => ({
+    id            : i,
+    title         : "Oliver Fence In The Old Western",
+    status        : "Draft",
+    allocatedTime : "200h",
+    totalTime     : "200h",
+    photo         : "https://www.wjhl.com/wp-content/uploads/sites/98/2023/02/vlcsnap-2023-02-22-18h30m52s817.jpg?strip=1"
+  }));
 
   public projectCreationForm = new FormGroup({
     projectName : new FormControl("", [Validators.required]),
