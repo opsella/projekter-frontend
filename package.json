@@ -48,6 +48,7 @@
     "@storybook/angular": "^9.0.6",
     "@types/jasmine": "~5.1.5",
     "@types/lodash": "^4.17.17",
+    "@types/node": "^22.15.30",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
     "eslint": "^8.57.0",
