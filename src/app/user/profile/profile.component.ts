@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { AuthenticationService } from "../../authentication/authentication.service";
 import { Router } from "@angular/router";
+import { UsersService } from "../services/users.service";
 
 @Component({
   selector    : "app-profile",
@@ -12,7 +13,8 @@ export class ProfileComponent {
 
   constructor(
     public auth: AuthenticationService,
-    public router: Router
+    public router: Router,
+    public userService: UsersService
   ) { }
 
   public logout() {

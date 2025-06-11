@@ -1,7 +1,10 @@
 <app-page-wrapper>
   <app-content-section title="Profile" [expandable]="false">
     <ul>
-      <li>Name: {{ auth.auth0User()?.name }}</li>
+      <li>
+        Name: {{ auth.auth0User()?.name }} -
+        {{ userService.currentUser.value().first_name }}
+      </li>
       <li>Username: {{ auth.auth0User()?.nickname }}</li>
       <li>Email: {{ auth.auth0User()?.email }}</li>
       <span>{{
@@ -17,5 +20,16 @@
 
     <button mat-flat-button (click)="logout()">LOGOUT</button>
     <button mat-flat-button (click)="tenant()">YOUR ORGANIZATION</button>
+  </app-content-section>
+
+  <app-content-section title="Your Permissions">
+    <ul>
+      @for (
+        permission of userService.currentUserPermissions.value();
+        track permission.permission_name
+      ) {
+        <li>{{ permission.permission_name }}: {{ permission.description }}</li>
+      }
+    </ul>
   </app-content-section>
 </app-page-wrapper>

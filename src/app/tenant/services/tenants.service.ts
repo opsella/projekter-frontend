@@ -7,8 +7,12 @@ import { ApiResponse } from "../../models/api/api-response";
   providedIn: "root"
 })
 export class TenantsService {
-  public tenant = httpResource<ApiResponse<Tenant>>(
-    () => "https://localhost:7209/tenant/current", {});
+  public tenant = httpResource<Tenant>(
+    () => "https://localhost:7209/tenant/current", {
+      parse: (result: ApiResponse<Tenant>) => {
+        return result.data;
+      },
+    });
 
   constructor() { }
 }
