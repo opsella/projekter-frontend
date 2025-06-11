@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-import { Project } from '../../models/project';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable, tap } from "rxjs";
+import { Project } from "../../models/project";
 
 @Injectable()
 export class ProjectService {
@@ -9,19 +9,19 @@ export class ProjectService {
 
   public getProjects<T>(): Observable<T> {
     return this.http
-      .get<T>(`https://localhost:7209/project`)
-      .pipe(tap((data) => console.log('DATA YOLO ', data)));
+      .get<T>("https://localhost:7209/project")
+      .pipe(tap((data) => console.log("DATA YOLO ", data)));
   }
 
   public getProjectById<T>(id: number): Observable<T> {
     return this.http
       .get<T>(`https://localhost:7209/project/${id}`)
-      .pipe(tap((data) => console.log('DATA YOLO ', data)));
+      .pipe(tap((data) => console.log("DATA YOLO ", data)));
   }
 
   public createProject<T>(body: Project): Observable<T> {
     return this.http
-      .post<T>(`https://localhost:7209/project`, body)
-      .pipe(tap((data) => console.log('DATA YOLO ', data)));
+      .post<T>("https://localhost:7209/project", body)
+      .pipe(tap((data) => console.log("DATA YOLO ", data)));
   }
 }

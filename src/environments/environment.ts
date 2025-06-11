@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-import { AuthConfig } from '@auth0/auth0-angular';
+import { AuthConfig } from "@auth0/auth0-angular";
 
 export const environment = {
   production : false,
@@ -14,14 +14,14 @@ export const environment = {
     cacheLocation    : "localstorage",
     httpInterceptor  : {
       allowedList: [{
-        uriMatcher: () => true,
-        allowAnonymous: true
+        uriMatcher     : () => true,
+        allowAnonymous : true
       }]
     },
     authorizationParams: {
       audience     : "https://api.projekter.opsella.com",
       redirect_uri : window.location.origin,
-      scope        : "openid profile offline_access email project:read tenant:delete",
+      scope        : "openid profile offline_access email project:read project:write tenant:read tenant:delete",
     }
   } as AuthConfig,
   projekterApi: {

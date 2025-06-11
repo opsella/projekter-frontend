@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Project } from '../../models/project';
-import { ProjectService } from '../services/project.service';
-import { map, Observable } from 'rxjs';
-import { ExpansionTableData } from '../../shared/expansion-table/expandable-data';
-import { ProjectTableContentComponent } from '../project-table-content/project-table-content.component';
-import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { Project } from "../../models/project";
+import { ProjectService } from "../services/project.service";
+import { map, Observable } from "rxjs";
+import { ExpansionTableData } from "../../shared/expansion-table/expandable-data";
+import { ProjectTableContentComponent } from "../project-table-content/project-table-content.component";
+import { Router } from "@angular/router";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Component({
   selector        : "app-project-data-list",
@@ -16,7 +16,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ProjectDataListComponent {
   public projects$: Observable<ExpansionTableData<Project>[]>;
-  public projects = Array.from({length: 30}, (x, i) => ({
+  public projects = Array.from({ length: 30 }, (x, i) => ({
     id            : i,
     title         : "Oliver Fence In The Old Western",
     status        : "Draft",
