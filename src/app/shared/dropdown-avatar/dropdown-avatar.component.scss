@@ -1,13 +1,10 @@
 .avatar-container {
   height: 92%;
   padding-top: 2px;
+  display: flex;
+  justify-items: center;
 
   button {
-    background-color: #040300;
-    height: 100%;
-    max-width: 4rem;
-    padding: 0;
-
     &:hover {
       cursor: pointer;
     }

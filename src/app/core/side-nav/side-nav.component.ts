@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import { AuthenticationService } from "../../authentication/authentication.service";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../authentication/authentication.service';
 
 @Component({
     selector: "app-side-nav",
@@ -11,12 +11,6 @@ import { AuthenticationService } from "../../authentication/authentication.servi
 export class SideNavComponent {
 
   public options = [
-    {
-      id        : "logout",
-      name      : "Logout",
-      handler   : () => this.logout(),
-      isVisible : () => true,
-    },
     {
       id        : "settings",
       name      : "Settings",
@@ -34,11 +28,6 @@ export class SideNavComponent {
     protected auth: AuthenticationService,
     private router: Router
   ) { }
-
-  public logout() {
-    // TODO: update this after the oidc changes
-    this.auth.logout();
-  }
 
   public async settings() {
     await this.router.navigate(["/user/settings"]);

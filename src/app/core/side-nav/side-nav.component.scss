@@ -10,6 +10,7 @@ aside {
 
   .active-user-container {
     display: flex;
+    align-items: center;
     height: 100%;
     max-width: 230px;
     min-width: 80px;
@@ -42,12 +43,5 @@ aside {
         padding: 0;
       }
     }
-  }
-
-  .maybe-something-useful {
-    //background-color: #434240;
-    //color: #D6D6D6;
-    //height: 80%;
-    width: 11rem;
   }
 }

@@ -1,19 +1,15 @@
 <div class="avatar-container">
-  <button class="avatar-button" (click)="openDropdown()">
-    <img
-      [src]="avatarUrl"
-      alt="User avatar and additional options"
-      class="avatar"
-    />
-  </button>
-
   <div class="dropdown">
-    <div class="dropdown-content" [class.dropdown-content-open]="dropdownOpen">
-      <ng-container *ngFor="let option of options">
-        <a *ngIf="option.isVisible()" (click)="dropdownClicked(option.id)">
-          {{ option.name }}
-        </a>
-      </ng-container>
+    <div class="dropdown-content" [class.dropdown-content-open]="openDropdown()">
+      @for (option of options; track option.id) {
+        <ng-container>
+          @if (option.isVisible()) {
+            <a (click)="dropdownClicked(option.id)">
+              {{ option.name }}
+            </a>
+          }
+        </ng-container>
+      }
     </div>
   </div>
 </div>

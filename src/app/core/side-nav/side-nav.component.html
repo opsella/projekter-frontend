@@ -1,8 +1,5 @@
 <aside>
-  <div class="maybe-something-useful"></div>
-  <!--  <select class="maybe-something-useful">-->
-  <!--    <option>Something Important</option>-->
-  <!--  </select>-->
+  <span class="spacer"></span>
 
   <div class="active-user-container">
     <div class="notification-icon">
@@ -16,13 +13,10 @@
     </div>
 
     <div class="user-info">
-      <h4>{{ auth.user()?.firstname }} {{ auth.user()?.lastname }}</h4>
-      <h5>Admin</h5>
+      <h4>{{ auth.auth0User()?.name }}</h4>
     </div>
 
-    <app-dropdown-avatar
-      [options]="options"
-      [avatarUrl]="auth.user()?.picture"
-    />
+    <app-avatar [photo]="auth.auth0User()?.picture"
+                (click)="profile()"/>
   </div>
 </aside>

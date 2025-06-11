@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-import { AuthenticationService } from "../../authentication/authentication.service";
+import { Component } from '@angular/core';
+import { AuthenticationService } from '../../authentication/authentication.service';
 
 @Component({
     selector: "app-profile",
@@ -12,4 +12,9 @@ export class ProfileComponent {
   constructor(
     public auth: AuthenticationService
   ) { }
+
+  public logout() {
+    this.auth.logout();
+  }
 }
+

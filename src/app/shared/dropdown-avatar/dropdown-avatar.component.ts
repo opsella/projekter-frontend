@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: "app-dropdown-avatar",
@@ -8,7 +8,7 @@ import { Component, Input } from "@angular/core";
 })
 export class DropdownAvatarComponent  {
     @Input() public options: DropDownAvatarElementConfig[] = [];
-    @Input() public avatarUrl: string | undefined = "";
+    @Input() public avatarUrl?: string = "";
 
     protected dropdownOpen = false;
 

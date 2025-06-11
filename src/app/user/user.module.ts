@@ -1,11 +1,13 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { SettingsComponent } from "./settings/settings.component";
-import { ProfileComponent } from "./profile/profile.component";
-import { SharedModule } from "../shared/shared.module";
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SettingsComponent } from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
+import { SharedModule } from '../shared/shared.module';
 
 
-import { UserRoutingModule } from "./user-routing.module";
+import { UserRoutingModule } from './user-routing.module';
+import { ContentSectionComponent } from '../shared/content-section/content-section.component';
+import { MatButton } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { UserRoutingModule } from "./user-routing.module";
   imports: [
     CommonModule,
     SharedModule,
-    UserRoutingModule
+    UserRoutingModule,
+    ContentSectionComponent,
+    MatButton
   ]
 })
 export class UserModule { }

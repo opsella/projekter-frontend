@@ -1,0 +1,12 @@
+@use "@angular/material" as mat;
+
+.avatar {
+  transform: scale(2);
+  border-radius: 100%;
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+mat-icon {
+  transform: scale(2);
+}

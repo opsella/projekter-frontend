@@ -1,14 +1,18 @@
-<app-page-wrapper title="Profile">
-  <ul>
-    <li>Name: {{ auth.user()?.firstname }} {{ auth.user()?.lastname }}</li>
-    <li>Username: {{ auth.user()?.nickname }}</li>
-    <li>Email: {{ auth.user()?.email }}</li>
-    <span>{{ auth.user()?.emailVerified ? "Verified" : "Unverified" }}</span>
-  </ul>
+<app-page-wrapper>
+  <app-content-section title="Profile" [expandable]="false">
+    <ul>
+      <li>Name: {{ auth.auth0User()?.name }}</li>
+      <li>Username: {{ auth.auth0User()?.nickname }}</li>
+      <li>Email: {{ auth.auth0User()?.email }}</li>
+      <span>{{ auth.auth0User()?.email_verified ? "Verified" : "Unverified" }}</span>
+    </ul>
 
-  <ul>
-    @for (permission of auth.permissions(); track permission.permissionName) {
-      <li>{{ permission.permissionName }}: {{ permission.description }}</li>
-    }
-  </ul>
+    <ul>
+      @for (permission of auth.permissions(); track permission.permissionName) {
+        <li>{{ permission.permissionName }}: {{ permission.description }}</li>
+      }
+    </ul>
+
+    <button mat-flat-button (click)="logout()">LOGOUT</button>
+  </app-content-section>
 </app-page-wrapper>
