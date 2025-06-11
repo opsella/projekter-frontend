@@ -1,4 +1,18 @@
 <button (click)="backToProjects()">Back to Projects</button>
-<app-page-wrapper title="Temp Title">
 
+<app-page-wrapper>
+  <app-content-section [title]="project.value().name">
+    <img
+      [ngSrc]="project.value().photo"
+      alt="Project Image"
+      width="200"
+      height="200"
+    />
+
+    <ul>
+      <li>Project Name: {{ project.value().name }}</li>
+      <li>Project State: {{ project.value().state }}</li>
+      <li>Project Status: {{ project.value().status_id }}</li>
+    </ul>
+  </app-content-section>
 </app-page-wrapper>

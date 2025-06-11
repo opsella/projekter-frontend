@@ -1,10 +1,11 @@
 <section>
   <div class="project-grid">
-    @for (project of projects; track project.id) {
+    @for (project of projects.value(); track project.id) {
       <app-project-card
-        [title]="project.title"
-        [status]="project.status"
+        [title]="project.name"
+        [status]="project.state"
         [photo]="project.photo"
+        (click)="viewDetails(project.id)"
       >
       </app-project-card>
     }
@@ -29,8 +30,5 @@
 }
 
 <section class="actions">
-  <button mat-flat-button
-          (click)="createProject()">
-    New Project
-  </button>
+  <button mat-flat-button (click)="createProject()">New Project</button>
 </section>

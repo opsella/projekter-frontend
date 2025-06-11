@@ -1,46 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { combineLatest, Observable, of, switchMap, tap } from 'rxjs';
-import { Project } from '../../models/project';
-import { ProjectService } from '../services/project.service';
+import { Component, effect, inject, signal } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ProjectService } from "../services/project.service";
+import { HttpResourceRef } from "@angular/common/http";
+import { Project } from "../../models/project";
+import { toSignal } from "@angular/core/rxjs-interop";
 
 @Component({
-  selector: 'app-project-details',
-  templateUrl: './project-details.component.html',
-  styleUrl: './project-details.component.scss',
-  standalone: false,
+  selector    : "app-project-details",
+  templateUrl : "./project-details.component.html",
+  styleUrl    : "./project-details.component.scss",
+  standalone  : false,
 })
-export class ProjectDetailsComponent implements OnInit {
+export class ProjectDetailsComponent {
+  private route = inject(ActivatedRoute);
+  private params = toSignal(this.route.params, { initialValue: { id: "" } });
+  private projectId = signal(this.params().id);
+
+  protected project: HttpResourceRef<Project> = this.projectService.project(this.projectId);
+
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
-  ) {}
-
-  ngOnInit() {
-    combineLatest([this.activatedRoute.params, this.activatedRoute.queryParams])
-      .pipe(
-        switchMap(([params1, params2]: [Params, Params]): any => {
-          let projectDetails$: Observable<null | Project[]> = of(null);
-
-          if (!params2['new']) {
-            projectDetails$ = this.projectService.getProjectById<Project[]>(
-              Number(params1['id']),
-            );
-          }
-
-          return projectDetails$;
-        }),
-        tap((result) => {
-          console.log('RESULT', result);
-          // if project results, populate readonly form
-          // else make form not readonly with only the name populated
-        }),
-      )
-      .subscribe();
+  ) {
+    effect(() => {
+      this.projectId.set(this.params().id);
+    })
   }
 
   public async backToProjects(): Promise<void> {
-    await this.router.navigate(['projects/list']);
+    await this.router.navigate(["projects/list"]);
   }
 }
