@@ -103,7 +103,7 @@
           }
         ],
         "@angular-eslint/prefer-standalone": [
-          "none"
+          "warn"
         ]
       }
     },
