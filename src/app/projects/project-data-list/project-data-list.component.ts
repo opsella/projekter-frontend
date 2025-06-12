@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
-import { ProjectService } from '../services/project.service';
-import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CreateProjectRequest, Project, ProjectState } from '../../models/project';
-import { HttpResourceRef } from '@angular/common/http';
-import { MatSelectChange } from '@angular/material/select';
-import { MatDialog } from '@angular/material/dialog';
-import { ProjectCreationDialogComponent } from '../project-creation-dialog/project-creation-dialog.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from "@angular/core";
+import { ProjectService } from "../services/project.service";
+import { Router } from "@angular/router";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { CreateProjectRequest, Project, ProjectState } from "../../models/project";
+import { HttpResourceRef } from "@angular/common/http";
+import { MatSelectChange } from "@angular/material/select";
+import { MatDialog } from "@angular/material/dialog";
+import { ProjectCreationDialogComponent } from "../project-creation-dialog/project-creation-dialog.component";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { ProjectId } from "../../models/ids/project-id";
 
 @Component({
   selector        : "app-project-data-list",
@@ -34,7 +35,7 @@ export class ProjectDataListComponent {
   ) {
   }
 
-  public async viewDetails(id: string): Promise<void> {
+  public async viewDetails(id: ProjectId): Promise<void> {
     await this.router.navigate([
       "project/details", id
     ]);

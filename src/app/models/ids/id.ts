@@ -13,7 +13,7 @@ export abstract class Id {
     return this._value;
   }
 
-  protected isValid(value: string, prefix: string): boolean {
+  protected isValid(value: string, prefix?: string): boolean {
     return new RegExp(
       `^${prefix}_[0-9A-Fa-f]{8}-?[0-9A-Fa-f]{4}-?4[0-9A-Fa-f]{3}-?[89ABab][0-9A-Fa-f]{3}-?[0-9A-Fa-f]{12}$`,
     ).test(value);
