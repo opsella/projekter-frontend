@@ -13,6 +13,20 @@
       <li>Project Name: {{ project.value().name }}</li>
       <li>Project State: {{ project.value().state }}</li>
       <li>Project Status: {{ project.value().status_id }}</li>
+      <li>
+        Location:
+        {{ project.value().location.address?.address_lines[0] ?? "no address" }}
+      </li>
+    </ul>
+  </app-content-section>
+
+  <app-content-section title="Tasks">
+    <ul>
+      @for (task of project.value().tasks; track task.id) {
+        <li>
+          Due {{ task.due_date }} - {{ task.name }}: {{ task.description }}
+        </li>
+      }
     </ul>
   </app-content-section>
 </app-page-wrapper>

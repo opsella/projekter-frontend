@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { Project } from "../../models/project";
 import { ProjectService } from "../services/project.service";
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
@@ -38,23 +37,24 @@ export class ProjectDataListComponent {
   }
 
   public onSubmit() {
-    const project = new Project(
-      this.projectCreationForm.get("projectName").value,
-      "Draft"
-    );
-
-    this.projectService.createProject<Project>(project).subscribe({
-      next: async (project: Project): Promise<void> => {
-        await this.router.navigate([
-          "project/details", project.id
-        ], {
-          queryParams: { new: true },
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    // const project = new Project(
+    //   this.projectCreationForm.get("projectName").value,
+    //   "Draft"
+    //
+    // );
+    //
+    // this.projectService.createProject<Project>(project).subscribe({
+    //   next: async (project: Project): Promise<void> => {
+    //     await this.router.navigate([
+    //       "project/details", project.id
+    //     ], {
+    //       queryParams: { new: true },
+    //     });
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //   },
+    // });
 
     this.openModal = false;
   }
