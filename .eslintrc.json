@@ -31,20 +31,6 @@
             }
           }
         ],
-        "key-spacing": [
-          "error",
-          {
-            "multiLine": {
-              "beforeColon": false,
-              "afterColon": true
-            },
-            "align": {
-              "beforeColon": true,
-              "afterColon": true,
-              "on": "colon"
-            }
-          }
-        ],
         "array-bracket-newline": [
           "error",
           {
