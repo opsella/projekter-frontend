@@ -1,10 +1,15 @@
-import { Injectable, Signal } from "@angular/core";
-import { httpResource, HttpResourceRef } from "@angular/common/http";
-import { CreateProjectRequest, Project, ProjectResponse, ProjectState } from "../../models/project";
-import { ApiResponse, PaginatedApiResponse } from "../../models/api/api-response";
+import { Injectable, Signal } from '@angular/core';
+import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
+import { CreateProjectRequest, Project, ProjectResponse, ProjectState } from '../../models/project';
+import { ApiResponse, PaginatedApiResponse } from '../../models/api/api-response';
+import { map, Observable } from 'rxjs';
 
 @Injectable()
 export class ProjectService {
+
+  constructor(private http: HttpClient) {
+  }
+
   public projects: (state?: Signal<ProjectState>) => HttpResourceRef<Project[]> = (state) => {
     return httpResource<Project[]>(
       () => ({
@@ -28,26 +33,20 @@ export class ProjectService {
     return httpResource<Project>(
       () => `https://localhost:7209/project/${projectId()}`,
       {
-        parse: (result: ApiResponse<Project>) => {
-          return result.data;
+        parse: (result: ApiResponse<ProjectResponse>) => {
+          return Project.fromResponse(result.data);
         }
       }
     )
   }
 
-  public createProject: (project: CreateProjectRequest) => HttpResourceRef<Project> = (project) => {
-    return httpResource<Project>(
-      () => ({
-        url    : "https://localhost:7209/project",
-        method : "POST",
-        data   : project
-      }), {
-        parse: (result: ApiResponse<Project>) => {
-          return result.data;
-        }
-      }
-    )
+  public createProject(project: CreateProjectRequest): Observable<Project> {
+    return this.http.post<ApiResponse<ProjectResponse>>("https://localhost:7209/project", project, {})
+      .pipe(
+        map(response => {
+          console.log("received response", response)
+          return Project.fromResponse(response.data);
+        })
+      )
   }
-
-  constructor() {}
 }

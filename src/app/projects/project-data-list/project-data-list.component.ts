@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from "@angular/core";
-import { ProjectService } from "../services/project.service";
-import { Router } from "@angular/router";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Project, ProjectState } from "../../models/project";
-import { HttpResourceRef } from "@angular/common/http";
-import { MatSelectChange } from "@angular/material/select";
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from '@angular/core';
+import { ProjectService } from '../services/project.service';
+import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CreateProjectRequest, Project, ProjectState } from '../../models/project';
+import { HttpResourceRef } from '@angular/common/http';
+import { MatSelectChange } from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectCreationDialogComponent } from '../project-creation-dialog/project-creation-dialog.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector        : "app-project-data-list",
@@ -22,11 +25,12 @@ export class ProjectDataListComponent {
   });
 
   protected projects: HttpResourceRef<Project[]> = this.projectService.projects(this.filterProjectState);
-  protected openModal = false;
 
   constructor(
     private projectService: ProjectService,
+    private dialog: MatDialog,
     private router: Router,
+    private snackbar: MatSnackBar
   ) {
   }
 
@@ -36,34 +40,24 @@ export class ProjectDataListComponent {
     ]);
   }
 
-  public onFilterChanged(value: MatSelectChange<string>) {
+  public onFilterChanged(value: MatSelectChange<string>): void {
     this.filterProjectState.set(value.value as ProjectState);
   }
 
-  public createProject() {
-    this.openModal = true;
-  }
+  public createProject(): void {
+    const ref = this.dialog.open(ProjectCreationDialogComponent);
 
-  public onSubmit() {
-    // const project = new Project(
-    //   this.projectCreationForm.get("projectName").value,
-    //   "Draft"
-    //
-    // );
-    //
-    // this.projectService.createProject<Project>(project).subscribe({
-    //   next: async (project: Project): Promise<void> => {
-    //     await this.router.navigate([
-    //       "project/details", project.id
-    //     ], {
-    //       queryParams: { new: true },
-    //     });
-    //   },
-    //   error: (err) => {
-    //     console.log(err);
-    //   },
-    // });
-
-    this.openModal = false;
+    ref.afterClosed()
+      .subscribe((result: CreateProjectRequest | boolean) => {
+        if (result instanceof CreateProjectRequest) {
+          this.projectService.createProject(result)
+            .subscribe(result => {
+              this.viewDetails(result.id)
+            });
+          this.snackbar.open("Project POSTed to Server", null, { duration: 2000 });
+        } else {
+          this.snackbar.open("Project Creation Canceled", null, { duration: 2000 });
+        }
+      });
   }
 }

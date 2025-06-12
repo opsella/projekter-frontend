@@ -9,6 +9,7 @@ html {
 
   @include mat.theme((
     color-scheme: light dark,
+    //color: mat.$blue-palette,
     color: (
       primary: projektor.$primary-palette,
       tertiary: projektor.$tertiary-palette,
@@ -53,4 +54,11 @@ a {
   left: -1000px;
   height: 0;
   width: 0;
+}
+
+:root {
+  //@include mat.dialog-overrides((
+  //  container-color: orange,
+  //  subhead-color: red,
+  //));
 }

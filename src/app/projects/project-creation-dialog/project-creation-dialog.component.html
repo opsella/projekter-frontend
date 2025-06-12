@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Create New Project</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Project Name</mat-label>
+      <input matInput type="text" formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <input matInput type="text" formControlName="status" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Photo Url</mat-label>
+      <input matInput type="text" formControlName="photo" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button matButton (click)="onCancelClick()">Cancel</button>
+  <button mat-flat-button (click)="onSubmitClick()">Submit</button>
+</mat-dialog-actions>

@@ -1,22 +1,26 @@
 <button (click)="backToProjects()">Back to Projects</button>
 
 <app-page-wrapper>
-  <app-content-section [title]="project.value().name">
-    <img
-      [ngSrc]="project.value().photo"
-      alt="Project Image"
-      width="200"
-      height="200"
-    />
+  <app-content-section [title]="project.value()?.name ?? ''">
+    @if (project.value()?.photo) {
+      <img
+        [ngSrc]="project.value()?.photo"
+        alt="Project Image"
+        width="200"
+        height="200"
+      />
+    }
 
     <ul>
-      <li>Project Name: {{ project.value().name }}</li>
-      <li>Project State: {{ project.value().state }}</li>
-      <li>Project Status: {{ project.value().status_id }}</li>
-      <li>Project Status: {{ project.value().status_id.value }}</li>
+      <li>Project Name: {{ project.value()?.name }}</li>
+      <li>Project State: {{ project.value()?.state }}</li>
+      <li>Project Status: {{ project.value()?.status_id }}</li>
+      <li>Project Status: {{ project.value()?.status_id.value }}</li>
       <li>
         Location:
-        {{ project.value().location.address?.address_lines[0] ?? "no address" }}
+        {{
+          project.value()?.location.address?.address_lines[0] ?? "no address"
+        }}
       </li>
     </ul>
 
@@ -24,7 +28,7 @@
   </app-content-section>
 
   <app-content-section title="Tasks">
-    <mat-table [dataSource]="project.value().tasks">
+    <mat-table [dataSource]="project.value()?.tasks ?? []">
       <ng-container matColumnDef="duedate">
         <mat-header-cell *matHeaderCellDef>Due Date</mat-header-cell>
         <mat-cell *matCellDef="let row">{{ row.due_date | date }}</mat-cell>

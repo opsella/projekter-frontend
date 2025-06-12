@@ -22,23 +22,6 @@
   </div>
 </section>
 
-@if (openModal) {
-  <div class="modal-overlay">
-    <div class="modal-form">
-      {{ openModal }}
-
-      <form [formGroup]="projectCreationForm" (ngSubmit)="onSubmit()">
-        <label for="first-name">Project Name</label>
-        <input id="first-name" type="text" formControlName="projectName" />
-
-        <button type="submit" [disabled]="projectCreationForm.valid">
-          Save
-        </button>
-      </form>
-    </div>
-  </div>
-}
-
 <section class="actions">
   <button mat-flat-button (click)="createProject()">New Project</button>
 </section>

@@ -1,6 +1,6 @@
-import { ProjectStatusId } from "./ids/project-status-id";
-import { TimeTrackingId } from "./ids/time-tracking-id";
-import { BillOfMaterialsId } from "./ids/bill-of-materials-id";
+import { ProjectStatusId } from './ids/project-status-id';
+import { TimeTrackingId } from './ids/time-tracking-id';
+import { BillOfMaterialsId } from './ids/bill-of-materials-id';
 
 export class CreateProjectRequest {
   constructor(
@@ -54,7 +54,7 @@ export class Project {
       response.code,
       response.bill_of_materials_id ? BillOfMaterialsId.fromJSON(response.bill_of_materials_id) : null,
       response.id
-    )
+    );
   }
 }
 
