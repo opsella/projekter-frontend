@@ -27,6 +27,7 @@
     "@auth0/auth0-angular": "^2.2.3",
     "@fontsource/material-icons": "^5.2.5",
     "@fontsource/roboto": "^5.2.6",
+    "@innova2/url-builder": "^4.0.0",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
     "rxjs": "~7.8.1",

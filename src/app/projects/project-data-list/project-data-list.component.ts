@@ -1,7 +1,10 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component, signal, WritableSignal } from "@angular/core";
 import { ProjectService } from "../services/project.service";
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Project, ProjectState } from "../../models/project";
+import { HttpResourceRef } from "@angular/common/http";
+import { MatSelectChange } from "@angular/material/select";
 
 @Component({
   selector        : "app-project-data-list",
@@ -11,13 +14,14 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
   standalone      : false
 })
 export class ProjectDataListComponent {
-  public projects = this.projectService.projects;
+  public filterProjectState: WritableSignal<ProjectState> = signal("Draft");
 
   public projectCreationForm = new FormGroup({
     projectName : new FormControl("", [Validators.required]),
     image       : new FormControl(""),
   });
 
+  protected projects: HttpResourceRef<Project[]> = this.projectService.projects(this.filterProjectState);
   protected openModal = false;
 
   constructor(
@@ -30,6 +34,10 @@ export class ProjectDataListComponent {
     await this.router.navigate([
       "project/details", id
     ]);
+  }
+
+  public onFilterChanged(value: MatSelectChange<string>) {
+    this.filterProjectState.set(value.value as ProjectState);
   }
 
   public createProject() {

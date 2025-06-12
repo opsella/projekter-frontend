@@ -13,11 +13,14 @@
       <li>Project Name: {{ project.value().name }}</li>
       <li>Project State: {{ project.value().state }}</li>
       <li>Project Status: {{ project.value().status_id }}</li>
+      <li>Project Status: {{ project.value().status_id.value }}</li>
       <li>
         Location:
         {{ project.value().location.address?.address_lines[0] ?? "no address" }}
       </li>
     </ul>
+
+    <p>{{ test2 }}</p>
   </app-content-section>
 
   <app-content-section title="Tasks">

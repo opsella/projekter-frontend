@@ -1,4 +1,14 @@
 <section>
+  <div class="project-filter">
+    <mat-form-field>
+      <mat-label>Project State</mat-label>
+      <mat-select (selectionChange)="onFilterChanged($event)">
+        <mat-option value="Draft">Draft</mat-option>
+        <mat-option value="Published">Published</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
   <div class="project-grid">
     @for (project of projects.value(); track project.id) {
       <app-project-card
