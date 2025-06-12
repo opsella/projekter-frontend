@@ -26,7 +26,7 @@ export abstract class Id {
     return this.value;
   }
 
-  private toString() {
+  public toString() {
     return this.value;
   }
 }
