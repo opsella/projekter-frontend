@@ -1,22 +1,22 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ExpansionTableStore } from '../expansion-table.store';
-import { Observable, of } from 'rxjs';
-import { MatTableDataSource } from '@angular/material/table';
-import { ExpandableData, ExpansionTableData } from '../expandable-data';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
+import { animate, state, style, transition, trigger } from "@angular/animations";
+import { ExpansionTableStore } from "../expansion-table.store";
+import { Observable, of } from "rxjs";
+import { MatTableDataSource } from "@angular/material/table";
+import { ExpandableData, ExpansionTableData } from "../expandable-data";
 
 @Component({
-    selector: "app-expansion-table",
-    templateUrl: "./expansion-table.component.html",
-    styleUrls: ["./expansion-table.component.scss"],
-    animations: [trigger("detailExpand", [
-            state("collapsed", style({ height: "0px", minHeight: "0" })),
-            state("expanded", style({ height: "*" })),
-            transition("expanded <=> collapsed", animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")),
-        ]),],
-    providers: [ExpansionTableStore],
-    standalone: false,
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector    : "app-expansion-table",
+  templateUrl : "./expansion-table.component.html",
+  styleUrls   : ["./expansion-table.component.scss"],
+  animations  : [trigger("detailExpand", [
+    state("collapsed", style({ height: "0px", minHeight: "0" })),
+    state("expanded", style({ height: "*" })),
+    transition("expanded <=> collapsed", animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")),
+  ]),],
+  providers       : [ExpansionTableStore],
+  standalone      : false,
+  changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class ExpansionTableComponent implements OnInit {
   @Input() public tableData: Observable<ExpansionTableData<any>[]>;
@@ -30,11 +30,13 @@ export class ExpansionTableComponent implements OnInit {
   constructor(
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.tableData.subscribe((tableData: ExpansionTableData<any>[]) => {
       this.tableDataSource.data = tableData;
       this.columnHeaders = [...Object.keys(tableData[0].data ?? {})].filter(key => key !== "id");
-      this.columnHeadersWithActions = this.columnHeaders.concat(['actions', 'expand']);
+      this.columnHeadersWithActions = this.columnHeaders.concat([
+        "actions", "expand"
+      ]);
     })
 
   }
@@ -46,7 +48,7 @@ export class ExpansionTableComponent implements OnInit {
   }
 
   protected elementIsExpanded(element: any) {
-    console.log('expandedElement', this.expandedElements);
+    console.log("expandedElement", this.expandedElements);
     return this.expandedElements.includes(element.id);
   }
 
