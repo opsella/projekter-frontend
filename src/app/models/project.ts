@@ -1,15 +1,15 @@
-import { ProjectStatusId } from './ids/project-status-id';
-import { TimeTrackingId } from './ids/time-tracking-id';
-import { BillOfMaterialsId } from './ids/bill-of-materials-id';
+import { ProjectStatusId } from "./ids/project-status-id";
+import { TimeTrackingId } from "./ids/time-tracking-id";
+import { BillOfMaterialsId } from "./ids/bill-of-materials-id";
+import { ProjectId } from "./ids/project-id";
 
 export class CreateProjectRequest {
   constructor(
     public name: string,
     public status: ProjectStatusId,
     public photo?: URL,
-    public location?: Location
-  ) {
-  }
+    public location?: Location,
+  ) {}
 }
 
 export type ProjectState = "Draft" | "Published";
@@ -27,9 +27,9 @@ export interface ProjectResponse {
   id?: string;
 }
 
-
 export class Project {
   constructor(
+    public id: ProjectId,
     public name: string,
     public state: ProjectState,
     public time_tracking_id: TimeTrackingId,
@@ -39,11 +39,11 @@ export class Project {
     public status_id?: ProjectStatusId,
     public code?: string,
     public bill_of_materials_id?: BillOfMaterialsId,
-    public id?: string,
   ) {}
 
   public static fromResponse(response: ProjectResponse): Project {
     return new Project(
+      ProjectId.fromJSON(response.id),
       response.name,
       response.state,
       TimeTrackingId.fromJSON(response.time_tracking_id),
@@ -52,8 +52,9 @@ export class Project {
       response.photo,
       response.status_id ? ProjectStatusId.fromJSON(response.status_id) : null,
       response.code,
-      response.bill_of_materials_id ? BillOfMaterialsId.fromJSON(response.bill_of_materials_id) : null,
-      response.id
+      response.bill_of_materials_id
+        ? BillOfMaterialsId.fromJSON(response.bill_of_materials_id)
+        : null,
     );
   }
 }
@@ -65,17 +66,15 @@ export class Task {
     public description: string,
     public due_date?: Date,
     public completed_at?: Date,
-    public id?: string
-  ) {
-  }
+    public id?: string,
+  ) {}
 }
 
 export class Location {
   constructor(
     public address?: Address,
-    public gps_coordinates?: GpsCoordinates
-  ) {
-  }
+    public gps_coordinates?: GpsCoordinates,
+  ) {}
 }
 
 export class Address {
@@ -84,15 +83,13 @@ export class Address {
     public state: string,
     public city: string,
     public postal_code: string,
-    public country: string
-  ) {
-  }
+    public country: string,
+  ) {}
 }
 
 export class GpsCoordinates {
   constructor(
     public latitude: number,
-    public longitude: number
-  ) {
-  }
+    public longitude: number,
+  ) {}
 }
