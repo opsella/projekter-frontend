@@ -1,8 +1,14 @@
-import { Injectable, Signal } from '@angular/core';
-import { HttpClient, httpResource, HttpResourceRef } from '@angular/common/http';
-import { CreateProjectRequest, Project, ProjectResponse, ProjectState } from '../../models/project';
-import { ApiResponse, PaginatedApiResponse } from '../../models/api/api-response';
-import { map, Observable } from 'rxjs';
+import { Injectable, Signal } from "@angular/core";
+import { HttpClient, httpResource, HttpResourceRef } from "@angular/common/http";
+import {
+  CreateProjectRequest,
+  Project,
+  ProjectAddSpecificationRequest,
+  ProjectResponse,
+  ProjectState
+} from "../../models/project";
+import { ApiResponse, PaginatedApiResponse } from "../../models/api/api-response";
+import { map, Observable } from "rxjs";
 
 @Injectable()
 export class ProjectService {
@@ -26,7 +32,7 @@ export class ProjectService {
             });
         }
       }
-    )
+    );
   }
 
   public project: (projectId: Signal<string>) => HttpResourceRef<Project> = (projectId) => {
@@ -37,16 +43,24 @@ export class ProjectService {
           return Project.fromResponse(result.data);
         }
       }
-    )
+    );
   }
 
   public createProject(project: CreateProjectRequest): Observable<Project> {
     return this.http.post<ApiResponse<ProjectResponse>>("https://localhost:7209/project", project, {})
       .pipe(
         map(response => {
-          console.log("received response", response)
           return Project.fromResponse(response.data);
         })
-      )
+      );
+  }
+
+  public addSpecification(spec: ProjectAddSpecificationRequest): Observable<Project> {
+    return this.http.post<ApiResponse<ProjectResponse>>(`https://localhost:7209/project/${spec.project_id.toString()}/spec`, spec, {})
+      .pipe(
+        map(response => {
+          return Project.fromResponse(response.data);
+        })
+      );
   }
 }

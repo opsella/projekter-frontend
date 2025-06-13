@@ -62,9 +62,6 @@ export class ProjectDataListComponent {
             this.snackbar.open("Project POSTed to Server", null, {
               duration: 2000,
             });
-            this.snackbar.open("Project POSTed to Server", null, {
-              duration: 2000,
-            });
           } else {
             this.snackbar.open("Project Creation Canceled", null, {
               duration: 2000,

@@ -2,6 +2,8 @@ import { ProjectStatusId } from "./ids/project-status-id";
 import { TimeTrackingId } from "./ids/time-tracking-id";
 import { BillOfMaterialsId } from "./ids/bill-of-materials-id";
 import { ProjectId } from "./ids/project-id";
+import { SpecificationId } from "./ids/specification-id";
+import { TaskId } from "./ids/task-id";
 
 export class CreateProjectRequest {
   constructor(
@@ -12,6 +14,16 @@ export class CreateProjectRequest {
   ) {}
 }
 
+export class ProjectAddSpecificationRequest {
+  constructor(
+    public project_id: ProjectId,
+    public code: string,
+    public title: string,
+    public description: string,
+  ) {
+  }
+}
+
 export type ProjectState = "Draft" | "Published";
 
 export interface ProjectResponse {
@@ -19,12 +31,33 @@ export interface ProjectResponse {
   state: ProjectState;
   time_tracking_id: string;
   location: Location;
-  tasks: Task[];
+  tasks: ProjectTaskResponse[];
+  specifications: SpecificationResponse[];
   photo?: string;
   status_id?: string;
   code?: string;
   bill_of_materials_id?: string;
   id?: string;
+}
+
+export interface ProjectTaskResponse {
+  id: string,
+  assigned_project_id: string,
+  name: string,
+  description: string,
+  due_date?: Date,
+  completed_at?: Date,
+}
+
+export interface SpecificationResponse {
+  id: string,
+  project_id: string,
+  code: string,
+  title: string,
+  description: string,
+  issued_at_date: Date,
+  revision: number,
+  last_revision_date?: Date
 }
 
 export class Project {
@@ -35,6 +68,7 @@ export class Project {
     public time_tracking_id: TimeTrackingId,
     public location: Location,
     public tasks: Task[],
+    public specifications: Specification[],
     public photo?: string,
     public status_id?: ProjectStatusId,
     public code?: string,
@@ -48,7 +82,8 @@ export class Project {
       response.state,
       TimeTrackingId.fromJSON(response.time_tracking_id),
       response.location,
-      response.tasks,
+      response.tasks.map(t => Task.fromResponse(t)),
+      response.specifications.map(s => Specification.fromResponse(s)),
       response.photo,
       response.status_id ? ProjectStatusId.fromJSON(response.status_id) : null,
       response.code,
@@ -61,13 +96,51 @@ export class Project {
 
 export class Task {
   constructor(
-    public assigned_project_id: string,
+    public id: TaskId,
+    public assigned_project_id: ProjectId,
     public name: string,
     public description: string,
     public due_date?: Date,
     public completed_at?: Date,
-    public id?: string,
   ) {}
+
+  public static fromResponse(task: ProjectTaskResponse) {
+    return new Task(
+      TaskId.fromJSON(task.id),
+      ProjectId.fromJSON(task.assigned_project_id),
+      task.name,
+      task.description,
+      task.due_date,
+      task.completed_at
+    );
+  }
+}
+
+export class Specification {
+  constructor(
+    public id: SpecificationId,
+    public project_id: ProjectId,
+    public code: string,
+    public title: string,
+    public description: string,
+    public issued_at_date: Date,
+    public revision: number,
+    public last_revision_date?: Date
+  ) {
+  }
+
+  public static fromResponse(spec: SpecificationResponse) {
+    return new Specification(
+      SpecificationId.fromJSON(spec.id),
+      ProjectId.fromJSON(spec.project_id),
+      spec.code,
+      spec.title,
+      spec.description,
+      spec.issued_at_date,
+      spec.revision,
+      spec.last_revision_date
+    )
+  }
 }
 
 export class Location {
