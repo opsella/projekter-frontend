@@ -1,14 +1,16 @@
 <div>
-  <div *ngFor="let item of data.connect(collectionViewer) | async">
-    <ng-container
-      *ngTemplateOutlet="ContentHeader; context: { $implicit: item }"
-    ></ng-container>
-    <ng-container
-      *ngTemplateOutlet="ContentBody; context: { $implicit: item }"
-    ></ng-container>
-    <ng-container
-      *ngTemplateOutlet="ContentFooter; context: { $implicit: item }"
-    >
-    </ng-container>
-  </div>
+  @for (item of data.connect(collectionViewer) | async; track item) {
+    <div>
+      <ng-container
+        *ngTemplateOutlet="ContentHeader; context: { $implicit: item }"
+      ></ng-container>
+      <ng-container
+        *ngTemplateOutlet="ContentBody; context: { $implicit: item }"
+      ></ng-container>
+      <ng-container
+        *ngTemplateOutlet="ContentFooter; context: { $implicit: item }"
+      >
+      </ng-container>
+    </div>
+  }
 </div>

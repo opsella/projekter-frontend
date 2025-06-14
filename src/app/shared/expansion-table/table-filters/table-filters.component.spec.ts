@@ -8,8 +8,8 @@ describe("InventorySelectorComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TableFiltersComponent ]
-    })
+    imports: [TableFiltersComponent]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(TableFiltersComponent);

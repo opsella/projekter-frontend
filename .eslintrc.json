@@ -31,21 +31,6 @@
             }
           }
         ],
-        "array-bracket-newline": [
-          "error",
-          {
-            "minItems": 2
-          }
-        ],
-        "array-element-newline": [
-          "error",
-          {
-            "ArrayExpression": "consistent",
-            "ArrayPattern": {
-              "minItems": 2
-            }
-          }
-        ],
         "object-curly-spacing": [
           "error",
           "always"

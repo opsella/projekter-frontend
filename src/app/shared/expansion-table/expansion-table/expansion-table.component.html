@@ -7,26 +7,26 @@
     class="expansion-table"
     #table
   >
-    <ng-container
-      *ngFor="let propertyName of columnHeaders"
-      cdkColumnDef="{{ propertyName }}"
-    >
-      <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
-      <cdk-cell *cdkCellDef="let row" class="cell">
-        {{ row.data[propertyName] }}
-      </cdk-cell>
-    </ng-container>
+    @for (propertyName of columnHeaders; track propertyName) {
+      <ng-container [cdkColumnDef]="propertyName">
+        <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
+        <cdk-cell *cdkCellDef="let row" class="cell">
+          {{ row.data[propertyName] }}
+        </cdk-cell>
+      </ng-container>
+    }
 
     <ng-container cdkColumnDef="actions">
       <cdk-header-cell *cdkHeaderCellDef></cdk-header-cell>
       <cdk-cell *cdkCellDef="let row" class="cell">
-        <button
-          *ngFor="let action of row.actions"
-          (click)="action.action(row); $event.stopPropagation()"
-          [disabled]="!action.enabled"
-        >
-          {{ action.title }}
-        </button>
+        @for (action of row.actions; track action.id) {
+          <button
+            (click)="action.action(row); $event.stopPropagation()"
+            [disabled]="!action.enabled"
+          >
+            {{ action.title }}
+          </button>
+        }
       </cdk-cell>
     </ng-container>
 
@@ -38,12 +38,11 @@
           aria-label="expand row"
           (click)="updateExpandedElements(element)"
         >
-          <mat-icon *ngIf="elementIsExpanded(element)"
-            >keyboard_arrow_down</mat-icon
-          >
-          <mat-icon *ngIf="!elementIsExpanded(element)"
-            >keyboard_arrow_up</mat-icon
-          >
+          @if (elementIsExpanded(element)) {
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          } @else {
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          }
         </button>
       </cdk-cell>
     </ng-container>

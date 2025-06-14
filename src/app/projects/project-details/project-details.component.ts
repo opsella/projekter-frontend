@@ -7,22 +7,58 @@ import { toSignal } from "@angular/core/rxjs-interop";
 import { MatDialog } from "@angular/material/dialog";
 import {
   ProjectAddSpecificationDialogComponent,
-  ProjectAddSpecificationDialogData
+  ProjectAddSpecificationDialogData,
 } from "../project-add-specification-dialog/project-add-specification-dialog.component";
 import { Observable, of, switchMap, take, tap } from "rxjs";
+import { PageWrapperComponent } from "../../shared/page-wrapper/page-wrapper.component";
+import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
+import { DatePipe, NgOptimizedImage } from "@angular/common";
+import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable,
+} from "@angular/material/table";
+import { MatButton } from "@angular/material/button";
 
 @Component({
-  selector    : "app-project-details",
-  templateUrl : "./project-details.component.html",
-  styleUrl    : "./project-details.component.scss",
-  standalone  : false,
+  selector: "app-project-details",
+  templateUrl: "./project-details.component.html",
+  styleUrl: "./project-details.component.scss",
+  imports: [
+    PageWrapperComponent,
+    ContentSectionComponent,
+    NgOptimizedImage,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatCellDef,
+    MatCell,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatButton,
+    DatePipe,
+  ],
+  providers: [ProjectService],
+  standalone: true,
 })
 export class ProjectDetailsComponent {
   private route = inject(ActivatedRoute);
   private params = toSignal(this.route.params, { initialValue: { id: "" } });
   private projectId = signal(this.params().id);
 
-  protected project: HttpResourceRef<Project> = this.projectService.project(this.projectId);
+  protected project: HttpResourceRef<Project> = this.projectService.project(
+    this.projectId,
+  );
 
   constructor(
     private router: Router,
@@ -31,33 +67,39 @@ export class ProjectDetailsComponent {
   ) {
     effect(() => {
       this.projectId.set(this.params().id);
-    })
+    });
   }
 
   public addSpecification(): void {
     const ref = this.dialog.open(ProjectAddSpecificationDialogComponent, {
       data: {
-        projectId: this.projectId()
-      } as ProjectAddSpecificationDialogData
+        projectId: this.projectId(),
+      } as ProjectAddSpecificationDialogData,
     });
 
     ref
       .afterClosed()
       .pipe(
-        switchMap((result: ProjectAddSpecificationRequest | null | boolean): Observable<Project> => {
-          const response: Observable<Project> = of(null) as Observable<Project>;
+        switchMap(
+          (
+            result: ProjectAddSpecificationRequest | null | boolean,
+          ): Observable<Project> => {
+            const response: Observable<Project> = of(
+              null,
+            ) as Observable<Project>;
 
-          if (result instanceof ProjectAddSpecificationRequest) {
-            return this.projectService.addSpecification(result);
-          }
+            if (result instanceof ProjectAddSpecificationRequest) {
+              return this.projectService.addSpecification(result);
+            }
 
-          return response;
-        }),
+            return response;
+          },
+        ),
         tap(async (result: Project) => {
           // TODO: refresh the details page / reload the updated content
           this.project.set(result);
         }),
-        take(1)
+        take(1),
       )
       .subscribe();
   }

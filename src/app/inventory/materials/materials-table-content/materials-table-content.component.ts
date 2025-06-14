@@ -2,11 +2,9 @@ import { Component } from "@angular/core";
 import { ExpansionContentData } from "../../../shared/expansion-table/expandable-data";
 
 @Component({
-    selector: "app-materials-table-content",
-    templateUrl: "./materials-table-content.component.html",
-    styleUrls: ["./materials-table-content.component.scss"],
-    standalone: false
+  selector: "app-materials-table-content",
+  templateUrl: "./materials-table-content.component.html",
+  styleUrls: ["./materials-table-content.component.scss"],
+  standalone: true,
 })
-export class MaterialsTableContentComponent implements ExpansionContentData {
-
-}
+export class MaterialsTableContentComponent implements ExpansionContentData {}

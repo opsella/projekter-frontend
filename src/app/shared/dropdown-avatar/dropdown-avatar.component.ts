@@ -1,29 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-    selector: "app-dropdown-avatar",
-    templateUrl: "./dropdown-avatar.component.html",
-    styleUrls: ["./dropdown-avatar.component.scss"],
-    standalone: false
+  selector: "app-dropdown-avatar",
+  templateUrl: "./dropdown-avatar.component.html",
+  styleUrls: ["./dropdown-avatar.component.scss"],
+  standalone: true,
 })
-export class DropdownAvatarComponent  {
-    @Input() public options: DropDownAvatarElementConfig[] = [];
-    @Input() public avatarUrl?: string = "";
+export class DropdownAvatarComponent {
+  @Input() public options: DropDownAvatarElementConfig[] = [];
+  @Input() public avatarUrl?: string = "";
 
-    protected dropdownOpen = false;
+  protected dropdownOpen = false;
 
-    protected openDropdown(): void {
-      this.dropdownOpen = !this.dropdownOpen;
-    }
+  protected openDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 
-    protected dropdownClicked(id: string): void {
-      this.options.find(option => option.id === id)?.handler();
-    }
+  protected dropdownClicked(id: string): void {
+    this.options.find((option) => option.id === id)?.handler();
+  }
 }
 
 export interface DropDownAvatarElementConfig {
-    id: string;
-    name: string;
-    handler: () => void;
-    isVisible: () => boolean;
+  id: string;
+  name: string;
+  handler: () => void;
+  isVisible: () => boolean;
 }

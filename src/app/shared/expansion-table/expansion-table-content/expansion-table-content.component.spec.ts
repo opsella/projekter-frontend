@@ -8,8 +8,8 @@ describe('ExpansionTableContentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExpansionTableContentComponent ]
-    })
+    imports: [ExpansionTableContentComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(ExpansionTableContentComponent);

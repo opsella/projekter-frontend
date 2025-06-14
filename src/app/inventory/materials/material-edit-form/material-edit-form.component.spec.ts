@@ -8,8 +8,8 @@ describe('MaterialEditFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MaterialEditFormComponent ]
-    })
+    imports: [MaterialEditFormComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(MaterialEditFormComponent);

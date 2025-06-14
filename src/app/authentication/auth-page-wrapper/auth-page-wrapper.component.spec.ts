@@ -8,8 +8,8 @@ describe("AuthPageWrapperComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AuthPageWrapperComponent]
-    })
+    imports: [AuthPageWrapperComponent]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(AuthPageWrapperComponent);

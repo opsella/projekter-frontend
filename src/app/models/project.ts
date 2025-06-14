@@ -20,8 +20,7 @@ export class ProjectAddSpecificationRequest {
     public code: string,
     public title: string,
     public description: string,
-  ) {
-  }
+  ) {}
 }
 
 export type ProjectState = "Draft" | "Published";
@@ -41,23 +40,23 @@ export interface ProjectResponse {
 }
 
 export interface ProjectTaskResponse {
-  id: string,
-  assigned_project_id: string,
-  name: string,
-  description: string,
-  due_date?: Date,
-  completed_at?: Date,
+  id: string;
+  assigned_project_id: string;
+  name: string;
+  description: string;
+  due_date?: Date;
+  completed_at?: Date;
 }
 
 export interface SpecificationResponse {
-  id: string,
-  project_id: string,
-  code: string,
-  title: string,
-  description: string,
-  issued_at_date: Date,
-  revision: number,
-  last_revision_date?: Date
+  id: string;
+  project_id: string;
+  code: string;
+  title: string;
+  description: string;
+  issued_at_date: Date;
+  revision: number;
+  last_revision_date?: Date;
 }
 
 export class Project {
@@ -82,8 +81,13 @@ export class Project {
       response.state,
       TimeTrackingId.fromJSON(response.time_tracking_id),
       response.location,
-      response.tasks.map(t => Task.fromResponse(t)),
-      response.specifications.map(s => Specification.fromResponse(s)),
+      response.tasks?.map(
+        (t: ProjectTaskResponse): Task => Task.fromResponse(t),
+      ),
+      response.specifications?.map(
+        (s: SpecificationResponse): Specification =>
+          Specification.fromResponse(s),
+      ),
       response.photo,
       response.status_id ? ProjectStatusId.fromJSON(response.status_id) : null,
       response.code,
@@ -111,7 +115,7 @@ export class Task {
       task.name,
       task.description,
       task.due_date,
-      task.completed_at
+      task.completed_at,
     );
   }
 }
@@ -125,9 +129,8 @@ export class Specification {
     public description: string,
     public issued_at_date: Date,
     public revision: number,
-    public last_revision_date?: Date
-  ) {
-  }
+    public last_revision_date?: Date,
+  ) {}
 
   public static fromResponse(spec: SpecificationResponse) {
     return new Specification(
@@ -138,8 +141,8 @@ export class Specification {
       spec.description,
       spec.issued_at_date,
       spec.revision,
-      spec.last_revision_date
-    )
+      spec.last_revision_date,
+    );
   }
 }
 

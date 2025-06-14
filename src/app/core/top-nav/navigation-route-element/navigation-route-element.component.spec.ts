@@ -8,8 +8,8 @@ describe("NavigationRouteElementComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigationRouteElementComponent ]
-    })
+    imports: [NavigationRouteElementComponent]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(NavigationRouteElementComponent);

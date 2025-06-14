@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 export interface DropdownElementConfig {
   id: string;
@@ -8,10 +8,11 @@ export interface DropdownElementConfig {
 }
 
 @Component({
-  selector: 'app-dropdown',
+  selector: "app-dropdown",
   imports: [],
-  templateUrl: './dropdown.component.html',
-  styleUrl: './dropdown.component.scss'
+  templateUrl: "./dropdown.component.html",
+  styleUrl: "./dropdown.component.scss",
+  standalone: true,
 })
 export class DropdownComponent {
   @Input() public options: DropdownElementConfig[] = [];
@@ -25,8 +26,6 @@ export class DropdownComponent {
   }
 
   protected handleClicked(id: string): void {
-    this.options.find(option => option.id === id)?.handler();
+    this.options.find((option) => option.id === id)?.handler();
   }
 }
-
-

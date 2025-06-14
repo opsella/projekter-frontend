@@ -8,8 +8,8 @@ describe('ExpansionTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExpansionTableComponent ]
-    })
+    imports: [ExpansionTableComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(ExpansionTableComponent);

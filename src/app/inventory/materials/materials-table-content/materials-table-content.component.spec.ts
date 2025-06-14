@@ -8,8 +8,8 @@ describe('MaterialsTableContentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MaterialsTableContentComponent ]
-    })
+    imports: [MaterialsTableContentComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(MaterialsTableContentComponent);

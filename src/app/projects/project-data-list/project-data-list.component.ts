@@ -1,22 +1,48 @@
-import { ChangeDetectionStrategy, Component, signal, WritableSignal } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  signal,
+  WritableSignal,
+} from "@angular/core";
 import { ProjectService } from "../services/project.service";
 import { Router } from "@angular/router";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { CreateProjectRequest, Project, ProjectState } from "../../models/project";
+import {
+  CreateProjectRequest,
+  Project,
+  ProjectState,
+} from "../../models/project";
 import { HttpResourceRef } from "@angular/common/http";
-import { MatSelectChange } from "@angular/material/select";
+import {
+  MatFormField,
+  MatLabel,
+  MatOption,
+  MatSelect,
+  MatSelectChange,
+} from "@angular/material/select";
 import { MatDialog } from "@angular/material/dialog";
 import { ProjectCreationDialogComponent } from "../project-creation-dialog/project-creation-dialog.component";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ProjectId } from "../../models/ids/project-id";
 import { Observable, of, switchMap, take, tap } from "rxjs";
+import { ProjectCardComponent } from "../project-card/project-card.component";
+import { MatButton } from "@angular/material/button";
 
 @Component({
   selector: "app-project-data-list",
   templateUrl: "./project-data-list.component.html",
   styleUrls: ["./project-data-list.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    MatFormField,
+    MatLabel,
+    MatSelect,
+    MatOption,
+    ProjectCardComponent,
+    MatButton,
+  ],
+  providers: [ProjectService],
+  standalone: true,
 })
 export class ProjectDataListComponent {
   public filterProjectState: WritableSignal<ProjectState> = signal("Draft");
@@ -38,9 +64,7 @@ export class ProjectDataListComponent {
   ) {}
 
   public async viewDetails(id: ProjectId): Promise<void> {
-    await this.router.navigate([
-      "project/details", id.toString()
-    ]);
+    await this.router.navigate(["project/details", id.toString()]);
   }
 
   public onFilterChanged(value: MatSelectChange<string>): void {

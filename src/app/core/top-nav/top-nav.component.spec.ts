@@ -8,8 +8,8 @@ describe("TopNavComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TopNavComponent]
-    })
+    imports: [TopNavComponent]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(TopNavComponent);

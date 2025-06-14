@@ -1,28 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@auth0/auth0-angular';
-import { HttpClient } from '@angular/common/http';
+import { Component } from "@angular/core";
+import { AsyncPipe } from "@angular/common";
+import { RouterOutlet } from "@angular/router";
+import { TopNavComponent } from "./core/top-nav/top-nav.component";
+import { SideNavComponent } from "./core/side-nav/side-nav.component";
+import { MainContentComponent } from "./core/main-content/main-content.component";
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
-    selector: "app-root",
-    templateUrl: "./app.component.html",
-    styleUrls: ["./app.component.scss"],
-    standalone: false
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
+  imports: [
+    RouterOutlet,
+    AsyncPipe,
+    TopNavComponent,
+    SideNavComponent,
+    MainContentComponent,
+  ],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public title = "projekter-frontend";
 
-  constructor(
-    protected auth: AuthService,
-    private httpClient: HttpClient
-  ) { }
-
-  ngOnInit() {
-    // this.auth.idTokenClaims$.subscribe(claims => console.log(claims));
-    //
-    // this.httpClient.get(`https://localhost:7209/users/me`).pipe(
-    //   switchMap((response: any) => {
-    //     return this.httpClient.get(`https://localhost:7209/users/${ response['data']['user_id'] }/permissions`)
-    //   }),
-    // ).subscribe();
-  }
+  constructor(protected auth: AuthService) {}
 }

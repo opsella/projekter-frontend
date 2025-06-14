@@ -2,14 +2,16 @@
 
 <app-page-wrapper>
   <app-content-section [title]="project.value()?.name ?? ''">
-    @if (project.value()?.photo) {
-      <img
-        [ngSrc]="project.value()?.photo"
-        alt="Project Image"
-        width="200"
-        height="200"
-      />
-    }
+    <img
+      priority
+      [ngSrc]="
+        project.value()?.photo ||
+        'https://via.placeholder.com/200x200.jpg?text=No+Image'
+      "
+      width="200"
+      height="200"
+      alt="Project Image"
+    />
 
     <ul>
       <li>Project Name: {{ project.value()?.name }}</li>

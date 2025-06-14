@@ -12,8 +12,8 @@ describe("DataListComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DataListComponent]
-    })
+    imports: [DataListComponent]
+})
       .compileComponents();
 
     fixture = TestBed.createComponent(DataListComponent<InternalTestData>);
