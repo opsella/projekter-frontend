@@ -1,6 +1,6 @@
 .main-application {
   display: flex;
-  height: 100%;
+  height: 100vh;
 
   .main-wrapper {
     background-color: #D6D6D6;
@@ -17,6 +17,7 @@
       height: 92%;
       padding: 1em;
       width: 97%;
+      overflow-y: auto;
     }
   }
 }
