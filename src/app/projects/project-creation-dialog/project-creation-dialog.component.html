@@ -8,8 +8,14 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Status</mat-label>
-      <input matInput type="text" formControlName="status" />
+      <mat-label>Select option</mat-label>
+      <mat-select formControlName="status">
+        @for (status of data; track status.id) {
+          <mat-option [value]="status.id">
+            {{ status.name }}
+          </mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field>

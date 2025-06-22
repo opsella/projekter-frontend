@@ -10,14 +10,24 @@
   </div>
 
   <div class="project-grid">
-    @for (project of projects.value(); track project.id) {
-      <app-project-card
-        [title]="project.name"
-        [status]="project.state"
-        [photo]="project.photo"
-        (click)="viewDetails(project.id)"
-      >
-      </app-project-card>
+    @switch (projects.status()) {
+      @case ("loading") {
+        <div>loading...</div>
+      }
+      @case ("resolved") {
+        @for (project of projects.value(); track project.id) {
+          <app-project-card
+            [title]="project.name"
+            [status]="project.state"
+            [photo]="project.photo"
+            (click)="viewDetails(project.id)"
+          >
+          </app-project-card>
+        }
+      }
+      @case ("error") {
+        <span>We had trouble loading your Projects. Please try again.</span>
+      }
     }
   </div>
 </section>

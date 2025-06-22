@@ -20,13 +20,15 @@ import {
   MatSelect,
   MatSelectChange,
 } from "@angular/material/select";
-import { MatDialog } from "@angular/material/dialog";
-import { ProjectCreationDialogComponent } from "../project-creation-dialog/project-creation-dialog.component";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ProjectId } from "../../models/ids/project-id";
-import { Observable, of, switchMap, take, tap } from "rxjs";
+import { Observable, of, switchMap, take } from "rxjs";
 import { ProjectCardComponent } from "../project-card/project-card.component";
 import { MatButton } from "@angular/material/button";
+import { OrganizationService } from "../../services/organization.service";
+import { ProjectCreationDialogComponent } from "../project-creation-dialog/project-creation-dialog.component";
+import { ProjectStatus } from "../../models/tenant";
 
 @Component({
   selector: "app-project-data-list",
@@ -61,6 +63,7 @@ export class ProjectDataListComponent {
     private dialog: MatDialog,
     private router: Router,
     private snackbar: MatSnackBar,
+    private orgService: OrganizationService,
   ) {}
 
   public async viewDetails(id: ProjectId): Promise<void> {
@@ -72,33 +75,48 @@ export class ProjectDataListComponent {
   }
 
   public createProject(): void {
-    const ref = this.dialog.open(ProjectCreationDialogComponent);
+    let ref: MatDialogRef<ProjectCreationDialogComponent>;
 
-    ref
-      .afterClosed()
-      .pipe(
-        switchMap((result: CreateProjectRequest | boolean) => {
-          let response: Observable<Project> = of(null) as Observable<Project>;
+    this.orgService.getProjectStatuses().subscribe({
+      next: (result: ProjectStatus[]): void => {
+        ref = this.dialog.open(ProjectCreationDialogComponent, {
+          data: result,
+        });
 
-          if (result instanceof CreateProjectRequest) {
-            response = this.projectService.createProject(result);
+        ref
+          ?.afterClosed()
+          .pipe(
+            switchMap(
+              (result: CreateProjectRequest | boolean): Observable<Project> => {
+                return result instanceof CreateProjectRequest
+                  ? this.projectService.createProject(result)
+                  : (of(null) as Observable<Project>);
+              },
+            ),
+            take(1),
+          )
+          .subscribe({
+            next: async (result: Project): Promise<void> => {
+              if (result) {
+                await this.viewDetails(result.id);
 
-            this.snackbar.open("Project POSTed to Server", null, {
-              duration: 2000,
-            });
-          } else {
-            this.snackbar.open("Project Creation Canceled", null, {
-              duration: 2000,
-            });
-          }
-
-          return response;
-        }),
-        tap(async (result: Project): Promise<void> => {
-          await this.viewDetails(result.id);
-        }),
-        take(1),
-      )
-      .subscribe();
+                this.snackbar.open("Project created successfully", null, {
+                  duration: 2000,
+                });
+              }
+            },
+            error: (): void => {
+              this.snackbar.open(
+                "Project creation failed. Please try again.",
+                null,
+                {
+                  duration: 2000,
+                },
+              );
+            },
+          });
+      },
+      error: () => {},
+    });
   }
 }

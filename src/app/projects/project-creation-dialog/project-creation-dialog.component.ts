@@ -1,4 +1,4 @@
-import { Component, inject, model } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import {
   MAT_DIALOG_DATA,
   MatDialogModule,
@@ -14,6 +14,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
+import { MatOption, MatSelect } from "@angular/material/select";
+import { ProjectStatus } from "../../models/tenant";
 import { CreateProjectRequest } from "../../models/project";
 import { ProjectStatusId } from "../../models/ids/project-status-id";
 
@@ -28,6 +30,8 @@ import { ProjectStatusId } from "../../models/ids/project-status-id";
     MatInput,
     ReactiveFormsModule,
     MatDialogTitle,
+    MatSelect,
+    MatOption,
   ],
   templateUrl: "./project-creation-dialog.component.html",
   styleUrl: "./project-creation-dialog.component.scss",
@@ -37,20 +41,21 @@ export class ProjectCreationDialogComponent {
   private readonly dialogRef = inject(
     MatDialogRef<ProjectCreationDialogComponent>,
   );
-  private readonly data = inject<CreateProjectRequest | undefined | null>(
-    MAT_DIALOG_DATA,
-  );
-  public readonly project = model(this.data);
+  protected readonly data = inject<ProjectStatus[]>(MAT_DIALOG_DATA);
+  // public readonly project: ModelSignal<CreateProjectRequest> = model(this.data);
 
   protected form: FormGroup = new FormGroup({
-    name: new FormControl(this.project()?.name ?? "", {
+    name: new FormControl("", {
       validators: [Validators.required],
     }),
-    status: new FormControl(this.project()?.status.value ?? "", {
-      validators: [Validators.required],
-    }),
-    photo: new FormControl(this.project()?.photo ?? null),
-    location: new FormControl(this.project()?.location ?? null),
+    status: new FormControl(
+      this.data.find((c) => c.category === "Proposed").id,
+      {
+        validators: [Validators.required],
+      },
+    ),
+    photo: new FormControl(null),
+    location: new FormControl(null),
   });
 
   public onCancelClick() {
@@ -59,15 +64,14 @@ export class ProjectCreationDialogComponent {
 
   public onSubmitClick() {
     if (this.form.valid) {
-      this.project.set(
-        new CreateProjectRequest(
-          this.form.controls["name"].value,
-          new ProjectStatusId(this.form.controls["status"].value),
-          this.form.controls["photo"].value,
-          null,
-        ),
+      const newProject = new CreateProjectRequest(
+        this.form.controls["name"].value,
+        new ProjectStatusId(this.form.controls["status"].value),
+        this.form.controls["photo"].value,
+        null,
       );
-      this.dialogRef.close(this.project());
+
+      this.dialogRef.close(newProject);
     }
   }
 }
