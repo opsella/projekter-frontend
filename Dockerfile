@@ -1,6 +1,6 @@
 FROM nginx:alpine AS base
 WORKDIR /app
-EXPOSE 8080
+EXPOSE 80
 
 FROM node:22.16.0-alpine AS builder
 RUN mkdir /build
