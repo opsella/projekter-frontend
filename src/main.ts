@@ -1,11 +1,7 @@
 import { enableProdMode, importProvidersFrom } from "@angular/core";
 
 import { environment } from "./environments/environment";
-import {
-  HTTP_INTERCEPTORS,
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from "@angular/common/http";
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
 import { ActiveTenantInterceptor } from "./app/core/active-tenant.interceptor";
 import { FollowLocationHeaderInterceptor } from "./app/shared/follow-location-header.interceptor";
@@ -16,6 +12,7 @@ import { MatInputModule } from "@angular/material/input";
 import { AppComponent } from "./app/app.component";
 import { provideRouter } from "@angular/router";
 import { routes } from "./app/app.routes";
+import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from "@angular/common";
 
 if (environment.production) {
   enableProdMode();
@@ -43,6 +40,14 @@ bootstrapApplication(AppComponent, {
       provide: HTTP_INTERCEPTORS,
       useClass: FollowLocationHeaderInterceptor,
       multi: true,
+    },
+    {
+      provide: APP_BASE_HREF,
+      useValue: "/"
+    },
+    {
+      provide: LocationStrategy,
+      useClass: PathLocationStrategy
     },
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),

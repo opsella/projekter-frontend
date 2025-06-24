@@ -1,0 +1,5 @@
+services:
+  app:
+    image: opsella/projekter-admin-app:latest
+    ports:
+      - "4200:8080"

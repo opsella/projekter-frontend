@@ -1,0 +1,41 @@
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
+import { AuthConfig } from "@auth0/auth0-angular";
+
+export const environment = {
+  production: true,
+  auth0: {
+    clientId: "SHHXAgPz2cfZerNzPQM31TTYEy6jSDVQ",
+    domain: "dev-8nen27hb.us.auth0.com",
+    useRefreshTokens: true,
+    cacheLocation: "localstorage",
+    httpInterceptor: {
+      allowedList: [
+        {
+          uriMatcher: () => true,
+          allowAnonymous: true,
+        },
+      ],
+    },
+    authorizationParams: {
+      audience: "https://api.projekter.opsella.com",
+      redirect_uri: window.location.origin,
+      scope:
+        "openid profile offline_access email project:read project:write tenant:read tenant:delete",
+    },
+  } as AuthConfig,
+  projekterApi: {
+    host: "http://localhost:5261",
+  },
+};
+
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
