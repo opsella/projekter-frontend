@@ -24,9 +24,7 @@ export const environment = {
       scope        : "openid profile offline_access email project:read project:write tenant:read tenant:delete",
     }
   } as AuthConfig,
-  projekterApi: {
-    host: "http://localhost:7209"
-  }
+  projekterApi: "http://localhost:7209"
 };
 
 /*

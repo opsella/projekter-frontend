@@ -26,9 +26,7 @@ export const environment = {
         "openid profile offline_access email project:read project:write tenant:read tenant:delete",
     },
   } as AuthConfig,
-  projekterApi: {
-    host: "https://api.projekter.opsella.com",
-  },
+  projekterApi: "https://api.projekter.opsella.com",
 };
 
 /*
