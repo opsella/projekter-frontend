@@ -26,13 +26,13 @@ export class AuthenticationService implements AuthenticationApi {
     this.authService.user$
       .pipe(
         exhaustMap(() => {
-          return this.http.get<UserInfoResponse>(`${environment.projekterApi.host}/users/me`)
+          return this.http.get<UserInfoResponse>(`${environment.projekterApi}/users/me`)
             .pipe(
               tap((response) => {
                 this.user.set(response);
               }),
               exhaustMap((response) => {
-                return this.http.get<UserPermissionsResponse>(`${environment.projekterApi.host}/users/:userId/permissions`, {
+                return this.http.get<UserPermissionsResponse>(`${environment.projekterApi}/users/:userId/permissions`, {
                   userId: response.id
                 })
                   .pipe(
@@ -51,7 +51,7 @@ export class AuthenticationService implements AuthenticationApi {
   }
 
   public getUserInfo(): Observable<UserInfoResponse> {
-    return this.http.get<UserInfoResponse>(`${environment.projekterApi.host}/users/me`)
+    return this.http.get<UserInfoResponse>(`${environment.projekterApi}/users/me`)
       .pipe(
         tap((response) => {
           this.user.set(response)
@@ -61,7 +61,7 @@ export class AuthenticationService implements AuthenticationApi {
 
   public getPermissions(): Observable<UserPermission[]> {
     const userId = this.user()?.id!
-    return this.http.get<UserPermissionsResponse>(`${environment.projekterApi.host}/users/:userId/permissions`, {
+    return this.http.get<UserPermissionsResponse>(`${environment.projekterApi}/users/:userId/permissions`, {
       userId: userId
     })
       .pipe(

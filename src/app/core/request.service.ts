@@ -12,7 +12,7 @@ export class RequestService {
   constructor(
     private http: HttpClient
   ) {
-    this.urlBase = environment.projekterApi.host;
+    this.urlBase = environment.projekterApi;
   }
 
   public post<TResponseData>(path: string, body: object, params?: Record<string, string[]>): Observable<TResponseData> {
