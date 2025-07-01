@@ -16,6 +16,7 @@ import {
   PaginatedApiResponse,
 } from "../../models/api/api-response";
 import { map, Observable } from "rxjs";
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ProjectService {
@@ -26,7 +27,7 @@ export class ProjectService {
   ) => HttpResourceRef<Project[]> = (state) => {
     return httpResource<Project[]>(
       () => ({
-        url: "https://localhost:7209/project",
+        url: `${environment.projekterApi}/project`,
         params: {
           state: state(),
         },
@@ -45,7 +46,7 @@ export class ProjectService {
     projectId,
   ) => {
     return httpResource<Project>(
-      () => `https://localhost:7209/project/${projectId()}`,
+      () => `${environment.projekterApi}/project/${projectId()}`,
       {
         parse: (result: ApiResponse<ProjectResponse>) => {
           return Project.fromResponse(result.data);
@@ -58,7 +59,7 @@ export class ProjectService {
     return this.http
       .post<
         ApiResponse<ProjectResponse>
-      >("https://localhost:7209/project", project, {})
+      >(`${environment.projekterApi}/project`, project, {})
       .pipe(
         map((response) => {
           return Project.fromResponse(response.data);
@@ -72,7 +73,7 @@ export class ProjectService {
     return this.http
       .post<
         ApiResponse<ProjectResponse>
-      >(`https://localhost:7209/project/${spec.project_id.toString()}/spec`, spec, {})
+      >(`${environment.projekterApi}/project/${spec.project_id.toString()}/spec`, spec, {})
       .pipe(
         map((response) => {
           return Project.fromResponse(response.data);

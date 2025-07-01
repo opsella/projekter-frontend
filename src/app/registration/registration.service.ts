@@ -3,6 +3,7 @@ import { map, Observable } from 'rxjs';
 import { RequestService } from '../core/request.service';
 import { JsonObject, JsonProperty } from 'typescript-json-serializer';
 import { ApiResponse } from '../models/api/api-response';
+import {environment} from "../../environments/environment";
 
 @JsonObject()
 export class UserInfoResponse {
@@ -51,14 +52,14 @@ export class RegistrationService {
   ) { }
 
   public registerUser(): Observable<UserInfoResponse> {
-    return this.api.post<ApiResponse<UserInfoResponse>>("/users/register", {})
+    return this.api.post<ApiResponse<UserInfoResponse>>(`${environment.projekterApi}/users/register`, {})
       .pipe(
         map(res => res.data)
       );
   }
 
   public registerTenant(): Observable<TenantInfoResponse> {
-    return this.api.post<ApiResponse<TenantInfoResponse>>("/tenants/register", {})
+    return this.api.post<ApiResponse<TenantInfoResponse>>(`${environment.projekterApi}/tenants/register`, {})
       .pipe(
         map(res => res.data)
       );

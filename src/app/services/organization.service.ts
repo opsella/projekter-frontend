@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { ProjectStatus, Tenant } from "../models/tenant";
 import { map, Observable, shareReplay } from "rxjs";
 import { ApiResponse } from "../models/api/api-response";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -10,12 +11,14 @@ import { ApiResponse } from "../models/api/api-response";
 export class OrganizationService {
   private projectStatus$: Observable<ProjectStatus[]>;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+  ) {}
 
   public getProjectStatuses(): Observable<ProjectStatus[]> {
     if (!this.projectStatus$) {
       this.projectStatus$ = this.httpClient
-        .get<ApiResponse<Tenant>>("https://localhost:7209/tenant/current")
+        .get<ApiResponse<Tenant>>(`${environment.projekterApi}/tenant/current`)
         .pipe(
           map(
             (result: ApiResponse<Tenant>): ProjectStatus[] =>

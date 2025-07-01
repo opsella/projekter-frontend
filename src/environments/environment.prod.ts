@@ -27,7 +27,7 @@ export const environment = {
     },
   } as AuthConfig,
   projekterApi: {
-    host: "http://localhost:5261",
+    host: "https://api.projekter.opsella.com",
   },
 };
 

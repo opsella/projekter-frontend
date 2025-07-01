@@ -25,7 +25,7 @@ export const environment = {
     }
   } as AuthConfig,
   projekterApi: {
-    host: "http://localhost:5261"
+    host: "http://localhost:7209"
   }
 };
 
