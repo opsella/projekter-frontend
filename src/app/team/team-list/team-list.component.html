@@ -1,9 +1,17 @@
-<app-page-wrapper title="Team">
-  <!--  <div *ngIf="vm$ | async as vm">-->
-  <!--    <app-expansion-table-->
-  <!--      *ngIf="vm.hasData$"-->
-  <!--      [data]="vm.inventory$"-->
-  <!--      [filters]="vm.tableFilters$"-->
-  <!--    ></app-expansion-table>-->
-  <!--  </div>-->
+<app-page-wrapper>
+  <app-content-section title="My Team">
+    <app-simple-table
+      [data]="employees.value()"
+      [columns]="[
+        {
+          key: 'fullname',
+          name: 'Fullname'
+        },
+        {
+          key: 'is_active',
+          name: 'Active'
+        }
+      ]"
+    />
+  </app-content-section>
 </app-page-wrapper>

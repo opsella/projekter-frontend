@@ -13,3 +13,4 @@ export class InventoryId extends Id {
     return new InventoryId(input);
   }
 }
+
