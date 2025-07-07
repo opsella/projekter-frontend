@@ -5,11 +5,23 @@
         <div>loading...</div>
       }
       @case ("resolved") {
-        <div>
-          @for (item of equipment.value(); track item.id) {
-            <p>{{ item.name }}</p>
-          }
-        </div>
+        <app-simple-table
+          [data]="equipment.value()"
+          [columns]="[
+            {
+              key: 'id',
+              name: 'Id'
+            },
+            {
+              key: 'name',
+              name: 'Name'
+            },
+            {
+              key: 'description',
+              name: 'Description'
+            }
+          ]"
+        />
       }
       @case ("error") {
         <span>
@@ -24,11 +36,23 @@
         <div>loading...</div>
       }
       @case ("resolved") {
-        <div>
-          @for (item of materials.value(); track item.id) {
-            <p>{{ item.name }}</p>
-          }
-        </div>
+        <app-simple-table
+          [data]="materials.value()"
+          [columns]="[
+            {
+              key: 'id',
+              name: 'Id'
+            },
+            {
+              key: 'name',
+              name: 'Name'
+            },
+            {
+              key: 'description',
+              name: 'Description'
+            }
+          ]"
+        />
       }
       @case ("error") {
         <span>

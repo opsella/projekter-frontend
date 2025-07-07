@@ -26,6 +26,7 @@ import {
   MatTable,
 } from "@angular/material/table";
 import { MatButton } from "@angular/material/button";
+import { SimpleTableComponent } from "../../shared/simple-table/simple-table.component";
 
 @Component({
   selector: "app-project-details",
@@ -47,6 +48,7 @@ import { MatButton } from "@angular/material/button";
     MatRow,
     MatButton,
     DatePipe,
+    SimpleTableComponent,
   ],
   providers: [ProjectService],
   standalone: true,

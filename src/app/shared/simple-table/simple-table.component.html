@@ -1,0 +1,13 @@
+<div>
+  <mat-table [dataSource]="data()">
+    @for (col of columns(); track col.key) {
+      <ng-container [matColumnDef]="col.key">
+        <mat-header-cell *matHeaderCellDef>{{ col.name }}</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{ row[col.key] }}</mat-cell>
+      </ng-container>
+    }
+
+    <mat-header-row *matHeaderRowDef="keymap()"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: keymap()"></mat-row>
+  </mat-table>
+</div>

@@ -5,6 +5,7 @@ import { ResourceService } from "../../resources/services/resource.service";
 import { HttpResourceRef } from "@angular/common/http";
 import { Equipment } from "../../models/equipment";
 import { Material } from "../../models/material";
+import { SimpleTableComponent } from "../../shared/simple-table/simple-table.component";
 
 export interface InventoryListData {
   id: string;
@@ -19,7 +20,7 @@ export interface InventoryListData {
   selector: "app-inventory-list",
   templateUrl: "./inventory-list.component.html",
   styleUrls: ["./inventory-list.component.scss"],
-  imports: [PageWrapperComponent, ContentSectionComponent],
+  imports: [PageWrapperComponent, ContentSectionComponent, SimpleTableComponent],
   standalone: true,
 })
 export class InventoryListComponent {

@@ -28,38 +28,27 @@
   </app-content-section>
 
   <app-content-section title="Tasks">
-    <mat-table [dataSource]="project.value()?.tasks ?? []">
-      <ng-container matColumnDef="duedate">
-        <mat-header-cell *matHeaderCellDef>Due Date</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.due_date | date }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.description }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="completed">
-        <mat-header-cell *matHeaderCellDef>Completed On</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.completed_at | date }}</mat-cell>
-      </ng-container>
-
-      <!-- Header and Row Declarations -->
-      <mat-header-row
-        *matHeaderRowDef="['duedate', 'name', 'description', 'completed']"
-      ></mat-header-row>
-      <mat-row
-        *matRowDef="
-          let row;
-          columns: ['duedate', 'name', 'description', 'completed']
-        "
-      ></mat-row>
-    </mat-table>
+    <app-simple-table
+      [data]="project.value()?.tasks ?? []"
+      [columns]="[
+        {
+          key: 'due_date',
+          name: 'Due Date'
+        },
+        {
+          key: 'name',
+          name: 'Name'
+        },
+        {
+          key: 'description',
+          name: 'Description'
+        },
+        {
+          key: 'completed_at',
+          name: 'Completed On'
+        }
+      ]"
+    />
   </app-content-section>
 
   <app-content-section title="Specifications">
