@@ -13,3 +13,4 @@ export class TimeTrackingId extends Id {
     return new TimeTrackingId(input);
   }
 }
+
