@@ -1,13 +1,9 @@
 import { Routes } from "@angular/router";
-import { LoginComponent } from "./login/login.component";
 
 export const authRoutes: Routes = [
   {
-    path: "login",
-    component: LoginComponent,
-  },
-  {
-    path: "**",
-    redirectTo: "/auth/login",
+    // This is required for auth0 organization invitations
+    path: "authorize",
+    redirectTo: "https://dev-8nen27hb.us.auth0.com/authorize",
   },
 ];
