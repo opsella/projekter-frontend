@@ -1,4 +1,5 @@
 import { Routes } from "@angular/router";
+import { environment } from "../../environments/environment";
 
 export const authRoutes: Routes = [
   {
@@ -8,8 +9,9 @@ export const authRoutes: Routes = [
     redirectTo: (route) => {
       const inviteCode: string = route.queryParams["invitation"];
       const org: string = route.queryParams["organization"];
-      // const orgName: string = route.queryParams["organization_name"];
-      return `https://dev-8nen27hb.us.auth0.com/authorize?invitation=${inviteCode}&organization=${org}`;
+      const aud: string = encodeURIComponent(environment.auth0.authorizationParams.audience);
+      const clientId: string = environment.auth0.clientId;
+      return `https://${environment.auth0.domain}/authorize?audience=${aud}&response_type=code&client_id=${clientId}&invitation=${inviteCode}&organization=${org}`;
     }
   },
 ];
