@@ -1,11 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, httpResource } from "@angular/common/http";
-import { User, UserPermission, UserResponse } from "../../models/user";
+import { User, UserPermission } from "../../models/user";
 import { ApiResponse } from "../../models/api/api-response";
 import { environment } from "../../../environments/environment";
-import { map, Observable } from "rxjs";
-
-
 
 @Injectable({
   providedIn: "root"
@@ -32,7 +29,5 @@ export class UsersService {
       }
     }
   );
-
-
 }
 

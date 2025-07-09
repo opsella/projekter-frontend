@@ -25,7 +25,7 @@ export class RegistrationService {
 
   public registerUser(request: UserRegistrationRequest): Observable<User> {
     return this.http
-      .post<ApiResponse<UserResponse>>(`${environment.projekterApi}/user/register`, request, {})
+      .post<ApiResponse<UserResponse>>(`${environment.projekterApi}/users/register`, request, {})
       .pipe(
         map((response) => {
           return User.fromResponse(response.data);
