@@ -1,5 +1,7 @@
 import { Routes } from "@angular/router";
-import { environment } from "../../environments/environment";
+import { inject } from "@angular/core";
+import { AuthService } from "@auth0/auth0-angular";
+import { take } from "rxjs";
 
 export const authRoutes: Routes = [
   {
@@ -7,11 +9,20 @@ export const authRoutes: Routes = [
     // Example redirect: https://projekter.app/auth/authorize?invitation=PXaQVdP6XKo7UHLUc61zvJasBiryaXV2&organization=org_yBpvvoPMyTYfLV4M&organization_name=subcodetech
     path: "authorize",
     redirectTo: (route) => {
+      const auth0 = inject(AuthService);
       const inviteCode: string = route.queryParams["invitation"];
       const org: string = route.queryParams["organization"];
-      const aud: string = encodeURIComponent(environment.auth0.authorizationParams.audience);
-      const clientId: string = environment.auth0.clientId;
-      window.location.href = `https://${environment.auth0.domain}/authorize?audience=${aud}&response_type=code&client_id=${clientId}&invitation=${inviteCode}&organization=${org}`;
+      auth0.loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: window.location.origin,
+          organization: org,
+          invitation: inviteCode,
+        }
+      })
+        .pipe(
+          take(1)
+        )
+        .subscribe();
       return "";
     }
   },
