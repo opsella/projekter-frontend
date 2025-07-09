@@ -8,7 +8,7 @@ export const environment = {
   production: true,
   auth0: {
     clientId: "SHHXAgPz2cfZerNzPQM31TTYEy6jSDVQ",
-    domain: "auth.opsella.com",
+    domain: "dev-8nen27hb.us.auth0.com",
     useRefreshTokens: true,
     cacheLocation: "localstorage",
     httpInterceptor: {
