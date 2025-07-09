@@ -7,10 +7,10 @@ import { ContentSectionComponent } from "../../shared/content-section/content-se
 import { MatButton } from "@angular/material/button";
 
 @Component({
-    selector: "app-profile",
-    templateUrl: "./profile.component.html",
-    styleUrls: ["./profile.component.scss"],
-    imports: [PageWrapperComponent, ContentSectionComponent, MatButton]
+  selector: "app-profile",
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.scss"],
+  imports: [PageWrapperComponent, ContentSectionComponent, MatButton]
 })
 export class ProfileComponent {
 

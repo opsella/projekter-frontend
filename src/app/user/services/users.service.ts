@@ -1,13 +1,20 @@
 import { Injectable } from "@angular/core";
-import { httpResource } from "@angular/common/http";
-import { User, UserPermission } from "../../models/user";
+import { HttpClient, httpResource } from "@angular/common/http";
+import { User, UserPermission, UserResponse } from "../../models/user";
 import { ApiResponse } from "../../models/api/api-response";
-import {environment} from "../../../environments/environment";
+import { environment } from "../../../environments/environment";
+import { map, Observable } from "rxjs";
+
+
 
 @Injectable({
   providedIn: "root"
 })
 export class UsersService {
+  constructor(
+    private http: HttpClient
+  ) { }
+
   public currentUser = httpResource<User>(
     () => `${environment.projekterApi}/users/me`,
     {
@@ -18,14 +25,14 @@ export class UsersService {
   );
 
   public currentUserPermissions = httpResource<UserPermission[]>(
-    () => `${environment.projekterApi}/users/${this.currentUser.value().user_id}/permissions`,
+    () => `${environment.projekterApi}/users/${this.currentUser.value().id}/permissions`,
     {
       parse: (result: ApiResponse<{ user_permissions: UserPermission[] }>) => {
         return result.data.user_permissions;
       }
     }
-  )
+  );
 
-  constructor() { }
+
 }
 

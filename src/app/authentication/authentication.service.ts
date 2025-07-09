@@ -14,7 +14,7 @@ import {
 } from "rxjs";
 import { environment } from "../../environments/environment";
 import { RequestService } from "../core/request.service";
-import { UserInfoResponse } from "../registration/registration.service";
+import { UserResponse } from "../models/user";
 
 @Injectable({
   providedIn: "root"
@@ -24,7 +24,7 @@ export class AuthenticationService implements AuthenticationApi {
   private tokenIsExpired: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private onTokenExpired$: Observable<boolean> = this.tokenIsExpired.asObservable();
 
-  public user: WritableSignal<UserInfoResponse | null | undefined> = signal(null);
+  public user: WritableSignal<UserResponse | null | undefined> = signal(null);
   public permissions: WritableSignal<UserPermission[]> = signal([]);
   public auth0User: Signal<User | null | undefined> = toSignal(this.authService.user$);
   public token: Signal<IdToken | null> = toSignal(this.authService.idTokenClaims$);
@@ -68,7 +68,7 @@ export class AuthenticationService implements AuthenticationApi {
     this.authService.user$
       .pipe(
         exhaustMap(() => {
-          return this.http.get<UserInfoResponse>(`${environment.projekterApi}/users/me`)
+          return this.http.get<UserResponse>(`${environment.projekterApi}/users/me`)
             .pipe(
               tap((response) => {
                 this.user.set(response);
@@ -92,10 +92,10 @@ export class AuthenticationService implements AuthenticationApi {
     return this.authService.logout();
   }
 
-  public getUserInfo(): Observable<UserInfoResponse> {
+  public getUserInfo(): Observable<UserResponse> {
     this.validateToken();
 
-    return this.http.get<UserInfoResponse>(`${environment.projekterApi}/users/me`)
+    return this.http.get<UserResponse>(`${environment.projekterApi}/users/me`)
       .pipe(
         tap((response) => {
           this.user.set(response)

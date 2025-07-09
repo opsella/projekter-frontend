@@ -14,7 +14,7 @@ export const authRoutes: Routes = [
       const org: string = route.queryParams["organization"];
       auth0.loginWithRedirect({
         authorizationParams: {
-          redirect_uri: window.location.origin,
+          redirect_uri: window.location.origin + "/user/register",
           organization: org,
           invitation: inviteCode,
         }
