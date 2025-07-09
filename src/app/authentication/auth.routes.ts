@@ -11,7 +11,8 @@ export const authRoutes: Routes = [
       const org: string = route.queryParams["organization"];
       const aud: string = encodeURIComponent(environment.auth0.authorizationParams.audience);
       const clientId: string = environment.auth0.clientId;
-      return `https://${environment.auth0.domain}/authorize?audience=${aud}&response_type=code&client_id=${clientId}&invitation=${inviteCode}&organization=${org}`;
+      window.location.href = `https://${environment.auth0.domain}/authorize?audience=${aud}&response_type=code&client_id=${clientId}&invitation=${inviteCode}&organization=${org}`;
+      return "";
     }
   },
 ];
