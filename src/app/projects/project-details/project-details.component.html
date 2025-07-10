@@ -1,122 +1,114 @@
 <button (click)="backToProjects()">Back to Projects</button>
 
-<app-page-wrapper>
-  <app-content-section [title]="project.value()?.name ?? ''">
-    <img
-      priority
-      [ngSrc]="
-        project.value()?.photo ||
-        'https://via.placeholder.com/200x200.jpg?text=No+Image'
-      "
-      width="200"
-      height="200"
-      alt="Project Image"
-    />
+<app-content-section [title]="project.value()?.name ?? ''">
+  <img
+    priority
+    [ngSrc]="
+      project.value()?.photo ||
+      'https://via.placeholder.com/200x200.jpg?text=No+Image'
+    "
+    width="200"
+    height="200"
+    alt="Project Image"
+  />
 
-    <ul>
-      <li>Project Name: {{ project.value()?.name }}</li>
-      <li>Project State: {{ project.value()?.state }}</li>
-      <li>Project Status: {{ project.value()?.status_id }}</li>
-      <li>Project Status: {{ project.value()?.status_id.value }}</li>
-      <li>
-        Location:
-        {{
-          project.value()?.location.address?.address_lines[0] ?? "no address"
-        }}
-      </li>
-    </ul>
-  </app-content-section>
+  <ul>
+    <li>Project Name: {{ project.value()?.name }}</li>
+    <li>Project State: {{ project.value()?.state }}</li>
+    <li>Project Status: {{ project.value()?.status_id }}</li>
+    <li>Project Status: {{ project.value()?.status_id.value }}</li>
+    <li>
+      Location:
+      {{ project.value()?.location.address?.address_lines[0] ?? "no address" }}
+    </li>
+  </ul>
+</app-content-section>
 
-  <app-content-section title="Tasks">
-    <app-simple-table
-      [data]="project.value()?.tasks ?? []"
-      [columns]="[
-        {
-          key: 'due_date',
-          name: 'Due Date'
-        },
-        {
-          key: 'name',
-          name: 'Name'
-        },
-        {
-          key: 'description',
-          name: 'Description'
-        },
-        {
-          key: 'completed_at',
-          name: 'Completed On'
-        }
+<app-content-section title="Tasks">
+  <app-simple-table
+    [data]="project.value()?.tasks ?? []"
+    [columns]="[
+      {
+        key: 'due_date',
+        name: 'Due Date'
+      },
+      {
+        key: 'name',
+        name: 'Name'
+      },
+      {
+        key: 'description',
+        name: 'Description'
+      },
+      {
+        key: 'completed_at',
+        name: 'Completed On'
+      }
+    ]"
+  />
+</app-content-section>
+
+<app-content-section title="Specifications">
+  <mat-table [dataSource]="project.value()?.specifications ?? []">
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef>Code</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.code }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.description }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="issued_at">
+      <mat-header-cell *matHeaderCellDef>Issued At</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.issued_at_date | date }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="revision">
+      <mat-header-cell *matHeaderCellDef>Revision</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.revision }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="last_revision_date">
+      <mat-header-cell *matHeaderCellDef>Date of Last Revision</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{
+        row?.last_revision_date ?? row.issued_at_date | date
+      }}</mat-cell>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <mat-header-row
+      *matHeaderRowDef="[
+        'code',
+        'title',
+        'description',
+        'issued_at',
+        'revision',
+        'last_revision_date'
       ]"
-    />
-  </app-content-section>
-
-  <app-content-section title="Specifications">
-    <mat-table [dataSource]="project.value()?.specifications ?? []">
-      <ng-container matColumnDef="code">
-        <mat-header-cell *matHeaderCellDef>Code</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.code }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="title">
-        <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.description }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="issued_at">
-        <mat-header-cell *matHeaderCellDef>Issued At</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{
-          row.issued_at_date | date
-        }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="revision">
-        <mat-header-cell *matHeaderCellDef>Revision</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row.revision }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="last_revision_date">
-        <mat-header-cell *matHeaderCellDef
-          >Date of Last Revision</mat-header-cell
-        >
-        <mat-cell *matCellDef="let row">{{
-          row?.last_revision_date ?? row.issued_at_date | date
-        }}</mat-cell>
-      </ng-container>
-
-      <!-- Header and Row Declarations -->
-      <mat-header-row
-        *matHeaderRowDef="[
+    ></mat-header-row>
+    <mat-row
+      *matRowDef="
+        let row;
+        columns: [
           'code',
           'title',
           'description',
           'issued_at',
           'revision',
           'last_revision_date'
-        ]"
-      ></mat-header-row>
-      <mat-row
-        *matRowDef="
-          let row;
-          columns: [
-            'code',
-            'title',
-            'description',
-            'issued_at',
-            'revision',
-            'last_revision_date'
-          ]
-        "
-      ></mat-row>
-    </mat-table>
+        ]
+      "
+    ></mat-row>
+  </mat-table>
 
-    <button mat-raised-button (click)="addSpecification()">Add</button>
-  </app-content-section>
+  <button mat-raised-button (click)="addSpecification()">Add</button>
+</app-content-section>
 
-  <app-content-section title="Submittals"> </app-content-section>
-</app-page-wrapper>
+<app-content-section title="Submittals"> </app-content-section>

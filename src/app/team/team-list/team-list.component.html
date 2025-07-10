@@ -1,19 +1,17 @@
-<app-page-wrapper>
-  <app-content-section title="My Team">
-    <app-simple-table
-      [data]="employees.value()"
-      [columns]="[
-        {
-          key: 'fullname',
-          name: 'Fullname'
-        },
-        {
-          key: 'is_active',
-          name: 'Active'
-        }
-      ]"
-    />
+<app-content-section title="My Team">
+  <app-simple-table
+    [data]="employees.value()"
+    [columns]="[
+      {
+        key: 'fullname',
+        name: 'Fullname'
+      },
+      {
+        key: 'is_active',
+        name: 'Active'
+      }
+    ]"
+  />
 
-    <button mat-flat-button>Invite</button>
-  </app-content-section>
-</app-page-wrapper>
+  <button mat-flat-button>Invite</button>
+</app-content-section>

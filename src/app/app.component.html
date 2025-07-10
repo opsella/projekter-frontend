@@ -1,13 +1,12 @@
 @if ((auth.isAuthenticated$ | async) === true) {
-  <div>
-    <div class="main-application">
-      <app-top-nav></app-top-nav>
+  <div class="main-application">
+    <app-top-nav></app-top-nav>
 
-      <div class="main-wrapper">
-        <app-side-nav></app-side-nav>
-        <span id="square"><span id="circle"></span></span>
-        <app-main-content class="content"></app-main-content>
-      </div>
+    <div class="main-wrapper">
+      <app-side-nav></app-side-nav>
+      <span id="square"><span id="circle"></span></span>
+
+      <app-main-content class="content"></app-main-content>
     </div>
   </div>
 } @else {

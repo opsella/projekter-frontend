@@ -10,7 +10,6 @@ import {
   ProjectAddSpecificationDialogData,
 } from "../project-add-specification-dialog/project-add-specification-dialog.component";
 import { Observable, of, switchMap, take, tap } from "rxjs";
-import { PageWrapperComponent } from "../../shared/page-wrapper/page-wrapper.component";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
 import { DatePipe, NgOptimizedImage } from "@angular/common";
 import {
@@ -33,7 +32,6 @@ import { SimpleTableComponent } from "../../shared/simple-table/simple-table.com
   templateUrl: "./project-details.component.html",
   styleUrl: "./project-details.component.scss",
   imports: [
-    PageWrapperComponent,
     ContentSectionComponent,
     NgOptimizedImage,
     MatTable,

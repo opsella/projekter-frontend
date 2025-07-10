@@ -1,23 +1,20 @@
-<app-page-wrapper>
-  <app-content-section title="Your Organization">
-    Organization Name:
-    {{ tenantService.tenant.value()?.display_name ?? "unknown" }}
+<app-content-section title="Your Organization">
+  Organization Name:
+  {{ tenantService.tenant.value()?.display_name ?? "unknown" }}
 
-    <br />
+  <br />
 
-    Organization Code:
-    {{ tenantService.tenant.value()?.code ?? "unknown" }}
-  </app-content-section>
+  Organization Code:
+  {{ tenantService.tenant.value()?.code ?? "unknown" }}
+</app-content-section>
 
-  <app-content-section title="Project Statuses" style="margin-top: 10px">
-    <ul>
-      @for (
-        status of tenantService.tenant.value()?.available_project_statuses ??
-          [];
-        track status.id
-      ) {
-        <li>{{ status.id }}: {{ status.category }} => {{ status.name }}</li>
-      }
-    </ul>
-  </app-content-section>
-</app-page-wrapper>
+<app-content-section title="Project Statuses" style="margin-top: 10px">
+  <ul>
+    @for (
+      status of tenantService.tenant.value()?.available_project_statuses ?? [];
+      track status.id
+    ) {
+      <li>{{ status.id }}: {{ status.category }} => {{ status.name }}</li>
+    }
+  </ul>
+</app-content-section>

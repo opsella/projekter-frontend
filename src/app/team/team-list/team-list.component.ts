@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { PageWrapperComponent } from "../../shared/page-wrapper/page-wrapper.component";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
 import { Employee } from "../../models/employee";
 import { EmployeesService } from "../employees.service";
@@ -11,7 +10,7 @@ import { MatButton } from "@angular/material/button";
   selector: "app-team-list",
   templateUrl: "./team-list.component.html",
   styleUrls: ["./team-list.component.scss"],
-  imports: [PageWrapperComponent, ContentSectionComponent, SimpleTableComponent, MatButton],
+  imports: [ContentSectionComponent, SimpleTableComponent, MatButton],
   standalone: true,
 })
 export class TeamListComponent {

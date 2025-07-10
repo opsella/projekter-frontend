@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { PageWrapperComponent } from "../../shared/page-wrapper/page-wrapper.component";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
 import { ResourceService } from "../../resources/services/resource.service";
 import { HttpResourceRef } from "@angular/common/http";
@@ -20,7 +19,7 @@ export interface InventoryListData {
   selector: "app-inventory-list",
   templateUrl: "./inventory-list.component.html",
   styleUrls: ["./inventory-list.component.scss"],
-  imports: [PageWrapperComponent, ContentSectionComponent, SimpleTableComponent],
+  imports: [ContentSectionComponent, SimpleTableComponent],
   standalone: true,
 })
 export class InventoryListComponent {

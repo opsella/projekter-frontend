@@ -1,64 +1,62 @@
-<app-page-wrapper>
-  <app-content-section title="Equipment">
-    @switch (equipment.status()) {
-      @case ("loading") {
-        <div>loading...</div>
-      }
-      @case ("resolved") {
-        <app-simple-table
-          [data]="equipment.value()"
-          [columns]="[
-            {
-              key: 'id',
-              name: 'Id'
-            },
-            {
-              key: 'name',
-              name: 'Name'
-            },
-            {
-              key: 'description',
-              name: 'Description'
-            }
-          ]"
-        />
-      }
-      @case ("error") {
-        <span>
-          We had trouble loading your equipment please try again later.
-        </span>
-      }
+<app-content-section title="Equipment">
+  @switch (equipment.status()) {
+    @case ("loading") {
+      <div>loading...</div>
     }
-  </app-content-section>
-  <app-content-section title="Materials">
-    @switch (materials.status()) {
-      @case ("loading") {
-        <div>loading...</div>
-      }
-      @case ("resolved") {
-        <app-simple-table
-          [data]="materials.value()"
-          [columns]="[
-            {
-              key: 'id',
-              name: 'Id'
-            },
-            {
-              key: 'name',
-              name: 'Name'
-            },
-            {
-              key: 'description',
-              name: 'Description'
-            }
-          ]"
-        />
-      }
-      @case ("error") {
-        <span>
-          We had trouble loading your materials please try again later.
-        </span>
-      }
+    @case ("resolved") {
+      <app-simple-table
+        [data]="equipment.value()"
+        [columns]="[
+          {
+            key: 'id',
+            name: 'Id'
+          },
+          {
+            key: 'name',
+            name: 'Name'
+          },
+          {
+            key: 'description',
+            name: 'Description'
+          }
+        ]"
+      />
     }
-  </app-content-section>
-</app-page-wrapper>
+    @case ("error") {
+      <span>
+        We had trouble loading your equipment please try again later.
+      </span>
+    }
+  }
+</app-content-section>
+<app-content-section title="Materials">
+  @switch (materials.status()) {
+    @case ("loading") {
+      <div>loading...</div>
+    }
+    @case ("resolved") {
+      <app-simple-table
+        [data]="materials.value()"
+        [columns]="[
+          {
+            key: 'id',
+            name: 'Id'
+          },
+          {
+            key: 'name',
+            name: 'Name'
+          },
+          {
+            key: 'description',
+            name: 'Description'
+          }
+        ]"
+      />
+    }
+    @case ("error") {
+      <span>
+        We had trouble loading your materials please try again later.
+      </span>
+    }
+  }
+</app-content-section>
