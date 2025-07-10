@@ -1,0 +1,18 @@
+form {
+  mat-form-field {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    flex-grow: 1;
+  }
+
+  .form-column {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .form-row {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+  }
+}

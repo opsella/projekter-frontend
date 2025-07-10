@@ -1,16 +1,57 @@
 <app-page-wrapper>
   <app-content-section title="Profile" [expandable]="false">
-    <ul>
-      <li>
-        Name: {{ auth.auth0User()?.name }} -
-        {{ userService.currentUser.value().first_name }}
-      </li>
-      <li>Username: {{ auth.auth0User()?.nickname }}</li>
-      <li>Email: {{ auth.auth0User()?.email }}</li>
-      <span>{{
-        auth.auth0User()?.email_verified ? "Verified" : "Unverified"
-      }}</span>
-    </ul>
+    <form class="form-column" [formGroup]="profileForm">
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Given Name</mat-label>
+          <input matInput type="text" formControlName="givenName" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Family Name</mat-label>
+          <input matInput type="text" formControlName="familyName" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput type="text" formControlName="email" />
+          @if (auth.auth0User()?.email_verified) {
+            <mat-icon
+              style="color: darkgreen"
+              matSuffix
+              matTooltip="Email is verified"
+              >check</mat-icon
+            >
+          } @else {
+            <mat-icon
+              style="color: red"
+              matSuffix
+              matTooltip="Email is not verified"
+              >close</mat-icon
+            >
+          }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Username</mat-label>
+          <input matInput type="text" formControlName="username" />
+        </mat-form-field>
+      </div>
+
+      <div class="form-row">
+        <mat-form-field>
+          <mat-label>Employee Id</mat-label>
+          <input matInput type="text" formControlName="employeeId" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Nickname</mat-label>
+          <input matInput type="text" formControlName="nickname" />
+        </mat-form-field>
+      </div>
+    </form>
 
     <ul>
       @for (permission of auth.permissions(); track permission.permissionName) {

@@ -7,6 +7,7 @@
 .header {
   background: var(--mat-sys-on-surface);
   color: var(--mat-sys-surface-tint);
+  height: 64px;
 
   button {
     color: var(--mat-sys-surface-tint);
@@ -19,4 +20,8 @@
   .content {
     padding: 16px;
   }
+
+  // TODO: Why does this need to be here and cannot be specified on the component
+  // on an as needed basis, even if this was a default?
+  margin-bottom: 50px;
 }
