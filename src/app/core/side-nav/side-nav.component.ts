@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, computed, Signal } from "@angular/core";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthenticationService } from "../../authentication/authentication.service";
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
@@ -25,6 +25,12 @@ export class SideNavComponent {
       isVisible: () => true,
     },
   ];
+
+  protected displayName: Signal<string> = computed(() => {
+    const auth0User = this.auth.auth0User();
+    return auth0User.given_name ?? auth0User.nickname;
+  })
+
   constructor(
     protected auth: AuthenticationService,
     private router: Router,

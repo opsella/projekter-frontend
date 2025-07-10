@@ -13,10 +13,9 @@
     </div>
 
     <div class="user-info">
-      <h4>{{ auth.auth0User()?.name }}</h4>
+      <h4>{{ displayName() }}</h4>
     </div>
 
-    <app-avatar [photo]="auth.auth0User()?.picture"
-                (click)="profile()"/>
+    <app-avatar [photo]="auth.auth0User()?.picture" (click)="profile()" />
   </div>
 </aside>

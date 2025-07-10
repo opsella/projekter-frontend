@@ -1,19 +1,15 @@
 aside {
-  align-items: center;
   background-color: #040300;
   color: #D6D6D6;
   display: flex;
   height: 55px;
   justify-content: space-between;
   max-height: 55px;
-  padding-left: 6rem;
 
   .active-user-container {
     display: flex;
     align-items: center;
     height: 100%;
-    max-width: 230px;
-    min-width: 80px;
     padding-right: 1rem;
     width: auto;
 
@@ -21,6 +17,7 @@ aside {
       align-items: center;
       display: flex;
       font-size: calc(1rem + 3px);
+      margin-right: 1rem;
 
       a {
         color: #D6D6D6;
@@ -36,7 +33,6 @@ aside {
       display: flex;
       flex-flow: column;
       justify-content: center;
-      margin-left: 2rem;
 
       h4, h5 {
         margin: 0 10px 0 0;
