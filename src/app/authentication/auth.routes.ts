@@ -13,8 +13,11 @@ export const authRoutes: Routes = [
       const inviteCode: string = route.queryParams["invitation"];
       const org: string = route.queryParams["organization"];
       auth0.loginWithRedirect({
+        appState: {
+          target: "/user/register"
+        },
         authorizationParams: {
-          redirect_uri: window.location.origin + "/user/register",
+          redirect_uri: window.location.origin,
           organization: org,
           invitation: inviteCode,
         }
