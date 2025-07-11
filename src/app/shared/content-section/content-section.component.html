@@ -1,11 +1,11 @@
 <div>
-  <p-toolbar class="header">
+  <p-toolbar class="header" [style]="{ 'border-radius': '0' }">
     <ng-template #start>
       <span>{{ title }}</span>
     </ng-template>
     <ng-template #end>
       @if (expandable === true) {
-        <p-button (click)="toggleExpansion()">
+        <p-button (click)="toggleExpansion()" size="small" text>
           @if (expanded) {
             <i class="pi pi-angle-down"></i>
           } @else {

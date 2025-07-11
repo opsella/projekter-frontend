@@ -1,45 +1,58 @@
-<app-content-section title="Profile" [expandable]="false">
-  <form class="form-column" [formGroup]="profileForm">
+<app-content-section title="Profile" [expandable]="true">
+  <form [formGroup]="profileForm">
     <div class="form-row">
-      <p-ifta-label>
-        <label for="given-name">Given Name</label>
-        <input pInputText type="text" id="given-name" formControlName="givenName">
-      </p-ifta-label>
+      <p-input-group>
+        <p-float-label variant="in">
+          <input pInputText type="text" id="given-name" formControlName="givenName">
+          <label for="given-name">Given Name</label>
+        </p-float-label>
+      </p-input-group>
 
-
-      <p-ifta-label>
-        <label for="family-name">Family Name</label>
-        <input pInputText type="text" id="family-name" formControlName="familyName">
-      </p-ifta-label>
+      <p-input-group>
+        <p-float-label variant="in">
+          <input pInputText type="text" id="family-name" formControlName="familyName">
+          <label for="family-name">Family Name</label>
+        </p-float-label>
+      </p-input-group>
     </div>
 
     <div class="form-row">
-      <p-ifta-label>
-        <label for="email">Email</label>
-        <input pInputText type="email" id="email" formControlName="email">
-        @if (auth.auth0User()?.email_verified) {
-          <i class="pi pi-check-circle" style="color: darkgreen" pTooltip="Email is verified"></i>
-        } @else {
-          <i class="pi pi-exclamation-circle" style="color: red" pTooltip="Email is not verified"></i>
-        }
-      </p-ifta-label>
+      <p-input-group>
+        <p-float-label variant="in">
+          <input pInputText type="email" id="email" formControlName="email">
+          <label for="email">Email</label>
+        </p-float-label>
+        <p-inputgroup-addon>
+          @if (auth.auth0User()?.email_verified) {
+            <i class="pi pi-check-circle" style="color: darkgreen" pTooltip="Email is verified"></i>
+          } @else {
+            <i class="pi pi-exclamation-circle" style="color: red" pTooltip="Email is not verified"></i>
+          }
+        </p-inputgroup-addon>
+      </p-input-group>
 
-      <p-ifta-label>
-        <label for="username">Username</label>
-        <input pInputText type="text" id="username" formControlName="username">
-      </p-ifta-label>
+      <p-input-group>
+        <p-float-label variant="in">
+          <input pInputText type="text" id="username" formControlName="username">
+          <label for="username">Username</label>
+        </p-float-label>
+      </p-input-group>
     </div>
 
     <div class="form-row">
-      <p-ifta-label>
-        <label for="employee-id">Employee Id</label>
-        <input pInputText type="text" id="employee-id" formControlName="employeeId">
-      </p-ifta-label>
+      <p-input-group>
+        <p-float-label variant="in">
+          <input pInputText type="text" id="employee-id" formControlName="employeeId">
+          <label for="employee-id">Employee Id</label>
+        </p-float-label>
+      </p-input-group>
 
-      <p-ifta-label>
-        <label for="nickname">Nickname</label>
-        <input pInputText type="text" id="nickname" formControlName="nickname">
-      </p-ifta-label>
+      <p-input-group>
+        <p-float-label variant="in">
+          <input pInputText type="text" id="nickname" formControlName="nickname">
+          <label for="nickname">Nickname</label>
+        </p-float-label>
+      </p-input-group>
     </div>
   </form>
 

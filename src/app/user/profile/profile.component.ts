@@ -9,12 +9,15 @@ import {IftaLabel} from "primeng/iftalabel";
 import {InputText} from "primeng/inputtext";
 import {Tooltip} from "primeng/tooltip";
 import {Button} from "primeng/button";
+import {InputGroup} from "primeng/inputgroup";
+import {InputGroupAddon} from "primeng/inputgroupaddon";
+import {FloatLabel} from "primeng/floatlabel";
 
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
-  imports: [ContentSectionComponent, ReactiveFormsModule, IftaLabel, InputText, Tooltip, Button]
+  imports: [ContentSectionComponent, ReactiveFormsModule, IftaLabel, InputText, Tooltip, Button, InputGroup, InputGroupAddon, FloatLabel]
 })
 export class ProfileComponent {
   protected auth0User: Signal<User> = this.auth.auth0User;

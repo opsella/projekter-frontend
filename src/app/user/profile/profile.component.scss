@@ -1,8 +1,11 @@
 form {
-  mat-form-field {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  margin-bottom: 1rem;
+
+  p-input-group, p-ifta-label, p-iftalabel {
+    padding-left: .5rem;
+    padding-right: .5rem;
     flex-grow: 1;
+    width: 100%;
   }
 
   .form-column {
@@ -13,6 +16,6 @@ form {
   .form-row {
     display: flex;
     flex-flow: row;
-    justify-content: space-evenly;
+    margin-bottom: 0.2rem;
   }
 }

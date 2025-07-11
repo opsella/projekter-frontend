@@ -1,6 +1,6 @@
 import { Component, Input } from "@angular/core";
 import {Toolbar} from "primeng/toolbar";
-import {Button, ButtonLabel} from "primeng/button";
+import {Button} from "primeng/button";
 
 @Component({
   selector: "app-content-section",
