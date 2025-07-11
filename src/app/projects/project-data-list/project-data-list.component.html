@@ -1,7 +1,6 @@
 <section>
   <div class="project-filter">
-    <p-select [options]="['Draft', 'Published']"
-              optionLabel="state"
+    <p-select [options]="states"
               (onChange)="onFilterChanged($event)"
               placeholder="Project State">
     </p-select>
@@ -18,7 +17,7 @@
             [title]="project.name"
             [status]="project.state"
             [photo]="project.photo"
-            (click)="viewDetails(project.id)"
+            [id]="project.id"
           >
           </app-project-card>
         }

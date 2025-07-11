@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from "@angular/core";
+import {Component, inject, Input, OnInit} from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -10,11 +10,13 @@ import { ProjectStatus } from "../../models/tenant";
 import { CreateProjectRequest } from "../../models/project";
 import { ProjectStatusId } from "../../models/ids/project-status-id";
 import {Button} from "primeng/button";
-import {Dialog} from "primeng/dialog";
 import {IftaLabel} from "primeng/iftalabel";
 import {InputText} from "primeng/inputtext";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Select} from "primeng/select";
+import {InputGroup} from "primeng/inputgroup";
+import {FloatLabel} from "primeng/floatlabel";
+import {InputGroupAddon} from "primeng/inputgroupaddon";
 
 @Component({
   selector: "app-project-creation-dialog",
@@ -22,26 +24,33 @@ import {Select} from "primeng/select";
     FormsModule,
     ReactiveFormsModule,
     Button,
-    Dialog,
     IftaLabel,
     InputText,
     Select,
+    InputGroup,
+    FloatLabel,
+    InputGroupAddon,
   ],
+  providers: [],
   templateUrl: "./project-creation-dialog.component.html",
   styleUrl: "./project-creation-dialog.component.scss",
   standalone: true,
 })
 export class ProjectCreationDialogComponent implements OnInit {
-  private readonly ref: DynamicDialogRef = inject(DynamicDialogRef);
-  private readonly config: DynamicDialogConfig = inject(DynamicDialogConfig);
-  protected statuses: ProjectStatus[] = [];
+  @Input() public statuses: ProjectStatus[] = [];
+
+  constructor(
+    private ref: DynamicDialogRef,
+    private config: DynamicDialogConfig
+  ) {
+  }
 
   protected form: FormGroup = new FormGroup({
     name: new FormControl("", {
       validators: [Validators.required],
     }),
     status: new FormControl(
-      this.statuses.find((c) => c.category === "Proposed").id,
+      this.statuses.find((c) => c.category === "Proposed")?.id,
       {
         validators: [Validators.required],
       },

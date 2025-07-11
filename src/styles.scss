@@ -36,3 +36,26 @@ a {
   height: 0;
   width: 0;
 }
+
+
+form {
+  margin-bottom: 1rem;
+
+  p-input-group, p-ifta-label, p-iftalabel, p-select {
+    padding-left: .5rem;
+    padding-right: .5rem;
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  .form-column {
+    display: flex;
+    flex-flow: column;
+  }
+
+  .form-row {
+    display: flex;
+    flex-flow: row;
+    margin-bottom: 0.2rem;
+  }
+}

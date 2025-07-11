@@ -1,5 +1,5 @@
 <div>
-  <p-table [value]="columns()">
+  <p-table [value]="data()">
     <ng-template #header>
       <tr>
         @for (col of columns(); track col.key) {
@@ -10,7 +10,7 @@
     <ng-template #body let-row>
       <tr>
         @for (col of columns(); track col.key) {
-          <td>{{ row[row.key] }}</td>
+          <td>{{ row[col.key] }}</td>
         }
       </tr>
     </ng-template>

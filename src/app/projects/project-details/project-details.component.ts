@@ -15,6 +15,8 @@ import { SimpleTableComponent } from "../../shared/simple-table/simple-table.com
 import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
 import {TableModule} from "primeng/table";
 import {Button} from "primeng/button";
+import {Breadcrumb} from "primeng/breadcrumb";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: "app-project-details",
@@ -27,6 +29,7 @@ import {Button} from "primeng/button";
     SimpleTableComponent,
     TableModule,
     Button,
+    Breadcrumb,
   ],
   providers: [
     ProjectService,
@@ -38,6 +41,17 @@ export class ProjectDetailsComponent {
   private route = inject(ActivatedRoute);
   private params = toSignal(this.route.params, { initialValue: { id: "" } });
   private projectId = signal(this.params().id);
+
+  protected breadcrumbItems: MenuItem[] = [
+    {
+      label: 'projects',
+      routerLink: '/project'
+    }
+  ];
+  protected home: MenuItem = {
+    icon: 'pi pi-home',
+    routerLink: '/project'
+  };
 
   protected project: HttpResourceRef<Project> = this.projectService.project(
     this.projectId,
@@ -86,9 +100,5 @@ export class ProjectDetailsComponent {
         take(1),
       )
       .subscribe();
-  }
-
-  public async backToProjects(): Promise<void> {
-    await this.router.navigate(["projects/list"]);
   }
 }

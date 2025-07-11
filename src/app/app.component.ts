@@ -4,6 +4,7 @@ import { TopNavComponent } from "./core/top-nav/top-nav.component";
 import { SideNavComponent } from "./core/side-nav/side-nav.component";
 import { MainContentComponent } from "./core/main-content/main-content.component";
 import { AuthService } from "@auth0/auth0-angular";
+import {Toast} from "primeng/toast";
 
 @Component({
   selector: "app-root",
@@ -14,6 +15,7 @@ import { AuthService } from "@auth0/auth0-angular";
     TopNavComponent,
     SideNavComponent,
     MainContentComponent,
+    Toast,
   ],
 })
 export class AppComponent {

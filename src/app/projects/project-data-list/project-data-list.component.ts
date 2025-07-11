@@ -6,7 +6,6 @@ import {
 } from "@angular/core";
 import { ProjectService } from "../services/project.service";
 import { Router } from "@angular/router";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
 import {
   CreateProjectRequest,
   Project,
@@ -21,8 +20,9 @@ import { ProjectCreationDialogComponent } from "../project-creation-dialog/proje
 import { ProjectStatus } from "../../models/tenant";
 import {Button} from "primeng/button";
 import {MessageService} from "primeng/api";
-import {DialogService} from "primeng/dynamicdialog";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Select, SelectChangeEvent} from "primeng/select";
+import {Toast} from "primeng/toast";
 
 @Component({
   selector: "app-project-data-list",
@@ -40,11 +40,7 @@ import {Select, SelectChangeEvent} from "primeng/select";
 export class ProjectDataListComponent {
   public filterProjectState: WritableSignal<ProjectState> = signal("Draft");
 
-  public projectCreationForm = new FormGroup({
-    projectName: new FormControl("", [Validators.required]),
-    image: new FormControl(""),
-  });
-
+  protected states: string[] = ['Draft', 'Published'];
   protected projects: HttpResourceRef<Project[]> = this.projectService.projects(
     this.filterProjectState,
   );
@@ -66,15 +62,21 @@ export class ProjectDataListComponent {
   }
 
   public createProject(): void {
+    let ref: DynamicDialogRef<ProjectCreationDialogComponent>;
+
     this.orgService
       .getProjectStatuses()
       .subscribe({
         next: (result: ProjectStatus[]): void => {
-          const ref = this.dialogService
+          ref = this.dialogService
             .open(ProjectCreationDialogComponent, {
+              header: "Create New Project",
+              contentStyle: {"overflow": "auto"},
+
               inputValues:{
                 statuses: result
               },
+              modal: true
             });
 
           ref.onClose
@@ -94,13 +96,26 @@ export class ProjectDataListComponent {
                   await this.viewDetails(result.id);
 
                   this.messageService.add({
-                    text: 'Project created successfully',
+                    severity: 'info',
+                    summary: 'Created',
+                    detail: 'Project created successfully',
+                    life: 3000,
+                  });
+                } else {
+                  this.messageService.add({
+                    severity: 'warn',
+                    summary: 'Canceled',
+                    detail: 'Project creation was canceled',
+                    life: 3000,
                   });
                 }
               },
               error: (): void => {
                 this.messageService.add({
-                  text: 'Project creation failed. Please try again.',
+                  severity: 'error',
+                  summary: 'Failed',
+                  detail: 'Project creation failed, please try again',
+                  life: 3000,
                 });
               },
             });

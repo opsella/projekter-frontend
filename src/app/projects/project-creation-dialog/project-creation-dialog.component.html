@@ -1,26 +1,32 @@
-<p-dialog>
-  <ng-template #header>
-    <h2>Create New Project</h2>
-  </ng-template>
-  <form [formGroup]="form">
-    <p-ifta-label>
-      <label for="project-name">Project Name</label>
+<form [formGroup]="form">
+  <p-input-group>
+    <p-float-label variant="in">
       <input pInputText type="text" id="project-name" formControlName="name" />
-    </p-ifta-label>
+      <label for="project-name">Project Name</label>
+    </p-float-label>
+  </p-input-group>
 
+  <p-input-group>
     <p-select [options]="statuses"
               formControlName="status"
-              optionLabel="status"
+              optionLabel="name"
               placeholder="Project Status">
     </p-select>
+  </p-input-group>
 
-    <p-ifta-label>
-      <label for="photo-url">Photo Url</label>
+  <p-input-group>
+    <p-inputgroup-addon>
+      www
+    </p-inputgroup-addon>
+    <p-float-label variant="in">
       <input pInputText type="text" id="photo-url" formControlName="photo" />
-    </p-ifta-label>
-  </form>
-  <ng-template #footer>
-    <p-button label="Cancel" [text]="true" severity="secondary" (click)="onCancelClick()"/>
-    <p-button label="Submit" [outlined]="true" severity="secondary" (click)="onSubmitClick()"/>
-  </ng-template>
-</p-dialog>
+      <label for="photo-url">Photo Url</label>
+    </p-float-label>
+  </p-input-group>
+</form>
+
+<div>
+  <p-button label="Cancel" [text]="true" severity="secondary" (click)="onCancelClick()"/>
+  <p-button label="Submit" [outlined]="true" severity="primary" (click)="onSubmitClick()"/>
+</div>
+

@@ -1,23 +1,25 @@
-<p-overlay-badge [hidden]="alerts <= 0" [value]="alerts" badgeSize="large">
-  <div class="project-card">
-    <div class="header">
-      <span class="title">{{ title }}</span>
-      <div class="location">
-        <i class="pi pi-map-marker"></i>
-        <span>{{ location }}</span>
-      </div>
+<p-overlay-badge [badgeDisabled]="alerts <= 0" [value]="alerts" badgeSize="large">
+  <p-card [style]="{ 'width': '22rem' }">
+    <ng-template #header>
+      <img
+        [src]="photo"
+        style="width: 100%; height: 200px;"
+        alt="photo used for identifying the project: {{ projectName }}"
+      />
+    </ng-template>
+    <ng-template #title>{{ projectName }}</ng-template>
+    <ng-template #subtitle>
+      <i class="pi pi-map-marker"></i>
+      <span>{{ location }}</span>
+    </ng-template>
+
+    <div class="status">
+      <p-chip [label]="status" />
     </div>
 
-    <div class="content-container">
-      <img
-        [ngSrc]="photo"
-        width="300"
-        height="175"
-        alt="photo used for identifying the project: {{ title }}"
-      />
-      <div class="content">
-        <app-simple-chip [label]="status" />
-      </div>
-    </div>
-  </div>
+    <ng-template #footer>
+      <p-button label="Details" (click)="viewDetails(projectId())"></p-button>
+    </ng-template>
+  </p-card>
 </p-overlay-badge>
+

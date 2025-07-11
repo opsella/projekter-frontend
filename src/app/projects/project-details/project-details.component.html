@@ -1,4 +1,4 @@
-<button (click)="backToProjects()">Back to Projects</button>
+<p-breadcrumb [model]="breadcrumbItems" [home]="home" [style]="{ 'margin-bottom': '1rem' }"/>
 
 <app-content-section [title]="project.value()?.name ?? ''">
   <img
