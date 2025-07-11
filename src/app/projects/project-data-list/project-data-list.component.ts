@@ -13,22 +13,16 @@ import {
   ProjectState,
 } from "../../models/project";
 import { HttpResourceRef } from "@angular/common/http";
-import {
-  MatFormField,
-  MatLabel,
-  MatOption,
-  MatSelect,
-  MatSelectChange,
-} from "@angular/material/select";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
 import { ProjectId } from "../../models/ids/project-id";
 import { Observable, of, switchMap, take } from "rxjs";
 import { ProjectCardComponent } from "../project-card/project-card.component";
-import { MatButton } from "@angular/material/button";
 import { OrganizationService } from "../../services/organization.service";
 import { ProjectCreationDialogComponent } from "../project-creation-dialog/project-creation-dialog.component";
 import { ProjectStatus } from "../../models/tenant";
+import {Button} from "primeng/button";
+import {MessageService} from "primeng/api";
+import {DialogService} from "primeng/dynamicdialog";
+import {Select, SelectChangeEvent} from "primeng/select";
 
 @Component({
   selector: "app-project-data-list",
@@ -36,12 +30,9 @@ import { ProjectStatus } from "../../models/tenant";
   styleUrls: ["./project-data-list.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    MatFormField,
-    MatLabel,
-    MatSelect,
-    MatOption,
     ProjectCardComponent,
-    MatButton,
+    Button,
+    Select,
   ],
   providers: [ProjectService],
   standalone: true,
@@ -60,63 +51,61 @@ export class ProjectDataListComponent {
 
   constructor(
     private projectService: ProjectService,
-    private dialog: MatDialog,
     private router: Router,
-    private snackbar: MatSnackBar,
     private orgService: OrganizationService,
+    private messageService: MessageService,
+    private dialogService: DialogService
   ) {}
 
   public async viewDetails(id: ProjectId): Promise<void> {
     await this.router.navigate(["project/details", id.toString()]);
   }
 
-  public onFilterChanged(value: MatSelectChange<string>): void {
+  public onFilterChanged(value: SelectChangeEvent): void {
     this.filterProjectState.set(value.value as ProjectState);
   }
 
   public createProject(): void {
-    let ref: MatDialogRef<ProjectCreationDialogComponent>;
-
-    this.orgService.getProjectStatuses().subscribe({
-      next: (result: ProjectStatus[]): void => {
-        ref = this.dialog.open(ProjectCreationDialogComponent, {
-          data: result,
-        });
-
-        ref
-          ?.afterClosed()
-          .pipe(
-            switchMap(
-              (result: CreateProjectRequest | boolean): Observable<Project> => {
-                return result instanceof CreateProjectRequest
-                  ? this.projectService.createProject(result)
-                  : (of(null) as Observable<Project>);
+    this.orgService
+      .getProjectStatuses()
+      .subscribe({
+        next: (result: ProjectStatus[]): void => {
+          const ref = this.dialogService
+            .open(ProjectCreationDialogComponent, {
+              inputValues:{
+                statuses: result
               },
-            ),
-            take(1),
-          )
-          .subscribe({
-            next: async (result: Project): Promise<void> => {
-              if (result) {
-                await this.viewDetails(result.id);
+            });
 
-                this.snackbar.open("Project created successfully", null, {
-                  duration: 2000,
-                });
-              }
-            },
-            error: (): void => {
-              this.snackbar.open(
-                "Project creation failed. Please try again.",
-                null,
-                {
-                  duration: 2000,
+          ref.onClose
+            .pipe(
+              switchMap(
+                (result: CreateProjectRequest | boolean): Observable<Project> => {
+                  return result instanceof CreateProjectRequest
+                    ? this.projectService.createProject(result)
+                    : (of(null) as Observable<Project>);
                 },
-              );
-            },
-          });
-      },
-      error: () => {},
-    });
+              ),
+              take(1),
+            )
+            .subscribe({
+              next: async (result: Project): Promise<void> => {
+                if (result) {
+                  await this.viewDetails(result.id);
+
+                  this.messageService.add({
+                    text: 'Project created successfully',
+                  });
+                }
+              },
+              error: (): void => {
+                this.messageService.add({
+                  text: 'Project creation failed. Please try again.',
+                });
+              },
+            });
+        },
+        error: () => {},
+      });
   }
 }

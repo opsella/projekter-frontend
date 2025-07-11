@@ -1,17 +1,20 @@
 <div>
-  <mat-toolbar class="header">
-    <span>{{ title }}</span>
-    <span class="spacer"></span>
-    @if (expandable === true) {
-      <button matIconButton (click)="toggleExpansion()">
-        @if (expanded) {
-          <mat-icon>keyboard_arrow_down</mat-icon>
-        } @else {
-          <mat-icon>keyboard_arrow_right</mat-icon>
-        }
-      </button>
-    }
-  </mat-toolbar>
+  <p-toolbar class="header">
+    <ng-template #start>
+      <span>{{ title }}</span>
+    </ng-template>
+    <ng-template #end>
+      @if (expandable === true) {
+        <p-button (click)="toggleExpansion()">
+          @if (expanded) {
+            <i class="pi pi-angle-down"></i>
+          } @else {
+            <i class="pi pi-angle-down"></i>
+          }
+        </p-button>
+      }
+    </ng-template>
+  </p-toolbar>
 
   @if (expanded) {
     <div class="content-container">

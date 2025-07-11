@@ -1,10 +1,9 @@
-import { Component, effect, inject, signal } from "@angular/core";
+import {Component, effect, inject, model, ModelSignal, signal} from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ProjectService } from "../services/project.service";
 import { HttpResourceRef } from "@angular/common/http";
 import { Project, ProjectAddSpecificationRequest } from "../../models/project";
 import { toSignal } from "@angular/core/rxjs-interop";
-import { MatDialog } from "@angular/material/dialog";
 import {
   ProjectAddSpecificationDialogComponent,
   ProjectAddSpecificationDialogData,
@@ -12,20 +11,10 @@ import {
 import { Observable, of, switchMap, take, tap } from "rxjs";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
 import { DatePipe, NgOptimizedImage } from "@angular/common";
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from "@angular/material/table";
-import { MatButton } from "@angular/material/button";
 import { SimpleTableComponent } from "../../shared/simple-table/simple-table.component";
+import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
+import {TableModule} from "primeng/table";
+import {Button} from "primeng/button";
 
 @Component({
   selector: "app-project-details",
@@ -34,21 +23,15 @@ import { SimpleTableComponent } from "../../shared/simple-table/simple-table.com
   imports: [
     ContentSectionComponent,
     NgOptimizedImage,
-    MatTable,
-    MatColumnDef,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatCellDef,
-    MatCell,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow,
-    MatButton,
     DatePipe,
     SimpleTableComponent,
+    TableModule,
+    Button,
   ],
-  providers: [ProjectService],
+  providers: [
+    ProjectService,
+    DynamicDialogModule
+  ],
   standalone: true,
 })
 export class ProjectDetailsComponent {
@@ -63,7 +46,7 @@ export class ProjectDetailsComponent {
   constructor(
     private router: Router,
     private projectService: ProjectService,
-    private dialog: MatDialog,
+    private dialogService: DialogService
   ) {
     effect(() => {
       this.projectId.set(this.params().id);
@@ -71,14 +54,15 @@ export class ProjectDetailsComponent {
   }
 
   public addSpecification(): void {
-    const ref = this.dialog.open(ProjectAddSpecificationDialogComponent, {
-      data: {
-        projectId: this.projectId(),
-      } as ProjectAddSpecificationDialogData,
-    });
+    const ref = this.dialogService
+      .open(ProjectAddSpecificationDialogComponent, {
+        modal: true,
+        data: {
+          projectId: this.projectId()
+        } as ProjectAddSpecificationDialogData,
+      });
 
-    ref
-      .afterClosed()
+    ref.onClose
       .pipe(
         switchMap(
           (

@@ -1,15 +1,17 @@
-<h2 mat-dialog-title>Invite New User</h2>
+<p-dialog>
+  <ng-template #header>
+    <h2>Invite New User</h2>
+  </ng-template>
 
-<mat-dialog-content>
   <form>
-    <mat-form-field>
-      <mat-label>Email</mat-label>
-      <input matInput type="text" />
-    </mat-form-field>
+    <p-ifta-label>
+      <label for="email"></label>
+      <input pInputText type="email" id="email">
+    </p-ifta-label>
   </form>
-</mat-dialog-content>
 
-<mat-dialog-actions>
-  <button matButton>Cancel</button>
-  <button mat-flat-button>Invite</button>
-</mat-dialog-actions>
+  <ng-template #footer>
+    <p-button label="Cancel"></p-button>
+    <p-button label="Invite"></p-button>
+  </ng-template>
+</p-dialog>

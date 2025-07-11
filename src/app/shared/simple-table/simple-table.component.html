@@ -1,13 +1,18 @@
 <div>
-  <mat-table [dataSource]="data()">
-    @for (col of columns(); track col.key) {
-      <ng-container [matColumnDef]="col.key">
-        <mat-header-cell *matHeaderCellDef>{{ col.name }}</mat-header-cell>
-        <mat-cell *matCellDef="let row">{{ row[col.key] }}</mat-cell>
-      </ng-container>
-    }
-
-    <mat-header-row *matHeaderRowDef="keymap()"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: keymap()"></mat-row>
-  </mat-table>
+  <p-table [value]="columns()">
+    <ng-template #header>
+      <tr>
+        @for (col of columns(); track col.key) {
+          <th>{{ col.name }}</th>
+        }
+      </tr>
+    </ng-template>
+    <ng-template #body let-row>
+      <tr>
+        @for (col of columns(); track col.key) {
+          <td>{{ row[row.key] }}</td>
+        }
+      </tr>
+    </ng-template>
+  </p-table>
 </div>

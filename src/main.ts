@@ -7,12 +7,15 @@ import { ActiveTenantInterceptor } from "./app/core/active-tenant.interceptor";
 import { FollowLocationHeaderInterceptor } from "./app/shared/follow-location-header.interceptor";
 import { bootstrapApplication, BrowserModule } from "@angular/platform-browser";
 import { provideAnimations } from "@angular/platform-browser/animations";
-import { MatExpansionModule } from "@angular/material/expansion";
-import { MatInputModule } from "@angular/material/input";
 import { AppComponent } from "./app/app.component";
 import { provideRouter } from "@angular/router";
 import { routes } from "./app/app.routes";
 import { APP_BASE_HREF, LocationStrategy, PathLocationStrategy } from "@angular/common";
+import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
+import {providePrimeNG} from "primeng/config";
+import material from "@primeuix/themes/material";
+import {MessageService} from "primeng/api";
+import {DialogService} from "primeng/dynamicdialog";
 
 if (environment.production) {
   enableProdMode();
@@ -22,8 +25,6 @@ bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
       BrowserModule,
-      MatExpansionModule,
-      MatInputModule,
       AuthModule.forRoot(environment.auth0),
     ),
     {
@@ -51,6 +52,14 @@ bootstrapApplication(AppComponent, {
     },
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
+    provideAnimationsAsync(),
+    providePrimeNG({
+      theme: {
+        preset: material
+      }
+    }),
     provideRouter(routes),
+    MessageService,
+    DialogService
   ],
 }).catch((err) => console.error(err));

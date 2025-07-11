@@ -1,31 +1,26 @@
-<h2 mat-dialog-title>Create New Project</h2>
-
-<mat-dialog-content>
+<p-dialog>
+  <ng-template #header>
+    <h2>Create New Project</h2>
+  </ng-template>
   <form [formGroup]="form">
-    <mat-form-field>
-      <mat-label>Project Name</mat-label>
-      <input matInput type="text" formControlName="name" />
-    </mat-form-field>
+    <p-ifta-label>
+      <label for="project-name">Project Name</label>
+      <input pInputText type="text" id="project-name" formControlName="name" />
+    </p-ifta-label>
 
-    <mat-form-field>
-      <mat-label>Select option</mat-label>
-      <mat-select formControlName="status">
-        @for (status of data; track status.id) {
-          <mat-option [value]="status.id">
-            {{ status.name }}
-          </mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+    <p-select [options]="statuses"
+              formControlName="status"
+              optionLabel="status"
+              placeholder="Project Status">
+    </p-select>
 
-    <mat-form-field>
-      <mat-label>Photo Url</mat-label>
-      <input matInput type="text" formControlName="photo" />
-    </mat-form-field>
+    <p-ifta-label>
+      <label for="photo-url">Photo Url</label>
+      <input pInputText type="text" id="photo-url" formControlName="photo" />
+    </p-ifta-label>
   </form>
-</mat-dialog-content>
-
-<mat-dialog-actions>
-  <button matButton (click)="onCancelClick()">Cancel</button>
-  <button mat-flat-button (click)="onSubmitClick()">Submit</button>
-</mat-dialog-actions>
+  <ng-template #footer>
+    <p-button label="Cancel" [text]="true" severity="secondary" (click)="onCancelClick()"/>
+    <p-button label="Submit" [outlined]="true" severity="secondary" (click)="onSubmitClick()"/>
+  </ng-template>
+</p-dialog>

@@ -1,54 +1,45 @@
 <app-content-section title="Profile" [expandable]="false">
   <form class="form-column" [formGroup]="profileForm">
     <div class="form-row">
-      <mat-form-field>
-        <mat-label>Given Name</mat-label>
-        <input matInput type="text" formControlName="givenName" />
-      </mat-form-field>
+      <p-ifta-label>
+        <label for="given-name">Given Name</label>
+        <input pInputText type="text" id="given-name" formControlName="givenName">
+      </p-ifta-label>
 
-      <mat-form-field>
-        <mat-label>Family Name</mat-label>
-        <input matInput type="text" formControlName="familyName" />
-      </mat-form-field>
+
+      <p-ifta-label>
+        <label for="family-name">Family Name</label>
+        <input pInputText type="text" id="family-name" formControlName="familyName">
+      </p-ifta-label>
     </div>
 
     <div class="form-row">
-      <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput type="text" formControlName="email" />
+      <p-ifta-label>
+        <label for="email">Email</label>
+        <input pInputText type="email" id="email" formControlName="email">
         @if (auth.auth0User()?.email_verified) {
-          <mat-icon
-            style="color: darkgreen"
-            matSuffix
-            matTooltip="Email is verified"
-            >check</mat-icon
-          >
+          <i class="pi pi-check-circle" style="color: darkgreen" pTooltip="Email is verified"></i>
         } @else {
-          <mat-icon
-            style="color: red"
-            matSuffix
-            matTooltip="Email is not verified"
-            >close</mat-icon
-          >
+          <i class="pi pi-exclamation-circle" style="color: red" pTooltip="Email is not verified"></i>
         }
-      </mat-form-field>
+      </p-ifta-label>
 
-      <mat-form-field>
-        <mat-label>Username</mat-label>
-        <input matInput type="text" formControlName="username" />
-      </mat-form-field>
+      <p-ifta-label>
+        <label for="username">Username</label>
+        <input pInputText type="text" id="username" formControlName="username">
+      </p-ifta-label>
     </div>
 
     <div class="form-row">
-      <mat-form-field>
-        <mat-label>Employee Id</mat-label>
-        <input matInput type="text" formControlName="employeeId" />
-      </mat-form-field>
+      <p-ifta-label>
+        <label for="employee-id">Employee Id</label>
+        <input pInputText type="text" id="employee-id" formControlName="employeeId">
+      </p-ifta-label>
 
-      <mat-form-field>
-        <mat-label>Nickname</mat-label>
-        <input matInput type="text" formControlName="nickname" />
-      </mat-form-field>
+      <p-ifta-label>
+        <label for="nickname">Nickname</label>
+        <input pInputText type="text" id="nickname" formControlName="nickname">
+      </p-ifta-label>
     </div>
   </form>
 
@@ -58,8 +49,8 @@
     }
   </ul>
 
-  <button mat-flat-button (click)="logout()">LOGOUT</button>
-  <button mat-flat-button (click)="tenant()">YOUR ORGANIZATION</button>
+  <p-button label="LOGOUT" (click)="logout()"></p-button>
+  <p-button label="YOUR ORGANIZATION" (click)="tenant()"></p-button>
 </app-content-section>
 
 <app-content-section title="Your Permissions">

@@ -3,18 +3,18 @@ import { AuthenticationService } from "../../authentication/authentication.servi
 import { Router } from "@angular/router";
 import { UsersService } from "../services/users.service";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
-import { MatButton } from "@angular/material/button";
-import { MatFormField, MatInput, MatLabel, MatSuffix } from "@angular/material/input";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { User } from "@auth0/auth0-angular";
-import { MatIcon } from "@angular/material/icon";
-import { MatTooltip } from "@angular/material/tooltip";
+import {IftaLabel} from "primeng/iftalabel";
+import {InputText} from "primeng/inputtext";
+import {Tooltip} from "primeng/tooltip";
+import {Button} from "primeng/button";
 
 @Component({
   selector: "app-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
-  imports: [ContentSectionComponent, MatButton, MatFormField, MatLabel, MatInput, ReactiveFormsModule, MatFormField, MatLabel, MatIcon, MatTooltip, MatSuffix]
+  imports: [ContentSectionComponent, ReactiveFormsModule, IftaLabel, InputText, Tooltip, Button]
 })
 export class ProfileComponent {
   protected auth0User: Signal<User> = this.auth.auth0User;

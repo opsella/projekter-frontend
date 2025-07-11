@@ -1,12 +1,10 @@
 <section>
   <div class="project-filter">
-    <mat-form-field>
-      <mat-label>Project State</mat-label>
-      <mat-select (selectionChange)="onFilterChanged($event)">
-        <mat-option value="Draft">Draft</mat-option>
-        <mat-option value="Published">Published</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <p-select [options]="['Draft', 'Published']"
+              optionLabel="state"
+              (onChange)="onFilterChanged($event)"
+              placeholder="Project State">
+    </p-select>
   </div>
 
   <div class="project-grid">
@@ -33,5 +31,5 @@
 </section>
 
 <section class="actions">
-  <button mat-flat-button (click)="createProject()">New Project</button>
+  <p-button label="New Project" (click)="createProject()"></p-button>
 </section>

@@ -1,4 +1,4 @@
-<button mat-icon-button>
+<p-button>
   @if (photo) {
     <img [ngSrc]="photo"
          class="avatar"
@@ -6,6 +6,6 @@
          width="48"
          height="48"/>
   } @else {
-    <mat-icon>account_circle</mat-icon>
+    <i class="pi pi-user"></i>
   }
-</button>
+</p-button>

@@ -1,25 +1,25 @@
-<h2 mat-dialog-title>Add Specification to Project</h2>
-
-<mat-dialog-content>
+<p-dialog [visible]="visible()">
+  <ng-template #header>
+    <h2>Add Specification to Project</h2>
+  </ng-template>
   <form [formGroup]="form">
-    <mat-form-field>
-      <mat-label>Code</mat-label>
-      <input matInput type="text" formControlName="code" />
-    </mat-form-field>
+    <p-ifta-label>
+      <label for="code">Code</label>
+      <input pInputText type="text" id="code" formControlName="code" />
+    </p-ifta-label>
 
-    <mat-form-field>
-      <mat-label>Title</mat-label>
-      <input matInput type="text" formControlName="title" />
-    </mat-form-field>
+    <p-ifta-label>
+      <label for="title">Code</label>
+      <input pInputText type="text" id="title" formControlName="title" />
+    </p-ifta-label>
 
-    <mat-form-field>
-      <mat-label>Description</mat-label>
-      <input matInput type="text" formControlName="description" />
-    </mat-form-field>
+    <p-ifta-label>
+      <label for="description">Code</label>
+      <input pInputText type="text" id="description" formControlName="description" />
+    </p-ifta-label>
   </form>
-</mat-dialog-content>
-
-<mat-dialog-actions>
-  <button matButton (click)="onCancelClick()">Cancel</button>
-  <button mat-flat-button (click)="onSubmitClick()">Submit</button>
-</mat-dialog-actions>
+  <ng-template #footer>
+    <p-button label="Cancel" [text]="true" severity="secondary" (click)="onCancelClick()" />
+    <p-button label="Submit" [outlined]="true" severity="secondary" (click)="onSubmitClick()" />
+  </ng-template>
+</p-dialog>

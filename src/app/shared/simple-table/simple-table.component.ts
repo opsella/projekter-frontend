@@ -1,27 +1,10 @@
 import { Component, computed, input, InputSignal, Signal } from "@angular/core";
-import {
-  MatCell,
-  MatCellDef, MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
-  MatTable
-} from "@angular/material/table";
+import {TableModule} from "primeng/table";
 
 @Component({
   selector: "app-simple-table",
   imports: [
-    MatTable,
-    MatHeaderRow,
-    MatRow,
-    MatHeaderCell,
-    MatHeaderCellDef,
-    MatCell,
-    MatCellDef,
-    MatHeaderRowDef,
-    MatRowDef,
-    MatColumnDef
+    TableModule
   ],
   templateUrl: "./simple-table.component.html",
   styleUrl: "./simple-table.component.scss"

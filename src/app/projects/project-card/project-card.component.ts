@@ -1,22 +1,14 @@
 import { Component, Input } from "@angular/core";
-import { MatCardModule } from "@angular/material/card";
-import { MatButtonModule } from "@angular/material/button";
-import { MatChipsModule } from "@angular/material/chips";
-import { MatIconModule } from "@angular/material/icon";
-import { MatBadgeModule } from "@angular/material/badge";
 import { SimpleChipComponent } from "../../shared/simple-chip/simple-chip.component";
 import { NgOptimizedImage } from "@angular/common";
+import {OverlayBadge} from "primeng/overlaybadge";
 
 @Component({
   selector: "app-project-card",
   imports: [
-    MatCardModule,
-    MatButtonModule,
-    MatChipsModule,
-    MatIconModule,
-    MatBadgeModule,
     SimpleChipComponent,
     NgOptimizedImage,
+    OverlayBadge,
   ],
   templateUrl: "./project-card.component.html",
   styleUrl: "./project-card.component.scss",

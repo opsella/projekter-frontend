@@ -3,7 +3,6 @@
 
   <cdk-table
     [dataSource]="tableDataSource"
-    multiTemplateDataRows
     class="expansion-table"
     #table
   >
@@ -39,9 +38,9 @@
           (click)="updateExpandedElements(element)"
         >
           @if (elementIsExpanded(element)) {
-            <mat-icon>keyboard_arrow_down</mat-icon>
+            <i class="pi pi-angle-down"></i>
           } @else {
-            <mat-icon>keyboard_arrow_up</mat-icon>
+            <i class="pi pi-angle-up"></i>
           }
         </button>
       </cdk-cell>

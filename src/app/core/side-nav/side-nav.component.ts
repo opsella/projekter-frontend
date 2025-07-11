@@ -28,7 +28,7 @@ export class SideNavComponent {
 
   protected displayName: Signal<string> = computed(() => {
     const auth0User = this.auth.auth0User();
-    return auth0User.given_name ?? auth0User.nickname;
+    return auth0User?.given_name ?? auth0User?.nickname ?? "Not found";
   })
 
   constructor(

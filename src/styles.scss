@@ -1,29 +1,9 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.dev/guide/theming
-@use '@angular/material' as mat;
-@use 'theme-colors' as projektor;
+@import "primeicons/primeicons.css";
 
 html {
   color-scheme: light;
   height: 100%;
-
-  @include mat.theme((
-    color-scheme: light dark,
-    //color: mat.$blue-palette,
-    color: (
-      primary: projektor.$primary-palette,
-      tertiary: projektor.$tertiary-palette,
-    ),
-    typography: (
-      plain-family: Roboto,
-      brand-family: Roboto,
-      bold-weight: 900,
-      medium-weight: 600,
-      regular-weight: 400,
-    ),
-    density: 0,
-  ));
-}/* You can add global styles to this file, and also import other style files */
+}
 
 body {
   margin: 0;
@@ -55,11 +35,4 @@ a {
   left: -1000px;
   height: 0;
   width: 0;
-}
-
-:root {
-  //@include mat.dialog-overrides((
-  //  container-color: orange,
-  //  subhead-color: red,
-  //));
 }

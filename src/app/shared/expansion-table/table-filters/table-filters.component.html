@@ -1,7 +1,5 @@
 <div class="table-filters">
   @for (filter of filters; track filter) {
-    <button mat-button (click)="filter.action()">
-      {{ filter.title }}
-    </button>
+    <p-button [label]="filter.title" (click)="filter.action()" />
   }
 </div>

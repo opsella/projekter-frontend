@@ -1,11 +1,4 @@
-import { Component, inject } from "@angular/core";
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-  MatDialogTitle,
-} from "@angular/material/dialog";
-import { MatButton } from "@angular/material/button";
+import {Component, inject, OnInit} from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -13,43 +6,42 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
-import { MatOption, MatSelect } from "@angular/material/select";
 import { ProjectStatus } from "../../models/tenant";
 import { CreateProjectRequest } from "../../models/project";
 import { ProjectStatusId } from "../../models/ids/project-status-id";
+import {Button} from "primeng/button";
+import {Dialog} from "primeng/dialog";
+import {IftaLabel} from "primeng/iftalabel";
+import {InputText} from "primeng/inputtext";
+import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {Select} from "primeng/select";
 
 @Component({
   selector: "app-project-creation-dialog",
   imports: [
-    MatDialogModule,
-    MatButton,
     FormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
     ReactiveFormsModule,
-    MatDialogTitle,
-    MatSelect,
-    MatOption,
+    Button,
+    Dialog,
+    IftaLabel,
+    InputText,
+    Select,
   ],
   templateUrl: "./project-creation-dialog.component.html",
   styleUrl: "./project-creation-dialog.component.scss",
   standalone: true,
 })
-export class ProjectCreationDialogComponent {
-  private readonly dialogRef = inject(
-    MatDialogRef<ProjectCreationDialogComponent>,
-  );
-  protected readonly data = inject<ProjectStatus[]>(MAT_DIALOG_DATA);
-  // public readonly project: ModelSignal<CreateProjectRequest> = model(this.data);
+export class ProjectCreationDialogComponent implements OnInit {
+  private readonly ref: DynamicDialogRef = inject(DynamicDialogRef);
+  private readonly config: DynamicDialogConfig = inject(DynamicDialogConfig);
+  protected statuses: ProjectStatus[] = [];
 
   protected form: FormGroup = new FormGroup({
     name: new FormControl("", {
       validators: [Validators.required],
     }),
     status: new FormControl(
-      this.data.find((c) => c.category === "Proposed").id,
+      this.statuses.find((c) => c.category === "Proposed").id,
       {
         validators: [Validators.required],
       },
@@ -58,8 +50,12 @@ export class ProjectCreationDialogComponent {
     location: new FormControl(null),
   });
 
+  public ngOnInit(): void {
+    this.statuses = this.config.inputValues['statuses'];
+  }
+
   public onCancelClick() {
-    this.dialogRef.close(false);
+    this.ref.close(false);
   }
 
   public onSubmitClick() {
@@ -71,7 +67,7 @@ export class ProjectCreationDialogComponent {
         null,
       );
 
-      this.dialogRef.close(newProject);
+      this.ref.close(newProject);
     }
   }
 }

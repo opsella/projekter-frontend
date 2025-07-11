@@ -1,20 +1,16 @@
 import { Component } from "@angular/core";
-import { MatDialogActions, MatDialogContent, MatDialogTitle } from "@angular/material/dialog";
-import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
-import { MatButton } from "@angular/material/button";
+import {Dialog} from "primeng/dialog";
+import {IftaLabel} from "primeng/iftalabel";
+import {InputText} from "primeng/inputtext";
+import {Button} from "primeng/button";
 
 @Component({
   selector: "app-invite-user-dialog",
   imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatDialogActions,
-    MatButton,
-    MatFormField,
-    MatLabel
+    Dialog,
+    IftaLabel,
+    InputText,
+    Button
   ],
   templateUrl: "./invite-user-dialog.component.html",
   styleUrl: "./invite-user-dialog.component.scss"

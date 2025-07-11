@@ -49,66 +49,30 @@
 </app-content-section>
 
 <app-content-section title="Specifications">
-  <mat-table [dataSource]="project.value()?.specifications ?? []">
-    <ng-container matColumnDef="code">
-      <mat-header-cell *matHeaderCellDef>Code</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.code }}</mat-cell>
-    </ng-container>
+  <p-table [value]="project.value()?.specifications ?? []">
+    <ng-template #header>
+      <tr>
+        <th>Code</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Issued At</th>
+        <th>Revision</th>
+        <th>Date of Last Revision</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-row>
+      <tr>
+        <td>{{ row.code }}</td>
+        <td>{{ row.title }}</td>
+        <td>{{ row.description }}</td>
+        <td>{{ row.issued_at_date | date }}</td>
+        <td>{{ row.revision }}</td>
+        <td>{{ row?.last_revision_date ?? row.issued_at_date | date }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
 
-    <ng-container matColumnDef="title">
-      <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.title }}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.description }}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="issued_at">
-      <mat-header-cell *matHeaderCellDef>Issued At</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.issued_at_date | date }}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="revision">
-      <mat-header-cell *matHeaderCellDef>Revision</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{ row.revision }}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="last_revision_date">
-      <mat-header-cell *matHeaderCellDef>Date of Last Revision</mat-header-cell>
-      <mat-cell *matCellDef="let row">{{
-        row?.last_revision_date ?? row.issued_at_date | date
-      }}</mat-cell>
-    </ng-container>
-
-    <!-- Header and Row Declarations -->
-    <mat-header-row
-      *matHeaderRowDef="[
-        'code',
-        'title',
-        'description',
-        'issued_at',
-        'revision',
-        'last_revision_date'
-      ]"
-    ></mat-header-row>
-    <mat-row
-      *matRowDef="
-        let row;
-        columns: [
-          'code',
-          'title',
-          'description',
-          'issued_at',
-          'revision',
-          'last_revision_date'
-        ]
-      "
-    ></mat-row>
-  </mat-table>
-
-  <button mat-raised-button (click)="addSpecification()">Add</button>
+  <p-button label="Add" (click)="addSpecification()" />
 </app-content-section>
 
 <app-content-section title="Submittals"> </app-content-section>

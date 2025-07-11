@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import Main from "../../../../.storybook/main";
 import { RouterLink } from "@angular/router";
 import { NavigationRouteElementComponent } from "./navigation-route-element/navigation-route-element.component";
 
@@ -56,7 +55,6 @@ export class TopNavComponent {
       path: "/help",
     },
   ];
-  protected readonly main = Main;
 }
 
 interface NavigationRouteOption {

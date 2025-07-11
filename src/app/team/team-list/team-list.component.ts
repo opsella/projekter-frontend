@@ -4,13 +4,13 @@ import { Employee } from "../../models/employee";
 import { EmployeesService } from "../employees.service";
 import { HttpResourceRef } from "@angular/common/http";
 import { SimpleTableComponent } from "../../shared/simple-table/simple-table.component";
-import { MatButton } from "@angular/material/button";
+import {Button} from "primeng/button";
 
 @Component({
   selector: "app-team-list",
   templateUrl: "./team-list.component.html",
   styleUrls: ["./team-list.component.scss"],
-  imports: [ContentSectionComponent, SimpleTableComponent, MatButton],
+  imports: [ContentSectionComponent, SimpleTableComponent, Button],
   standalone: true,
 })
 export class TeamListComponent {

@@ -1,11 +1,10 @@
 import { Component, Input } from "@angular/core";
-import { MatToolbar } from "@angular/material/toolbar";
-import { MatButtonModule } from "@angular/material/button";
-import { MatIconModule } from "@angular/material/icon";
+import {Toolbar} from "primeng/toolbar";
+import {Button, ButtonLabel} from "primeng/button";
 
 @Component({
   selector: "app-content-section",
-  imports: [MatToolbar, MatIconModule, MatButtonModule],
+  imports: [Toolbar, Button],
   templateUrl: "./content-section.component.html",
   styleUrl: "./content-section.component.scss",
   standalone: true,

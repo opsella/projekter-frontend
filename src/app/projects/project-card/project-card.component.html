@@ -1,26 +1,23 @@
-<div
-  class="project-card"
-  [matBadge]="alerts"
-  [matBadgeHidden]="alerts <= 0"
-  matBadgeSize="large"
->
-  <div class="header">
-    <span class="title">{{ title }}</span>
-    <div class="location">
-      <mat-icon>location_on</mat-icon>
-      <span>{{ location }}</span>
+<p-overlay-badge [hidden]="alerts <= 0" [value]="alerts" badgeSize="large">
+  <div class="project-card">
+    <div class="header">
+      <span class="title">{{ title }}</span>
+      <div class="location">
+        <i class="pi pi-map-marker"></i>
+        <span>{{ location }}</span>
+      </div>
     </div>
-  </div>
 
-  <div class="content-container">
-    <img
-      [ngSrc]="photo"
-      width="300"
-      height="175"
-      alt="photo used for identifying the project: {{ title }}"
-    />
-    <div class="content">
-      <app-simple-chip>{{ status }}</app-simple-chip>
+    <div class="content-container">
+      <img
+        [ngSrc]="photo"
+        width="300"
+        height="175"
+        alt="photo used for identifying the project: {{ title }}"
+      />
+      <div class="content">
+        <app-simple-chip [label]="status" />
+      </div>
     </div>
   </div>
-</div>
+</p-overlay-badge>
