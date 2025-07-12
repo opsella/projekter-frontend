@@ -124,8 +124,8 @@ export class Task {
       ProjectId.fromJSON(task.assigned_project_id),
       task.name,
       task.description,
-      task.due_date,
-      task.completed_at,
+      new Date(task.due_date),
+      task.completed_at ? new Date(task.completed_at) : null,
     );
   }
 }
@@ -149,9 +149,9 @@ export class Specification {
       spec.code,
       spec.title,
       spec.description,
-      spec.issued_at_date,
+      new Date(spec.issued_at_date),
       spec.revision,
-      spec.last_revision_date,
+      spec.last_revision_date ? new Date(spec.last_revision_date) : null,
     );
   }
 }

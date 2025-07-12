@@ -29,4 +29,16 @@ export const authRoutes: Routes = [
       return "";
     }
   },
+  {
+    path: "logout",
+    redirectTo: (route) => {
+      const auth0 = inject(AuthService);
+      auth0.logout()
+        .pipe(
+          take(1)
+        )
+        .subscribe();
+      return "";
+    }
+  }
 ];

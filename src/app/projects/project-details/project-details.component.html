@@ -58,7 +58,7 @@
       <p-button label="New" severity="primary" (click)="addSpecification()">
         <i class="pi pi-plus"></i>
       </p-button>
-      <p-button label="Delete" outlined disabled severity="danger">
+      <p-button label="Delete" outlined [disabled]="selectedSpecs().length <= 0" severity="danger" (click)="deleteSpec()">
         <i class="pi pi-trash"></i>
       </p-button>
     </ng-template>
@@ -73,28 +73,11 @@
     </ng-template>
   </p-toolbar>
 
-  <p-table [value]="project.value()?.specifications ?? []">
-    <ng-template #header>
-      <tr>
-        <th>Code</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Issued At</th>
-        <th>Revision</th>
-        <th>Date of Last Revision</th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-row>
-      <tr>
-        <td>{{ row.code }}</td>
-        <td>{{ row.title }}</td>
-        <td>{{ row.description }}</td>
-        <td>{{ row.issued_at_date | date }}</td>
-        <td>{{ row.revision }}</td>
-        <td>{{ row?.last_revision_date ?? row.issued_at_date | date }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
+  <app-simple-table
+    [data]="project.value()?.specifications ?? []"
+    [columns]="specificationColumns"
+    [(selectedItems)]="selectedSpecs"
+  />
 </app-content-section>
 
 <app-content-section title="Submittals"> </app-content-section>

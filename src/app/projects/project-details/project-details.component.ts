@@ -2,7 +2,13 @@ import {Component, effect, inject, model, ModelSignal, Signal, signal} from "@an
 import { ActivatedRoute } from "@angular/router";
 import { ProjectService } from "../services/project.service";
 import { HttpResourceRef } from "@angular/common/http";
-import {Project, ProjectAddSpecificationRequest, ProjectAddTaskRequest, Task} from "../../models/project";
+import {
+  Project,
+  ProjectAddSpecificationRequest,
+  ProjectAddTaskRequest,
+  Specification,
+  Task
+} from "../../models/project";
 import { toSignal } from "@angular/core/rxjs-interop";
 import {
   ProjectAddSpecificationDialogComponent,
@@ -64,9 +70,9 @@ export class ProjectDetailsComponent {
     {
       key: 'due_date',
       name: 'Due Date',
-      value: item => {
-        if (item) {
-          return (new Date(item as string)).toLocaleDateString();
+      value: (item: Task): string => {
+        if (item.due_date) {
+          return item.due_date.toLocaleDateString();
         } else {
           return "";
         }
@@ -83,15 +89,58 @@ export class ProjectDetailsComponent {
     {
       key: 'completed_at',
       name: 'Completed On',
-      value: item => {
-        if (item) {
-          return (new Date(item as string)).toLocaleDateString();
+      value: (item: Task) => {
+        if (item.completed_at) {
+          return item.completed_at?.toLocaleDateString();
         } else {
           return "";
         }
       }
     }
   ]
+
+  protected selectedSpecs: ModelSignal<Specification[]> = model([]);
+  protected specificationColumns: TableColumnMapping[] = [
+    {
+      key: "code",
+      name: "Code"
+    },
+    {
+      key: "title",
+      name: "Title"
+    },
+    {
+      key: "description",
+      name: "Description"
+    },
+    {
+      key: "issued_at_date",
+      name: "Issued At",
+      value: (item: Specification) => {
+        if (item.issued_at_date) {
+          return item.issued_at_date.toLocaleDateString();
+        } else {
+          return "";
+        }
+      }
+    },
+    {
+      key: "revision",
+      name: "Revision"
+    },
+    {
+      key: "last_revision_date",
+      name: "Date of Last Revision",
+      value: (item: Specification) => {
+        if (item) {
+          const date = item?.last_revision_date ?? item.issued_at_date;
+          return date.toLocaleDateString();
+        } else {
+          return "";
+        }
+      }
+    }
+  ];
 
   constructor(
     private projectService: ProjectService,
@@ -187,7 +236,7 @@ export class ProjectDetailsComponent {
 
   public deleteTasks(): void {
     if (this.selectedTasks().length === 0){
-      this.alertService.warn("Canceled", "No tasks were selected to be deleted");
+      this.alertService.warn("Canceled", "No Tasks were selected to be deleted");
       return;
     }
 
@@ -199,6 +248,7 @@ export class ProjectDetailsComponent {
             // TODO: refresh the details page / reload the updated content
             if (result) {
               this.project.set(result);
+              this.selectedTasks.set([]);
             }
           }),
           take(1)
@@ -213,6 +263,40 @@ export class ProjectDetailsComponent {
           },
           error: (error) => {
             this.alertService.error("Failed", "Task failed to be deleted");
+          }
+        });
+    }
+  }
+
+  public deleteSpec(): void {
+    if (this.selectedSpecs().length === 0){
+      this.alertService.warn("Canceled", "No Specifications were selected to be deleted");
+      return;
+    }
+
+    for (const spec of this.selectedSpecs()) {
+      this.projectService
+        .deleteSpecification(spec)
+        .pipe(
+          tap(async (result: Project) => {
+            // TODO: refresh the details page / reload the updated content
+            if (result) {
+              this.project.set(result);
+              this.selectedSpecs.set([]);
+            }
+          }),
+          take(1)
+        )
+        .subscribe({
+          next: (result) => {
+            if (result) {
+              this.alertService.info("Deleted", "Specification deleted successfully");
+            } else {
+              this.alertService.warn("Canceled", "Specification deletion was canceled");
+            }
+          },
+          error: (error) => {
+            this.alertService.error("Failed", "Specification failed to be deleted");
           }
         });
     }

@@ -22,8 +22,18 @@ export const environment = {
     authorizationParams: {
       audience: "https://api.projekter.opsella.com",
       redirect_uri: window.location.origin,
-      scope:
-        "openid profile offline_access email project:read project:write tenant:read tenant:delete",
+      scope        : [
+        "openid",
+        "profile",
+        "offline_access",
+        "email",
+        "project:read",
+        "project:write",
+        "project:delete",
+        "tenant:read",
+        "tenant:write",
+        "tenant:delete",
+      ].join(" "),
     },
   } as AuthConfig,
   projekterApi: "https://dev.api.projekter.opsella.com",

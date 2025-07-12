@@ -25,9 +25,12 @@ export const environment = {
         "openid",
         "profile",
         "offline_access",
-        "email project:read",
+        "email",
+        "project:read",
         "project:write",
+        "project:delete",
         "tenant:read",
+        "tenant:write",
         "tenant:delete",
       ].join(" "),
     }

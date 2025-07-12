@@ -18,7 +18,7 @@
           <p-tableCheckbox [value]="row" />
         </td>
         @for (col of columns(); track col.key) {
-          <td>{{ columnValue(col, row[col.key]) }}</td>
+          <td>{{ columnValue(col, row) }}</td>
         }
       </tr>
     </ng-template>

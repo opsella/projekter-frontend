@@ -34,6 +34,6 @@ export class SimpleTableComponent {
     if (typeof mapper.value === 'function') {
       return mapper.value(value);
     }
-    return value?.toString();
+    return value[mapper.key].toString();
   }
 }
