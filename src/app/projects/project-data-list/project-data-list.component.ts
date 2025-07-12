@@ -19,10 +19,9 @@ import { OrganizationService } from "../../services/organization.service";
 import { ProjectCreationDialogComponent } from "../project-creation-dialog/project-creation-dialog.component";
 import { ProjectStatus } from "../../models/tenant";
 import {Button} from "primeng/button";
-import {MessageService} from "primeng/api";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Select, SelectChangeEvent} from "primeng/select";
-import {Toast} from "primeng/toast";
+import {AlertService} from "../../core/alert.service";
 
 @Component({
   selector: "app-project-data-list",
@@ -49,7 +48,7 @@ export class ProjectDataListComponent {
     private projectService: ProjectService,
     private router: Router,
     private orgService: OrganizationService,
-    private messageService: MessageService,
+    private alertService: AlertService,
     private dialogService: DialogService
   ) {}
 
@@ -94,29 +93,13 @@ export class ProjectDataListComponent {
               next: async (result: Project): Promise<void> => {
                 if (result) {
                   await this.viewDetails(result.id);
-
-                  this.messageService.add({
-                    severity: 'info',
-                    summary: 'Created',
-                    detail: 'Project created successfully',
-                    life: 3000,
-                  });
+                  this.alertService.info('Created', "Project created successfully");
                 } else {
-                  this.messageService.add({
-                    severity: 'warn',
-                    summary: 'Canceled',
-                    detail: 'Project creation was canceled',
-                    life: 3000,
-                  });
+                  this.alertService.warn("Canceled", "Project creation was canceled");
                 }
               },
               error: (): void => {
-                this.messageService.add({
-                  severity: 'error',
-                  summary: 'Failed',
-                  detail: 'Project creation failed, please try again',
-                  life: 3000,
-                });
+                this.alertService.error("Failed", "Project creation failed, please try again");
               },
             });
         },

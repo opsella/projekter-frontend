@@ -3,7 +3,7 @@
   height: 100%;
 
   .main-wrapper {
-    background-color: #D6D6D6;
+    background-color: var(--p-surface-200); // #D6D6D6 is the eventual background color
     display: flex;
     flex-flow: column;
     width: 100%;
@@ -29,7 +29,7 @@
 }
 
 #circle {
-  background-color: #D6D6D6;
+  background-color: var(--p-surface-200);
   border-radius: 50%;
   display: inline-block;
   height: calc(1em + 3px);

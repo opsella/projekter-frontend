@@ -14,6 +14,16 @@ export class CreateProjectRequest {
   ) {}
 }
 
+export class ProjectAddTaskRequest {
+  constructor(
+    public project_id: ProjectId,
+    public name: string,
+    public description: string,
+    public due_date: Date
+  ) {
+  }
+}
+
 export class ProjectAddSpecificationRequest {
   constructor(
     public project_id: ProjectId,

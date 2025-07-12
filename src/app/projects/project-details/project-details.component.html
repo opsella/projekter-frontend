@@ -25,6 +25,27 @@
 </app-content-section>
 
 <app-content-section title="Tasks">
+
+  <p-toolbar>
+    <ng-template #start>
+      <p-button label="New" severity="primary" (click)="addTask()">
+        <i class="pi pi-plus"></i>
+      </p-button>
+      <p-button label="Delete" outlined disabled severity="danger">
+        <i class="pi pi-trash"></i>
+      </p-button>
+    </ng-template>
+
+    <ng-template #end>
+      <p-button label="Import" text severity="secondary">
+        <i class="pi pi-plus"></i>
+      </p-button>
+      <p-button label="Export" text severity="secondary">
+        <i class="pi pi-upload"></i>
+      </p-button>
+    </ng-template>
+  </p-toolbar>
+
   <app-simple-table
     [data]="project.value()?.tasks ?? []"
     [columns]="[
@@ -46,9 +67,30 @@
       }
     ]"
   />
+
 </app-content-section>
 
 <app-content-section title="Specifications">
+  <p-toolbar>
+    <ng-template #start>
+      <p-button label="New" severity="primary" (click)="addSpecification()">
+        <i class="pi pi-plus"></i>
+      </p-button>
+      <p-button label="Delete" outlined disabled severity="danger">
+        <i class="pi pi-trash"></i>
+      </p-button>
+    </ng-template>
+
+    <ng-template #end>
+      <p-button label="Import" text severity="secondary">
+        <i class="pi pi-plus"></i>
+      </p-button>
+      <p-button label="Export" text severity="secondary">
+        <i class="pi pi-upload"></i>
+      </p-button>
+    </ng-template>
+  </p-toolbar>
+
   <p-table [value]="project.value()?.specifications ?? []">
     <ng-template #header>
       <tr>
@@ -71,8 +113,6 @@
       </tr>
     </ng-template>
   </p-table>
-
-  <p-button label="Add" (click)="addSpecification()" />
 </app-content-section>
 
 <app-content-section title="Submittals"> </app-content-section>

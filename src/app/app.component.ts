@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { AsyncPipe } from "@angular/common";
+import {AsyncPipe} from "@angular/common";
 import { TopNavComponent } from "./core/top-nav/top-nav.component";
 import { SideNavComponent } from "./core/side-nav/side-nav.component";
 import { MainContentComponent } from "./core/main-content/main-content.component";

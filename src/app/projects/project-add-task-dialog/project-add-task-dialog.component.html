@@ -1,0 +1,30 @@
+<form [formGroup]="form">
+  <div class="form-row">
+    <p-input-group>
+      <p-float-label variant="in">
+        <input pInputText type="text" id="name" formControlName="name" />
+        <label for="name">Name</label>
+      </p-float-label>
+    </p-input-group>
+  </div>
+
+  <div class="form-row">
+    <p-input-group>
+      <p-float-label variant="in">
+        <input pInputText type="text" id="description" formControlName="description" />
+        <label for="description">Description</label>
+      </p-float-label>
+    </p-input-group>
+  </div>
+
+  <div class="form-row">
+    <p-input-group>
+      <p-date-picker showIcon formControlName="dueDate" appendTo="body"></p-date-picker>
+    </p-input-group>
+  </div>
+</form>
+
+<div>
+  <p-button label="Cancel" text severity="secondary" (click)="onCancelClick()" />
+  <p-button label="Submit" outlined severity="primary" (click)="onSubmitClick()"/>
+</div>

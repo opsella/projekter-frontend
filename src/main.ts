@@ -55,8 +55,11 @@ bootstrapApplication(AppComponent, {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: material
-      }
+        preset: material,
+        options: {
+          darkModeSelector: '.is-dark-mode'
+        }
+      },
     }),
     provideRouter(routes),
     MessageService,

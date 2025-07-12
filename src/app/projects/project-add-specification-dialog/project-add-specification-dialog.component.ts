@@ -1,4 +1,4 @@
-import {Component, input, InputSignal, model, ModelSignal, output, OutputEmitterRef} from "@angular/core";
+import {Component, inject, input, InputSignal, model, ModelSignal} from "@angular/core";
 import {
   FormControl,
   FormGroup, FormsModule,
@@ -7,10 +7,11 @@ import {
 } from "@angular/forms";
 import { ProjectId } from "../../models/ids/project-id";
 import { ProjectAddSpecificationRequest } from "../../models/project";
-import {Dialog} from "primeng/dialog";
 import {Button} from "primeng/button";
-import {IftaLabel} from "primeng/iftalabel";
 import {InputText} from "primeng/inputtext";
+import {InputGroup} from "primeng/inputgroup";
+import {FloatLabel} from "primeng/floatlabel";
+import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 
 export interface ProjectAddSpecificationDialogData {
   projectId: ProjectId;
@@ -20,21 +21,22 @@ export interface ProjectAddSpecificationDialogData {
   selector: "app-project-add-specification-dialog",
   imports: [
     ReactiveFormsModule,
-    Dialog,
     Button,
-    IftaLabel,
     FormsModule,
     InputText,
+    InputGroup,
+    FloatLabel,
   ],
   templateUrl: "./project-add-specification-dialog.component.html",
   styleUrl: "./project-add-specification-dialog.component.scss",
   standalone: true,
 })
 export class ProjectAddSpecificationDialogComponent {
-  public readonly data: InputSignal<ProjectAddSpecificationDialogData | undefined | null> = input();
-  public visible: ModelSignal<boolean> = model(false);
-  public readonly specification: ModelSignal<{ success: boolean, value?: ProjectAddSpecificationRequest }> =
-    model(null);
+  public projectId: InputSignal<ProjectId> = input.required();
+  public readonly specification: ModelSignal<ProjectAddSpecificationRequest | null> = model(null);
+
+  private ref: DynamicDialogRef = inject(DynamicDialogRef);
+  private config: DynamicDialogConfig = inject(DynamicDialogConfig);
 
   protected form: FormGroup = new FormGroup({
     code: new FormControl("", { validators: [Validators.required] }),
@@ -43,24 +45,19 @@ export class ProjectAddSpecificationDialogComponent {
   });
 
   public onCancelClick() {
-    this.specification.set({
-      success: false
-    });
-    this.visible.set(false);
+    this.specification.set(null);
+    this.ref.close(false);
   }
 
   public onSubmitClick() {
     if (this.form.valid) {
-      this.specification.set({
-        success: true,
-        value: new ProjectAddSpecificationRequest(
-          this.data().projectId,
-          this.form.controls["code"].value,
-          this.form.controls["title"].value,
-          this.form.controls["description"].value,
-        )
-      });
-      this.visible.set(false);
+      this.specification.set(new ProjectAddSpecificationRequest(
+        this.projectId(),
+        this.form.controls["code"].value,
+        this.form.controls["title"].value,
+        this.form.controls["description"].value,
+      ));
+      this.ref.close(this.specification());
     }
   }
 }

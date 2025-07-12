@@ -7,7 +7,7 @@ import {
 import {
   CreateProjectRequest,
   Project,
-  ProjectAddSpecificationRequest,
+  ProjectAddSpecificationRequest, ProjectAddTaskRequest,
   ProjectResponse,
   ProjectState,
 } from "../../models/project";
@@ -79,5 +79,17 @@ export class ProjectService {
           return Project.fromResponse(response.data);
         }),
       );
+  }
+
+  public addTask(
+    task: ProjectAddTaskRequest
+  ): Observable<Project> {
+    return this.http
+      .post<ApiResponse<ProjectResponse>>(`${environment.projekterApi}/project/${task.project_id.toString()}/task`, task, {})
+      .pipe(
+        map((response) => {
+          return Project.fromResponse(response.data);
+        })
+      )
   }
 }
