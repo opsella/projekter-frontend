@@ -8,14 +8,17 @@ export class FollowLocationHeaderInterceptor implements HttpInterceptor {
   }
 
   public intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (req.method !== "POST" && req.method !== "PUT" && req.method !== "PATCH")
+    if (req.method !== "POST" && req.method !== "PUT" && req.method !== "PATCH" && req.method !== "DELETE")
       return next.handle(req);
 
     return next.handle(req)
       .pipe(
         switchMap((event) => {
           // Only respond to HttpResponse events
-          if (event instanceof HttpResponse && event.status === 201) {
+          if (
+            event instanceof HttpResponse && event.status === 201 ||
+            event instanceof HttpResponse && event.status === 202
+          ) {
             const location = event.headers.get("Location");
             if (location) {
               // Make a follow-up GET request to the Location header

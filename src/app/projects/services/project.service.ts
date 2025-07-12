@@ -9,7 +9,7 @@ import {
   Project,
   ProjectAddSpecificationRequest, ProjectAddTaskRequest,
   ProjectResponse,
-  ProjectState,
+  ProjectState, Task,
 } from "../../models/project";
 import {
   ApiResponse,
@@ -86,6 +86,18 @@ export class ProjectService {
   ): Observable<Project> {
     return this.http
       .post<ApiResponse<ProjectResponse>>(`${environment.projekterApi}/project/${task.project_id.toString()}/task`, task, {})
+      .pipe(
+        map((response) => {
+          return Project.fromResponse(response.data);
+        })
+      )
+  }
+
+  public deleteTask(
+    task: Task
+  ): Observable<Project> {
+    return this.http
+      .delete<ApiResponse<ProjectResponse>>(`${environment.projekterApi}/project/${task.assigned_project_id.toString()}/task/${task.id.toString()}`)
       .pipe(
         map((response) => {
           return Project.fromResponse(response.data);

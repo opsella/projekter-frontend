@@ -25,13 +25,12 @@
 </app-content-section>
 
 <app-content-section title="Tasks">
-
   <p-toolbar>
     <ng-template #start>
       <p-button label="New" severity="primary" (click)="addTask()">
         <i class="pi pi-plus"></i>
       </p-button>
-      <p-button label="Delete" outlined disabled severity="danger">
+      <p-button label="Delete" outlined [disabled]="selectedTasks().length <= 0" severity="danger" (click)="deleteTasks()">
         <i class="pi pi-trash"></i>
       </p-button>
     </ng-template>
@@ -48,26 +47,9 @@
 
   <app-simple-table
     [data]="project.value()?.tasks ?? []"
-    [columns]="[
-      {
-        key: 'due_date',
-        name: 'Due Date'
-      },
-      {
-        key: 'name',
-        name: 'Name'
-      },
-      {
-        key: 'description',
-        name: 'Description'
-      },
-      {
-        key: 'completed_at',
-        name: 'Completed On'
-      }
-    ]"
+    [columns]="projectTaskColumns"
+    [(selectedItems)]="selectedTasks"
   />
-
 </app-content-section>
 
 <app-content-section title="Specifications">

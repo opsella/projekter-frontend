@@ -1,8 +1,8 @@
-import {Component, effect, inject, signal} from "@angular/core";
+import {Component, effect, inject, model, ModelSignal, Signal, signal} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ProjectService } from "../services/project.service";
 import { HttpResourceRef } from "@angular/common/http";
-import {Project, ProjectAddSpecificationRequest, ProjectAddTaskRequest} from "../../models/project";
+import {Project, ProjectAddSpecificationRequest, ProjectAddTaskRequest, Task} from "../../models/project";
 import { toSignal } from "@angular/core/rxjs-interop";
 import {
   ProjectAddSpecificationDialogComponent,
@@ -11,7 +11,7 @@ import {
 import { Observable, of, switchMap, take, tap } from "rxjs";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
 import { DatePipe, NgOptimizedImage } from "@angular/common";
-import { SimpleTableComponent } from "../../shared/simple-table/simple-table.component";
+import {SimpleTableComponent, TableColumnMapping} from "../../shared/simple-table/simple-table.component";
 import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
 import {TableModule} from "primeng/table";
 import {Button} from "primeng/button";
@@ -58,6 +58,40 @@ export class ProjectDetailsComponent {
   };
 
   protected project: HttpResourceRef<Project> = this.projectService.project(this.projectId);
+
+  protected selectedTasks: ModelSignal<Task[]> = model([]);
+  protected projectTaskColumns: TableColumnMapping[] = [
+    {
+      key: 'due_date',
+      name: 'Due Date',
+      value: item => {
+        if (item) {
+          return (new Date(item as string)).toLocaleDateString();
+        } else {
+          return "";
+        }
+      }
+    },
+    {
+      key: 'name',
+      name: 'Name'
+    },
+    {
+      key: 'description',
+      name: 'Description'
+    },
+    {
+      key: 'completed_at',
+      name: 'Completed On',
+      value: item => {
+        if (item) {
+          return (new Date(item as string)).toLocaleDateString();
+        } else {
+          return "";
+        }
+      }
+    }
+  ]
 
   constructor(
     private projectService: ProjectService,
@@ -149,5 +183,38 @@ export class ProjectDetailsComponent {
           this.alertService.error("Failed", "Task failed to be created");
         }
       });
+  }
+
+  public deleteTasks(): void {
+    if (this.selectedTasks().length === 0){
+      this.alertService.warn("Canceled", "No tasks were selected to be deleted");
+      return;
+    }
+
+    for (const task of this.selectedTasks()) {
+      this.projectService
+        .deleteTask(task)
+        .pipe(
+          tap(async (result: Project) => {
+            // TODO: refresh the details page / reload the updated content
+            if (result) {
+              this.project.set(result);
+            }
+          }),
+          take(1)
+        )
+        .subscribe({
+          next: (result) => {
+            if (result) {
+              this.alertService.info("Deleted", "Task deleted successfully");
+            } else {
+              this.alertService.warn("Canceled", "Task deletion was canceled");
+            }
+          },
+          error: (error) => {
+            this.alertService.error("Failed", "Task failed to be deleted");
+          }
+        });
+    }
   }
 }
