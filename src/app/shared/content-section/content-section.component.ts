@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import {booleanAttribute, Component, Input} from "@angular/core";
 import {Toolbar} from "primeng/toolbar";
 import {Button} from "primeng/button";
 
@@ -11,7 +11,7 @@ import {Button} from "primeng/button";
 })
 export class ContentSectionComponent {
   @Input() public title: string;
-  @Input() public expandable: boolean = false;
+  @Input({ transform: booleanAttribute }) public expandable: boolean = false;
   @Input() public expanded: boolean = true;
 
   protected toggleExpansion() {

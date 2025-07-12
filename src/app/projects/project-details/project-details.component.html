@@ -24,7 +24,7 @@
   </ul>
 </app-content-section>
 
-<app-content-section title="Tasks">
+<app-content-section title="Tasks" expandable>
   <p-toolbar>
     <ng-template #start>
       <p-button label="New" severity="primary" (click)="addTask()">
@@ -52,7 +52,7 @@
   />
 </app-content-section>
 
-<app-content-section title="Specifications">
+<app-content-section title="Specifications" expandable>
   <p-toolbar>
     <ng-template #start>
       <p-button label="New" severity="primary" (click)="addSpecification()">

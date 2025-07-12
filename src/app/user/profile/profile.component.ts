@@ -5,7 +5,6 @@ import { UsersService } from "../services/users.service";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { User } from "@auth0/auth0-angular";
-import {IftaLabel} from "primeng/iftalabel";
 import {InputText} from "primeng/inputtext";
 import {Tooltip} from "primeng/tooltip";
 import {Button} from "primeng/button";
@@ -17,7 +16,7 @@ import {FloatLabel} from "primeng/floatlabel";
   selector: "app-profile",
   templateUrl: "./profile.component.html",
   styleUrls: ["./profile.component.scss"],
-  imports: [ContentSectionComponent, ReactiveFormsModule, IftaLabel, InputText, Tooltip, Button, InputGroup, InputGroupAddon, FloatLabel]
+  imports: [ContentSectionComponent, ReactiveFormsModule, InputText, Tooltip, Button, InputGroup, InputGroupAddon, FloatLabel]
 })
 export class ProfileComponent {
   protected auth0User: Signal<User> = this.auth.auth0User;

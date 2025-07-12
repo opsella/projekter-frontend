@@ -1,10 +1,12 @@
+.container {
+  // TODO: Why does this need to be here and cannot be specified on the component on an as needed basis, even if this was a default?
+  margin-bottom: 50px;
+}
+
 .content-container {
   background-color: white;
 
   .content {
     padding: 16px;
   }
-
-  // TODO: Why does this need to be here and cannot be specified on the component on an as needed basis, even if this was a default?
-  margin-bottom: 50px;
 }

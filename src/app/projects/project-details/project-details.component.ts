@@ -40,6 +40,7 @@ import {Toolbar} from "primeng/toolbar";
     Button,
     Breadcrumb,
     Toolbar,
+    ContentSectionComponent,
   ],
   providers: [
     ProjectService,
