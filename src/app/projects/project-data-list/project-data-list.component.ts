@@ -76,7 +76,6 @@ export class ProjectDataListComponent {
             .open(ProjectCreationDialogComponent, {
               header: "Create New Project",
               contentStyle: {"overflow": "auto"},
-
               inputValues:{
                 statuses: result
               },

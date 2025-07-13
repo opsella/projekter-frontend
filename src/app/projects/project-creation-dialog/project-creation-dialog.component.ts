@@ -1,4 +1,4 @@
-import {Component, inject, input, Input, InputSignal, OnInit} from "@angular/core";
+import {Component, computed, inject, input, Input, InputSignal, OnInit} from "@angular/core";
 import {
   FormControl,
   FormGroup,
@@ -35,21 +35,15 @@ import {InputGroupAddon} from "primeng/inputgroupaddon";
   standalone: true,
 })
 export class ProjectCreationDialogComponent {
-  public statuses: InputSignal<ProjectStatus[]> = input.required();
-
-  constructor(
-    private ref: DynamicDialogRef,
-    private config: DynamicDialogConfig
-  ) {
-  }
+  public statuses: InputSignal<ProjectStatus[]> = input();
+  private ref: DynamicDialogRef = inject(DynamicDialogRef);
+  private config: DynamicDialogConfig = inject(DynamicDialogConfig);
 
   protected form: FormGroup = new FormGroup({
     name: new FormControl("", {
       validators: [Validators.required],
     }),
-    status: new FormControl(
-      this.statuses().find((c) => c.category === "Proposed")?.id,
-      {
+    status: new FormControl("", {
         validators: [Validators.required],
       },
     ),

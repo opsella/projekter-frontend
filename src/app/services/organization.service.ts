@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { ProjectStatus, Tenant } from "../models/tenant";
+import {ProjectStatus, Tenant, TenantInfoResponse} from "../models/tenant";
 import { map, Observable, shareReplay } from "rxjs";
 import { ApiResponse } from "../models/api/api-response";
 import {environment} from "../../environments/environment";
@@ -18,12 +18,10 @@ export class OrganizationService {
   public getProjectStatuses(): Observable<ProjectStatus[]> {
     if (!this.projectStatus$) {
       this.projectStatus$ = this.httpClient
-        .get<ApiResponse<Tenant>>(`${environment.projekterApi}/tenant/current`)
+        .get<ApiResponse<TenantInfoResponse>>(`${environment.projekterApi}/tenant/current`)
         .pipe(
-          map(
-            (result: ApiResponse<Tenant>): ProjectStatus[] =>
-              result.data.available_project_statuses,
-          ),
+          map((result) => Tenant.fromRequest(result.data)),
+          map((result) => result.available_project_statuses),
           shareReplay({ bufferSize: 1, refCount: true }),
         );
     }
