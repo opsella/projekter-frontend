@@ -1,27 +1,33 @@
 <p-breadcrumb [model]="breadcrumbItems" [home]="home" [style]="{ 'margin-bottom': '1rem' }"/>
 
-<app-content-section [title]="project.value()?.name ?? ''">
-  <img
-    priority
-    [ngSrc]="
+<app-content-section [title]="'Project: ' + (project.value()?.name ?? '')">
+  <div style="display: flex; flex-flow: row;">
+    <div style="padding-right: 1rem;">
+      <img
+        priority
+        [ngSrc]="
       project.value()?.photo ||
       'https://via.placeholder.com/200x200.jpg?text=No+Image'
     "
-    width="200"
-    height="200"
-    alt="Project Image"
-  />
+        width="200"
+        height="200"
+        alt="Project Image"
+      />
+    </div>
+    <div style="display: flex; flex-flow: column; justify-content: start; gap: 1rem;">
+      <div>
+        <span>
+          <i class="pi pi-map-marker"></i>
+          {{ project.value()?.location.address?.address_lines[0] ?? "no address" }}
+        </span>
+      </div>
 
-  <ul>
-    <li>Project Name: {{ project.value()?.name }}</li>
-    <li>Project State: {{ project.value()?.state }}</li>
-    <li>Project Status: {{ project.value()?.status_id }}</li>
-    <li>Project Status: {{ project.value()?.status_id.value }}</li>
-    <li>
-      Location:
-      {{ project.value()?.location.address?.address_lines[0] ?? "no address" }}
-    </li>
-  </ul>
+      <div style="display: flex; flex-flow: row; align-content: start; gap: 1rem;">
+        <p-chip [label]="project.value()?.state" />
+        <p-chip [label]="project.value()?.status_id | projectStatus" />
+      </div>
+    </div>
+  </div>
 </app-content-section>
 
 <app-content-section title="Tasks" expandable>

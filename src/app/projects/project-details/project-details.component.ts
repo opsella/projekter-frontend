@@ -26,6 +26,8 @@ import {MenuItem} from "primeng/api";
 import {AlertService} from "../../core/alert.service";
 import {ProjectAddTaskDialogComponent} from "../project-add-task-dialog/project-add-task-dialog.component";
 import {Toolbar} from "primeng/toolbar";
+import {Chip} from "primeng/chip";
+import {ProjectStatusPipe} from "../../shared/project-status.pipe";
 
 @Component({
   selector: "app-project-details",
@@ -41,6 +43,8 @@ import {Toolbar} from "primeng/toolbar";
     Breadcrumb,
     Toolbar,
     ContentSectionComponent,
+    Chip,
+    ProjectStatusPipe,
   ],
   providers: [
     ProjectService,
@@ -53,10 +57,15 @@ export class ProjectDetailsComponent {
   private params = toSignal(this.route.params, { initialValue: { id: "" } });
   private projectId = signal(this.params().id);
 
+  protected project: HttpResourceRef<Project> = this.projectService.project(this.projectId);
+
   protected breadcrumbItems: MenuItem[] = [
     {
       label: 'projects',
       routerLink: '/project'
+    },
+    {
+      label: 'project',
     }
   ];
   protected home: MenuItem = {
@@ -64,7 +73,6 @@ export class ProjectDetailsComponent {
     routerLink: '/project'
   };
 
-  protected project: HttpResourceRef<Project> = this.projectService.project(this.projectId);
 
   protected selectedTasks: ModelSignal<Task[]> = model([]);
   protected projectTaskColumns: TableColumnMapping[] = [
