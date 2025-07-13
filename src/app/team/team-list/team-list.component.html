@@ -1,16 +1,19 @@
 <app-content-section title="My Team">
   <app-simple-table
     [data]="employees.value()"
-    [columns]="[
-      {
-        key: 'fullname',
-        name: 'Fullname'
-      },
-      {
-        key: 'is_active',
-        name: 'Active'
-      }
-    ]"
+    [config]="{
+      columns: [
+        {
+          key: 'fullname',
+          name: 'Fullname'
+        },
+        {
+          key: 'is_active',
+          name: 'Active'
+        }
+      ],
+      actions: []
+    }"
   />
 
   <p-button label="Invite"></p-button>

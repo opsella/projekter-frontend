@@ -17,7 +17,12 @@ import {
 import { Observable, of, switchMap, take, tap } from "rxjs";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
 import { DatePipe, NgOptimizedImage } from "@angular/common";
-import {SimpleTableComponent, TableColumnMapping} from "../../shared/simple-table/simple-table.component";
+import {
+  AlertConfig,
+  SimpleTableComponent,
+  TableAction,
+  TableColumnMapping
+} from "../../shared/simple-table/simple-table.component";
 import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
 import {TableModule} from "primeng/table";
 import {Button} from "primeng/button";
@@ -28,6 +33,7 @@ import {ProjectAddTaskDialogComponent} from "../project-add-task-dialog/project-
 import {Toolbar} from "primeng/toolbar";
 import {Chip} from "primeng/chip";
 import {ProjectStatusPipe} from "../../shared/project-status.pipe";
+import {isAfter, isBefore, isDate, isEqual, subDays } from 'date-fns';
 
 @Component({
   selector: "app-project-details",
@@ -73,13 +79,12 @@ export class ProjectDetailsComponent {
     routerLink: '/project'
   };
 
-
   protected selectedTasks: ModelSignal<Task[]> = model([]);
   protected projectTaskColumns: TableColumnMapping[] = [
     {
       key: 'due_date',
       name: 'Due Date',
-      value: (item: Task): string => {
+      transform: (item: Task): string => {
         if (item.due_date) {
           return item.due_date.toLocaleDateString();
         } else {
@@ -98,7 +103,7 @@ export class ProjectDetailsComponent {
     {
       key: 'completed_at',
       name: 'Completed On',
-      value: (item: Task) => {
+      transform: (item: Task) => {
         if (item.completed_at) {
           return item.completed_at?.toLocaleDateString();
         } else {
@@ -107,6 +112,49 @@ export class ProjectDetailsComponent {
       }
     }
   ]
+  protected projectTaskActions: TableAction[] = [
+    {
+      tooltip: "Complete",
+      icon: "pi pi-check-circle",
+      fn: (x) => {}
+    },
+    {
+      tooltip: "Edit",
+      icon: "pi pi-pencil",
+      severity: "secondary",
+      fn: (x) => {}
+    },
+  ];
+  protected projectTaskAlertConfig: AlertConfig = {
+    fn: (item: Task) => {
+      if (!isDate(item.due_date))
+        return null;
+
+      const currentDate = new Date();
+      const alertWarnDate = subDays<Date>(item.due_date, 7);
+
+      if (isBefore(currentDate, alertWarnDate)) {
+        return null;
+      } else if (
+        isEqual(currentDate, alertWarnDate) ||
+        (isAfter(currentDate, alertWarnDate) && isBefore(currentDate, item.due_date))
+      ) {
+        return {
+          icon: "pi pi-exclamation-triangle",
+          tooltip: "Due within 7 Days",
+          severity: "warn",
+          color: "color: orange;"
+        }
+      } else {
+        return {
+          icon: "pi pi-exclamation-triangle",
+          tooltip: "Overdue",
+          severity: "danger",
+          color: "color: red;"
+        }
+      }
+    }
+  }
 
   protected selectedSpecs: ModelSignal<Specification[]> = model([]);
   protected specificationColumns: TableColumnMapping[] = [
@@ -125,7 +173,7 @@ export class ProjectDetailsComponent {
     {
       key: "issued_at_date",
       name: "Issued At",
-      value: (item: Specification) => {
+      transform: (item: Specification) => {
         if (item.issued_at_date) {
           return item.issued_at_date.toLocaleDateString();
         } else {
@@ -140,7 +188,7 @@ export class ProjectDetailsComponent {
     {
       key: "last_revision_date",
       name: "Date of Last Revision",
-      value: (item: Specification) => {
+      transform: (item: Specification) => {
         if (item) {
           const date = item?.last_revision_date ?? item.issued_at_date;
           return date.toLocaleDateString();
@@ -150,6 +198,8 @@ export class ProjectDetailsComponent {
       }
     }
   ];
+  protected specificationActions: TableAction[] = [];
+
 
   constructor(
     private projectService: ProjectService,

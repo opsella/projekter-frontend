@@ -7,8 +7,14 @@
         <th style="width: 3rem;">
           <p-tableHeaderCheckbox />
         </th>
-        @for (col of columns(); track col.key) {
+        @for (col of config().columns; track col.key) {
           <th>{{ col.name }}</th>
+        }
+        @if (config().actions.length > 0) {
+          <th>Actions</th>
+        }
+        @if (config().alertConfig) {
+          <th style="width: 16px;"></th>
         }
       </tr>
     </ng-template>
@@ -17,8 +23,33 @@
         <td>
           <p-tableCheckbox [value]="row" />
         </td>
-        @for (col of columns(); track col.key) {
+        @for (col of config().columns; track col.key) {
           <td>{{ columnValue(col, row) }}</td>
+        }
+        @if (config().actions.length > 0) {
+          <td>
+            <div style="display: flex; justify-content: start; gap: 0.5rem;">
+              @for (action of config().actions; track action.tooltip) {
+                <p-button [icon]="action.icon"
+                          showDelay="500"
+                          [pTooltip]="action.tooltip"
+                          [severity]="action.severity"
+                          text size="small">
+                </p-button>
+              }
+            </div>
+          </td>
+        }
+        @if (config().alertConfig) {
+          <td>
+            <div>
+              @let alert = config().alertConfig.fn(row);
+              <i [class]="alert?.icon"
+                 [pTooltip]="alert?.tooltip"
+                 [tooltipOptions]="{ tooltipPosition: 'left' }"
+                 [style]="alert?.color"></i>
+            </div>
+          </td>
         }
       </tr>
     </ng-template>

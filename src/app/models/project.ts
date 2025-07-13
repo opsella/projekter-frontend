@@ -124,7 +124,7 @@ export class Task {
       ProjectId.fromJSON(task.assigned_project_id),
       task.name,
       task.description,
-      new Date(task.due_date),
+      task.due_date ? new Date(task.due_date) : null,
       task.completed_at ? new Date(task.completed_at) : null,
     );
   }

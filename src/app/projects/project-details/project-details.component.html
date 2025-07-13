@@ -53,7 +53,7 @@
 
   <app-simple-table
     [data]="project.value()?.tasks ?? []"
-    [columns]="projectTaskColumns"
+    [config]="{ columns: projectTaskColumns, actions: projectTaskActions, alertConfig: projectTaskAlertConfig }"
     [(selectedItems)]="selectedTasks"
   />
 </app-content-section>
@@ -81,7 +81,7 @@
 
   <app-simple-table
     [data]="project.value()?.specifications ?? []"
-    [columns]="specificationColumns"
+    [config]="{ columns: specificationColumns, actions: specificationActions }"
     [(selectedItems)]="selectedSpecs"
   />
 </app-content-section>

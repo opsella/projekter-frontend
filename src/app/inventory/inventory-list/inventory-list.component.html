@@ -6,20 +6,23 @@
     @case ("resolved") {
       <app-simple-table
         [data]="equipment.value()"
-        [columns]="[
-          {
-            key: 'id',
-            name: 'Id'
-          },
-          {
-            key: 'name',
-            name: 'Name'
-          },
-          {
-            key: 'description',
-            name: 'Description'
-          }
-        ]"
+        [config]="{
+          columns:[
+            {
+              key: 'id',
+              name: 'Id'
+            },
+            {
+              key: 'name',
+              name: 'Name'
+            },
+            {
+              key: 'description',
+              name: 'Description'
+            }
+          ],
+          actions: []
+        }"
       />
     }
     @case ("error") {
@@ -37,20 +40,23 @@
     @case ("resolved") {
       <app-simple-table
         [data]="materials.value()"
-        [columns]="[
-          {
-            key: 'id',
-            name: 'Id'
-          },
-          {
-            key: 'name',
-            name: 'Name'
-          },
-          {
-            key: 'description',
-            name: 'Description'
-          }
-        ]"
+        [config]="{
+          columns: [
+            {
+              key: 'id',
+              name: 'Id'
+            },
+            {
+              key: 'name',
+              name: 'Name'
+            },
+            {
+              key: 'description',
+              name: 'Description'
+            }
+          ],
+          actions: []
+        }"
       />
     }
     @case ("error") {
