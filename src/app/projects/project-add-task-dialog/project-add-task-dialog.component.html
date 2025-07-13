@@ -2,7 +2,7 @@
   <div class="form-row">
     <p-input-group>
       <p-float-label variant="in">
-        <input pInputText type="text" id="name" formControlName="name" />
+        <input pInputText [pAutoFocus]="true" type="text" id="name" formControlName="name" />
         <label for="name">Name</label>
       </p-float-label>
     </p-input-group>
@@ -19,7 +19,10 @@
 
   <div class="form-row">
     <p-input-group>
-      <p-date-picker showIcon formControlName="dueDate" appendTo="body"></p-date-picker>
+      <p-float-label variant="in">
+        <p-date-picker showIcon inputId="duedate" formControlName="dueDate" appendTo="body" />
+        <label for="duedate">Due Date</label>
+      </p-float-label>
     </p-input-group>
   </div>
 </form>

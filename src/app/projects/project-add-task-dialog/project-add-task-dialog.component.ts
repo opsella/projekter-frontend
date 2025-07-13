@@ -8,6 +8,7 @@ import {ProjectAddTaskRequest} from "../../models/project";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ProjectId} from "../../models/ids/project-id";
 import {DatePicker} from "primeng/datepicker";
+import {AutoFocus} from "primeng/autofocus";
 
 @Component({
   selector: 'app-project-add-task-dialog',
@@ -17,7 +18,8 @@ import {DatePicker} from "primeng/datepicker";
     InputGroup,
     InputText,
     Button,
-    DatePicker
+    DatePicker,
+    AutoFocus
   ],
   templateUrl: './project-add-task-dialog.component.html',
   styleUrl: './project-add-task-dialog.component.scss'
