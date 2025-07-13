@@ -22,6 +22,7 @@ import {Button} from "primeng/button";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Select, SelectChangeEvent} from "primeng/select";
 import {AlertService} from "../../core/alert.service";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: "app-project-data-list",
@@ -32,6 +33,7 @@ import {AlertService} from "../../core/alert.service";
     ProjectCardComponent,
     Button,
     Select,
+    ReactiveFormsModule,
   ],
   providers: [ProjectService],
   standalone: true,
@@ -40,6 +42,7 @@ export class ProjectDataListComponent {
   public filterProjectState: WritableSignal<ProjectState> = signal("Draft");
 
   protected states: string[] = ['Draft', 'Published'];
+  protected stateFilter: FormControl<ProjectState> = new FormControl("Draft");
   protected projects: HttpResourceRef<Project[]> = this.projectService.projects(
     this.filterProjectState,
   );
@@ -57,7 +60,7 @@ export class ProjectDataListComponent {
   }
 
   public onFilterChanged(value: SelectChangeEvent): void {
-    this.filterProjectState.set(value.value as ProjectState);
+    this.filterProjectState.set(this.stateFilter.value);
   }
 
   public createProject(): void {

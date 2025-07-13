@@ -1,6 +1,7 @@
 <section>
   <div class="project-filter">
     <p-select [options]="states"
+              [formControl]="stateFilter"
               (onChange)="onFilterChanged($event)"
               placeholder="Project State">
     </p-select>
