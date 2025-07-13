@@ -23,6 +23,7 @@ import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {Select, SelectChangeEvent} from "primeng/select";
 import {AlertService} from "../../core/alert.service";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {Toolbar} from "primeng/toolbar";
 
 @Component({
   selector: "app-project-data-list",
@@ -34,6 +35,7 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
     Button,
     Select,
     ReactiveFormsModule,
+    Toolbar,
   ],
   providers: [ProjectService],
   standalone: true,

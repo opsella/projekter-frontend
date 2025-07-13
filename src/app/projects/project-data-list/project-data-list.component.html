@@ -1,11 +1,17 @@
 <section>
-  <div class="project-filter">
-    <p-select [options]="states"
-              [formControl]="stateFilter"
-              (onChange)="onFilterChanged($event)"
-              placeholder="Project State">
-    </p-select>
-  </div>
+  <p-toolbar style="margin-bottom: 1rem;">
+    <ng-template #start>
+      <p-select [options]="states"
+                [formControl]="stateFilter"
+                (onChange)="onFilterChanged($event)"
+                placeholder="Project State">
+      </p-select>
+    </ng-template>
+
+    <ng-template #end>
+      <p-button label="New Project" (click)="createProject()"></p-button>
+    </ng-template>
+  </p-toolbar>
 
   <div class="project-grid">
     @switch (projects.status()) {
@@ -28,8 +34,4 @@
       }
     }
   </div>
-</section>
-
-<section class="actions">
-  <p-button label="New Project" (click)="createProject()"></p-button>
 </section>
