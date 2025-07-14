@@ -1,0 +1,29 @@
+<form [formGroup]="form">
+  <div class="form-row">
+    <p-inputgroup>
+      <p-float-label variant="in">
+        <input pInputText type="text" id="fullname" formControlName="name" [pAutoFocus]="true" />
+        <label for="fullname">Print Full Name</label>
+      </p-float-label>
+    </p-inputgroup>
+  </div>
+
+  <div class="form-row">
+    <p-inputgroup>
+      <p-float-label variant="in">
+        <p-date-picker inputId="completionDate" formControlName="completionDate" appendTo="body" />
+        <label for="completionDate">Date of Completion</label>
+      </p-float-label>
+    </p-inputgroup>
+  </div>
+
+  <div>
+    <h5>Your Signature: </h5>
+    <app-signature (drawComplete)="onDrawComplete($event)"></app-signature>
+  </div>
+</form>
+
+<div>
+  <p-button label="Cancel" text severity="secondary" (click)="onCancelClick()" />
+  <p-button label="Submit" outlined severity="primary" [disabled]="form.invalid" (click)="onSubmitClick()" />
+</div>

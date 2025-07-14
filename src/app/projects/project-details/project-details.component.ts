@@ -5,7 +5,7 @@ import { HttpResourceRef } from "@angular/common/http";
 import {
   Project,
   ProjectAddSpecificationRequest,
-  ProjectAddTaskRequest,
+  ProjectAddTaskRequest, ProjectTaskCompletionRequest,
   Specification,
   Task
 } from "../../models/project";
@@ -16,7 +16,7 @@ import {
 } from "../project-add-specification-dialog/project-add-specification-dialog.component";
 import { Observable, of, switchMap, take, tap } from "rxjs";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
-import { DatePipe, NgOptimizedImage } from "@angular/common";
+import { NgOptimizedImage } from "@angular/common";
 import {
   AlertConfig,
   SimpleTableComponent,
@@ -34,6 +34,9 @@ import {Toolbar} from "primeng/toolbar";
 import {Chip} from "primeng/chip";
 import {ProjectStatusPipe} from "../../shared/project-status.pipe";
 import {isAfter, isBefore, isDate, isEqual, subDays } from 'date-fns';
+import {
+  ProjectTaskCompletionDialogComponent
+} from "../project-task-completion-dialog/project-task-completion-dialog.component";
 
 @Component({
   selector: "app-project-details",
@@ -42,7 +45,6 @@ import {isAfter, isBefore, isDate, isEqual, subDays } from 'date-fns';
   imports: [
     ContentSectionComponent,
     NgOptimizedImage,
-    DatePipe,
     SimpleTableComponent,
     TableModule,
     Button,
@@ -116,7 +118,10 @@ export class ProjectDetailsComponent {
     {
       tooltip: "Complete",
       icon: "pi pi-check-circle",
-      fn: (x) => {}
+      fn: (x: Task) => {
+        console.log("Attempt to complete task: ", x);
+        this.completeTask(x);
+      }
     },
     {
       tooltip: "Edit",
@@ -252,6 +257,40 @@ export class ProjectDetailsComponent {
       });
   }
 
+  public deleteSpec(): void {
+    if (this.selectedSpecs().length === 0){
+      this.alertService.warn("Canceled", "No Specifications were selected to be deleted");
+      return;
+    }
+
+    for (const spec of this.selectedSpecs()) {
+      this.projectService
+        .deleteSpecification(spec)
+        .pipe(
+          tap(async (result: Project) => {
+            // TODO: refresh the details page / reload the updated content
+            if (result) {
+              this.project.set(result);
+              this.selectedSpecs.set([]);
+            }
+          }),
+          take(1)
+        )
+        .subscribe({
+          next: (result) => {
+            if (result) {
+              this.alertService.info("Deleted", "Specification deleted successfully");
+            } else {
+              this.alertService.warn("Canceled", "Specification deletion was canceled");
+            }
+          },
+          error: (error) => {
+            this.alertService.error("Failed", "Specification failed to be deleted");
+          }
+        });
+    }
+  }
+
   public addTask(): void {
     const ref = this.dialogService
       .open(ProjectAddTaskDialogComponent, {
@@ -327,37 +366,36 @@ export class ProjectDetailsComponent {
     }
   }
 
-  public deleteSpec(): void {
-    if (this.selectedSpecs().length === 0){
-      this.alertService.warn("Canceled", "No Specifications were selected to be deleted");
-      return;
-    }
+  public completeTask(task: Task): void {
+    const ref = this.dialogService
+      .open(ProjectTaskCompletionDialogComponent, {
+        header: "Complete Task",
+        modal: true,
+        inputValues: {
+          projectId: this.projectId(),
+          task: task
+        }
+      });
 
-    for (const spec of this.selectedSpecs()) {
-      this.projectService
-        .deleteSpecification(spec)
-        .pipe(
-          tap(async (result: Project) => {
-            // TODO: refresh the details page / reload the updated content
-            if (result) {
-              this.project.set(result);
-              this.selectedSpecs.set([]);
-            }
-          }),
-          take(1)
-        )
-        .subscribe({
-          next: (result) => {
-            if (result) {
-              this.alertService.info("Deleted", "Specification deleted successfully");
-            } else {
-              this.alertService.warn("Canceled", "Specification deletion was canceled");
-            }
-          },
-          error: (error) => {
-            this.alertService.error("Failed", "Specification failed to be deleted");
+    ref.onClose
+      .pipe(
+        switchMap((result: ProjectTaskCompletionRequest): Observable<Project> => {
+          return result instanceof ProjectTaskCompletionRequest
+            ? this.projectService.completeTask(result)
+            : (of(null) as Observable<Project>)
+        })
+      )
+      .subscribe({
+        next: (result) => {
+          if (result) {
+            this.alertService.info("Completed", "Task completed successfully");
+          } else {
+            this.alertService.warn("Canceled", "Task completion was canceled");
           }
-        });
-    }
+        },
+        error: (error) => {
+          this.alertService.error("Failed", "Task completion failed");
+        }
+      })
   }
 }

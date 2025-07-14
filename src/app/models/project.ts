@@ -33,6 +33,16 @@ export class ProjectAddSpecificationRequest {
   ) {}
 }
 
+export class ProjectTaskCompletionRequest {
+  constructor(
+    public project_id: ProjectId,
+    public task_id: TaskId,
+    public fullname: string,
+    public completion_date: Date,
+    public signature_data_url: string
+  ) {}
+}
+
 export type ProjectState = "Draft" | "Published";
 
 export interface ProjectResponse {

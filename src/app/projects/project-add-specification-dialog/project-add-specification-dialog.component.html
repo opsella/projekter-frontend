@@ -29,5 +29,5 @@
 
 <div>
   <p-button label="Cancel" [text]="true" severity="secondary" (click)="onCancelClick()" />
-  <p-button label="Submit" [outlined]="true" severity="primary" (click)="onSubmitClick()" />
+  <p-button label="Submit" [outlined]="true" severity="primary" [disabled]="form.invalid" (click)="onSubmitClick()" />
 </div>

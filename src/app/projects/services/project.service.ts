@@ -9,7 +9,7 @@ import {
   Project,
   ProjectAddSpecificationRequest, ProjectAddTaskRequest,
   ProjectResponse,
-  ProjectState, Specification, Task,
+  ProjectState, ProjectTaskCompletionRequest, Specification, Task,
 } from "../../models/project";
 import {
   ApiResponse,
@@ -115,5 +115,17 @@ export class ProjectService {
           return Project.fromResponse(response.data);
         })
       )
+  }
+
+  public completeTask(
+    task: ProjectTaskCompletionRequest
+  ): Observable<Project> {
+    return this.http
+      .put<ApiResponse<ProjectResponse>>(`${environment.projekterApi}/project/${task.project_id.toString()}/task/${task.task_id.toString()}/complete`, task)
+      .pipe(
+        map((response) => {
+          return Project.fromResponse(response.data);
+        })
+      );
   }
 }

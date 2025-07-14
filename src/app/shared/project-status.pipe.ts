@@ -15,6 +15,6 @@ export class ProjectStatusPipe implements PipeTransform {
     if (statuses.length > 0) {
       return statuses.find(s => deepEqual(s.id, value)).name;
     }
-    return value.toString();
+    return value?.toString() ?? "Unknown";
   }
 }

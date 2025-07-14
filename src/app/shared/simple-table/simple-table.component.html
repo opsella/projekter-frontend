@@ -34,6 +34,7 @@
                           showDelay="500"
                           [pTooltip]="action.tooltip"
                           [severity]="action.severity"
+                          (click)="action.fn(row)"
                           text size="small">
                 </p-button>
               }
