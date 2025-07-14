@@ -383,7 +383,14 @@ export class ProjectDetailsComponent {
           return result instanceof ProjectTaskCompletionRequest
             ? this.projectService.completeTask(result)
             : (of(null) as Observable<Project>)
-        })
+        }),
+        tap(async (result: Project) => {
+          // TODO: refresh the details page / reload the updated content
+          if (result) {
+            this.project.set(result);
+          }
+        }),
+        take(1),
       )
       .subscribe({
         next: (result) => {

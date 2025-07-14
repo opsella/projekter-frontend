@@ -35,7 +35,7 @@ export class ProjectTaskCompletionDialogComponent {
   public task: InputSignal<Task> = input.required();
 
   public form: FormGroup = new FormGroup({
-    name: new FormControl("", { validators: [Validators.required] }),
+    fullname: new FormControl("", { validators: [Validators.required] }),
     completionDate: new FormControl(new Date(), { validators: [Validators.required] }),
     signatureData: new FormControl("", { validators: [Validators.required] })
   });
