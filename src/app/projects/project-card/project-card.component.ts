@@ -1,5 +1,4 @@
 import {Component, input, Input, InputSignal} from "@angular/core";
-import { SimpleChipComponent } from "../../shared/simple-chip/simple-chip.component";
 import {OverlayBadge} from "primeng/overlaybadge";
 import {Card} from "primeng/card";
 import {ProjectId} from "../../models/ids/project-id";
@@ -10,7 +9,6 @@ import {Chip} from "primeng/chip";
 @Component({
   selector: "app-project-card",
   imports: [
-    SimpleChipComponent,
     OverlayBadge,
     Card,
     Button,

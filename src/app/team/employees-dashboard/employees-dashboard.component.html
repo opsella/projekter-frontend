@@ -1,0 +1,13 @@
+<app-content-section title="Employees">
+  <p-toolbar>
+    <ng-template #start>
+      <p-button label="Invite" severity="primary" />
+      <p-button label="Deactivate" severity="danger" text />
+    </ng-template>
+  </p-toolbar>
+
+  <app-simple-table [data]="employees.value() ?? []"
+                    [config]="employeesTableConfig">
+
+  </app-simple-table>
+</app-content-section>

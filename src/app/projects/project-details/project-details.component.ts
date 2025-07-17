@@ -82,7 +82,7 @@ export class ProjectDetailsComponent {
   };
 
   protected selectedTasks: ModelSignal<Task[]> = model([]);
-  protected projectTaskColumns: TableColumnMapping[] = [
+  protected projectTaskColumns: TableColumnMapping<Task>[] = [
     {
       key: 'due_date',
       name: 'Due Date',
@@ -114,7 +114,7 @@ export class ProjectDetailsComponent {
       }
     }
   ]
-  protected projectTaskActions: TableAction[] = [
+  protected projectTaskActions: TableAction<Task>[] = [
     {
       tooltip: "Complete",
       icon: "pi pi-check-circle",
@@ -130,7 +130,7 @@ export class ProjectDetailsComponent {
       fn: (x) => {}
     },
   ];
-  protected projectTaskAlertConfig: AlertConfig = {
+  protected projectTaskAlertConfig: AlertConfig<Task> = {
     fn: (item: Task) => {
       if (!isDate(item.due_date))
         return null;
@@ -162,7 +162,7 @@ export class ProjectDetailsComponent {
   }
 
   protected selectedSpecs: ModelSignal<Specification[]> = model([]);
-  protected specificationColumns: TableColumnMapping[] = [
+  protected specificationColumns: TableColumnMapping<Specification>[] = [
     {
       key: "code",
       name: "Code"
@@ -203,7 +203,7 @@ export class ProjectDetailsComponent {
       }
     }
   ];
-  protected specificationActions: TableAction[] = [];
+  protected specificationActions: TableAction<Specification>[] = [];
 
 
   constructor(
