@@ -11,7 +11,8 @@ export class UserPersonalInformationUpdateRequest {
     public id: UserId,
     public given_name?: string,
     public family_name?: string,
-    public nickname?: string
+    public nickname?: string,
+    public phone_number?: string,
   ) {
   }
 }

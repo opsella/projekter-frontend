@@ -39,7 +39,6 @@
     </div>
   </form>
 
-  <p-button label="Update" (click)="savePersonalInformation()"></p-button>
 </app-content-section>
 
 <app-content-section title="Contact Information">
@@ -62,6 +61,9 @@
 
     <div class="form-row">
       <p-input-group>
+        <p-inputgroup-addon>
+          <span>+1</span>
+        </p-inputgroup-addon>
         <p-float-label variant="in">
           <p-inputmask type="tel" mask="(999) 999-9999" formControlName="phone" />
           <label for="phone">Phone Number</label>
@@ -69,8 +71,6 @@
       </p-input-group>
     </div>
   </form>
-
-  <p-button label="Update"></p-button>
 </app-content-section>
 
 <app-content-section title="Your Permissions">
@@ -86,3 +86,13 @@
     </ul>
   }
 </app-content-section>
+
+<div style="position: absolute; right: 50px; bottom: 50px;">
+  <p-button icon="pi pi-save"
+            ariaLabel="save changes"
+            pTooltip="Save Changes"
+            rounded
+            raised
+            (click)="savePersonalInformation()"
+  />
+</div>

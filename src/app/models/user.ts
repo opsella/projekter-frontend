@@ -13,6 +13,7 @@ export interface UserResponse {
   email_verified?: boolean;
   picture: string;
   employee: EmployeeInfoResponse;
+  phone_number?: string;
 }
 
 
@@ -28,6 +29,7 @@ export class User {
     public username?: string,
     public nickname?: string,
     public email_verified?: boolean,
+    public phoneNumber?: string,
   ) {
   }
 
@@ -43,6 +45,7 @@ export class User {
       response.username,
       response.nickname,
       response.email_verified,
+      response.phone_number,
     );
   }
 }

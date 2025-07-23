@@ -14,6 +14,7 @@ import {InputMask} from "primeng/inputmask";
 import {User, UserPermission} from "../../models/user";
 import {HttpResourceRef} from "@angular/common/http";
 import {take} from "rxjs";
+import {AlertService} from "../../core/alert.service";
 
 @Component({
   selector: "app-profile",
@@ -24,7 +25,8 @@ import {take} from "rxjs";
 export class ProfileComponent {
   protected user: HttpResourceRef<User> = this.userService.getCurrentUser();
   protected permissions: WritableSignal<UserPermission[]> = signal<UserPermission[]>([]);
-  public personalData: ModelSignal<UserPersonalInformationUpdateRequest | null> = model(null);
+
+  protected isSaving: boolean = false;
 
   protected employeeInfoForm: FormGroup = new FormGroup({
     employeeId: new FormControl({
@@ -62,7 +64,8 @@ export class ProfileComponent {
   constructor(
     public auth: AuthenticationService,
     public router: Router,
-    public userService: UsersService
+    public userService: UsersService,
+    public alertService: AlertService
   ) {
     effect(() => {
       const user = this.user.value();
@@ -72,28 +75,53 @@ export class ProfileComponent {
           familyName: user.last_name,
           nickname: user.nickname,
         });
+
+        this.employeeInfoForm.patchValue({
+          employeeId: user.employee?.externalEmployeeId ?? user.employee.id,
+        });
+
+        this.contactInfoForm.patchValue({
+          email: user.email,
+          phone: user.phoneNumber.substring(2),
+        });
       }
     });
   }
 
   protected savePersonalInformation(): void {
-    if (this.profileForm.invalid) {
+    if (this.profileForm.invalid || this.contactInfoForm.invalid) {
+      this.alertService.error("Invalid Form(s)", "Form's are invalid, please fix and try again");
       return;
     }
+
+    this.isSaving = true;
+
+    const formPhone: string = this.contactInfoForm.controls["phone"].value;
+    const formatedPhone = "+1" + formPhone.replace("/\D/g", "");
 
     const request = new UserPersonalInformationUpdateRequest(
       this.user.value().id,
       this.profileForm.controls["givenName"].value,
       this.profileForm.controls["familyName"].value,
       this.profileForm.controls["nickname"].value,
+      formatedPhone,
     );
 
     this.userService.updatePersonalInformation(request)
       .pipe(
         take(1)
       )
-      .subscribe(response => {
-        this.user.set(response);
+      .subscribe({
+        next: response => {
+          this.alertService.info("Profile Updated", "Your profile has been updated");
+          this.user.set(response);
+        },
+        error: err => {
+          this.alertService.error("An error occurred", "We're sorry but an error occurred when saving")
+        },
+        complete: () => {
+          this.isSaving = false;
+        }
       });
   }
 }
