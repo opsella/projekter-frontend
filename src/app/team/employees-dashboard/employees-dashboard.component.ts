@@ -26,14 +26,14 @@ export class EmployeesDashboardComponent {
   protected employeesTableConfig: TableConfig<Employee> = {
     columns: [
       {
-        key: "fullname",
-        name: "Fullname"
+        key: "id",
+        name: "Id"
       },
       {
-        key: "is_active",
+        key: "isActive",
         name: "Active",
         transform: (item): string => {
-          return item.is_active ? "YES" : "NO";
+          return item.isActive ? "YES" : "NO";
         }
       }
     ],

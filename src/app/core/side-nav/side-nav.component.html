@@ -20,8 +20,9 @@
       <i class="pi" [class.pi-moon]="isDarkMode" [class.pi-sun]="!isDarkMode"></i>
     </p-button>
 
-    <app-avatar [photo]="auth.auth0User()?.picture" (click)="profile()" />
+    <app-avatar [photo]="auth.auth0User()?.picture" (click)="menu.toggle($event)" />
   </div>
 </aside>
+<p-menu #menu [model]="menuItems" [popup]="true" />
 
 <span id="square"><span id="circle"></span></span>

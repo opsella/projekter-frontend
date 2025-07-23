@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { httpResource, HttpResourceRef } from "@angular/common/http";
-import { Employee, EmployeeResponse } from "../models/employee";
+import {Employee, EmployeeInfoResponse} from "../models/employee";
 import { environment } from "../../environments/environment";
 import { PaginatedApiResponse } from "../models/api/api-response";
 
@@ -17,7 +17,7 @@ export class EmployeesService {
         url: `${environment.projekterApi}/employees`
       }),
       {
-        parse: (result: PaginatedApiResponse<EmployeeResponse>) => {
+        parse: (result: PaginatedApiResponse<EmployeeInfoResponse>) => {
           return result.data?.map((employee) => {
             return Employee.fromResponse(employee);
           });

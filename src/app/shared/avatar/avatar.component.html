@@ -1,11 +1,13 @@
-<p-button [text]="true" size="small">
+<p-button link size="small">
   @if (photo) {
-    <img [ngSrc]="photo"
-         class="avatar"
-         alt="Your account photo"
-         width="48"
-         height="48"/>
+    <p-avatar shape="circle"
+              size="normal"
+              [image]="photo()"
+    />
   } @else {
-    <i class="pi pi-user"></i>
+    <p-avatar shape="circle"
+              size="normal"
+              icon="pi pi-user"
+    />
   }
 </p-button>

@@ -1,16 +1,20 @@
 <app-content-section title="My Team">
   <app-simple-table
-    [data]="employees.value()"
+    [data]="users.value()"
     [config]="{
       columns: [
         {
-          key: 'fullname',
-          name: 'Fullname'
+          key: 'id',
+          name: 'Id'
         },
         {
-          key: 'is_active',
-          name: 'Active'
-        }
+          key: 'first_name',
+          name: 'First Name'
+        },
+        {
+          key: 'last_name',
+          name: 'Last Name'
+        },
       ],
       actions: []
     }"

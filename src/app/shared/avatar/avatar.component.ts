@@ -1,14 +1,14 @@
-import { Component, Input } from "@angular/core";
-import { NgOptimizedImage } from "@angular/common";
+import {Component, input, InputSignal} from "@angular/core";
 import {Button} from "primeng/button";
+import {Avatar} from "primeng/avatar";
 
 @Component({
   selector: "app-avatar",
   templateUrl: "./avatar.component.html",
   styleUrl: "./avatar.component.scss",
-  imports: [NgOptimizedImage, Button],
+  imports: [Button, Avatar],
   standalone: true,
 })
 export class AvatarComponent {
-  @Input() public photo?: string;
+  public photo: InputSignal<string | undefined | null> = input();
 }

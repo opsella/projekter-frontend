@@ -1,28 +1,32 @@
 import { UserId } from "./ids/user-id";
 import { TenantId } from "./ids/tenant-id";
+import {Employee, EmployeeInfoResponse} from "./employee";
 
 export interface UserResponse {
   id: string;
   tenant_id: string;
-  username: string;
-  nickname: string;
+  username?: string;
+  nickname?: string;
   first_name: string;
   last_name: string;
   email: string;
-  picture: string;
   email_verified?: boolean;
+  picture: string;
+  employee: EmployeeInfoResponse;
 }
+
 
 export class User {
   constructor(
     public id: UserId,
     public tenant_id: TenantId,
-    public username: string,
-    public nickname: string,
     public first_name: string,
     public last_name: string,
     public email: string,
     public picture: string,
+    public employee: Employee,
+    public username?: string,
+    public nickname?: string,
     public email_verified?: boolean,
   ) {
   }
@@ -31,13 +35,14 @@ export class User {
     return new User(
       UserId.fromJSON(response.id),
       TenantId.fromJSON(response.tenant_id),
-      response.username,
-      response.nickname,
       response.first_name,
       response.last_name,
       response.email,
       response.picture,
-      response.email_verified
+      Employee.fromResponse(response.employee),
+      response.username,
+      response.nickname,
+      response.email_verified,
     );
   }
 }

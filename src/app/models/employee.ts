@@ -2,31 +2,31 @@
 import { UserId } from "./ids/user-id";
 import { EmployeeId } from "./ids/employee-id";
 
-export interface EmployeeResponse {
-  employee_id: string;
+export interface EmployeeInfoResponse {
+  id: string;
   tenant_id: string;
   associated_user_id: string;
-  fullname: string;
+  external_employee_id?: string;
   is_active: boolean;
 }
 
 export class Employee {
   constructor(
     public id: EmployeeId,
-    public tenant_id: TenantId,
-    public associated_user_id: UserId,
-    public fullname: string,
-    public is_active: boolean,
+    public tenantId: TenantId,
+    public associatedUserId: UserId,
+    public isActive: boolean,
+    public externalEmployeeId?: string,
   ) {
   }
 
-  public static fromResponse(response: EmployeeResponse): Employee {
+  public static fromResponse(response: EmployeeInfoResponse): Employee {
     return new Employee(
-      EmployeeId.fromJSON(response.employee_id),
+      EmployeeId.fromJSON(response.id),
       TenantId.fromJSON(response.tenant_id),
       UserId.fromJSON(response.associated_user_id),
-      response.fullname,
       response.is_active,
+      response.external_employee_id,
     );
   }
 }

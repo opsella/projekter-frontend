@@ -1,10 +1,10 @@
 import { Component } from "@angular/core";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
-import { Employee } from "../../models/employee";
-import { EmployeesService } from "../employees.service";
 import { HttpResourceRef } from "@angular/common/http";
 import { SimpleTableComponent } from "../../shared/simple-table/simple-table.component";
 import {Button} from "primeng/button";
+import {UsersService} from "../../user/services/users.service";
+import {User} from "../../models/user";
 
 @Component({
   selector: "app-team-list",
@@ -14,10 +14,10 @@ import {Button} from "primeng/button";
   standalone: true,
 })
 export class TeamListComponent {
-  protected employees: HttpResourceRef<Employee[]> = this.employeeService.employees();
+  protected users: HttpResourceRef<User[]> = this.userService.getUsers();
 
   constructor(
-    private employeeService: EmployeesService
+    private userService: UsersService
   ) {
   }
 }

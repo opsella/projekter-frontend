@@ -47,6 +47,14 @@ form {
     width: 100%;
   }
 
+  p-input-mask, p-inputmask {
+    width: 100%;
+
+    input {
+      width: 100% !important;
+    }
+  }
+
   .form-column {
     display: flex;
     flex-flow: column;

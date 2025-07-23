@@ -1,4 +1,17 @@
-<app-content-section title="Profile" [expandable]="true">
+<app-content-section title="Employee Information">
+  <form [formGroup]="employeeInfoForm">
+    <div class="form-row">
+      <p-input-group>
+        <p-float-label variant="in">
+          <input pInputText type="text" id="employee-id" formControlName="employeeId">
+          <label for="employee-id">Employee Id</label>
+        </p-float-label>
+      </p-input-group>
+    </div>
+  </form>
+</app-content-section>
+
+<app-content-section title="Personal Information">
   <form [formGroup]="profileForm">
     <div class="form-row">
       <p-input-group>
@@ -19,6 +32,21 @@
     <div class="form-row">
       <p-input-group>
         <p-float-label variant="in">
+          <input pInputText type="text" id="nickname" formControlName="nickname">
+          <label for="nickname">Nickname</label>
+        </p-float-label>
+      </p-input-group>
+    </div>
+  </form>
+
+  <p-button label="Update" (click)="savePersonalInformation()"></p-button>
+</app-content-section>
+
+<app-content-section title="Contact Information">
+  <form [formGroup]="contactInfoForm">
+    <div class="form-row">
+      <p-input-group>
+        <p-float-label variant="in">
           <input pInputText type="email" id="email" formControlName="email">
           <label for="email">Email</label>
         </p-float-label>
@@ -30,49 +58,31 @@
           }
         </p-inputgroup-addon>
       </p-input-group>
-
-      <p-input-group>
-        <p-float-label variant="in">
-          <input pInputText type="text" id="username" formControlName="username">
-          <label for="username">Username</label>
-        </p-float-label>
-      </p-input-group>
     </div>
 
     <div class="form-row">
       <p-input-group>
         <p-float-label variant="in">
-          <input pInputText type="text" id="employee-id" formControlName="employeeId">
-          <label for="employee-id">Employee Id</label>
-        </p-float-label>
-      </p-input-group>
-
-      <p-input-group>
-        <p-float-label variant="in">
-          <input pInputText type="text" id="nickname" formControlName="nickname">
-          <label for="nickname">Nickname</label>
+          <p-inputmask type="tel" mask="(999) 999-9999" formControlName="phone" />
+          <label for="phone">Phone Number</label>
         </p-float-label>
       </p-input-group>
     </div>
   </form>
 
-  <ul>
-    @for (permission of auth.permissions(); track permission.permissionName) {
-      <li>{{ permission.permissionName }}: {{ permission.description }}</li>
-    }
-  </ul>
-
-  <p-button label="LOGOUT" (click)="logout()"></p-button>
-  <p-button label="YOUR ORGANIZATION" (click)="tenant()"></p-button>
+  <p-button label="Update"></p-button>
 </app-content-section>
 
 <app-content-section title="Your Permissions">
-  <ul>
-    @for (
-      permission of userService.currentUserPermissions.value();
-      track permission.permission_name
-    ) {
-      <li>{{ permission.permission_name }}: {{ permission.description }}</li>
-    }
-  </ul>
+  @if (user.status() === "loading") {
+    <p>loading...</p>
+  } @else if (user.status() === "error") {
+    <p>There was a problem loading your permissions...</p>
+  } @else if (user.status() === "resolved") {
+    <ul>
+      @for (permission of permissions(); track permission.permission_name) {
+        <li>{{ permission.permission_name }}: {{ permission.description }}</li>
+      }
+    </ul>
+  }
 </app-content-section>

@@ -1,29 +1,39 @@
 import {Component, computed, OnInit, Signal} from "@angular/core";
-import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive } from "@angular/router";
 import { AuthenticationService } from "../../authentication/authentication.service";
 import { AvatarComponent } from "../../shared/avatar/avatar.component";
 import {Button} from "primeng/button";
+import {Menu} from "primeng/menu";
+import {MenuItem} from "primeng/api";
 
 @Component({
   selector: "app-side-nav",
   templateUrl: "./side-nav.component.html",
   styleUrls: ["./side-nav.component.scss"],
-  imports: [RouterLink, RouterLinkActive, AvatarComponent, Button],
+  imports: [RouterLink, RouterLinkActive, AvatarComponent, Button, Menu],
   standalone: true,
 })
 export class SideNavComponent implements OnInit {
-  public options = [
+  public menuItems: MenuItem[] = [
     {
-      id: "settings",
-      name: "Settings",
-      handler: () => this.settings(),
-      isVisible: () => true,
+      label: "Profile",
+      icon: "pi pi-user",
+      routerLink: "/user/profile"
     },
     {
-      id: "profile",
-      name: "Profile",
-      handler: () => this.profile(),
-      isVisible: () => true,
+      label: "Settings",
+      icon: "pi pi-cog",
+      routerLink: "/user/settings"
+    },
+    {
+      label: "Your Organization",
+      icon: "pi pi-briefcase",
+      routerLink: "/tenant"
+    },
+    {
+      label: "Logout",
+      icon: "pi pi-sign-out",
+      routerLink: "/auth/logout"
     },
   ];
 
@@ -36,19 +46,10 @@ export class SideNavComponent implements OnInit {
 
   constructor(
     protected auth: AuthenticationService,
-    private router: Router,
   ) {}
 
   public ngOnInit(): void {
     this.refreshThemeIcon();
-  }
-
-  public async settings() {
-    await this.router.navigate(["/user/settings"]);
-  }
-
-  public async profile() {
-    await this.router.navigate(["/user/profile"]);
   }
 
   public toggleDarkMode() {
