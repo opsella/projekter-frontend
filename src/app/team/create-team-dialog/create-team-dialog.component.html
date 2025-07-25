@@ -1,0 +1,74 @@
+<form [formGroup]="form">
+  <div class="form-row">
+    <p-input-group>
+      <p-float-label variant="in">
+        <input pInputText [pAutoFocus]="true" type="text" id="name" formControlName="name">
+        <label for="name">Name</label>
+      </p-float-label>
+    </p-input-group>
+  </div>
+
+  <div class="form-row">
+    <p-input-group>
+      <p-float-label variant="in">
+        <input pInputText [pAutoFocus]="true" type="text" id="description" formControlName="description">
+        <label for="description">Description</label>
+      </p-float-label>
+    </p-input-group>
+  </div>
+
+  <div class="form-row">
+    <p-input-group>
+      <p-select [options]="possibleTeamLeads() ?? []"
+                formControlName="teamLead"
+                placeholder="Team Lead"
+                appendTo="body">
+        <ng-template #selectedItem let-selectedOption>
+          <div>
+            @if (selectedOption) {
+              <div style="display: flex; align-items: center;">
+                <p-avatar [image]="selectedOption.picture" shape="circle"></p-avatar>
+                <span style="margin-left: 1rem;">{{ selectedOption.nickname }}</span>
+              </div>
+            }
+          </div>
+        </ng-template>
+        <ng-template #item let-user>
+          <div style="display: flex; align-items: center;">
+            <p-avatar [image]="user.picture" shape="circle"></p-avatar>
+            <span style="margin-left: 1rem;">{{ user.nickname }}</span>
+          </div>
+        </ng-template>
+      </p-select>
+    </p-input-group>
+  </div>
+
+  <div class="form-row">
+    <p-input-group>
+      <p-multi-select [options]="possibleTeamLeads() ?? []"
+                      formControlName="teamMembers"
+                      placeholder="Team Members"
+                      display="chip"
+                      optionLabel="nickname"
+                      appendTo="body">
+        <ng-template #dropdownicon>
+          <i class="pi pi-group"></i>
+        </ng-template>
+        <ng-template #header>
+          <div class="font-medium px-3 py-2">Available Employees</div>
+        </ng-template>
+        <ng-template #item let-user>
+          <div style="display: flex; align-items: center;">
+            <p-avatar [image]="user.picture" shape="circle"></p-avatar>
+            <span style="margin-left: 1rem;">{{ user.nickname }}</span>
+          </div>
+        </ng-template>
+      </p-multi-select>
+    </p-input-group>
+  </div>
+</form>
+
+<div>
+  <p-button label="Cancel" text severity="secondary" (click)="onCancelClick()" />
+  <p-button label="Submit" outlined severity="primary" [disabled]="form.invalid" (click)="onSubmitClick()"/>
+</div>

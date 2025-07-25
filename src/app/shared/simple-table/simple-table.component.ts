@@ -33,10 +33,19 @@ export interface TableAction<TModel> {
   fn: (item: TModel) => void
 }
 
-export interface TableColumnMapping<TModel> {
-  key: keyof TModel;
+export interface TableColumnMapping<TModel> extends KeyedTableColumnMapping<TModel>, TransformedTableColumnMapping<TModel> {
+  id: string;
   name: string;
-  transform?: (item: TModel) => string
+  hidden?: () => boolean;
+}
+
+
+export interface KeyedTableColumnMapping<TModel> {
+  key?: keyof TModel;
+}
+
+export interface TransformedTableColumnMapping<TModel> {
+  transform?: (item: TModel) => string;
 }
 
 @Component({
@@ -68,5 +77,12 @@ export class SimpleTableComponent<TModel> {
       return value[mapper.key].toString();
 
     return "";
+  }
+
+  protected isHidden(mapper: TableColumnMapping<TModel>): boolean {
+    if (mapper.hidden && typeof(mapper.hidden) === "function") {
+      return mapper.hidden();
+    }
+    return false;
   }
 }

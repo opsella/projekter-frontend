@@ -1,24 +1,24 @@
-<app-content-section title="My Team">
-  <app-simple-table
-    [data]="users.value()"
-    [config]="{
-      columns: [
-        {
-          key: 'id',
-          name: 'Id'
-        },
-        {
-          key: 'first_name',
-          name: 'First Name'
-        },
-        {
-          key: 'last_name',
-          name: 'Last Name'
-        },
-      ],
-      actions: []
-    }"
-  />
+<p-breadcrumb [model]="breadcrumbItems" [home]="home" [style]="{ 'margin-bottom': '1rem' }"/>
 
-  <p-button label="Invite"></p-button>
+<app-content-section title="My Team">
+  <p-toolbar>
+    <ng-template #start>
+    </ng-template>
+
+    <ng-template #end>
+      <p-button label="Invite" (click)="createTeam()"></p-button>
+    </ng-template>
+  </p-toolbar>
+
+  @if (teams.status() === "loading") {
+    <span>loading...</span>
+  } @else if (teams.status() === "error") {
+    <span>There was an error loading your teams...</span>
+  } @else if (teams.status() === "resolved") {
+    <app-simple-table
+      [data]="teams.value()"
+      [config]="tableConfig"
+    />
+  }
+
 </app-content-section>

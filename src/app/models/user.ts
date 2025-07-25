@@ -7,8 +7,8 @@ export interface UserResponse {
   tenant_id: string;
   username?: string;
   nickname?: string;
-  first_name: string;
-  last_name: string;
+  first_name?: string;
+  last_name?: string;
   email: string;
   email_verified?: boolean;
   picture: string;
@@ -21,11 +21,11 @@ export class User {
   constructor(
     public id: UserId,
     public tenant_id: TenantId,
-    public first_name: string,
-    public last_name: string,
     public email: string,
     public picture: string,
     public employee: Employee,
+    public first_name?: string,
+    public last_name?: string,
     public username?: string,
     public nickname?: string,
     public email_verified?: boolean,
@@ -37,11 +37,11 @@ export class User {
     return new User(
       UserId.fromJSON(response.id),
       TenantId.fromJSON(response.tenant_id),
-      response.first_name,
-      response.last_name,
       response.email,
       response.picture,
       Employee.fromResponse(response.employee),
+      response.first_name,
+      response.last_name,
       response.username,
       response.nickname,
       response.email_verified,

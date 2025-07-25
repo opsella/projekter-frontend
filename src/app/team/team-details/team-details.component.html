@@ -1,0 +1,36 @@
+<p-breadcrumb [model]="breadcrumbItems" [home]="home" [style]="{ 'margin-bottom': '1rem' }"/>
+
+@if (team.status() === "loading") {
+  <span>Loading...</span>
+} @else if (team.status() === "error") {
+  <span>There was an error loading this team.</span>
+} @else if (team.status() === "resolved") {
+  <app-content-section [title]="team.value().name">
+    <h4>Description</h4>
+    <span>{{team.value().description}}</span>
+
+    <p-divider />
+    <h4>Team Lead</h4>
+    <div style="display: flex; align-items: center;">
+      @let lead = findMatchingUser(team.value().teamLead.associatedUserId);
+      @if (lead) {
+        <p-avatar size="large" [image]="lead.picture" shape="circle" />
+        <span style="margin-left: 1rem;">{{ lead.nickname }}</span>
+      }
+    </div>
+
+    <p-divider />
+    <h4>Team Members</h4>
+    <ul>
+      @for (employee of team.value().teamMembers; track employee.id) {
+        @let member = findMatchingUser(employee.associatedUserId);
+        @if (member) {
+          <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+            <p-avatar size="large" [image]="member.picture" shape="circle" />
+            <span style="margin-left: 1rem;">{{ member.nickname }}</span>
+          </div>
+        }
+      }
+    </ul>
+  </app-content-section>
+}

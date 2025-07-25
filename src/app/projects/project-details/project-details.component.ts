@@ -84,7 +84,7 @@ export class ProjectDetailsComponent {
   protected selectedTasks: ModelSignal<Task[]> = model([]);
   protected projectTaskColumns: TableColumnMapping<Task>[] = [
     {
-      key: 'due_date',
+      id: 'due_date',
       name: 'Due Date',
       transform: (item: Task): string => {
         if (item.due_date) {
@@ -95,15 +95,17 @@ export class ProjectDetailsComponent {
       }
     },
     {
+      id: 'name',
       key: 'name',
       name: 'Name'
     },
     {
+      id: 'description',
       key: 'description',
       name: 'Description'
     },
     {
-      key: 'completed_at',
+      id: 'completed_at',
       name: 'Completed On',
       transform: (item: Task) => {
         if (item.completed_at) {
@@ -164,19 +166,22 @@ export class ProjectDetailsComponent {
   protected selectedSpecs: ModelSignal<Specification[]> = model([]);
   protected specificationColumns: TableColumnMapping<Specification>[] = [
     {
-      key: "code",
+      id: "code",
+      key: 'code',
       name: "Code"
     },
     {
+      id: "title",
       key: "title",
       name: "Title"
     },
     {
+      id: "description",
       key: "description",
       name: "Description"
     },
     {
-      key: "issued_at_date",
+      id: "issued_at_date",
       name: "Issued At",
       transform: (item: Specification) => {
         if (item.issued_at_date) {
@@ -187,11 +192,12 @@ export class ProjectDetailsComponent {
       }
     },
     {
+      id: "revision",
       key: "revision",
       name: "Revision"
     },
     {
-      key: "last_revision_date",
+      id: "last_revision_date",
       name: "Date of Last Revision",
       transform: (item: Specification) => {
         if (item) {

@@ -21,13 +21,15 @@ export class UserPersonalInformationUpdateRequest {
   providedIn: "root"
 })
 export class UsersService {
+  private endpoint: string = `${environment.projekterApi}/users`;
+
   constructor(
     private http: HttpClient
   ) { }
 
   public getUsers(): HttpResourceRef<User[]> {
     return httpResource<User[]>(
-      () => `${environment.projekterApi}/users`,
+      () => `${this.endpoint}`,
       {
         parse: (result: PaginatedApiResponse<UserResponse>) => {
           return result.data.map(x => User.fromResponse(x));
@@ -38,7 +40,7 @@ export class UsersService {
 
   public getCurrentUser(): HttpResourceRef<User> {
     return httpResource<User>(
-      () => `${environment.projekterApi}/users/me`,
+      () => `${this.endpoint}/me`,
       {
         parse: (result: ApiResponse<UserResponse>) => {
           const value = User.fromResponse(result.data);
@@ -49,9 +51,20 @@ export class UsersService {
     );
   }
 
+  public getUser(userId: UserId): HttpResourceRef<User> {
+    return httpResource<User>(
+      () => `${this.endpoint}/${userId.toString()}`,
+      {
+        parse: (result: ApiResponse<UserResponse>) => {
+          return User.fromResponse(result.data);
+        }
+      }
+    );
+  }
+
   public getUserPermissions(userId: UserId): HttpResourceRef<UserPermission[]> {
     return httpResource<UserPermission[]>(
-      () => `${environment.projekterApi}/users/${userId}/permissions`,
+      () => `${this.endpoint}/${userId}/permissions`,
       {
         parse: (result: ApiResponse<{ user_permissions: UserPermission[] }>) => {
           return result.data.user_permissions;
@@ -62,7 +75,7 @@ export class UsersService {
 
   public updatePersonalInformation(request: UserPersonalInformationUpdateRequest): Observable<User> {
     return this.http
-      .patch<ApiResponse<UserResponse>>(`${environment.projekterApi}/users/${request.id}/personal`, request)
+      .patch<ApiResponse<UserResponse>>(`${this.endpoint}/${request.id}/personal`, request)
       .pipe(
         map((response) => {
           return User.fromResponse(response.data);
