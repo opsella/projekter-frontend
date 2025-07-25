@@ -15,6 +15,7 @@ export class TopNavComponent {
     name: "Settings",
     path: "/settings",
   };
+
   protected mainRoutes: NavigationRouteOption[] = [
     {
       icon: "fa-sharp fa-solid fa-bars-progress",
@@ -55,6 +56,12 @@ export class TopNavComponent {
       path: "/help",
     },
   ];
+
+  protected navbarExpanded: boolean = false;
+  protected toggleNavbarExpanded(): void {
+    console.log("Normally this would expand but it's pissing me off.");
+    // this.navbarExpanded = !this.navbarExpanded;
+  }
 }
 
 interface NavigationRouteOption {

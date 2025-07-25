@@ -1,4 +1,3 @@
-<a [routerLink]="routeUrl" routerLinkActive="active">
+<a [routerLink]="routeUrl()" [pTooltip]="routeName()" routerLinkActive="active">
   <ng-content></ng-content>
-  <!--  <span>{{ routeName }}</span>-->
 </a>

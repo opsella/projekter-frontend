@@ -1,4 +1,4 @@
-<nav>
+<nav [class.collapsed]="!navbarExpanded" [class.expanded]="navbarExpanded">
   <section class="company-logo-container">
     <div class="logo">
       <a routerLink="/">
@@ -6,8 +6,8 @@
       </a>
     </div>
 
-    <button class="nav-expand-button">
-      <i class="fa-sharp fa-solid fa-angles-right"></i>
+    <button class="nav-expand-button" (click)="toggleNavbarExpanded()">
+      <i class="fa-sharp fa-solid" [class.fa-angles-left]="navbarExpanded" [class.fa-angles-right]="!navbarExpanded"></i>
     </button>
   </section>
 
@@ -18,8 +18,11 @@
           <app-navigation-route-element
             [routeName]="route.name"
             [routeUrl]="route.path"
+            [expanded]="false"
           >
-            <i [class]="route.icon" class="icon"></i>
+            <div class="nav-item">
+                <i [class]="route.icon" class="icon"></i>
+            </div>
           </app-navigation-route-element>
         </li>
       }
@@ -30,6 +33,7 @@
     <app-navigation-route-element
       [routeName]="settingsRoute.name"
       [routeUrl]="settingsRoute.path"
+      [expanded]="false"
     >
       <i [class]="settingsRoute.icon" class="settings-icon"></i>
     </app-navigation-route-element>
@@ -41,6 +45,7 @@
             <app-navigation-route-element
               [routeName]="route.name"
               [routeUrl]="route.path"
+              [expanded]="false"
             >
               <i [class]="route.icon" class="icon-secondary"></i>
             </app-navigation-route-element>

@@ -6,7 +6,28 @@ nav {
   min-height: 45em;
   justify-content: flex-start;
   max-width: 15em;
-  width: 4rem;
+
+  &.expanded {
+    width: 15rem;
+    .company-logo-container {
+      .nav-expand-button {
+        &::before {
+          width: 75%;
+        }
+      }
+    }
+  }
+
+  &.collapsed {
+    width: 4rem;
+    .company-logo-container {
+      .nav-expand-button {
+        &::before {
+          width: 50%;
+        }
+      }
+    }
+  }
 
   .company-logo-container {
     display: flex;
@@ -45,7 +66,6 @@ nav {
         margin-right: 6px;
         position: relative;
         top: -4px;
-        width: 50%;
       }
 
       &:hover {
@@ -87,6 +107,19 @@ nav {
 
       &:hover,:active {
         color: #DFBA38;
+      }
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: start;
+
+      div {
+        display: flex;
+      }
+
+      span {
+        margin-left: 0.5rem;
       }
     }
   }
