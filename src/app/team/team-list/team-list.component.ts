@@ -106,7 +106,7 @@ export class TeamListComponent {
         next: async (result: Team): Promise<void> => {
           if (result) {
             await this.viewDetails(result.id);
-            this.alertService.error("Created", "Team created successfully");
+            this.alertService.info("Created", "Team created successfully");
           } else {
             this.alertService.warn("Canceled", "Team creation was cancelled");
           }

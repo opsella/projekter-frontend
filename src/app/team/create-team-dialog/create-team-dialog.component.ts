@@ -1,4 +1,4 @@
-import {Component, inject, input, InputSignal} from '@angular/core';
+import {Component, inject, input, InputSignal, OnInit} from '@angular/core';
 import {InputGroup} from "primeng/inputgroup";
 import {FloatLabel} from "primeng/floatlabel";
 import {InputText} from "primeng/inputtext";
@@ -30,19 +30,28 @@ import {CreateTeamRequest} from "../teams.service";
   templateUrl: './create-team-dialog.component.html',
   styleUrl: './create-team-dialog.component.scss'
 })
-export class CreateTeamDialogComponent {
+export class CreateTeamDialogComponent implements OnInit {
   private ref: DynamicDialogRef = inject(DynamicDialogRef);
   private config: DynamicDialogConfig = inject(DynamicDialogConfig);
+
+  public name: InputSignal<string | undefined> = input();
+  public description: InputSignal<string | undefined> = input();
+  public teamLead: InputSignal<User | undefined> = input();
+  public teamMembers: InputSignal<User[] | undefined> = input([]);
 
   public possibleTeamLeads: InputSignal<User[]> = input.required();
   public possibleTeamMembers: InputSignal<User[]> = input.required();
 
-  protected form: FormGroup = new FormGroup({
-    name: new FormControl("", { validators: [Validators.required] }),
-    description: new FormControl("", { validators: [Validators.required] }),
-    teamLead: new FormControl(null, { validators: [Validators.required] }),
-    teamMembers: new FormControl(null, { validators: [Validators.required] })
-  });
+  protected form: FormGroup;
+
+  public ngOnInit(): void {
+    this.form = new FormGroup({
+      name: new FormControl(this.name() ?? "", { validators: [Validators.required] }),
+      description: new FormControl(this.description() ?? "", { validators: [Validators.required] }),
+      teamLead: new FormControl(this.teamLead() ?? null, { validators: [Validators.required] }),
+      teamMembers: new FormControl(this.teamMembers() ?? null, { validators: [Validators.required] })
+    });
+  }
 
   public onCancelClick() {
     this.ref.close(false);

@@ -12,7 +12,7 @@ export class CreateTeamRequest {
     public name: string,
     public description: string,
     public team_lead_id: EmployeeId,
-    public team_member_ids: EmployeeId[]
+    public team_member_ids?: EmployeeId[]
   ) {
   }
 }
@@ -54,6 +54,16 @@ export class TeamsService {
   public createTeam(request: CreateTeamRequest): Observable<Team> {
     return this.http
       .post<ApiResponse<TeamInfoResponse>>(this.endpoint, request)
+      .pipe(
+        map((response) => {
+          return Team.fromRequest(response.data);
+        })
+      );
+  }
+
+  public updateTeam(teamId: TeamId, request: CreateTeamRequest): Observable<Team> {
+    return this.http
+      .put<ApiResponse<TeamInfoResponse>>(`${this.endpoint}/${teamId.toString()}`, request)
       .pipe(
         map((response) => {
           return Team.fromRequest(response.data);
