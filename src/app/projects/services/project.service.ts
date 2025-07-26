@@ -90,7 +90,7 @@ export class ProjectService {
         map((response) => {
           return Project.fromResponse(response.data);
         })
-      )
+      );
   }
 
   public addTask(
@@ -102,7 +102,7 @@ export class ProjectService {
         map((response) => {
           return Project.fromResponse(response.data);
         })
-      )
+      );
   }
 
   public deleteTask(
@@ -114,7 +114,7 @@ export class ProjectService {
         map((response) => {
           return Project.fromResponse(response.data);
         })
-      )
+      );
   }
 
   public completeTask(

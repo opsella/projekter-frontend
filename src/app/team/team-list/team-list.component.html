@@ -3,10 +3,15 @@
 <app-content-section title="My Team">
   <p-toolbar>
     <ng-template #start>
-    </ng-template>
-
-    <ng-template #end>
-      <p-button label="Invite" (click)="createTeam()"></p-button>
+      <div style="display: flex; gap: 0.5rem;">
+        <p-button icon="pi pi-plus" label="New" (click)="createTeam()"></p-button>
+        <p-button label="Delete"
+                  severity="danger"
+                  outlined
+                  (click)="deleteTeams()"
+                  [disabled]="selectedTeams().length === 0">
+        </p-button>
+      </div>
     </ng-template>
   </p-toolbar>
 
@@ -18,6 +23,7 @@
     <app-simple-table
       [data]="teams.value()"
       [config]="tableConfig"
+      [(selectedItems)]="selectedTeams"
     />
   }
 

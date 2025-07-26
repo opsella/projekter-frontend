@@ -33,21 +33,25 @@
 <app-content-section title="Tasks" expandable>
   <p-toolbar>
     <ng-template #start>
+      <div style="display: flex; gap: 1rem;">
       <p-button label="New" severity="primary" (click)="addTask()">
         <i class="pi pi-plus"></i>
       </p-button>
       <p-button label="Delete" outlined [disabled]="selectedTasks().length <= 0" severity="danger" (click)="deleteTasks()">
         <i class="pi pi-trash"></i>
       </p-button>
+      </div>
     </ng-template>
 
     <ng-template #end>
-      <p-button label="Import" text severity="secondary">
-        <i class="pi pi-plus"></i>
-      </p-button>
-      <p-button label="Export" text severity="secondary">
-        <i class="pi pi-upload"></i>
-      </p-button>
+      <div style="display: flex; gap: 1rem;">
+        <p-button label="Import" text severity="secondary">
+          <i class="pi pi-plus"></i>
+        </p-button>
+        <p-button label="Export" text severity="secondary">
+          <i class="pi pi-upload"></i>
+        </p-button>
+      </div>
     </ng-template>
   </p-toolbar>
 
@@ -61,21 +65,25 @@
 <app-content-section title="Specifications" expandable>
   <p-toolbar>
     <ng-template #start>
-      <p-button label="New" severity="primary" (click)="addSpecification()">
-        <i class="pi pi-plus"></i>
-      </p-button>
-      <p-button label="Delete" outlined [disabled]="selectedSpecs().length <= 0" severity="danger" (click)="deleteSpec()">
-        <i class="pi pi-trash"></i>
-      </p-button>
+      <div style="display: flex; gap: 1rem;">
+        <p-button label="New" severity="primary" (click)="addSpecification()">
+          <i class="pi pi-plus"></i>
+        </p-button>
+        <p-button label="Delete" outlined [disabled]="selectedSpecs().length <= 0" severity="danger" (click)="deleteSpec()">
+          <i class="pi pi-trash"></i>
+        </p-button>
+      </div>
     </ng-template>
 
     <ng-template #end>
-      <p-button label="Import" text severity="secondary">
-        <i class="pi pi-plus"></i>
-      </p-button>
-      <p-button label="Export" text severity="secondary">
-        <i class="pi pi-upload"></i>
-      </p-button>
+      <div style="display: flex; gap: 1rem;">
+        <p-button label="Import" text severity="secondary">
+          <i class="pi pi-plus"></i>
+        </p-button>
+        <p-button label="Export" text severity="secondary">
+          <i class="pi pi-upload"></i>
+        </p-button>
+      </div>
     </ng-template>
   </p-toolbar>
 

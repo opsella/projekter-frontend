@@ -3,7 +3,7 @@ import {HttpClient, httpResource, HttpResourceRef} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {ApiResponse, PaginatedApiResponse} from "../models/api/api-response";
 import {Team, TeamInfoResponse} from "../models/team";
-import {map, Observable} from "rxjs";
+import {map, Observable, tap} from "rxjs";
 import {EmployeeId} from "../models/ids/employee-id";
 import {TeamId} from "../models/ids/team-id";
 
@@ -69,5 +69,10 @@ export class TeamsService {
           return Team.fromRequest(response.data);
         })
       );
+  }
+
+  public deleteTeam(team: Team): Observable<Object> {
+    return this.http
+      .delete(`${this.endpoint}/${team.id.toString()}`);
   }
 }

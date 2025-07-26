@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import {Component, ModelSignal, signal, WritableSignal} from "@angular/core";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
 import { HttpResourceRef } from "@angular/common/http";
 import {SimpleTableComponent, TableConfig} from "../../shared/simple-table/simple-table.component";
@@ -27,6 +27,7 @@ import {User} from "../../models/user";
 export class TeamListComponent {
   protected teams: HttpResourceRef<Team[]> = this.teamService.getTeams();
   protected users: HttpResourceRef<User[]> = this.userServices.getUsers();
+  protected selectedTeams: WritableSignal<Team[]> = signal([]);
 
   protected breadcrumbItems: MenuItem[] = [
     {
@@ -44,7 +45,8 @@ export class TeamListComponent {
       {
         id: 'id',
         name: 'Id',
-        key: 'id'
+        key: 'id',
+        hidden: () => true,
       },
       {
         id: 'name',
@@ -77,6 +79,33 @@ export class TeamListComponent {
     private alertService: AlertService,
     private router: Router
   ) {
+  }
+
+  public deleteTeams(): void {
+    if (this.selectedTeams().length === 0) {
+      this.alertService.warn("Failed", "No teams were selected to be deleted");
+      return;
+    }
+
+    for (const team of this.selectedTeams()) {
+      this.teamService
+        .deleteTeam(team)
+        .pipe(
+          take(1)
+        )
+        .subscribe({
+          next: (result): void => {
+            if (result) {
+              this.alertService.info("Deleted", "Team deleted successfully");
+            } else {
+              this.alertService.warn("Canceled", "Team deletion was cancelled");
+            }
+          },
+          error: (error): void => {
+            this.alertService.error("Failed", "Team deletion failed, please try again");
+          },
+        })
+    }
   }
 
   public createTeam(): void {
