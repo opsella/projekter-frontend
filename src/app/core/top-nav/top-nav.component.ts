@@ -18,7 +18,7 @@ export class TopNavComponent {
 
   protected mainRoutes: NavigationRouteOption[] = [
     {
-      icon: "fa-sharp fa-solid fa-bars-progress",
+      icon: "fa-sharp fa-solid fa-clipboard-list",
       name: "Projects",
       path: "/project",
     },
@@ -33,7 +33,12 @@ export class TopNavComponent {
       path: "/team",
     },
     {
-      icon: "fa-sharp fa-solid fa-clipboard",
+      icon: "fa-sharp fa-solid fa-user-group",
+      name: "Employees",
+      path: "/team/employees"
+    },
+    {
+      icon: "fa-sharp fa-solid fa-copy",
       name: "Templates",
       path: "/template",
     },
