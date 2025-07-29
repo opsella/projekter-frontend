@@ -7,7 +7,7 @@
         <th style="width: 3rem;">
           <p-tableHeaderCheckbox />
         </th>
-        @for (col of config().columns; track col.key) {
+        @for (col of config().columns; track col.id) {
           @if (!isHidden(col)) {
             <th>{{ col.name }}</th>
           }
@@ -25,7 +25,7 @@
         <td>
           <p-tableCheckbox [value]="row" />
         </td>
-        @for (col of config().columns; track col.key) {
+        @for (col of config().columns; track col.id) {
           @if (!isHidden(col)) {
             <td>{{ columnValue(col, row) }}</td>
           }

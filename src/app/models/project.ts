@@ -4,6 +4,7 @@ import { BillOfMaterialsId } from "./ids/bill-of-materials-id";
 import { ProjectId } from "./ids/project-id";
 import { SpecificationId } from "./ids/specification-id";
 import { TaskId } from "./ids/task-id";
+import {DiscussionId} from "./ids/discussion-id";
 
 export class CreateProjectRequest {
   constructor(
@@ -52,6 +53,7 @@ export interface ProjectResponse {
   location: Location;
   tasks: ProjectTaskResponse[];
   specifications: SpecificationResponse[];
+  discussion_id?: string;
   photo?: string;
   status_id?: string;
   code?: string;
@@ -92,6 +94,7 @@ export class Project {
     public status_id?: ProjectStatusId,
     public code?: string,
     public bill_of_materials_id?: BillOfMaterialsId,
+    public discussion_id?: DiscussionId,
   ) {}
 
   public static fromResponse(response: ProjectResponse): Project {
@@ -113,6 +116,9 @@ export class Project {
       response.code,
       response.bill_of_materials_id
         ? BillOfMaterialsId.fromJSON(response.bill_of_materials_id)
+        : null,
+      response.discussion_id
+        ? DiscussionId.fromJSON(response.discussion_id)
         : null,
     );
   }

@@ -1,4 +1,4 @@
-import {Component, effect, inject, model, ModelSignal, Signal, signal} from "@angular/core";
+import {Component, effect, inject, model, ModelSignal, Signal, signal, WritableSignal} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ProjectService } from "../services/project.service";
 import { HttpResourceRef } from "@angular/common/http";
@@ -16,12 +16,12 @@ import {
 } from "../project-add-specification-dialog/project-add-specification-dialog.component";
 import { Observable, of, switchMap, take, tap } from "rxjs";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
-import { NgOptimizedImage } from "@angular/common";
+import {DatePipe, NgOptimizedImage} from "@angular/common";
 import {
   AlertConfig,
   SimpleTableComponent,
   TableAction,
-  TableColumnMapping
+  TableColumnMapping, TableConfig
 } from "../../shared/simple-table/simple-table.component";
 import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
 import {TableModule} from "primeng/table";
@@ -37,6 +37,15 @@ import {isAfter, isBefore, isDate, isEqual, subDays } from 'date-fns';
 import {
   ProjectTaskCompletionDialogComponent
 } from "../project-task-completion-dialog/project-task-completion-dialog.component";
+import {Editor} from "primeng/editor";
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  DiscussionMessageBlockComponent
+} from "../../shared/discussion-message-block/discussion-message-block.component";
+import {DiscussionsService} from "../../shared/discussions.service";
+import {DiscussionId} from "../../models/ids/discussion-id";
+import {Discussion} from "../../models/discussion";
+import {Timeline} from "primeng/timeline";
 
 @Component({
   selector: "app-project-details",
@@ -53,6 +62,11 @@ import {
     ContentSectionComponent,
     Chip,
     ProjectStatusPipe,
+    Editor,
+    ReactiveFormsModule,
+    DiscussionMessageBlockComponent,
+    Timeline,
+    DatePipe,
   ],
   providers: [
     ProjectService,
@@ -66,6 +80,8 @@ export class ProjectDetailsComponent {
   private projectId = signal(this.params().id);
 
   protected project: HttpResourceRef<Project> = this.projectService.project(this.projectId);
+  protected discussionId: WritableSignal<DiscussionId | null | undefined> = signal(null);
+  protected discussion: HttpResourceRef<Discussion | undefined> = this.discussionsService.getDiscussion(this.discussionId);
 
   protected breadcrumbItems: MenuItem[] = [
     {
@@ -164,62 +180,138 @@ export class ProjectDetailsComponent {
   }
 
   protected selectedSpecs: ModelSignal<Specification[]> = model([]);
-  protected specificationColumns: TableColumnMapping<Specification>[] = [
-    {
-      id: "code",
-      key: 'code',
-      name: "Code"
-    },
-    {
-      id: "title",
-      key: "title",
-      name: "Title"
-    },
-    {
-      id: "description",
-      key: "description",
-      name: "Description"
-    },
-    {
-      id: "issued_at_date",
-      name: "Issued At",
-      transform: (item: Specification) => {
-        if (item.issued_at_date) {
-          return item.issued_at_date.toLocaleDateString();
-        } else {
-          return "";
+  protected specificationTableConfig: TableConfig<Specification> = {
+    columns: [
+      {
+        id: "code",
+        key: 'code',
+        name: "Code"
+      },
+      {
+        id: "title",
+        key: "title",
+        name: "Title"
+      },
+      {
+        id: "description",
+        key: "description",
+        name: "Description"
+      },
+      {
+        id: "issued_at_date",
+        name: "Issued At",
+        transform: (item: Specification) => {
+          if (item.issued_at_date) {
+            return item.issued_at_date.toLocaleDateString();
+          } else {
+            return "";
+          }
+        }
+      },
+      {
+        id: "revision",
+        key: "revision",
+        name: "Revision"
+      },
+      {
+        id: "last_revision_date",
+        name: "Date of Last Revision",
+        transform: (item: Specification) => {
+          if (item) {
+            const date = item?.last_revision_date ?? item.issued_at_date;
+            return date.toLocaleDateString();
+          } else {
+            return "";
+          }
         }
       }
-    },
-    {
-      id: "revision",
-      key: "revision",
-      name: "Revision"
-    },
-    {
-      id: "last_revision_date",
-      name: "Date of Last Revision",
-      transform: (item: Specification) => {
-        if (item) {
-          const date = item?.last_revision_date ?? item.issued_at_date;
-          return date.toLocaleDateString();
-        } else {
-          return "";
-        }
-      }
-    }
-  ];
-  protected specificationActions: TableAction<Specification>[] = [];
+    ],
+    actions: []
+  }
 
+  protected discussionForm: FormGroup = new FormGroup({
+    content: new FormControl("", { validators: [Validators.required]})
+  });
 
   constructor(
     private projectService: ProjectService,
     private dialogService: DialogService,
     private alertService: AlertService,
+    private discussionsService: DiscussionsService
   ) {
     effect(() => {
       this.projectId.set(this.params().id);
     });
+    effect(() => {
+      const project = this.project.value();
+
+      if (project?.discussion_id) {
+        this.discussionId.set(project.discussion_id);
+      }
+    });
+  }
+
+  protected onDiscussionMessageSubmit() {
+    const discussionId = this.project.value().discussion_id;
+
+    if (!discussionId) {
+      // The project has not yet had a discussion started we need to start it
+      this.discussionsService.createDiscussion()
+        .pipe(
+          switchMap((discussion) => {
+            return this.projectService
+              .startDiscussion(this.projectId(), discussion.id)
+              .pipe(
+                tap(p => this.project.set(p)),
+                switchMap((p) => {
+                  return this.discussionsService
+                    .writeMessage({
+                      discussion_id: p.discussion_id,
+                      content_type: "RichText",
+                      content: this.discussionForm.controls["content"].value
+                    })
+                    .pipe(
+                      take(1)
+                    );
+                }),
+                take(1)
+              );
+          }),
+          take(1)
+        )
+        .subscribe({
+          next: (result) => {
+            this.discussion.set(result);
+            this.alertService.info("Successfully Written", "Message written to project successfully");
+          },
+          error: (error) => {
+            this.alertService.error("Message Failed", "Failed to write message to the project");
+          }
+        });
+    } else {
+      // The project already has a discussion, no need to create one
+      this.discussionsService
+        .writeMessage({
+          discussion_id: this.project.value().discussion_id,
+          content_type: "RichText",
+          content: this.discussionForm.controls["content"].value
+        })
+        .pipe(
+          take(1)
+        )
+        .subscribe({
+          next: (result) => {
+            this.discussion.set(result);
+            this.alertService.info("Successfully Written", "Message written to project successfully");
+          },
+          error: (error) => {
+            this.alertService.error("Message Failed", "Failed to write message to the project");
+          }
+        });
+    }
+
+
+    this.discussionForm.reset();
   }
 
   public addSpecification(): void {

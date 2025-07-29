@@ -17,6 +17,8 @@ import {
 } from "../../models/api/api-response";
 import { map, Observable } from "rxjs";
 import { environment } from "../../../environments/environment";
+import {DiscussionId} from "../../models/ids/discussion-id";
+import {ProjectId} from "../../models/ids/project-id";
 
 @Injectable()
 export class ProjectService {
@@ -57,9 +59,22 @@ export class ProjectService {
 
   public createProject(project: CreateProjectRequest): Observable<Project> {
     return this.http
-      .post<
-        ApiResponse<ProjectResponse>
-      >(`${environment.projekterApi}/project`, project, {})
+      .post<ApiResponse<ProjectResponse>>(`${environment.projekterApi}/project`, project, {})
+      .pipe(
+        map((response) => {
+          return Project.fromResponse(response.data);
+        }),
+      );
+  }
+
+  public startDiscussion(
+    projectId: ProjectId,
+    discussionId: DiscussionId
+  ): Observable<Project> {
+    return this.http
+      .patch<ApiResponse<ProjectResponse>>(`${environment.projekterApi}/project/${projectId}/discussion`, {
+        discussion_id: discussionId.toString()
+      })
       .pipe(
         map((response) => {
           return Project.fromResponse(response.data);
