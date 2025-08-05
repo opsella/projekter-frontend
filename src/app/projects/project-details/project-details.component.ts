@@ -16,12 +16,10 @@ import {
 } from "../project-add-specification-dialog/project-add-specification-dialog.component";
 import { Observable, of, switchMap, take, tap } from "rxjs";
 import { ContentSectionComponent } from "../../shared/content-section/content-section.component";
-import {DatePipe, NgOptimizedImage} from "@angular/common";
+import {NgOptimizedImage} from "@angular/common";
 import {
-  AlertConfig,
   SimpleTableComponent,
-  TableAction,
-  TableColumnMapping, TableConfig
+  TableConfig
 } from "../../shared/simple-table/simple-table.component";
 import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
 import {TableModule} from "primeng/table";
@@ -37,15 +35,13 @@ import {isAfter, isBefore, isDate, isEqual, subDays } from 'date-fns';
 import {
   ProjectTaskCompletionDialogComponent
 } from "../project-task-completion-dialog/project-task-completion-dialog.component";
-import {Editor} from "primeng/editor";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {
-  DiscussionMessageBlockComponent
-} from "../../shared/discussion-message-block/discussion-message-block.component";
+import {ReactiveFormsModule} from "@angular/forms";
 import {DiscussionsService} from "../../shared/discussions.service";
 import {DiscussionId} from "../../models/ids/discussion-id";
 import {Discussion} from "../../models/discussion";
-import {Timeline} from "primeng/timeline";
+import {
+  DiscussionContentSectionComponent
+} from "../../shared/discussion-content-section/discussion-content-section.component";
 
 @Component({
   selector: "app-project-details",
@@ -62,11 +58,8 @@ import {Timeline} from "primeng/timeline";
     ContentSectionComponent,
     Chip,
     ProjectStatusPipe,
-    Editor,
     ReactiveFormsModule,
-    DiscussionMessageBlockComponent,
-    Timeline,
-    DatePipe,
+    DiscussionContentSectionComponent,
   ],
   providers: [
     ProjectService,
@@ -80,8 +73,9 @@ export class ProjectDetailsComponent {
   private projectId = signal(this.params().id);
 
   protected project: HttpResourceRef<Project> = this.projectService.project(this.projectId);
-  protected discussionId: WritableSignal<DiscussionId | null | undefined> = signal(null);
-  protected discussion: HttpResourceRef<Discussion | undefined> = this.discussionsService.getDiscussion(this.discussionId);
+  protected discussionId: WritableSignal<DiscussionId | null> = signal(null);
+  protected discussionResponse: HttpResourceRef<Discussion | null> = this.discussionsService.getDiscussion(this.discussionId);
+  protected discussion: WritableSignal<Discussion | null> = model(null);
 
   protected breadcrumbItems: MenuItem[] = [
     {
@@ -98,82 +92,84 @@ export class ProjectDetailsComponent {
   };
 
   protected selectedTasks: ModelSignal<Task[]> = model([]);
-  protected projectTaskColumns: TableColumnMapping<Task>[] = [
-    {
-      id: 'due_date',
-      name: 'Due Date',
-      transform: (item: Task): string => {
-        if (item.due_date) {
-          return item.due_date.toLocaleDateString();
-        } else {
-          return "";
+  protected taskTableConfig: TableConfig<Task> = {
+    columns: [
+      {
+        id: 'due_date',
+        name: 'Due Date',
+        transform: (item: Task): string => {
+          if (item.due_date) {
+            return item.due_date.toLocaleDateString();
+          } else {
+            return "";
+          }
+        }
+      },
+      {
+        id: 'name',
+        key: 'name',
+        name: 'Name'
+      },
+      {
+        id: 'description',
+        key: 'description',
+        name: 'Description'
+      },
+      {
+        id: 'completed_at',
+        name: 'Completed On',
+        transform: (item: Task) => {
+          if (item.completed_at) {
+            return item.completed_at?.toLocaleDateString();
+          } else {
+            return "";
+          }
         }
       }
-    },
-    {
-      id: 'name',
-      key: 'name',
-      name: 'Name'
-    },
-    {
-      id: 'description',
-      key: 'description',
-      name: 'Description'
-    },
-    {
-      id: 'completed_at',
-      name: 'Completed On',
-      transform: (item: Task) => {
-        if (item.completed_at) {
-          return item.completed_at?.toLocaleDateString();
-        } else {
-          return "";
+    ],
+    actions: [
+      {
+        tooltip: "Complete",
+        icon: "pi pi-check-circle",
+        fn: (x: Task) => {
+          console.log("Attempt to complete task: ", x);
+          this.completeTask(x);
         }
-      }
-    }
-  ]
-  protected projectTaskActions: TableAction<Task>[] = [
-    {
-      tooltip: "Complete",
-      icon: "pi pi-check-circle",
-      fn: (x: Task) => {
-        console.log("Attempt to complete task: ", x);
-        this.completeTask(x);
-      }
-    },
-    {
-      tooltip: "Edit",
-      icon: "pi pi-pencil",
-      severity: "secondary",
-      fn: (x) => {}
-    },
-  ];
-  protected projectTaskAlertConfig: AlertConfig<Task> = {
-    fn: (item: Task) => {
-      if (!isDate(item.due_date))
-        return null;
+      },
+      {
+        tooltip: "Edit",
+        icon: "pi pi-pencil",
+        severity: "secondary",
+        fn: (x) => {}
+      },
+    ],
+    alertConfig: {
+      fn: (item: Task) => {
+        if (!isDate(item.due_date))
+          return null;
 
-      const currentDate = new Date();
-      const alertWarnDate = subDays<Date>(item.due_date, 7);
+        const currentDate = new Date();
+        const alertWarnDate = subDays<Date>(item.due_date, 7);
 
-      if (isBefore(currentDate, alertWarnDate)) {
-        return null;
-      } else if (
-        isEqual(currentDate, alertWarnDate) ||
-        (isAfter(currentDate, alertWarnDate) && isBefore(currentDate, item.due_date))
-      ) {
-        return {
-          icon: "pi pi-exclamation-triangle",
-          tooltip: "Due within 7 Days",
-          severity: "warn",
-          color: "color: orange;"
-        }
-      } else {
-        return {
-          icon: "pi pi-exclamation-triangle",
-          tooltip: "Overdue",
-          severity: "danger",
-          color: "color: red;"
+        if (isBefore(currentDate, alertWarnDate)) {
+          return null;
+        } else if (
+          isEqual(currentDate, alertWarnDate) ||
+          (isAfter(currentDate, alertWarnDate) && isBefore(currentDate, item.due_date))
+        ) {
+          return {
+            icon: "pi pi-exclamation-triangle",
+            tooltip: "Due within 7 Days",
+            severity: "warn",
+            color: "color: orange;"
+          }
+        } else {
+          return {
+            icon: "pi pi-exclamation-triangle",
+            tooltip: "Overdue",
+            severity: "danger",
+            color: "color: red;"
+          }
         }
       }
     }
@@ -229,10 +225,6 @@ export class ProjectDetailsComponent {
     actions: []
   }
 
-  protected discussionForm: FormGroup = new FormGroup({
-    content: new FormControl("", { validators: [Validators.required]})
-  });
-
   constructor(
     private projectService: ProjectService,
     private dialogService: DialogService,
@@ -249,69 +241,27 @@ export class ProjectDetailsComponent {
         this.discussionId.set(project.discussion_id);
       }
     });
+    effect(() => {
+      this.discussion.set(this.discussionResponse.value());
+    });
   }
 
-  protected onDiscussionMessageSubmit() {
-    const discussionId = this.project.value().discussion_id;
-
-    if (!discussionId) {
-      // The project has not yet had a discussion started we need to start it
-      this.discussionsService.createDiscussion()
-        .pipe(
-          switchMap((discussion) => {
-            return this.projectService
-              .startDiscussion(this.projectId(), discussion.id)
-              .pipe(
-                tap(p => this.project.set(p)),
-                switchMap((p) => {
-                  return this.discussionsService
-                    .writeMessage({
-                      discussion_id: p.discussion_id,
-                      content_type: "RichText",
-                      content: this.discussionForm.controls["content"].value
-                    })
-                    .pipe(
-                      take(1)
-                    );
-                }),
-                take(1)
-              );
-          }),
-          take(1)
-        )
-        .subscribe({
-          next: (result) => {
-            this.discussion.set(result);
-            this.alertService.info("Successfully Written", "Message written to project successfully");
-          },
-          error: (error) => {
-            this.alertService.error("Message Failed", "Failed to write message to the project");
-          }
-        });
-    } else {
-      // The project already has a discussion, no need to create one
-      this.discussionsService
-        .writeMessage({
-          discussion_id: this.project.value().discussion_id,
-          content_type: "RichText",
-          content: this.discussionForm.controls["content"].value
-        })
-        .pipe(
-          take(1)
-        )
-        .subscribe({
-          next: (result) => {
-            this.discussion.set(result);
-            this.alertService.info("Successfully Written", "Message written to project successfully");
-          },
-          error: (error) => {
-            this.alertService.error("Message Failed", "Failed to write message to the project");
-          }
-        });
-    }
-
-
-    this.discussionForm.reset();
+  protected onDiscussionChanged(discussion: Discussion): void {
+    this.projectService
+      .startDiscussion(this.projectId(), discussion.id)
+      .pipe(
+        take(1),
+        tap(p => this.project.set(p)),
+      )
+      .subscribe({
+        next: (result) => {
+          this.discussionId.set(result.discussion_id);
+          this.alertService.info("Successfully Written", "Message written to project successfully");
+        },
+        error: (error) => {
+          this.alertService.error("Message Failed", "Failed to write message to the project");
+        }
+      });
   }
 
   public addSpecification(): void {

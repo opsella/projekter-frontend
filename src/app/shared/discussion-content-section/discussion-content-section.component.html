@@ -1,0 +1,31 @@
+<app-content-section title="Discussion" expandable>
+  <div>
+    <p-timeline [value]="discussion()?.messages ?? []" >
+      <ng-template #marker let-event>
+        <span style="display: flex; width: 2rem; height: 2rem; justify-items: center; align-items: center; justify-content: center; align-content: center; z-index: 10; border-radius: 50%"
+              [style]="{ 'background-color': 'orange' }"
+        >
+          <i class="pi pi-user"></i>
+        </span>
+      </ng-template>
+      <ng-template #content let-event>
+        <app-discussion-message-block [message]="event" />
+      </ng-template>
+    </p-timeline>
+  </div>
+
+  <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        style="display: flex; flex-flow: column; gap: 4px;">
+    <p-editor formControlName="content"
+              [style]="{ height: '160px' }">
+
+    </p-editor>
+
+    @if (discussion()) {
+      <p-button label="Submit" severity="secondary" type="submit" [style]="{ width: '100%' }" />
+    } @else {
+      <p-button label="Create and Submit" severity="secondary" type="submit" [style]="{ width: '100%' }" />
+    }
+  </form>
+</app-content-section>
